@@ -15,10 +15,7 @@
     "plugin:storybook/recommended"
   ],
   "parser": "@typescript-eslint/parser",
-  "plugins": [
-    "react",
-    "@typescript-eslint"
-  ],
+  "plugins": ["react", "@typescript-eslint"],
   "settings": {
     "react": {
       "version": "detect"
@@ -31,6 +28,7 @@
     "react/require-default-props": "off",
     "no-underscore-dangle": "off",
     "@typescript-eslint/no-explicit-any": 0,
-    "@typescript-eslint/no-var-requires": "off"
+    "@typescript-eslint/no-var-requires": "off",
+    "tailwindcss/no-custom-classname": 0
   }
 }
