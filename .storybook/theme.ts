@@ -47,6 +47,10 @@ style.innerHTML = `
     color: ${colors.brown.dark};
   }
 
+  .css-141vx8o css-c3junj {
+    color: ${colors.beige.light} !important;
+  }
+
   .css-141vx8o .css-1dvoe4y {
     color: ${colors.beige.light} !important;
   }
