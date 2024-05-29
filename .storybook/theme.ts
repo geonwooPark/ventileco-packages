@@ -4,7 +4,7 @@ import { colors } from '../tw-config/theme'
 export default create({
   base: 'light',
   brandTarget: '_self',
-  brandUrl: 'https://naver.com',
+  brandUrl: 'https://github.com/geonwooPark/ventileco-ui',
   brandImage: './logo/logo.png',
 
   fontBase: '"Roboto", sans-serif',
@@ -16,7 +16,7 @@ export default create({
   // UI
   appBg: colors.brown.dark,
   appContentBg: colors.brown.dark,
-  appPreviewBg: colors.brown.dark,
+  appPreviewBg: '#ffffff',
   appBorderColor: colors.beige.dark,
   appBorderRadius: 4,
 
