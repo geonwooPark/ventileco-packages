@@ -70,5 +70,10 @@ style.innerHTML = `
   .search-result-recentlyOpened {
     color: ${colors.beige.light} !important; 
   }
+
+  .css-z072u2 {
+    background-color: ${colors.brown.normal} !important;
+    border: none !important;
+  }
 `
 document.head.appendChild(style)

@@ -40,7 +40,6 @@ export const ToolTipContext = createContext<ToolTipContextState>({
   setIsOpen: () => null,
 })
 
-/** 사용자 인터페이스 요소 위에 마우스를 올렸을 때 나타나는 작은 팝업 창으로, 추가 정보나 설명을 제공하여 사용자 경험을 향상시키는 역할을 하는 인터페이스 요소 */
 function ToolTip({
   children,
   direction,
