@@ -21,100 +21,148 @@ export function Direction() {
       <div style={{ display: 'flex', gap: '32px' }}>
         <ToolTip direction="top">
           <ToolTip.Trigger>
-            <div className="trigger">top</div>
+            <div className="rounded-md bg-gray-800 px-2 py-1 text-white">
+              top
+            </div>
           </ToolTip.Trigger>
           <ToolTip.Content>
-            <div className="tool-tip-component">툴팁</div>
+            <div className="rounded-md bg-black px-3 py-5 text-white shadow-md">
+              ToolTip
+            </div>
           </ToolTip.Content>
         </ToolTip>
         <ToolTip direction="topLeft">
           <ToolTip.Trigger>
-            <div className="trigger">topLeft</div>
+            <div className="rounded-md bg-gray-800 px-2 py-1 text-white">
+              topLeft
+            </div>
           </ToolTip.Trigger>
           <ToolTip.Content>
-            <div className="tool-tip-component">툴팁</div>
+            <div className="rounded-md bg-black px-3 py-5 text-white shadow-md">
+              ToolTip
+            </div>
           </ToolTip.Content>
         </ToolTip>
         <ToolTip direction="topRight">
           <ToolTip.Trigger>
-            <div className="trigger">topRight</div>
+            <div className="rounded-md bg-gray-800 px-2 py-1 text-white">
+              topRight
+            </div>
           </ToolTip.Trigger>
           <ToolTip.Content>
-            <div className="tool-tip-component">툴팁</div>
+            <div className="rounded-md bg-black px-3 py-5 text-white shadow-md">
+              ToolTip
+            </div>
           </ToolTip.Content>
         </ToolTip>
         <ToolTip direction="bottom">
           <ToolTip.Trigger>
-            <div className="trigger">bottom</div>
+            <div className="rounded-md bg-gray-800 px-2 py-1 text-white">
+              bottom
+            </div>
           </ToolTip.Trigger>
           <ToolTip.Content>
-            <div className="tool-tip-component">툴팁</div>
+            <div className="rounded-md bg-black px-3 py-5 text-white shadow-md">
+              ToolTip
+            </div>
           </ToolTip.Content>
         </ToolTip>
         <ToolTip direction="bottomLeft">
           <ToolTip.Trigger>
-            <div className="trigger">bottomLeft</div>
+            <div className="rounded-md bg-gray-800 px-2 py-1 text-white">
+              bottomLeft
+            </div>
           </ToolTip.Trigger>
           <ToolTip.Content>
-            <div className="tool-tip-component">툴팁</div>
+            <div className="rounded-md bg-black px-3 py-5 text-white shadow-md">
+              ToolTip
+            </div>
           </ToolTip.Content>
         </ToolTip>
         <ToolTip direction="bottomRight">
           <ToolTip.Trigger>
-            <div className="trigger">bottomRight</div>
+            <div className="rounded-md bg-gray-800 px-2 py-1 text-white">
+              bottomRight
+            </div>
           </ToolTip.Trigger>
           <ToolTip.Content>
-            <div className="tool-tip-component">툴팁</div>
+            <div className="rounded-md bg-black px-3 py-5 text-white shadow-md">
+              ToolTip
+            </div>
           </ToolTip.Content>
         </ToolTip>
       </div>
       <div style={{ display: 'flex', gap: '32px' }}>
         <ToolTip direction="left">
           <ToolTip.Trigger>
-            <div className="trigger">left</div>
+            <div className="rounded-md bg-gray-800 px-2 py-1 text-white">
+              left
+            </div>
           </ToolTip.Trigger>
           <ToolTip.Content>
-            <div className="tool-tip-component">툴팁</div>
+            <div className="rounded-md bg-black px-3 py-5 text-white shadow-md">
+              ToolTip
+            </div>
           </ToolTip.Content>
         </ToolTip>
         <ToolTip direction="leftTop">
           <ToolTip.Trigger>
-            <div className="trigger">leftTop</div>
+            <div className="rounded-md bg-gray-800 px-2 py-1 text-white">
+              leftTop
+            </div>
           </ToolTip.Trigger>
           <ToolTip.Content>
-            <div className="tool-tip-component">툴팁</div>
+            <div className="rounded-md bg-black px-3 py-5 text-white shadow-md">
+              ToolTip
+            </div>
           </ToolTip.Content>
         </ToolTip>
         <ToolTip direction="leftBottom">
           <ToolTip.Trigger>
-            <div className="trigger">leftBottom</div>
+            <div className="rounded-md bg-gray-800 px-2 py-1 text-white">
+              leftBottom
+            </div>
           </ToolTip.Trigger>
           <ToolTip.Content>
-            <div className="tool-tip-component">툴팁</div>
+            <div className="rounded-md bg-black px-3 py-5 text-white shadow-md">
+              ToolTip
+            </div>
           </ToolTip.Content>
         </ToolTip>
         <ToolTip direction="right">
           <ToolTip.Trigger>
-            <div className="trigger">right</div>
+            <div className="rounded-md bg-gray-800 px-2 py-1 text-white">
+              right
+            </div>
           </ToolTip.Trigger>
           <ToolTip.Content>
-            <div className="tool-tip-component">툴팁</div>
+            <div className="rounded-md bg-black px-3 py-5 text-white shadow-md">
+              ToolTip
+            </div>
           </ToolTip.Content>
         </ToolTip>
         <ToolTip direction="rightTop">
           <ToolTip.Trigger>
-            <div className="trigger">rightTop</div>
+            <div className="rounded-md bg-gray-800 px-2 py-1 text-white">
+              rightTop
+            </div>
           </ToolTip.Trigger>
           <ToolTip.Content>
-            <div className="tool-tip-component">툴팁</div>
+            <div className="rounded-md bg-black px-3 py-5 text-white shadow-md">
+              ToolTip
+            </div>
           </ToolTip.Content>
         </ToolTip>
         <ToolTip direction="rightBottom">
           <ToolTip.Trigger>
-            <div className="trigger">rightBottom</div>
+            <div className="rounded-md bg-gray-800 px-2 py-1 text-white">
+              rightBottom
+            </div>
           </ToolTip.Trigger>
           <ToolTip.Content>
-            <div className="tool-tip-component">툴팁</div>
+            <div className="rounded-md bg-black px-3 py-5 text-white shadow-md">
+              ToolTip
+            </div>
           </ToolTip.Content>
         </ToolTip>
       </div>
@@ -137,18 +185,26 @@ export function Delay() {
       <div style={{ display: 'flex', gap: '32px', overflow: 'hidden' }}>
         <ToolTip direction="left" enterDelay={1000}>
           <ToolTip.Trigger>
-            <div className="trigger">enterDelay</div>
+            <div className="rounded-md bg-gray-800 px-2 py-1 text-white">
+              enterDelay
+            </div>
           </ToolTip.Trigger>
           <ToolTip.Content>
-            <div className="tool-tip-component">툴팁</div>
+            <div className="rounded-md bg-black px-3 py-5 text-white shadow-md">
+              ToolTip
+            </div>
           </ToolTip.Content>
         </ToolTip>
         <ToolTip direction="leftTop" leaveDelay={1000}>
           <ToolTip.Trigger>
-            <div className="trigger">leaveDelay</div>
+            <div className="rounded-md bg-gray-800 px-2 py-1 text-white">
+              leaveDelay
+            </div>
           </ToolTip.Trigger>
           <ToolTip.Content>
-            <div className="tool-tip-component">툴팁</div>
+            <div className="rounded-md bg-black px-3 py-5 text-white shadow-md">
+              ToolTip
+            </div>
           </ToolTip.Content>
         </ToolTip>
       </div>
@@ -172,21 +228,20 @@ export function Disabled() {
     >
       <div style={{ display: 'flex', gap: '32px', overflow: 'hidden' }}>
         <button
-          className="trigger"
+          className="rounded-md bg-active p-1 text-white"
           onClick={() => setIsOpen((prev) => !prev)}
-          style={{ backgroundColor: 'darkgray' }}
         >
           {isOpen ? 'Disabled' : 'Enabled'}
         </button>
         <ToolTip direction="top" disabled={isOpen}>
           <ToolTip.Trigger>
-            <div className="trigger">
+            <div className="rounded-md bg-gray-800 px-2 py-1 text-white">
               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci
               asperiores atque
             </div>
           </ToolTip.Trigger>
           <ToolTip.Content>
-            <div className="tool-tip-component" style={{ maxWidth: '240px' }}>
+            <div className="max-w-[240px] rounded-md bg-black px-3 py-5 text-white shadow-md">
               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci
               asperiores atque
             </div>

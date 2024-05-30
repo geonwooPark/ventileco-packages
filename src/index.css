@@ -1,35 +1,3 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@layer components {
-  .trigger {
-    background-color: mediumaquamarine;
-    padding: 4px 8px;
-    border-radius: 4px;
-  }
-
-  .tool-tip-component {
-    background-color: black;
-    padding: 12px 20px;
-    border-radius: 4px;
-    color: white;
-    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
-  }
-
-  .example-component {
-    padding: 12px;
-    background-color: lightsalmon;
-    border-radius: 4px;
-    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
-  }
-
-  .pink {
-    background-color: pink;
-  }
-
-  .yellow {
-    background-color: lemonchiffon;
-    color: black;
-  }
-}
