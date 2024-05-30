@@ -1,6 +1,18 @@
-import Pagination from './components/Pagination/Pagination'
+import type { Meta, StoryObj } from '@storybook/react'
+import Pagination from './Pagination'
 
-function App() {
+const meta: Meta<typeof Pagination> = {
+  title: 'COMPONENTS/Pagination',
+  component: Pagination,
+  parameters: {
+    layout: 'centered',
+  },
+}
+
+export default meta
+type Story = StoryObj<typeof Pagination>
+
+export function Normal() {
   return (
     <Pagination listItemCount={5} totalItemCount={24} onNavigate={() => {}}>
       <Pagination.PrevButton>
@@ -47,5 +59,3 @@ function App() {
     </Pagination>
   )
 }
-
-export default App
