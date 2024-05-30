@@ -1,7 +1,7 @@
 import React, { PropsWithChildren } from 'react'
 
 function ComboBoxLabel({ children }: PropsWithChildren) {
-  return <div>{children}</div>
+  return children
 }
 
 export default ComboBoxLabel

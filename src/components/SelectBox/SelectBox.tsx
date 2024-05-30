@@ -6,36 +6,30 @@ import React, {
   useRef,
   useState,
 } from 'react'
-import ComboBoxLabel from './ComboBoxLabel'
-import ComboBoxTrigger from './ComboBoxTrigger'
-import ComboBoxInput from './ComboBoxInput'
-import ComboBoxItemList from './ComboBoxItemList'
-import { escapeRegExp } from '../../utils/escapeRegExp'
-import ComboBoxItem from './ComboBoxItem'
-import { OptionList } from '../../types'
+import SelectBoxLabel from './SelectBoxLabel'
+import SelectBoxTrigger from './SelectBoxTrigger'
+import SelectBoxTriggerText from './SelectBoxTriggerText'
+import SelectBoxItem from './SelectBoxItem'
+import SelectBoxItemList from './SelectBoxItemList'
 import { focusedStyle } from '../../constants'
-import ComboBoxClearButton from './ComboBoxClearButton'
-import ComboBoxArrowButton from './ComboBoxArrowButton'
+import { OptionList } from '../../types'
 
-type ComboBoxProps = {
+interface SelectBoxProps {
   value: string | undefined
   setValue: (value: string | undefined) => void
   list: OptionList
 }
 
-type ComboBoxContextState = {
+type SelectBoxContextState = {
   value: string | undefined
   isOpen: boolean
-  keyword: string
   selectedItem: string | undefined
   triggerRef: React.RefObject<HTMLDivElement> | null
   listRef: React.RefObject<HTMLUListElement> | null
-  inputRef: React.RefObject<HTMLInputElement> | null
   focusedIndex: number | undefined
   optionList: OptionList
-  onTextChange: (e: React.ChangeEvent<HTMLInputElement>) => void
-  onTrigger: () => void
-  onClear: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
+  onKeyboardTrigger: KeyboardEventHandler<HTMLDivElement>
   onSelect: ({
     value,
     label,
@@ -45,75 +39,35 @@ type ComboBoxContextState = {
     label: string
     disabled?: boolean
   }) => void
-  onKeyboardTrigger: KeyboardEventHandler<HTMLDivElement>
-  onKeyboardSelect: React.KeyboardEventHandler<HTMLLIElement>
+  onKeyboardSelect: KeyboardEventHandler<HTMLLIElement>
 }
 
-export const ComboBoxContext = createContext<ComboBoxContextState>({
+export const SelectContext = createContext<SelectBoxContextState>({
   value: '',
   isOpen: false,
-  keyword: '',
   selectedItem: '',
   triggerRef: null,
   listRef: null,
-  inputRef: null,
   focusedIndex: undefined,
   optionList: [],
-  onTextChange: () => null,
-  onClear: () => null,
-  onTrigger: () => null,
-  onSelect: () => null,
+  setIsOpen: () => null,
   onKeyboardTrigger: () => null,
+  onSelect: () => null,
   onKeyboardSelect: () => null,
 })
 
-function ComboBox({ children, ...props }: PropsWithChildren<ComboBoxProps>) {
+function SelectBox({ children, ...props }: PropsWithChildren<SelectBoxProps>) {
   const { value, setValue, list } = props
 
   const [isOpen, setIsOpen] = useState(false)
-  const [keyword, setKeyword] = useState<string>('')
   const [selectedItem, setSelectedItem] = useState<string>()
   const [focusedIndex, setFocusedIdx] = useState<number>()
-  const [optionList, setOptionList] = useState(list)
 
   const containerRef = useRef<HTMLDivElement>(null)
   const triggerRef = useRef<HTMLDivElement>(null)
-  const inputRef = useRef<HTMLInputElement>(null)
   const listRef = useRef<HTMLUListElement>(null)
 
-  const onTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target
-    setKeyword(value)
-  }
-
-  const onTrigger = () => {
-    setIsOpen((prev) => {
-      if (!inputRef?.current) return false
-
-      if (prev) {
-        inputRef.current.blur()
-        return false
-      } else {
-        inputRef.current.focus()
-        return true
-      }
-    })
-    setOptionList(list)
-  }
-
-  const onClear = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    e.stopPropagation()
-
-    setIsOpen(false)
-    setValue(undefined)
-    setKeyword('')
-    setSelectedItem('')
-    setFocusedIdx(undefined)
-  }
-
   const onKeyboardTrigger: KeyboardEventHandler<HTMLDivElement> = (e) => {
-    if (e.nativeEvent.isComposing) return
-
     if (e.key === 'ArrowDown') {
       e.preventDefault()
       setIsOpen(true)
@@ -167,10 +121,9 @@ function ComboBox({ children, ...props }: PropsWithChildren<ComboBoxProps>) {
     const findIdx = list.findIndex((item) => item.value === value)
 
     setIsOpen(false)
-    setValue(value)
-    setKeyword(label)
-    setSelectedItem(label)
     setFocusedIdx(findIdx)
+    setSelectedItem(label)
+    setValue(value)
   }
 
   const onKeyboardSelect: KeyboardEventHandler<HTMLLIElement> = (e) => {
@@ -214,24 +167,10 @@ function ComboBox({ children, ...props }: PropsWithChildren<ComboBoxProps>) {
   }
 
   useEffect(() => {
-    const escapedKeyword = escapeRegExp(keyword)
-    const regex = new RegExp(escapedKeyword, 'i')
-    const getFilteredData = () => {
-      const filteredData = list.filter((item) => regex.test(item.label))
-      setOptionList(filteredData)
-    }
-
-    const timer = setTimeout(() => getFilteredData(), 300)
-
-    return () => clearTimeout(timer)
-  }, [keyword])
-
-  useEffect(() => {
     if (!isOpen) return
 
     const onOutsideClick = (e: MouseEvent) => {
       if (containerRef.current?.contains(e.target as Node)) return
-      setKeyword(selectedItem || '')
       setIsOpen(false)
     }
 
@@ -251,36 +190,30 @@ function ComboBox({ children, ...props }: PropsWithChildren<ComboBoxProps>) {
   const providerValue = {
     value,
     isOpen,
-    keyword,
-    selectedItem,
     triggerRef,
     listRef,
-    inputRef,
     focusedIndex,
-    optionList,
-    onTextChange,
-    onTrigger,
-    onClear,
-    onSelect,
+    selectedItem,
+    optionList: list,
+    setIsOpen,
     onKeyboardTrigger,
+    onSelect,
     onKeyboardSelect,
   }
 
   return (
-    <ComboBoxContext.Provider value={providerValue}>
+    <SelectContext.Provider value={providerValue}>
       <div ref={containerRef} className="relative">
         {children}
       </div>
-    </ComboBoxContext.Provider>
+    </SelectContext.Provider>
   )
 }
 
-ComboBox.Label = ComboBoxLabel
-ComboBox.Trigger = ComboBoxTrigger
-ComboBox.Input = ComboBoxInput
-ComboBox.ClearButton = ComboBoxClearButton
-ComboBox.ArrowButton = ComboBoxArrowButton
-ComboBox.List = ComboBoxItemList
-ComboBox.Item = ComboBoxItem
+SelectBox.Label = SelectBoxLabel
+SelectBox.Trigger = SelectBoxTrigger
+SelectBox.TriggerText = SelectBoxTriggerText
+SelectBox.List = SelectBoxItemList
+SelectBox.Item = SelectBoxItem
 
-export default ComboBox
+export default SelectBox

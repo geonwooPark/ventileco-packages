@@ -1,13 +1,21 @@
-import { useState } from 'react'
-import { list } from './constants/list'
-import SelectBox from './components/SelectBox/SelectBox'
+import { Meta } from '@storybook/addon-docs'
 
-function App() {
-  const [value, setValue] = useState<string>()
+<Meta title="COMPONENTS/SelectBox" />
+
+# SelectBox
+
+사용자가 리스트에서 옵션을 선택할 수 있도록 목록을 표시해주는 인터페이스 요소
+
+## Example
+
+```jsx
+import SelectBox from './ventileco-ui
+
+function Example() {
   return (
-    <div className="w-[240px] text-sm">
+    <div className="w-[240px]">
       <SelectBox value={value} setValue={setValue} list={list}>
-        <SelectBox.Label>레이블</SelectBox.Label>
+        <SelectBox.Label>SelectBox</SelectBox.Label>
 
         <SelectBox.Trigger>
           <button className="flex w-full items-center justify-between rounded-md border px-3 py-2">
@@ -28,5 +36,4 @@ function App() {
     </div>
   )
 }
-
-export default App
+```
