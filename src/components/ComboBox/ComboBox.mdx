@@ -1,9 +1,17 @@
-import { useState } from 'react'
-import ComboBox from './components/ComboBox/ComboBox'
-import { list } from './constants/list'
+import { Meta } from '@storybook/addon-docs'
 
-function App() {
-  const [value, setValue] = useState<string>()
+<Meta title="COMPONENTS/ComboBox" />
+
+# ComboBox
+
+사용자가 목록에서 항목을 선택하거나 검색할 수 있는 드롭다운 메뉴
+
+## Example
+
+```jsx
+import ComboBox from './ventileco-ui
+
+function Example() {
   return (
     <div className="w-[240px] text-sm">
       <ComboBox value={value} setValue={setValue} list={list}>
@@ -61,5 +69,4 @@ function App() {
     </div>
   )
 }
-
-export default App
+```

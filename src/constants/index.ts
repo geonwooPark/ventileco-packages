@@ -1,5 +1,5 @@
-export const focusedStyle = `bg-primary-light`
-export const selectedStyle = `text-primary-main`
+export const focusedStyle = `text-active`
+export const selectedStyle = `text-active`
 export const hoveredStyle = `hover:bg-gray-100`
 
 export const TOOLTIP_TRIANGLE_DIRECTION: Record<string, string> = {
