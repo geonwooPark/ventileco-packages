@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta } from '@storybook/react'
 import Pagination from './Pagination'
 
 const meta: Meta<typeof Pagination> = {
@@ -10,7 +10,6 @@ const meta: Meta<typeof Pagination> = {
 }
 
 export default meta
-type Story = StoryObj<typeof Pagination>
 
 export function Normal() {
   return (

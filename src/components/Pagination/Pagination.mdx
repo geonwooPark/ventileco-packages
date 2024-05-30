@@ -1,0 +1,27 @@
+import { Meta } from '@storybook/addon-docs'
+
+<Meta title="COMPONENTS/Pagination" />
+
+# Pagination
+
+컨텐츠를 여러 페이지로 나누어 보여주고, 사용자가 페이지 간 이동할 수 있는 인터페이스 요소
+
+## Example
+
+```jsx
+import Pagination from './ventileco-ui
+
+function Example() {
+  return (
+    <Pagination listItemCount={} totalItemCount={} onNavigate={() => {}}>
+      <Pagination.PrevButton> </Pagination.PrevButton>
+      <Pagination.Numbering>
+        {({ active, numbering }) => (
+          <div>className={`${active ? '' : ''}`}>{numbering}</div>
+        )}
+      </Pagination.Numbering>
+      <Pagination.NextButton></Pagination.NextButton>
+    </Pagination>
+  )
+}
+```

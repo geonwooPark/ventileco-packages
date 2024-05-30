@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta } from '@storybook/react'
 import { useState } from 'react'
 import { list } from '../../constants/list'
 import SelectBox from './SelectBox'
@@ -12,7 +12,6 @@ const meta: Meta<typeof SelectBox> = {
 }
 
 export default meta
-type Story = StoryObj<typeof SelectBox>
 
 export function Normal() {
   const [value, setValue] = useState<string>()
