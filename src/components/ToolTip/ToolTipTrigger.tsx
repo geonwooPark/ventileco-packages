@@ -1,7 +1,10 @@
-import React, { PropsWithChildren } from 'react'
+import React, { PropsWithChildren, useContext } from 'react'
+import { ToolTipContext } from './ToolTip'
 
 function ToolTipTrigger({ children }: PropsWithChildren) {
-  return <div>{children}</div>
+  const { triggerRef } = useContext(ToolTipContext)
+
+  return <div ref={triggerRef}>{children}</div>
 }
 
 export default ToolTipTrigger

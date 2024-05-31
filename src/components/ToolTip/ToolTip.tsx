@@ -26,6 +26,7 @@ type ToolTipContextState = {
   isOpen: boolean
   disabled?: boolean
   direction: ToolTipDirection
+  triggerRef: React.RefObject<HTMLDivElement> | null
   tooltipRef: React.RefObject<HTMLDivElement> | null
   leaveTimer: React.MutableRefObject<number | NodeJS.Timeout | undefined>
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
@@ -35,6 +36,7 @@ export const ToolTipContext = createContext<ToolTipContextState>({
   isOpen: false,
   disabled: false,
   direction: 'top',
+  triggerRef: null,
   tooltipRef: null,
   leaveTimer: null as any,
   setIsOpen: () => null,
@@ -51,6 +53,7 @@ function ToolTip({
   const [isOpen, setIsOpen] = useState(false)
 
   const containerRef = useRef<HTMLDivElement>(null)
+  const triggerRef = useRef<HTMLDivElement>(null)
   const tooltipRef = useRef<HTMLDivElement>(null)
   const enterTimer = useRef<number | NodeJS.Timeout | undefined>(undefined)
   const leaveTimer = useRef<number | NodeJS.Timeout | undefined>(undefined)
@@ -79,7 +82,7 @@ function ToolTip({
     if (!isOpen) return
     if (disabled) return
 
-    const triggerNode = containerRef.current?.childNodes[0] as HTMLElement
+    const triggerNode = triggerRef.current as HTMLElement
     const tooltipNode = tooltipRef.current as HTMLElement
     const contentNode = tooltipNode.childNodes[0].childNodes[0] as HTMLElement
     const triangleNode = tooltipNode.childNodes[1] as HTMLElement
@@ -152,7 +155,15 @@ function ToolTip({
 
   return (
     <ToolTipContext.Provider
-      value={{ isOpen, disabled, direction, tooltipRef, leaveTimer, setIsOpen }}
+      value={{
+        isOpen,
+        disabled,
+        direction,
+        tooltipRef,
+        triggerRef,
+        leaveTimer,
+        setIsOpen,
+      }}
     >
       <div ref={containerRef} onMouseOver={onMouseOver} onMouseOut={onMouseOut}>
         {children}
