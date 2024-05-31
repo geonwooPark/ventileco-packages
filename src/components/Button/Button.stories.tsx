@@ -12,19 +12,19 @@ const meta: Meta<typeof Button> = {
 export default meta
 type Story = StoryObj<typeof Button>
 
-export const Normal: Story = {
-  render: () => (
+export function Normal() {
+  return (
     <Button
       type="button"
       className="h-[50px] w-[320px] rounded-md bg-black text-base font-bold text-white transition-all duration-200 hover:opacity-80"
     >
       <Button.Label>BUTTON</Button.Label>
     </Button>
-  ),
+  )
 }
 
-export const WithLeftIcon: Story = {
-  render: () => (
+export function WithLeftIcon() {
+  return (
     <Button
       type="button"
       className="h-[50px] w-[320px] rounded-md bg-black text-base font-bold text-white transition-all duration-200 hover:opacity-80"
@@ -34,11 +34,11 @@ export const WithLeftIcon: Story = {
       </Button.Icon>
       <Button.Label>BUTTON</Button.Label>
     </Button>
-  ),
+  )
 }
 
-export const WithRightIcon: Story = {
-  render: () => (
+export function WithRightIcon() {
+  return (
     <Button
       type="button"
       className="h-[50px] w-[320px] rounded-md bg-black text-base font-bold text-white transition-all duration-200 hover:opacity-80"
@@ -48,11 +48,11 @@ export const WithRightIcon: Story = {
         <div className="ml-2 size-5 bg-gray-400" />
       </Button.Icon>
     </Button>
-  ),
+  )
 }
 
-export const LoadingStatus: Story = {
-  render: () => (
+export function LoadingStatus() {
+  return (
     <Button
       type="button"
       isLoading
@@ -63,11 +63,11 @@ export const LoadingStatus: Story = {
         <div className="ml-2 size-5 bg-gray-400" />
       </Button.Icon>
     </Button>
-  ),
+  )
 }
 
-export const DisabledStatus: Story = {
-  render: () => (
+export function DisabledStatus() {
+  return (
     <Button
       type="button"
       disabled
@@ -75,5 +75,5 @@ export const DisabledStatus: Story = {
     >
       <Button.Label>BUTTON</Button.Label>
     </Button>
-  ),
+  )
 }
