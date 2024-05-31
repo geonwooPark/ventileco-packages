@@ -1,5 +1,5 @@
 import type { Meta } from '@storybook/react'
-import Pagination from './Pagination'
+import Pagination, { PaginationProps } from './Pagination'
 
 const meta: Meta<typeof Pagination> = {
   title: 'COMPONENTS/Pagination',
@@ -11,9 +11,9 @@ const meta: Meta<typeof Pagination> = {
 
 export default meta
 
-export function Normal() {
+export function Normal(args: PaginationProps) {
   return (
-    <Pagination listItemCount={5} totalItemCount={24} onNavigate={() => {}}>
+    <Pagination {...args}>
       <Pagination.PrevButton>
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -57,4 +57,9 @@ export function Normal() {
       </Pagination.NextButton>
     </Pagination>
   )
+}
+Normal.args = {
+  listItemCount: 5,
+  totalItemCount: 24,
+  numberingCount: 3,
 }

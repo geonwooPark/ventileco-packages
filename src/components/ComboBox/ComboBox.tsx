@@ -17,7 +17,7 @@ import { focusedStyle } from '../../constants'
 import ComboBoxClearButton from './ComboBoxClearButton'
 import ComboBoxArrowButton from './ComboBoxArrowButton'
 
-type ComboBoxProps = {
+export type ComboBoxProps = {
   value: string | undefined
   setValue: (value: string | undefined) => void
   list: OptionList

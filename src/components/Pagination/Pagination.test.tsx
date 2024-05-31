@@ -3,7 +3,9 @@ import { Normal } from './Pagination.stories'
 
 describe('Pagination', () => {
   it('기본 페이지네이션이 렌더링되는지 확인', () => {
-    render(<Normal />)
+    render(
+      <Normal totalItemCount={24} listItemCount={5} onNavigate={() => {}} />,
+    )
     expect(screen.getByText('1')).toBeInTheDocument()
     expect(screen.getByText('2')).toBeInTheDocument()
     expect(screen.getByText('3')).toBeInTheDocument()

@@ -1,5 +1,5 @@
 import type { Meta } from '@storybook/react'
-import Slider from './Slider'
+import Slider, { SliderProps } from './Slider'
 
 const meta: Meta<typeof Slider> = {
   title: 'COMPONENTS/Slider',
@@ -11,9 +11,9 @@ const meta: Meta<typeof Slider> = {
 
 export default meta
 
-export function Normal() {
+export function Normal(args: SliderProps) {
   return (
-    <Slider gap={16}>
+    <Slider {...args}>
       <Slider.PrevButton className="absolute left-4 top-1/2 -translate-y-1/2 rounded-full bg-black p-2 text-white shadow-md">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -65,4 +65,8 @@ export function Normal() {
       </Slider.NextButton>
     </Slider>
   )
+}
+Normal.args = {
+  gap: 16,
+  step: 4,
 }

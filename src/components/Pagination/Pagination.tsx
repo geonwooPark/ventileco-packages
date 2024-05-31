@@ -9,7 +9,7 @@ import PaginationPrevButton from './PaginationPrevButton'
 import PaginationNextButton from './PaginationNextButton'
 import PaginationNumbering from './PaginationNumbering'
 
-interface MyPagePaginationProps {
+export interface PaginationProps {
   /** 페이지 이동을 위해 실행하는 콜백함수 */
   onNavigate: (path: string) => void
   /** 페이지로 나눌 전체 아이템 갯수를 설정 */
@@ -47,7 +47,7 @@ function Pagination({
   numberingCount = 3,
   queries,
   listItemCount,
-}: PropsWithChildren<MyPagePaginationProps>) {
+}: PropsWithChildren<PaginationProps>) {
   const currentPage = Number(getParameterByName('page'))
   const [page, setPage] = useState(currentPage || 1)
 
