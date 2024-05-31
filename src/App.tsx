@@ -1,50 +1,61 @@
-import Pagination from './components/Pagination/Pagination'
+import { useState } from 'react'
+import Input from './components/Input/Input'
 
 function App() {
+  const [value, setValue] = useState('')
+
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target
+    setValue(value)
+  }
+
   return (
-    <Pagination listItemCount={5} totalItemCount={24} onNavigate={() => {}}>
-      <Pagination.PrevButton>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth="1.5"
-          stroke="currentColor"
-          className="size-6"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M15.75 19.5 8.25 12l7.5-7.5"
-          />
-        </svg>
-      </Pagination.PrevButton>
-      <Pagination.Numbering>
-        {({ active, numbering }) => (
-          <div
-            className={`flex size-6 items-center justify-center rounded-full border ${active ? 'border-blue-600 text-blue-600' : 'border-transparent text-black'} `}
-          >
-            {numbering}
-          </div>
-        )}
-      </Pagination.Numbering>
-      <Pagination.NextButton>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth="1.5"
-          stroke="currentColor"
-          className="size-6"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="m8.25 4.5 7.5 7.5-7.5 7.5"
-          />
-        </svg>
-      </Pagination.NextButton>
-    </Pagination>
+    <div className="w-[240px]">
+      <Input
+        type="text"
+        name="email"
+        value={value}
+        onChange={onChange}
+        placeholder="Enter text"
+        autoComplete="off"
+      >
+        <Input.Label>Input</Input.Label>
+        <Input.Container className="h-[50px] rounded-md border px-2 text-black data-[disabled]:opacity-50">
+          <Input.Icon>
+            <div className="mr-1">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="currentColor"
+                className="size-5"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z"
+                />
+              </svg>
+            </div>
+          </Input.Icon>
+          <Input.InputArea />
+        </Input.Container>
+      </Input>
+
+      <Input
+        type="password"
+        name="password"
+        value={value}
+        onChange={onChange}
+        placeholder="Password"
+      >
+        <Input.Label>Input</Input.Label>
+        <Input.Container className="h-[50px] rounded-md border px-2 text-black data-[disabled]:opacity-50">
+          <Input.InputArea />
+        </Input.Container>
+      </Input>
+    </div>
   )
 }
 
