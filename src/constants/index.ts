@@ -16,3 +16,12 @@ export const TOOLTIP_TRIANGLE_DIRECTION: Record<string, string> = {
   right: 'top-[50%] left-[-4.5px] translate-y-[-50%]',
   rightBottom: 'bottom-[6px] left-[-4.5px]',
 }
+
+export const TOAST_POSITION: Record<string, string> = {
+  topCenter: 'top-5 left-1/2 -translate-x-1/2',
+  topLeft: 'top-5 left-5',
+  topRight: 'top-5 right-5',
+  bottomCenter: 'bottom-5 left-1/2 -translate-x-1/2',
+  bottomLeft: 'bottom-5 left-5',
+  bottomRight: 'bottom-5 right-5',
+}

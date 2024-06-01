@@ -1,16 +1,14 @@
-import Button from './components/Button/Button'
+import { useToast } from './components/Toast/useToast'
 
 function App() {
+  const addToast = useToast()
+
   return (
-    <Button
-      type="button"
-      className="h-[50px] w-[320px] rounded-md bg-black text-base font-bold text-white transition-all duration-200 hover:opacity-80"
-    >
-      <div className="flex items-center justify-center">
-        <div className="mr-2 size-5 bg-gray-400" />
-        <p>BUTTON</p>
-      </div>
-    </Button>
+    <div>
+      <button onClick={() => addToast.success('성공 메시지')}>버튼</button>
+      <button onClick={() => addToast.error('실패 메시지')}>버튼</button>
+      <button onClick={() => addToast.info('인포 메시지')}>버튼</button>
+    </div>
   )
 }
 

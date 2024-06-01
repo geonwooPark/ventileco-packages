@@ -2,9 +2,35 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import './index.css'
 import App from './App.tsx'
+import ToastProvider from './components/Toast/ToastProvider.tsx'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <App />
+    <ToastProvider>
+      {({ toasts }) => (
+        <>
+          <App />
+          <ToastProvider.ToastList>
+            {toasts.map((toast) => (
+              <ToastProvider.ToastWrapper key={toast.id} id={toast.id}>
+                <div className="flex h-[80px] w-[320px] items-center rounded-full border px-4 py-2">
+                  <div
+                    className={`mr-2 size-5 shrink-0 ${toast.type === 'success' ? 'bg-success' : toast.type === 'error' ? 'bg-error' : 'bg-info'}`}
+                  />
+                  <div>
+                    <p
+                      className={`mr-2 text-lg font-semibold ${toast.type === 'success' ? 'text-success' : toast.type === 'error' ? 'text-error' : 'text-info'}`}
+                    >
+                      {toast.type}
+                    </p>
+                    <p className="text-sm">{toast.message}</p>
+                  </div>
+                </div>
+              </ToastProvider.ToastWrapper>
+            ))}
+          </ToastProvider.ToastList>
+        </>
+      )}
+    </ToastProvider>
   </React.StrictMode>,
 )

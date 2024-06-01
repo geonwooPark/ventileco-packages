@@ -24,3 +24,13 @@ export type ToolTipDirection =
   | 'leftBottom'
   | 'rightTop'
   | 'rightBottom'
+
+export type ToastType = `success` | `error` | `info`
+
+export type ToastPosition =
+  | 'topCenter'
+  | 'topLeft'
+  | 'topRight'
+  | 'bottomCenter'
+  | 'bottomLeft'
+  | 'bottomRight'
