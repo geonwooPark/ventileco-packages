@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Input from './Input'
-import { Meta, StoryObj } from '@storybook/react'
+import { Meta } from '@storybook/react'
 
 const meta: Meta<typeof Input> = {
   title: 'COMPONENTS/Input',
@@ -11,7 +11,6 @@ const meta: Meta<typeof Input> = {
 }
 
 export default meta
-type Story = StoryObj<typeof Input>
 
 export function Normal() {
   const [value, setValue] = useState('')
