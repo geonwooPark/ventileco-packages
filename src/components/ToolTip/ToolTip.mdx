@@ -13,9 +13,17 @@ import ToolTip from './ventileco-ui
 
 function Example() {
   return (
-    <ToolTip direction={}>
-      <ToolTip.Trigger></ToolTip.Trigger>
-      <ToolTip.Content></ToolTip.Content>
+    <ToolTip direction='top'>
+      <ToolTip.Trigger>
+        <div className="rounded-md bg-gray-800 px-2 py-1 text-white">
+          Trigger
+        </div>
+      </ToolTip.Trigger>
+      <ToolTip.Content>
+        <div className="rounded-md bg-black px-3 py-5 text-white shadow-md">
+          Content
+        </div>
+      </ToolTip.Content>
     </ToolTip>
   )
 }

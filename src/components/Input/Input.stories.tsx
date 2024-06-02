@@ -70,6 +70,7 @@ export function WithLeftIcon() {
     const { value } = e.target
     setValue(value)
   }
+
   return (
     <div className="w-[240px]">
       <Input
