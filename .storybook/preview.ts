@@ -12,7 +12,12 @@ const preview: Preview = {
     options: {
       storySort: {
         method: 'alphabetical',
-        order: ['INTRODUCTION', ['Configure', 'Usage', 'Theme'], 'COMPONENTS'],
+        order: [
+          'INTRODUCTION',
+          ['Configure', 'Usage', 'Theme'],
+          'COMPONENTS',
+          'PROVIDERS',
+        ],
       },
     },
   },
