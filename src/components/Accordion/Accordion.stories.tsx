@@ -1,9 +1,20 @@
-import Accordion from './components/Accordion/Accordion'
+import type { Meta } from '@storybook/react'
+import Accordion from './Accordion'
 
-function App() {
+const meta: Meta<typeof Accordion> = {
+  title: 'COMPONENTS/Accordion',
+  component: Accordion,
+  parameters: {
+    layout: 'centered',
+  },
+}
+
+export default meta
+
+export function Normal() {
   return (
     <div className="w-[240px]">
-      <Accordion className="border">
+      <Accordion className="rounded-md border">
         <Accordion.Item value={0}>
           {({ isOpen }) => (
             <>
@@ -41,13 +52,13 @@ function App() {
             <>
               <Accordion.Trigger>
                 <div
-                  className={`${isOpen && 'text-active'} cursor-pointer border-b px-4 py-3 `}
+                  className={`${isOpen && 'border-b text-active'} cursor-pointer px-4 py-3 `}
                 >
                   Title3
                 </div>
               </Accordion.Trigger>
               <Accordion.Content>
-                <div className="border-b px-4 py-3">Content3</div>
+                <div className="px-4 py-3">Content3</div>
               </Accordion.Content>
             </>
           )}
@@ -56,5 +67,3 @@ function App() {
     </div>
   )
 }
-
-export default App

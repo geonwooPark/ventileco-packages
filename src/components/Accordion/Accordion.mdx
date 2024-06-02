@@ -1,9 +1,20 @@
-import Accordion from './components/Accordion/Accordion'
+import { Meta } from '@storybook/addon-docs'
 
-function App() {
+<Meta title="COMPONENTS/Accordion" />
+
+# Accordion
+
+사용자가 섹션을 열거나 닫을 수 있는 접히고 펼쳐지는 인터페이스 요소
+
+## Example
+
+```jsx
+import Accordion from './ventileco-ui
+
+function Example() {
   return (
     <div className="w-[240px]">
-      <Accordion className="border">
+      <Accordion className="rounded-md border">
         <Accordion.Item value={0}>
           {({ isOpen }) => (
             <>
@@ -41,13 +52,13 @@ function App() {
             <>
               <Accordion.Trigger>
                 <div
-                  className={`${isOpen && 'text-active'} cursor-pointer border-b px-4 py-3 `}
+                  className={`${isOpen && 'border-b text-active'} cursor-pointer px-4 py-3 `}
                 >
                   Title3
                 </div>
               </Accordion.Trigger>
               <Accordion.Content>
-                <div className="border-b px-4 py-3">Content3</div>
+                <div className="px-4 py-3">Content3</div>
               </Accordion.Content>
             </>
           )}
@@ -56,5 +67,4 @@ function App() {
     </div>
   )
 }
-
-export default App
+```
