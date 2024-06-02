@@ -27,8 +27,8 @@ export function Normal() {
 
         <SelectBox.List>
           {({ optionList }) =>
-            optionList.map((item, idx) => (
-              <SelectBox.Item key={item.value} idx={idx} item={item}>
+            optionList.map((item) => (
+              <SelectBox.Item key={item.value} item={item}>
                 <button className={`w-full px-3 py-2`}>{item.label}</button>
               </SelectBox.Item>
             ))
@@ -54,8 +54,8 @@ export function WithLabel() {
 
         <SelectBox.List>
           {({ optionList }) =>
-            optionList.map((item, idx) => (
-              <SelectBox.Item key={item.value} idx={idx} item={item}>
+            optionList.map((item) => (
+              <SelectBox.Item key={item.value} item={item}>
                 <button className={`w-full px-3 py-2`}>{item.label}</button>
               </SelectBox.Item>
             ))

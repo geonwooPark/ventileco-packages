@@ -3,7 +3,6 @@ import { SelectContext } from './SelectBox'
 import { hoveredStyle, selectedStyle } from '../../constants'
 
 interface SelectItemProps {
-  idx: number
   item: {
     value: string
     label: string
@@ -11,17 +10,13 @@ interface SelectItemProps {
   }
 }
 
-function SelectBoxItem({
-  children,
-  idx,
-  item,
-}: PropsWithChildren<SelectItemProps>) {
+function SelectBoxItem({ children, item }: PropsWithChildren<SelectItemProps>) {
   const { value, onSelect, onKeyboardSelect } = useContext(SelectContext)
 
   return (
     <li
       role="listitem"
-      tabIndex={idx}
+      tabIndex={0}
       data-value={item.value}
       data-label={item.label}
       data-disabled={item.disabled}

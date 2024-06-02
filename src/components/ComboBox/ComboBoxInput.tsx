@@ -6,15 +6,13 @@ interface ComboBoxInputProps {
 }
 
 function ComboBoxInput({ placeholder }: ComboBoxInputProps) {
-  const { inputRef, keyword, onTextChange, onKeyboardTrigger } =
-    useContext(ComboBoxContext)
+  const { inputRef, keyword, onTextChange } = useContext(ComboBoxContext)
 
   return (
     <input
       role="input"
       ref={inputRef}
       value={keyword}
-      onKeyDown={onKeyboardTrigger}
       onChange={onTextChange}
       placeholder={placeholder}
       className="w-full outline-none"

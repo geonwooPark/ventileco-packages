@@ -27,8 +27,8 @@ export function Normal() {
 
         <ComboBox.List>
           {({ optionList }) =>
-            optionList.map((item, idx) => (
-              <ComboBox.Item key={item.value} idx={idx} item={item}>
+            optionList.map((item) => (
+              <ComboBox.Item key={item.value} item={item}>
                 <button className={`w-full px-3 py-2`}>{item.label}</button>
               </ComboBox.Item>
             ))
@@ -54,8 +54,8 @@ export function WithLabel() {
 
         <ComboBox.List>
           {({ optionList }) =>
-            optionList.map((item, idx) => (
-              <ComboBox.Item key={item.value} idx={idx} item={item}>
+            optionList.map((item) => (
+              <ComboBox.Item key={item.value} item={item}>
                 <button className={`w-full px-3 py-2`}>{item.label}</button>
               </ComboBox.Item>
             ))
@@ -97,8 +97,8 @@ export function WithClearButton() {
 
         <ComboBox.List>
           {({ optionList }) =>
-            optionList.map((item, idx) => (
-              <ComboBox.Item key={item.value} idx={idx} item={item}>
+            optionList.map((item) => (
+              <ComboBox.Item key={item.value} item={item}>
                 <button className={`w-full px-3 py-2`}>{item.label}</button>
               </ComboBox.Item>
             ))
@@ -158,8 +158,8 @@ export function WithArrowButton() {
 
         <ComboBox.List>
           {({ optionList }) =>
-            optionList.map((item, idx) => (
-              <ComboBox.Item key={item.value} idx={idx} item={item}>
+            optionList.map((item) => (
+              <ComboBox.Item key={item.value} item={item}>
                 <button className={`w-full px-3 py-2`}>{item.label}</button>
               </ComboBox.Item>
             ))

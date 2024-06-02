@@ -3,7 +3,6 @@ import { ComboBoxContext } from './ComboBox'
 import { hoveredStyle, selectedStyle } from '../../constants'
 
 interface ComboBoxItemProps {
-  idx: number
   item: {
     value: string
     label: string
@@ -13,7 +12,6 @@ interface ComboBoxItemProps {
 
 function ComboBoxItem({
   children,
-  idx,
   item,
 }: PropsWithChildren<ComboBoxItemProps>) {
   const { value, onSelect, onKeyboardSelect } = useContext(ComboBoxContext)
@@ -21,7 +19,7 @@ function ComboBoxItem({
   return (
     <li
       role="listitem"
-      tabIndex={idx}
+      tabIndex={0}
       data-value={item.value}
       data-label={item.label}
       data-disabled={item.disabled}
