@@ -1,5 +1,4 @@
 import React, { PropsWithChildren } from 'react'
-import { BUTTON_STATUS } from '../../constants'
 
 export interface ButtonProps {
   type: 'submit' | 'button'

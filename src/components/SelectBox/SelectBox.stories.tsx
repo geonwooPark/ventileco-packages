@@ -21,7 +21,7 @@ export function Normal() {
       <SelectBox value={value} setValue={setValue} list={list}>
         <SelectBox.Trigger>
           <button className="flex w-full items-center justify-between rounded-md border px-3 py-2">
-            <SelectBox.TriggerText>메뉴를 선택하세요.</SelectBox.TriggerText>
+            <SelectBox.TriggerText>메뉴를 선택하세요</SelectBox.TriggerText>
           </button>
         </SelectBox.Trigger>
 
@@ -54,7 +54,7 @@ export function WithLabel() {
         <SelectBox.Label>레이블</SelectBox.Label>
         <SelectBox.Trigger>
           <button className="flex w-full items-center justify-between rounded-md border px-3 py-2">
-            <SelectBox.TriggerText>메뉴를 선택하세요.</SelectBox.TriggerText>
+            <SelectBox.TriggerText>메뉴를 선택하세요</SelectBox.TriggerText>
           </button>
         </SelectBox.Trigger>
 
