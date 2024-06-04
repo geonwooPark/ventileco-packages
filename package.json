@@ -1,7 +1,7 @@
 {
   "name": "ventileco-ui",
   "private": false,
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Tailwind Headless UI Kit",
   "main": "dist/components/index.js",
   "types": "dist/components/index.d.ts",

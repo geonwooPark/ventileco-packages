@@ -10,9 +10,9 @@ import SelectBoxLabel from './SelectBoxLabel'
 import SelectBoxTrigger from './SelectBoxTrigger'
 import SelectBoxTriggerText from './SelectBoxTriggerText'
 import SelectBoxItem from './SelectBoxItem'
-import SelectBoxItemList from './SelectBoxItemList'
 import { focusedStyle } from '../../constants'
 import { OptionList } from '../../types'
+import SelectBoxList from './SelectBoxList'
 
 interface SelectBoxProps {
   value: string | undefined
@@ -213,7 +213,7 @@ function SelectBox({ children, ...props }: PropsWithChildren<SelectBoxProps>) {
 SelectBox.Label = SelectBoxLabel
 SelectBox.Trigger = SelectBoxTrigger
 SelectBox.TriggerText = SelectBoxTriggerText
-SelectBox.List = SelectBoxItemList
+SelectBox.List = SelectBoxList
 SelectBox.Item = SelectBoxItem
 
 export default SelectBox

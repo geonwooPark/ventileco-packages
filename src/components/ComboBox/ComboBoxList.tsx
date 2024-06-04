@@ -3,12 +3,12 @@ import { ComboBoxContext } from './ComboBox'
 import { OptionList } from '../../types'
 import { twMerge } from 'tailwind-merge'
 
-interface ComboBoxItemListProps {
+interface ComboBoxListProps {
   children: (props: { optionList: OptionList }) => React.ReactNode
   className?: string
 }
 
-function ComboBoxItemList({ children, className }: ComboBoxItemListProps) {
+function ComboBoxList({ children, className }: ComboBoxListProps) {
   const { isOpen, listRef, optionList } = useContext(ComboBoxContext)
 
   const newClassName = useMemo(
@@ -27,4 +27,4 @@ function ComboBoxItemList({ children, className }: ComboBoxItemListProps) {
   ) : null
 }
 
-export default ComboBoxItemList
+export default ComboBoxList

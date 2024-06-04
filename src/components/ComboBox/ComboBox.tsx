@@ -9,13 +9,13 @@ import React, {
 import ComboBoxLabel from './ComboBoxLabel'
 import ComboBoxTrigger from './ComboBoxTrigger'
 import ComboBoxInput from './ComboBoxInput'
-import ComboBoxItemList from './ComboBoxItemList'
 import { escapeRegExp } from '../../utils/escapeRegExp'
 import ComboBoxItem from './ComboBoxItem'
 import { OptionList } from '../../types'
 import { focusedStyle } from '../../constants'
 import ComboBoxClearButton from './ComboBoxClearButton'
 import ComboBoxArrowButton from './ComboBoxArrowButton'
+import ComboBoxList from './ComboBoxList'
 
 export type ComboBoxProps = {
   value: string | undefined
@@ -280,7 +280,7 @@ ComboBox.Trigger = ComboBoxTrigger
 ComboBox.Input = ComboBoxInput
 ComboBox.ClearButton = ComboBoxClearButton
 ComboBox.ArrowButton = ComboBoxArrowButton
-ComboBox.List = ComboBoxItemList
+ComboBox.List = ComboBoxList
 ComboBox.Item = ComboBoxItem
 
 export default ComboBox

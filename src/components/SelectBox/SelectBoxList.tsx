@@ -3,12 +3,12 @@ import { SelectContext } from './SelectBox'
 import { OptionList } from '../../types'
 import { twMerge } from 'tailwind-merge'
 
-interface SelectItemListProps {
+interface SelectListProps {
   children: (props: { optionList: OptionList }) => React.ReactNode
   className?: string
 }
 
-function SelectBoxItemList({ children, className }: SelectItemListProps) {
+function SelectBoxList({ children, className }: SelectListProps) {
   const { isOpen, listRef, optionList } = useContext(SelectContext)
 
   const newClassName = useMemo(
@@ -27,4 +27,4 @@ function SelectBoxItemList({ children, className }: SelectItemListProps) {
   ) : null
 }
 
-export default SelectBoxItemList
+export default SelectBoxList

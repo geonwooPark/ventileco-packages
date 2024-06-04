@@ -15,7 +15,7 @@ dist/providers/**/*.stories.d.ts
 dist/providers/**/*.test.js
 dist/providers/**/*.test.d.ts
 dist/*.{js,ts,d.ts,css}
-dist/constants/list/
+dist/constants/list.{d.ts,js}
 dist/test/
 
 .prettierrc
