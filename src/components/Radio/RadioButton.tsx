@@ -8,20 +8,20 @@ interface RadioButtonProps {
 }
 
 function RadioButton({ children, id, value }: RadioButtonProps) {
-  const { selectedValue, name, register, onChange } = useContext(RadioContext)
+  const { selectedValue, name, register, onClick } = useContext(RadioContext)
   const isSelected = selectedValue === value
 
   return (
     <label role="radio" className="flex">
       <input
-        {...register}
         id={id}
         type="radio"
         name={name}
         value={value}
-        onChange={() => onChange(value)}
+        onClick={() => onClick(value)}
         defaultChecked={isSelected}
         className="hidden"
+        {...register}
       />
       {children({ isSelected })}
     </label>

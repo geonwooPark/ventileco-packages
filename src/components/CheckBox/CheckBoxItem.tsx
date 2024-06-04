@@ -14,11 +14,11 @@ function CheckBoxItem({ children, value, register }: CheckBoxItemProps) {
   return (
     <label role="checkbox">
       <input
-        {...register}
         type="checkbox"
         value={value}
         onClick={() => onClick(value)}
         className="hidden"
+        {...register}
       />
       {children({ isSelected })}
     </label>
