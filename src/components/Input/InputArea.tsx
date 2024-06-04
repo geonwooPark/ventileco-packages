@@ -1,4 +1,4 @@
-import React, { useContext, useMemo } from 'react'
+import { useContext, useMemo } from 'react'
 import { InputContext } from './Input'
 import { twMerge } from 'tailwind-merge'
 

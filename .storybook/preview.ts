@@ -14,7 +14,7 @@ const preview: Preview = {
         method: 'alphabetical',
         order: [
           'INTRODUCTION',
-          ['Configure', 'Usage', 'Theme'],
+          ['Configure', 'Usage'],
           'COMPONENTS',
           'PROVIDERS',
         ],

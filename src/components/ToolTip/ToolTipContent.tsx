@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, useContext } from 'react'
+import { PropsWithChildren, useContext } from 'react'
 import { createPortal } from 'react-dom'
 import { ToolTipContext } from './ToolTip'
 import { TOOLTIP_TRIANGLE_DIRECTION } from '../../constants'

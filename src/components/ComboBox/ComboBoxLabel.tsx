@@ -1,4 +1,4 @@
-import React, { PropsWithChildren } from 'react'
+import { PropsWithChildren } from 'react'
 
 function ComboBoxLabel({ children }: PropsWithChildren) {
   return children

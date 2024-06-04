@@ -1,8 +1,17 @@
 {
   "name": "ventileco-ui",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
+  "private": false,
+  "version": "0.0.1",
+  "description": "Tailwind Headless UI Kit",
+  "main": "dist/components/index.js",
+  "types": "dist/components/index.d.ts",
+  "keywords": [
+    "react",
+    "tailwind",
+    "ui",
+    "component",
+    "headless"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
@@ -11,7 +20,8 @@
     "test": "vitest --coverage",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "chromatic": "npx chromatic --project-token=chpt_58bae08c9c6afa4"
+    "chromatic": "npx chromatic --project-token=chpt_58bae08c9c6afa4",
+    "prepare": "rm -rf dist && mkdir dist && tsc"
   },
   "dependencies": {
     "class-variance-authority": "^0.7.0",

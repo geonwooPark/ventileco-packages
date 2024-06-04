@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, useContext } from 'react'
+import { PropsWithChildren, useContext } from 'react'
 import { PaginationContext } from './Pagination'
 import { getQueries } from '../../utils/getQueries'
 

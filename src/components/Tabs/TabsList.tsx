@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, useMemo } from 'react'
+import { PropsWithChildren, useMemo } from 'react'
 import { twMerge } from 'tailwind-merge'
 
 interface TabsListProps {

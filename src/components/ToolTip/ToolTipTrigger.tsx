@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, useContext } from 'react'
+import { PropsWithChildren, useContext } from 'react'
 import { ToolTipContext } from './ToolTip'
 
 function ToolTipTrigger({ children }: PropsWithChildren) {

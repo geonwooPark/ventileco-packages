@@ -1,4 +1,3 @@
-import React from 'react'
 import ToolTip, { ToolTipProps } from './ToolTip'
 
 export default {

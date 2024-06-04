@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, useContext } from 'react'
+import { PropsWithChildren, useContext } from 'react'
 import { AccordionContext } from './Accordion'
 import { AccordionItemContext } from './AccordionItem'
 

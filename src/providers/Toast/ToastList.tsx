@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, useContext } from 'react'
+import { PropsWithChildren, useContext } from 'react'
 import { TOAST_POSITION } from '../../constants'
 import { ToastContext } from './ToastProvider'
 
