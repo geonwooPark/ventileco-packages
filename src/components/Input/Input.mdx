@@ -6,7 +6,7 @@ import { Meta } from '@storybook/addon-docs'
 
 사용자의 클릭 이벤트를 처리하여 다양한 동작을 수행하는 인터페이스 요소
 
-## Example
+## Controlled Example
 
 ```jsx
 import Input from './ventileco-ui
@@ -27,15 +27,51 @@ function Example() {
         value={value}
         onChange={onChange}
         placeholder="Enter text"
+        className="h-[50px] rounded-md border px-2 text-black data-[disabled]:opacity-50"
       >
-        <Input.Container className="h-[50px] rounded-md border px-2 text-black data-[disabled]:opacity-50">
+        <Input.Icon>
+          <div className="mr-1 size-5 bg-gray-400" />
+        </Input.Icon>
+        <Input.InputArea />
+      </Input>
+    </div>
+  )
+}
+```
+
+## With React Hook Form Example
+
+```jsx
+import Input from './ventileco-ui
+import { useForm } from 'react-hook-form'
+
+function Example() {
+  const { register, handleSubmit } = useForm({
+    defaultValues: { text: '' },
+  })
+
+  const onSubmit = (data: any) => console.log(data)
+
+  const inputRegister = register('text', {
+    required: '텍스트를 입력해주세요.',
+  })
+
+  return (
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <div className="w-[240px]">
+        <Input
+          type="text"
+          placeholder="Enter text"
+          register={inputRegister}
+          className="h-[50px] rounded-md border px-2 text-black data-[disabled]:opacity-50"
+        >
           <Input.Icon>
             <div className="mr-1 size-5 bg-gray-400" />
           </Input.Icon>
           <Input.InputArea />
-        </Input.Container>
-      </Input>
-    </div>
+        </Input>
+      </div>
+    </form>
   )
 }
 ```

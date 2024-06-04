@@ -7,7 +7,7 @@ interface InputAreaProps {
 }
 
 function InputArea({ className }: InputAreaProps) {
-  const { ...props } = useContext(InputContext)
+  const { register, disabled, ...props } = useContext(InputContext)
 
   const newClassName = useMemo(
     () => twMerge('w-full bg-inherit outline-none', className),
@@ -18,9 +18,10 @@ function InputArea({ className }: InputAreaProps) {
     <input
       role="input"
       {...props}
-      // eslint-disable-next-line react/prop-types
-      data-disabled={props.disabled}
+      disabled={disabled}
+      data-disabled={disabled}
       className={newClassName}
+      {...register}
     />
   )
 }
