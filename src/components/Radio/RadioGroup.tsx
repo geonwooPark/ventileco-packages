@@ -69,7 +69,7 @@ function RadioGroup({
 }
 
 RadioGroup.Title = RadioGroupTitle
-RadioGroup.RadioList = RadioList
-RadioGroup.RadioButton = RadioButton
+RadioGroup.List = RadioList
+RadioGroup.Item = RadioButton
 
 export default RadioGroup

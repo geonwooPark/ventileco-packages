@@ -12,7 +12,7 @@ function RadioButton({ children, id, value }: RadioButtonProps) {
   const isSelected = selectedValue === value
 
   return (
-    <label role="radio" className="flex items-center">
+    <label role="radio" className="flex">
       <input
         {...register}
         id={id}
