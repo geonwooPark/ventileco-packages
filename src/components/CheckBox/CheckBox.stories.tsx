@@ -82,12 +82,16 @@ export function WithReactHookForm() {
 
   const onSubmit = (data: any) => console.log(data)
 
+  const checkBoxRegister = register('months', {
+    required: 'You must select at least one',
+  })
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <CheckBoxGroup defaultValues={['January']}>
         <CheckBoxGroup.Title>With React Hook Form</CheckBoxGroup.Title>
         <CheckBoxGroup.List className="flex gap-2">
-          <CheckBoxGroup.Item value="January" register={register('months')}>
+          <CheckBoxGroup.Item value="January" register={checkBoxRegister}>
             {({ isSelected }) => (
               <div
                 className={`${isSelected && 'text-active'} cursor-pointer rounded-md border border-black px-3 py-2`}
@@ -112,7 +116,7 @@ export function WithReactHookForm() {
               </div>
             )}
           </CheckBoxGroup.Item>
-          <CheckBoxGroup.Item value="February" register={register('months')}>
+          <CheckBoxGroup.Item value="February" register={checkBoxRegister}>
             {({ isSelected }) => (
               <div
                 className={`${isSelected && 'text-active'} cursor-pointer rounded-md border border-black px-3 py-2`}

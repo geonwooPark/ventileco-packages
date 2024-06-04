@@ -16,9 +16,9 @@ function App() {
 
   return (
       <CheckBoxGroup defaultValues={values} setValues={setValues}>
-        <CheckBoxTitle>CheckBox</CheckBoxTitle>
-        <CheckList className="flex gap-2">
-          <CheckBoxItem value="January">
+        <CheckBoxGroup.Title>CheckBox</CheckBoxGroup.Title>
+        <CheckBoxGroup.List className="flex gap-2">
+          <CheckBoxGroup.Item value="January">
             {({ isSelected }) => (
               <div
                 className={`${isSelected && 'text-active'} cursor-pointer rounded-md border border-black px-3 py-2`}
@@ -42,8 +42,8 @@ function App() {
                 <p>January</p>
               </div>
             )}
-          </CheckBoxItem>
-          <CheckBoxItem value="February">
+          </CheckBoxGroup.Item>
+          <CheckBoxGroup.Item value="February">
             {({ isSelected }) => (
               <div
                 className={`${isSelected && 'text-active'} cursor-pointer rounded-md border border-black px-3 py-2`}
@@ -67,8 +67,8 @@ function App() {
                 <p>February</p>
               </div>
             )}
-          </CheckBoxItem>
-        </CheckList>
+          </CheckBoxGroup.Item>
+        </CheckBoxGroup.List>
       </CheckBoxGroup>
   )
 }
@@ -87,12 +87,16 @@ function App() {
 
   const onSubmit = (data: any) => console.log(data)
 
+  const checkBoxRegister = register('months', {
+    required: 'You must select at least one',
+  })
+
   return (
       <form onSubmit={handleSubmit(onSubmit)}>
         <CheckBoxGroup defaultValues={['January']}>
-          <CheckBoxTitle>CheckBox</CheckBoxTitle>
-          <CheckList className="flex gap-2">
-            <CheckBoxItem value="January" register={register('months')}>
+          <CheckBoxGroup.itle>CheckBox</CheckBoxGroup.itle>
+          <CheckBoxGroup.List className="flex gap-2">
+            <CheckBoxGroup.Item value="January" register={checkBoxRegister}>
               {({ isSelected }) => (
                 <div
                   className={`${isSelected && 'text-active'} cursor-pointer rounded-md border border-black px-3 py-2`}
@@ -116,8 +120,8 @@ function App() {
                   <p>January</p>
                 </div>
               )}
-            </CheckBoxItem>
-            <CheckBoxItem value="February" register={register('months')}>
+            </CheckBoxGroup.Item>
+            <CheckBoxGroup.Item value="February" register={checkBoxRegister}>
               {({ isSelected }) => (
                 <div
                   className={`${isSelected && 'text-active'} cursor-pointer rounded-md border border-black px-3 py-2`}
@@ -141,8 +145,8 @@ function App() {
                   <p>February</p>
                 </div>
               )}
-            </CheckBoxItem>
-          </CheckList>
+            </CheckBoxGroup.Item>
+          </CheckBoxGroup.List>
         </CheckBoxGroup>
         <input type="submit" />
       </form>
