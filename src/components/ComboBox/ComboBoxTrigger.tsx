@@ -9,7 +9,7 @@ function ComboBoxTrigger({ children }: PropsWithChildren) {
       role="combobox"
       onClick={onTrigger}
       onKeyDown={onKeyboardTrigger}
-      className="relative cursor-pointer"
+      style={{ position: 'relative', cursor: 'pointer' }}
     >
       {children}
     </div>

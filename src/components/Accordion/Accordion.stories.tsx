@@ -20,7 +20,7 @@ export function Normal() {
             <>
               <Accordion.Trigger>
                 <div
-                  className={`${isOpen && 'text-active'} cursor-pointer border-b px-4 py-3`}
+                  className={`${isOpen && 'text-blue-600'} cursor-pointer border-b px-4 py-3`}
                 >
                   Title1
                 </div>
@@ -36,7 +36,7 @@ export function Normal() {
             <>
               <Accordion.Trigger>
                 <div
-                  className={`${isOpen && 'text-active'} cursor-pointer border-b px-4 py-3 `}
+                  className={`${isOpen && 'text-blue-600'} cursor-pointer border-b px-4 py-3 `}
                 >
                   Title2
                 </div>
@@ -52,7 +52,7 @@ export function Normal() {
             <>
               <Accordion.Trigger>
                 <div
-                  className={`${isOpen && 'border-b text-active'} cursor-pointer px-4 py-3 `}
+                  className={`${isOpen && 'border-b text-blue-600'} cursor-pointer px-4 py-3 `}
                 >
                   Title3
                 </div>

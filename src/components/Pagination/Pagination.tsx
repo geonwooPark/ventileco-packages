@@ -20,6 +20,7 @@ export interface PaginationProps {
   numberingCount?: number
   /** 페이지 외 필터, 정렬 등의 쿼리를 설정 */
   queries?: Record<string, string>
+  className?: string
 }
 
 type PaginationContextState = {
@@ -47,6 +48,7 @@ function Pagination({
   numberingCount = 3,
   queries,
   listItemCount,
+  className,
 }: PropsWithChildren<PaginationProps>) {
   const currentPage = Number(getParameterByName('page'))
   const [page, setPage] = useState(currentPage || 1)
@@ -67,7 +69,7 @@ function Pagination({
 
   return (
     <PaginationContext.Provider value={providerValue}>
-      <div className="flex items-center gap-4">{children}</div>
+      <div className={className}>{children}</div>
     </PaginationContext.Provider>
   )
 }

@@ -1,7 +1,14 @@
 import { PropsWithChildren, useContext } from 'react'
 import { SliderContext } from './Slider'
 
-function SliderContent({ children }: PropsWithChildren) {
+interface SliderContentProps {
+  className: string
+}
+
+function SliderContent({
+  children,
+  className,
+}: PropsWithChildren<SliderContentProps>) {
   const { slideContainer, gap, onDragStart, onThrottleDragMove, onDragEnd } =
     useContext(SliderContext)
 
@@ -14,7 +21,7 @@ function SliderContent({ children }: PropsWithChildren) {
       onMouseMove={onThrottleDragMove}
       onMouseLeave={onDragEnd}
       style={{ gap: `${gap}px` }}
-      className={`scrollbar-hide flex cursor-grab overflow-x-scroll scroll-smooth [&>*]:shrink-0`}
+      className={className}
     >
       {children}
     </div>

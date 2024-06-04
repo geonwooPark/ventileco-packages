@@ -14,7 +14,12 @@ function PaginationPrevButton({ children }: PropsWithChildren) {
     <button
       disabled={page === 1}
       onClick={onClick}
-      className={`flex items-center justify-center ${page === 1 && 'opacity-30'}`}
+      style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        opacity: page === 1 ? '0.3' : '1',
+      }}
     >
       {children}
     </button>

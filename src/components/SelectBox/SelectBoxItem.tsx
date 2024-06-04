@@ -1,8 +1,12 @@
-import { PropsWithChildren, useContext } from 'react'
+import { useContext } from 'react'
 import { SelectContext } from './SelectBox'
-import { hoveredStyle, selectedStyle } from '../../constants'
 
 interface SelectItemProps {
+  children: (props: {
+    isSelected: boolean
+    isDisabled: boolean
+  }) => React.ReactNode
+
   item: {
     value: string
     label: string
@@ -10,8 +14,10 @@ interface SelectItemProps {
   }
 }
 
-function SelectBoxItem({ children, item }: PropsWithChildren<SelectItemProps>) {
+function SelectBoxItem({ children, item }: SelectItemProps) {
   const { value, onSelect, onKeyboardSelect } = useContext(SelectContext)
+  const isSelected = value === item.value
+  const isDisabled = item.disabled ? true : false
 
   return (
     <li
@@ -20,7 +26,6 @@ function SelectBoxItem({ children, item }: PropsWithChildren<SelectItemProps>) {
       data-value={item.value}
       data-label={item.label}
       data-disabled={item.disabled}
-      className={`${value === item.value && selectedStyle} ${item.disabled ? 'text-gray-300' : hoveredStyle} outline-none`}
       onKeyDown={onKeyboardSelect}
       onClick={() =>
         onSelect({
@@ -30,7 +35,7 @@ function SelectBoxItem({ children, item }: PropsWithChildren<SelectItemProps>) {
         })
       }
     >
-      {children}
+      {children({ isSelected, isDisabled })}
     </li>
   )
 }

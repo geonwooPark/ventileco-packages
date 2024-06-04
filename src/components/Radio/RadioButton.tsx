@@ -20,7 +20,7 @@ function RadioButton({ children, id, value }: RadioButtonProps) {
         value={value}
         onClick={() => onClick(value)}
         defaultChecked={isSelected}
-        className="hidden"
+        style={{ display: 'none' }}
         {...register}
       />
       {children({ isSelected })}

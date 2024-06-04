@@ -23,7 +23,7 @@ export function Controlled() {
         <CheckBoxGroup.Item value="January">
           {({ isSelected }) => (
             <div
-              className={`${isSelected && 'text-active'} cursor-pointer rounded-md border border-black px-3 py-2`}
+              className={`${isSelected && 'text-blue-600'} cursor-pointer rounded-md border border-black px-3 py-2`}
             >
               <div className="flex justify-center">
                 <svg
@@ -48,7 +48,7 @@ export function Controlled() {
         <CheckBoxGroup.Item value="February">
           {({ isSelected }) => (
             <div
-              className={`${isSelected && 'text-active'} cursor-pointer rounded-md border border-black px-3 py-2`}
+              className={`${isSelected && 'text-blue-600'} cursor-pointer rounded-md border border-black px-3 py-2`}
             >
               <div className="flex justify-center">
                 <svg
@@ -94,7 +94,7 @@ export function WithReactHookForm() {
           <CheckBoxGroup.Item value="January" register={checkBoxRegister}>
             {({ isSelected }) => (
               <div
-                className={`${isSelected && 'text-active'} cursor-pointer rounded-md border border-black px-3 py-2`}
+                className={`${isSelected && 'text-blue-600'} cursor-pointer rounded-md border border-black px-3 py-2`}
               >
                 <div className="flex justify-center">
                   <svg
@@ -119,7 +119,7 @@ export function WithReactHookForm() {
           <CheckBoxGroup.Item value="February" register={checkBoxRegister}>
             {({ isSelected }) => (
               <div
-                className={`${isSelected && 'text-active'} cursor-pointer rounded-md border border-black px-3 py-2`}
+                className={`${isSelected && 'text-blue-600'} cursor-pointer rounded-md border border-black px-3 py-2`}
               >
                 <div className="flex justify-center">
                   <svg

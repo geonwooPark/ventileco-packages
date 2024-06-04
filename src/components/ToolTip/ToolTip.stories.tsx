@@ -107,5 +107,5 @@ export function Disabled(args: ToolTipProps) {
 }
 Disabled.args = {
   direction: 'top',
-  disabled: false,
+  disabled: true,
 }

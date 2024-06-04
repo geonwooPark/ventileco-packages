@@ -5,10 +5,8 @@ import {
   useMemo,
   useRef,
 } from 'react'
-import InputLabel from './InputLabel'
 import InputArea from './InputArea'
 import InputIcon from './InputIcon'
-import { twMerge } from 'tailwind-merge'
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   register?: any
@@ -43,11 +41,6 @@ function Input({
     inputNodes.focus()
   }
 
-  const newClassName = useMemo(
-    () => twMerge('flex items-center justify-between cursor-text', className),
-    [className],
-  )
-
   const providerValue = useMemo(
     () => ({
       register,
@@ -63,7 +56,8 @@ function Input({
         ref={containerRef}
         onClick={onClick}
         data-disabled={disabled}
-        className={newClassName}
+        style={{ cursor: 'text' }}
+        className={className}
       >
         {children}
       </div>
@@ -71,7 +65,6 @@ function Input({
   )
 }
 
-Input.Label = InputLabel
 Input.InputArea = InputArea
 Input.Icon = InputIcon
 

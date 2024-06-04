@@ -33,7 +33,7 @@ export function Controlled() {
                   viewBox="0 0 24 24"
                   strokeWidth="1.5"
                   stroke="currentColor"
-                  className={`size-6 ${isSelected && 'fill-active text-active'}`}
+                  className={`size-6 ${isSelected && 'fill-blue-600 text-blue-600'}`}
                 >
                   <path
                     strokeLinecap="round"
@@ -55,7 +55,7 @@ export function Controlled() {
                   viewBox="0 0 24 24"
                   strokeWidth="1.5"
                   stroke="currentColor"
-                  className={`size-6 ${isSelected && 'fill-active text-active'}`}
+                  className={`size-6 ${isSelected && 'fill-blue-600 text-blue-600'}`}
                 >
                   <path
                     strokeLinecap="round"
@@ -77,7 +77,7 @@ export function Controlled() {
                   viewBox="0 0 24 24"
                   strokeWidth="1.5"
                   stroke="currentColor"
-                  className={`size-6 ${isSelected && 'fill-active text-active'}`}
+                  className={`size-6 ${isSelected && 'fill-blue-600 text-blue-600'}`}
                 >
                   <path
                     strokeLinecap="round"
@@ -120,7 +120,7 @@ export function WithReactHookForm() {
                     viewBox="0 0 24 24"
                     strokeWidth="1.5"
                     stroke="currentColor"
-                    className={`size-6 ${isSelected && 'fill-active text-active'}`}
+                    className={`size-6 ${isSelected && 'fill-blue-600 text-blue-600'}`}
                   >
                     <path
                       strokeLinecap="round"
@@ -144,7 +144,7 @@ export function WithReactHookForm() {
                     viewBox="0 0 24 24"
                     strokeWidth="1.5"
                     stroke="currentColor"
-                    className={`size-6 ${isSelected && 'fill-active text-active'}`}
+                    className={`size-6 ${isSelected && 'fill-blue-600 text-blue-600'}`}
                   >
                     <path
                       strokeLinecap="round"
@@ -168,7 +168,7 @@ export function WithReactHookForm() {
                     viewBox="0 0 24 24"
                     strokeWidth="1.5"
                     stroke="currentColor"
-                    className={`size-6 ${isSelected && 'fill-active text-active'}`}
+                    className={`size-6 ${isSelected && 'fill-blue-600 text-blue-600'}`}
                   >
                     <path
                       strokeLinecap="round"

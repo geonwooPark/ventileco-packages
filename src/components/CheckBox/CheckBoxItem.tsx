@@ -17,7 +17,7 @@ function CheckBoxItem({ children, value, register }: CheckBoxItemProps) {
         type="checkbox"
         value={value}
         onClick={() => onClick(value)}
-        className="hidden"
+        style={{ display: 'none' }}
         {...register}
       />
       {children({ isSelected })}

@@ -15,7 +15,7 @@ function ComboBoxInput({ placeholder }: ComboBoxInputProps) {
       value={keyword}
       onChange={onTextChange}
       placeholder={placeholder}
-      className="w-full outline-none"
+      style={{ width: '100%', outline: 'none' }}
     />
   )
 }

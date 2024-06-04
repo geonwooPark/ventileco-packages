@@ -23,11 +23,14 @@ export function Normal() {
 }
 
 export function LoadingStatus(args: ButtonProps) {
+  const isLoading = true
+  const disabled = false
+
   return (
     <Button
       {...args}
       type="button"
-      className="h-[50px] w-[320px] rounded-md bg-black text-base font-bold text-white transition-all duration-200 hover:opacity-80"
+      className={`h-[50px] w-[320px] rounded-md bg-black text-base font-bold text-white transition-all duration-200 ${!isLoading && !disabled && 'hover:opacity-80'}`}
     >
       BUTTON
     </Button>
@@ -38,11 +41,14 @@ LoadingStatus.args = {
 }
 
 export function DisabledStatus(args: ButtonProps) {
+  const isLoading = false
+  const disabled = true
+
   return (
     <Button
       {...args}
       type="button"
-      className="h-[50px] w-[320px] rounded-md bg-black text-base font-bold text-white transition-all duration-200 hover:opacity-80"
+      className={`h-[50px] w-[320px] rounded-md bg-black text-base font-bold text-white transition-all duration-200 ${!isLoading && !disabled && 'hover:opacity-80'}`}
     >
       BUTTON
     </Button>

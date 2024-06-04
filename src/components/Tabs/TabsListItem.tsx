@@ -13,7 +13,7 @@ function TabsListItem({ children, index }: TabsListItemProps) {
 
   return (
     <li
-      className="w-full cursor-pointer"
+      role="tab"
       tabIndex={0}
       onClick={() => onClick(index)}
       onFocus={() => onFocus(index)}

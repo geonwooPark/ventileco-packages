@@ -1,14 +1,15 @@
-import { PropsWithChildren, useMemo } from 'react'
-import { twMerge } from 'tailwind-merge'
+import { PropsWithChildren } from 'react'
 
 interface TabsListProps {
   className?: string
 }
 
 function TabsList({ children, className }: PropsWithChildren<TabsListProps>) {
-  const newClassName = useMemo(() => twMerge('flex', className), [className])
-
-  return <ul className={newClassName}>{children}</ul>
+  return (
+    <ul role="tablist" className={className}>
+      {children}
+    </ul>
+  )
 }
 
 export default TabsList

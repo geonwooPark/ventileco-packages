@@ -13,7 +13,7 @@ export default meta
 
 export function Normal(args: PaginationProps) {
   return (
-    <Pagination {...args}>
+    <Pagination {...args} className="flex items-center gap-4">
       <Pagination.PrevButton>
         <svg
           xmlns="http://www.w3.org/2000/svg"

@@ -25,11 +25,17 @@ export function Normal() {
           </button>
         </ComboBox.Trigger>
 
-        <ComboBox.List>
+        <ComboBox.List className="absolute z-[200] mt-1 max-h-[240px] w-full overflow-hidden overflow-y-scroll rounded-md border bg-white">
           {({ optionList }) =>
             optionList.map((item) => (
               <ComboBox.Item key={item.value} item={item}>
-                <button className={`w-full px-3 py-2`}>{item.label}</button>
+                {({ isSelected, isDisabled }) => (
+                  <button
+                    className={`${isSelected && 'text-blue-600'} ${isDisabled && 'text-gray-300'} w-full px-3 py-2 hover:bg-gray-100`}
+                  >
+                    {item.label}
+                  </button>
+                )}
               </ComboBox.Item>
             ))
           }
@@ -52,11 +58,17 @@ export function WithLabel() {
           </button>
         </ComboBox.Trigger>
 
-        <ComboBox.List>
+        <ComboBox.List className="absolute z-[200] mt-1 max-h-[240px] w-full overflow-hidden overflow-y-scroll rounded-md border bg-white">
           {({ optionList }) =>
             optionList.map((item) => (
               <ComboBox.Item key={item.value} item={item}>
-                <button className={`w-full px-3 py-2`}>{item.label}</button>
+                {({ isSelected, isDisabled }) => (
+                  <button
+                    className={`${isSelected && 'text-blue-600'} ${isDisabled && 'text-gray-300'} w-full px-3 py-2 hover:bg-gray-100`}
+                  >
+                    {item.label}
+                  </button>
+                )}
               </ComboBox.Item>
             ))
           }
@@ -95,11 +107,17 @@ export function WithClearButton() {
           </button>
         </ComboBox.Trigger>
 
-        <ComboBox.List>
+        <ComboBox.List className="absolute z-[200] mt-1 max-h-[240px] w-full overflow-hidden overflow-y-scroll rounded-md border bg-white">
           {({ optionList }) =>
             optionList.map((item) => (
               <ComboBox.Item key={item.value} item={item}>
-                <button className={`w-full px-3 py-2`}>{item.label}</button>
+                {({ isSelected, isDisabled }) => (
+                  <button
+                    className={`${isSelected && 'text-blue-600'} ${isDisabled && 'text-gray-300'} w-full px-3 py-2 hover:bg-gray-100`}
+                  >
+                    {item.label}
+                  </button>
+                )}
               </ComboBox.Item>
             ))
           }
@@ -156,11 +174,17 @@ export function WithArrowButton() {
           </button>
         </ComboBox.Trigger>
 
-        <ComboBox.List>
+        <ComboBox.List className="absolute z-[200] mt-1 max-h-[240px] w-full overflow-hidden overflow-y-scroll rounded-md border bg-white">
           {({ optionList }) =>
             optionList.map((item) => (
               <ComboBox.Item key={item.value} item={item}>
-                <button className={`w-full px-3 py-2`}>{item.label}</button>
+                {({ isSelected, isDisabled }) => (
+                  <button
+                    className={`${isSelected && 'text-blue-600'} ${isDisabled && 'text-gray-300'} w-full px-3 py-2 hover:bg-gray-100`}
+                  >
+                    {item.label}
+                  </button>
+                )}
               </ComboBox.Item>
             ))
           }

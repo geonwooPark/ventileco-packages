@@ -10,7 +10,6 @@ import SelectBoxLabel from './SelectBoxLabel'
 import SelectBoxTrigger from './SelectBoxTrigger'
 import SelectBoxTriggerText from './SelectBoxTriggerText'
 import SelectBoxItem from './SelectBoxItem'
-import { focusedStyle } from '../../constants'
 import { OptionList } from '../../types'
 import SelectBoxList from './SelectBoxList'
 
@@ -87,7 +86,6 @@ function SelectBox({ children, ...props }: PropsWithChildren<SelectBoxProps>) {
           if (node instanceof HTMLElement) {
             if (node.dataset.disabled !== 'true') {
               node.focus()
-              node.classList.add(focusedStyle)
               break
             }
           }
@@ -98,7 +96,6 @@ function SelectBox({ children, ...props }: PropsWithChildren<SelectBoxProps>) {
           if (node instanceof HTMLElement) {
             if (node.dataset.disabled !== 'true') {
               node.focus()
-              node.classList.add(focusedStyle)
               break
             }
           }
@@ -146,8 +143,6 @@ function SelectBox({ children, ...props }: PropsWithChildren<SelectBoxProps>) {
       }
       if (nextChildNode) {
         nextChildNode.focus()
-        nextChildNode.classList.add(focusedStyle)
-        element.classList.remove(focusedStyle)
       }
     }
 
@@ -160,8 +155,6 @@ function SelectBox({ children, ...props }: PropsWithChildren<SelectBoxProps>) {
       }
       if (prevChildNode) {
         prevChildNode.focus()
-        prevChildNode.classList.add(focusedStyle)
-        element.classList.remove(focusedStyle)
       }
     }
   }
@@ -203,7 +196,7 @@ function SelectBox({ children, ...props }: PropsWithChildren<SelectBoxProps>) {
 
   return (
     <SelectContext.Provider value={providerValue}>
-      <div ref={containerRef} className="relative">
+      <div ref={containerRef} style={{ position: 'relative' }}>
         {children}
       </div>
     </SelectContext.Provider>

@@ -166,7 +166,7 @@ function Slider({ children, gap, step = 1 }: PropsWithChildren<SliderProps>) {
 
   return (
     <SliderContext.Provider value={providerValue}>
-      <div className="relative w-full">{children}</div>
+      <div style={{ position: 'relative', width: '100%' }}>{children}</div>
     </SliderContext.Provider>
   )
 }

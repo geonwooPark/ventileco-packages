@@ -9,13 +9,13 @@ import { Meta } from '@storybook/addon-docs'
 ## Example
 
 ```jsx
-import Button from './ventileco-ui
+import Button from 'ventileco-ui'
 
 function Example() {
   return (
     <Button
       type="button"
-      className="h-[50px] w-[320px] rounded-md bg-black text-base font-bold text-white transition-all duration-200 hover:opacity-80"
+      className={`h-[50px] w-[320px] rounded-md bg-black text-base font-bold text-white transition-all duration-200 ${!isLoading && !disabled && 'hover:opacity-80'}`}
     >
       BUTTON
     </Button>

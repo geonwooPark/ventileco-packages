@@ -9,11 +9,16 @@ import { Meta } from '@storybook/addon-docs'
 ## Example
 
 ```jsx
-import Pagination from './ventileco-ui
+import Pagination from 'ventileco-ui'
 
 function Example() {
   return (
-    <Pagination listItemCount={5} totalItemCount={24} numberingCount={3}>
+    <Pagination
+      listItemCount={5}
+      totalItemCount={24}
+      numberingCount={3}
+      className="flex items-center gap-4"
+    >
       <Pagination.PrevButton>
         <svg
           xmlns="http://www.w3.org/2000/svg"

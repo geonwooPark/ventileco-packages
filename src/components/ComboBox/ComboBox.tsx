@@ -12,7 +12,6 @@ import ComboBoxInput from './ComboBoxInput'
 import { escapeRegExp } from '../../utils/escapeRegExp'
 import ComboBoxItem from './ComboBoxItem'
 import { OptionList } from '../../types'
-import { focusedStyle } from '../../constants'
 import ComboBoxClearButton from './ComboBoxClearButton'
 import ComboBoxArrowButton from './ComboBoxArrowButton'
 import ComboBoxList from './ComboBoxList'
@@ -133,7 +132,6 @@ function ComboBox({ children, ...props }: PropsWithChildren<ComboBoxProps>) {
           if (node instanceof HTMLElement) {
             if (node.dataset.disabled !== 'true') {
               node.focus()
-              node.classList.add(focusedStyle)
               break
             }
           }
@@ -144,7 +142,6 @@ function ComboBox({ children, ...props }: PropsWithChildren<ComboBoxProps>) {
           if (node instanceof HTMLElement) {
             if (node.dataset.disabled !== 'true') {
               node.focus()
-              node.classList.add(focusedStyle)
               break
             }
           }
@@ -193,8 +190,6 @@ function ComboBox({ children, ...props }: PropsWithChildren<ComboBoxProps>) {
       }
       if (nextChildNode) {
         nextChildNode.focus()
-        nextChildNode.classList.add(focusedStyle)
-        element.classList.remove(focusedStyle)
       }
     }
 
@@ -207,8 +202,6 @@ function ComboBox({ children, ...props }: PropsWithChildren<ComboBoxProps>) {
       }
       if (prevChildNode) {
         prevChildNode.focus()
-        prevChildNode.classList.add(focusedStyle)
-        element.classList.remove(focusedStyle)
       }
     }
   }
@@ -268,7 +261,7 @@ function ComboBox({ children, ...props }: PropsWithChildren<ComboBoxProps>) {
 
   return (
     <ComboBoxContext.Provider value={providerValue}>
-      <div ref={containerRef} className="relative">
+      <div ref={containerRef} style={{ position: 'relative' }}>
         {children}
       </div>
     </ComboBoxContext.Provider>

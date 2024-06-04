@@ -30,7 +30,7 @@ export function Normal(args: SliderProps) {
           />
         </svg>
       </Slider.PrevButton>
-      <Slider.Content>
+      <Slider.Content className="hide-scroll flex cursor-grab overflow-x-scroll scroll-smooth [&>*]:shrink-0">
         <div className="size-[200px] bg-red-400"></div>
         <div className="size-[200px] bg-blue-400"></div>
         <div className="size-[200px] bg-green-400"></div>

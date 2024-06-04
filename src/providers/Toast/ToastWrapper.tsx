@@ -9,7 +9,7 @@ function ToastWrapper({ children, id }: PropsWithChildren<ToastUIProps>) {
   const { removeToast } = useContext(ToastContext)
 
   return (
-    <div onClick={() => removeToast(id)} className="cursor-pointer">
+    <div onClick={() => removeToast(id)} style={{ cursor: 'pointer' }}>
       {children}
     </div>
   )

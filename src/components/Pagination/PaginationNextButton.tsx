@@ -15,7 +15,12 @@ function PaginationNextButton({ children }: PropsWithChildren) {
     <button
       disabled={page === totalPage}
       onClick={onClick}
-      className={`flex items-center justify-center ${page === totalPage && 'opacity-30'}`}
+      style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        opacity: page === totalPage ? '0.3' : '1',
+      }}
     >
       {children}
     </button>

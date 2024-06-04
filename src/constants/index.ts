@@ -1,27 +1,101 @@
-export const focusedStyle = `text-active`
-export const selectedStyle = `text-active`
-export const hoveredStyle = `hover:bg-gray-100`
-
-export const TOOLTIP_TRIANGLE_DIRECTION: Record<string, string> = {
-  topLeft: 'bottom-[-4.5px] left-[6px]',
-  top: 'bottom-[-4.5px] left-[50%] translate-x-[-50%]',
-  topRight: 'bottom-[-4.5px] right-[6px]',
-  bottomLeft: 'top-[-4.5px] left-[6px]',
-  bottom: 'top-[-4.5px] left-[50%] translate-x-[-50%]',
-  bottomRight: 'top-[-4.5px] right-[6px]',
-  leftTop: 'top-[6px] right-[-4.5px]',
-  left: 'top-[50%] right-[-4.5px] translate-y-[-50%]',
-  leftBottom: 'bottom-[6px] right-[-4.5px]',
-  rightTop: 'top-[6px] left-[-4.5px]',
-  right: 'top-[50%] left-[-4.5px] translate-y-[-50%]',
-  rightBottom: 'bottom-[6px] left-[-4.5px]',
+export const BUTTON_STATUS = {
+  isLoading: {
+    cursor: 'not-allowed',
+  },
+  isDisabled: {
+    cursor: 'not-allowed',
+    backgorundColor: 'red',
+  },
 }
 
-export const TOAST_POSITION: Record<string, string> = {
-  topCenter: 'top-5 left-1/2 -translate-x-1/2',
-  topLeft: 'top-5 left-5',
-  topRight: 'top-5 right-5',
-  bottomCenter: 'bottom-5 left-1/2 -translate-x-1/2',
-  bottomLeft: 'bottom-5 left-5',
-  bottomRight: 'bottom-5 right-5',
+export const TOOLTIP_TRIANGLE_DIRECTION = {
+  topLeft: {
+    bottom: '-4.5px',
+    left: '6px',
+    transform: 'rotate(45deg)',
+  },
+  top: {
+    bottom: '-4.5px',
+    left: '50%',
+    transform: 'translateX(-50%) rotate(45deg)',
+  },
+  topRight: {
+    bottom: '-4.5px',
+    right: '6px',
+    transform: 'rotate(45deg)',
+  },
+  bottomLeft: {
+    top: '-4.5px',
+    left: '6px',
+    transform: 'rotate(45deg)',
+  },
+  bottom: {
+    top: '-4.5px',
+    left: '50%',
+    transform: 'translateX(-50%) rotate(45deg)',
+  },
+  bottomRight: {
+    top: '-4.5px',
+    right: '6px',
+    transform: 'rotate(45deg)',
+  },
+  leftTop: {
+    top: '6px',
+    right: '-4.5px',
+    transform: 'rotate(45deg)',
+  },
+  left: {
+    top: '50%',
+    right: '-4.5px',
+    transform: 'translateY(-50%) rotate(45deg)',
+  },
+  leftBottom: {
+    bottom: '6px',
+    right: '-4.5px',
+    transform: 'rotate(45deg)',
+  },
+  rightTop: {
+    top: '6px',
+    left: '-4.5px',
+    transform: 'rotate(45deg)',
+  },
+  right: {
+    top: '50%',
+    left: '-4.5px',
+    transform: 'translateY(-50%) rotate(45deg)',
+  },
+  rightBottom: {
+    bottom: '6px',
+    left: '-4.5px',
+    transform: 'rotate(45deg)',
+  },
+}
+
+export const TOAST_POSITION = {
+  topCenter: {
+    top: '20px',
+    left: '50%',
+    transform: 'translateX(-50%)',
+  },
+  topLeft: {
+    top: '20px',
+    left: '20px',
+  },
+  topRight: {
+    top: '20px',
+    right: '20px',
+  },
+  bottomCenter: {
+    bottom: '20px',
+    left: '50%',
+    transform: 'translateX(-50%)',
+  },
+  bottomLeft: {
+    bottom: '20px',
+    left: '20px',
+  },
+  bottomRight: {
+    bottom: '20px',
+    right: '20px',
+  },
 }

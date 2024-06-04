@@ -9,17 +9,17 @@ import { Meta } from '@storybook/addon-docs'
 ## Example
 
 ```jsx
-import Tabs from './ventileco-ui
+import Tabs from 'ventileco-ui'
 
 function Example() {
   return (
-    <div className='w-[240px]'>
+    <div className="w-[240px]">
       <Tabs>
-        <Tabs.List className="overflow-hidden rounded-t-md border bg-blue-100">
+        <Tabs.List className="flex overflow-hidden rounded-t-md border bg-blue-100">
           <Tabs.ListItem index={0}>
             {({ selected }) => (
               <div
-                className={`${selected && 'bg-active text-white'} w-full px-4 py-3 text-center transition duration-200 hover:opacity-50`}
+                className={`${selected && 'bg-blue-600 text-white'} w-full cursor-pointer px-4 py-3 text-center transition duration-200 hover:opacity-50`}
               >
                 Tab1
               </div>
@@ -28,7 +28,7 @@ function Example() {
           <Tabs.ListItem index={1}>
             {({ selected }) => (
               <div
-                className={`${selected && 'bg-active text-white'} w-full px-4 py-3 text-center transition duration-200 hover:opacity-50`}
+                className={`${selected && 'bg-blue-600 text-white'} w-full cursor-pointer px-4 py-3 text-center transition duration-200 hover:opacity-50`}
               >
                 Tab2
               </div>
@@ -37,7 +37,7 @@ function Example() {
           <Tabs.ListItem index={2}>
             {({ selected }) => (
               <div
-                className={`${selected && 'bg-active text-white'} w-full px-4 py-3 text-center transition duration-200 hover:opacity-50`}
+                className={`${selected && 'bg-blue-600 text-white'} w-full cursor-pointer px-4 py-3 text-center transition duration-200 hover:opacity-50`}
               >
                 Tab3
               </div>

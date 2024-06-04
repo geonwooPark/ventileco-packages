@@ -14,11 +14,11 @@ export default meta
 export function Normal() {
   return (
     <Tabs>
-      <Tabs.List className="overflow-hidden rounded-t-md border bg-blue-100">
+      <Tabs.List className="flex overflow-hidden rounded-t-md border bg-blue-100">
         <Tabs.ListItem index={0}>
           {({ selected }) => (
             <div
-              className={`${selected && 'bg-active text-white'} w-full px-4 py-3 text-center transition duration-200 hover:opacity-50`}
+              className={`${selected && 'bg-blue-600 text-white'} w-full cursor-pointer px-4 py-3 text-center transition duration-200 hover:opacity-50`}
             >
               Tab1
             </div>
@@ -27,7 +27,7 @@ export function Normal() {
         <Tabs.ListItem index={1}>
           {({ selected }) => (
             <div
-              className={`${selected && 'bg-active text-white'} w-full px-4 py-3 text-center transition duration-200 hover:opacity-50`}
+              className={`${selected && 'bg-blue-600 text-white'} w-full cursor-pointer px-4 py-3 text-center transition duration-200 hover:opacity-50`}
             >
               Tab2
             </div>
@@ -36,7 +36,7 @@ export function Normal() {
         <Tabs.ListItem index={2}>
           {({ selected }) => (
             <div
-              className={`${selected && 'bg-active text-white'} w-full px-4 py-3 text-center transition duration-200 hover:opacity-50`}
+              className={`${selected && 'bg-blue-600 text-white'} w-full cursor-pointer px-4 py-3 text-center transition duration-200 hover:opacity-50`}
             >
               Tab3
             </div>

@@ -27,14 +27,20 @@ function ToolTipContent({ children }: PropsWithChildren) {
         (isOpen &&
           createPortal(
             <div
-              className="fixed"
+              style={{ position: 'fixed' }}
               ref={tooltipRef}
               onMouseOver={onMouseOver}
               onMouseLeave={onMouseLeave}
             >
               <div>{children}</div>
               <div
-                className={`absolute z-[-1] size-2.5 rotate-45 ${TOOLTIP_TRIANGLE_DIRECTION[direction]}`}
+                style={{
+                  position: 'absolute',
+                  zIndex: '-1',
+                  width: '10px',
+                  height: '10px',
+                  ...TOOLTIP_TRIANGLE_DIRECTION[direction],
+                }}
               />
             </div>,
             portalRoot,

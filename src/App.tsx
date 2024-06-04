@@ -1,33 +1,14 @@
-import { useForm } from 'react-hook-form'
-import Input from './components/Input/Input'
+import { useToast } from './providers/Toast/useToast'
 
 function App() {
-  const { register, handleSubmit } = useForm({
-    defaultValues: { text: '' },
-  })
-
-  const onSubmit = (data: any) => console.log(data)
-
-  const inputRegister = register('text', {
-    required: '텍스트를 입력해주세요.',
-  })
+  const addToast = useToast()
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="w-[240px]">
-        <Input
-          type="text"
-          placeholder="Enter text"
-          register={inputRegister}
-          className="h-[50px] rounded-md border px-2 text-black data-[disabled]:opacity-50"
-        >
-          <Input.Icon>
-            <div className="mr-1 size-5 bg-gray-400" />
-          </Input.Icon>
-          <Input.InputArea />
-        </Input>
-      </div>
-    </form>
+    <div>
+      <button onClick={() => addToast.success('성공 메시지')}>버튼</button>
+      <button onClick={() => addToast.error('실패 메시지')}>버튼</button>
+      <button onClick={() => addToast.info('인포 메시지')}>버튼</button>
+    </div>
   )
 }
 

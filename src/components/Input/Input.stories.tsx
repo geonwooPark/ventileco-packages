@@ -21,22 +21,20 @@ export function Normal() {
   }
 
   return (
-    <div className="w-[240px]">
-      <Input
-        type="text"
-        name="email"
-        value={value}
-        onChange={onChange}
-        placeholder="Enter text"
-        className="h-[50px] rounded-md border px-2 text-black data-[disabled]:opacity-50"
-      >
-        <Input.InputArea />
-      </Input>
-    </div>
+    <Input
+      type="text"
+      name="email"
+      value={value}
+      onChange={onChange}
+      placeholder="Enter text"
+      className="flex h-[50px] w-[240px] items-center justify-between rounded-md border px-2 text-black data-[disabled]:opacity-50"
+    >
+      <Input.InputArea />
+    </Input>
   )
 }
 
-export function WithLabel() {
+export function WithIcon() {
   const [value, setValue] = useState('')
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -45,72 +43,19 @@ export function WithLabel() {
   }
 
   return (
-    <div className="w-[240px]">
-      <Input
-        type="text"
-        name="email"
-        value={value}
-        onChange={onChange}
-        placeholder="Enter text"
-        className="h-[50px] rounded-md border px-2 text-black data-[disabled]:opacity-50"
-      >
-        <Input.Label>Input</Input.Label>
-        <Input.InputArea />
-      </Input>
-    </div>
-  )
-}
-
-export function WithLeftIcon() {
-  const [value, setValue] = useState('')
-
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target
-    setValue(value)
-  }
-
-  return (
-    <div className="w-[240px]">
-      <Input
-        type="text"
-        name="email"
-        value={value}
-        onChange={onChange}
-        placeholder="Enter text"
-        className="h-[50px] rounded-md border px-2 text-black data-[disabled]:opacity-50"
-      >
-        <Input.Icon>
-          <div className="mr-1 size-5 bg-gray-400" />
-        </Input.Icon>
-        <Input.InputArea />
-      </Input>
-    </div>
-  )
-}
-
-export function WithRightIcon() {
-  const [value, setValue] = useState('')
-
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target
-    setValue(value)
-  }
-  return (
-    <div className="w-[240px]">
-      <Input
-        type="text"
-        name="email"
-        value={value}
-        onChange={onChange}
-        placeholder="Enter text"
-        className="h-[50px] rounded-md border px-2 text-black data-[disabled]:opacity-50"
-      >
-        <Input.InputArea />
-        <Input.Icon>
-          <div className="ml-1 size-5 bg-gray-400" />
-        </Input.Icon>
-      </Input>
-    </div>
+    <Input
+      type="text"
+      name="email"
+      value={value}
+      onChange={onChange}
+      placeholder="Enter text"
+      className="flex h-[50px] w-[240px] items-center justify-between rounded-md border px-2 text-black data-[disabled]:opacity-50"
+    >
+      <Input.Icon>
+        <div className="mr-1 size-5 bg-gray-400" />
+      </Input.Icon>
+      <Input.InputArea />
+    </Input>
   )
 }
 
@@ -122,18 +67,16 @@ export function DisabledStatus() {
     setValue(value)
   }
   return (
-    <div className="w-[240px]">
-      <Input
-        type="text"
-        name="email"
-        value={value}
-        onChange={onChange}
-        disabled
-        placeholder="Enter text"
-        className="h-[50px] rounded-md border px-2 text-black data-[disabled]:opacity-50"
-      >
-        <Input.InputArea />
-      </Input>
-    </div>
+    <Input
+      type="text"
+      name="email"
+      value={value}
+      onChange={onChange}
+      disabled
+      placeholder="Enter text"
+      className="flex h-[50px] w-[240px] items-center justify-between rounded-md border px-2 text-black data-[disabled]:opacity-50"
+    >
+      <Input.InputArea />
+    </Input>
   )
 }

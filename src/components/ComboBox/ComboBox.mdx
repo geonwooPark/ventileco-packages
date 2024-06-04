@@ -9,7 +9,7 @@ import { Meta } from '@storybook/addon-docs'
 ## Example
 
 ```jsx
-import ComboBox from './ventileco-ui
+import ComboBox from 'ventileco-ui'
 
 function Example() {
   const [value, setValue] = useState<string>()
@@ -62,7 +62,13 @@ function Example() {
           {({ optionList }) =>
             optionList.map((item) => (
               <ComboBox.Item key={item.value} item={item}>
-                <button className={`w-full px-3 py-2`}>{item.label}</button>
+                {({ isSelected, isDisabled }) => (
+                  <button
+                    className={`${isSelected && 'text-blue-600'} ${isDisabled && 'text-gray-300'} w-full px-3 py-2 hover:bg-gray-100`}
+                  >
+                    {item.label}
+                  </button>
+                )}
               </ComboBox.Item>
             ))
           }

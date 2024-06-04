@@ -1,13 +1,12 @@
 {
   "name": "ventileco-ui",
   "private": false,
-  "version": "0.0.2",
-  "description": "Tailwind Headless UI Kit",
+  "version": "0.0.3",
+  "description": "Headless UI Kit",
   "main": "dist/components/index.js",
   "types": "dist/components/index.d.ts",
   "keywords": [
     "react",
-    "tailwind",
     "ui",
     "component",
     "headless"
@@ -22,11 +21,6 @@
     "build-storybook": "storybook build",
     "chromatic": "npx chromatic --project-token=chpt_58bae08c9c6afa4",
     "prepare": "rm -rf dist && mkdir dist && tsc"
-  },
-  "dependencies": {
-    "class-variance-authority": "^0.7.0",
-    "clsx": "^2.1.0",
-    "tailwind-merge": "^2.2.1"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^1.5.0",

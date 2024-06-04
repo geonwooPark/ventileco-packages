@@ -9,7 +9,7 @@ import { Meta } from '@storybook/addon-docs'
 ## Controlled Example
 
 ```jsx
-import Input from './ventileco-ui
+import Input from 'ventileco-ui'
 
 function Example() {
   const [value, setValue] = useState('')
@@ -20,21 +20,18 @@ function Example() {
   }
 
   return (
-    <div className="w-[240px]">
       <Input
         type="text"
         name="email"
         value={value}
         onChange={onChange}
         placeholder="Enter text"
-        className="h-[50px] rounded-md border px-2 text-black data-[disabled]:opacity-50"
-      >
+        className="flex h-[50px] w-[240px] items-center justify-between rounded-md border px-2 text-black data-[disabled]:opacity-50">
         <Input.Icon>
           <div className="mr-1 size-5 bg-gray-400" />
         </Input.Icon>
         <Input.InputArea />
       </Input>
-    </div>
   )
 }
 ```
@@ -42,7 +39,7 @@ function Example() {
 ## With React Hook Form Example
 
 ```jsx
-import Input from './ventileco-ui
+import Input from 'ventileco-ui'
 import { useForm } from 'react-hook-form'
 
 function Example() {
@@ -58,19 +55,16 @@ function Example() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="w-[240px]">
         <Input
           type="text"
           placeholder="Enter text"
           register={inputRegister}
-          className="h-[50px] rounded-md border px-2 text-black data-[disabled]:opacity-50"
-        >
+          className="flex h-[50px] w-[240px] items-center justify-between rounded-md border px-2 text-black data-[disabled]:opacity-50">
           <Input.Icon>
             <div className="mr-1 size-5 bg-gray-400" />
           </Input.Icon>
           <Input.InputArea />
         </Input>
-      </div>
     </form>
   )
 }

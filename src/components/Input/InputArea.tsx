@@ -1,6 +1,5 @@
-import { useContext, useMemo } from 'react'
+import { useContext } from 'react'
 import { InputContext } from './Input'
-import { twMerge } from 'tailwind-merge'
 
 interface InputAreaProps {
   className?: string
@@ -9,18 +8,14 @@ interface InputAreaProps {
 function InputArea({ className }: InputAreaProps) {
   const { register, disabled, ...props } = useContext(InputContext)
 
-  const newClassName = useMemo(
-    () => twMerge('w-full bg-inherit outline-none', className),
-    [className],
-  )
-
   return (
     <input
       role="input"
       {...props}
       disabled={disabled}
       data-disabled={disabled}
-      className={newClassName}
+      style={{ width: '100%', backgroundColor: 'inherit', outline: 'none' }}
+      className={className}
       {...register}
     />
   )

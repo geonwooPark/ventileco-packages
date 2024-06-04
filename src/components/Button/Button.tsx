@@ -1,6 +1,5 @@
-import React, { PropsWithChildren, useMemo } from 'react'
-import { cva } from 'class-variance-authority'
-import { cn } from '../../utils/cn'
+import React, { PropsWithChildren } from 'react'
+import { BUTTON_STATUS } from '../../constants'
 
 export interface ButtonProps {
   type: 'submit' | 'button'
@@ -24,38 +23,18 @@ function Button({
     }
   }
 
-  const updatedClassName =
-    isLoading || disabled ? className?.replace(/\bhover:\S+\b/g, '') : className
-
-  const ButtonVariants = useMemo(
-    () =>
-      cva(`${updatedClassName}`, {
-        variants: {
-          isLoading: {
-            true: `cursor-not-allowed`,
-            false: '',
-          },
-          disabled: {
-            true: 'cursor-not-allowed bg-grey',
-            false: '',
-          },
-        },
-      }),
-    [updatedClassName, isLoading, disabled],
-  )
-
-  const buttonClassName = useMemo(
-    () => cn(ButtonVariants({ isLoading, disabled })),
-    [ButtonVariants, isLoading, disabled],
-  )
-
   return (
     <button
       {...props}
       role="button"
       onKeyDown={onKeyDown}
+      style={{
+        cursor: isLoading || disabled ? 'not-allowed' : undefined,
+        backgroundColor: disabled ? '#d1d5db' : undefined,
+        color: disabled ? '#9ca3af' : undefined,
+      }}
       disabled={isLoading || disabled}
-      className={buttonClassName}
+      className={className}
     >
       {isLoading ? (
         <svg
