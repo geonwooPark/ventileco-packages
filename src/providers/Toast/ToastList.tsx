@@ -6,9 +6,7 @@ function ToastList({ children }: PropsWithChildren) {
   const { position } = useContext(ToastContext)
 
   return (
-    <div
-      className={`fixed z-notification space-y-4 ${TOAST_POSITION[position]}`}
-    >
+    <div className={`fixed z-[500] space-y-4 ${TOAST_POSITION[position]}`}>
       {children}
     </div>
   )

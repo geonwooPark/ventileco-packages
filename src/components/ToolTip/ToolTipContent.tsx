@@ -34,7 +34,7 @@ function ToolTipContent({ children }: PropsWithChildren) {
             >
               <div>{children}</div>
               <div
-                className={`absolute -z-base size-2.5 rotate-45 ${TOOLTIP_TRIANGLE_DIRECTION[direction]}`}
+                className={`absolute z-[-1] size-2.5 rotate-45 ${TOOLTIP_TRIANGLE_DIRECTION[direction]}`}
               />
             </div>,
             portalRoot,

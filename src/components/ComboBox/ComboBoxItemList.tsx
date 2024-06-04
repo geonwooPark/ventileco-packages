@@ -14,7 +14,7 @@ function ComboBoxItemList({ children, className }: ComboBoxItemListProps) {
   const newClassName = useMemo(
     () =>
       twMerge(
-        'absolute z-sticky mt-1 max-h-[240px] w-full overflow-hidden overflow-y-scroll rounded-md border bg-white ',
+        'absolute z-[200] mt-1 max-h-[240px] w-full overflow-hidden overflow-y-scroll rounded-md border bg-white ',
         className,
       ),
     [className],
