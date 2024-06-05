@@ -58,7 +58,7 @@ function Example() {
           </button>
         </ComboBox.Trigger>
 
-        <ComboBox.List>
+        <ComboBox.List className="absolute z-[200] mt-1 max-h-[240px] w-full overflow-hidden overflow-y-scroll rounded-md border bg-white">
           {({ optionList }) =>
             optionList.map((item) => (
               <ComboBox.Item key={item.value} item={item}>

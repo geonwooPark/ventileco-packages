@@ -7,9 +7,9 @@ import React, {
   useState,
 } from 'react'
 import TabsList from './TabsList'
-import TabsListItem from './TabsListItem'
 import TabsView from './TabsView'
 import TabsContent from './TabsContent'
+import TabsItem from './TabsItem'
 
 type TabsContextState = {
   currentTab: number
@@ -76,7 +76,7 @@ function Tabs({ children }: PropsWithChildren) {
 }
 
 Tabs.List = TabsList
-Tabs.ListItem = TabsListItem
+Tabs.Item = TabsItem
 Tabs.View = TabsView
 Tabs.Content = TabsContent
 

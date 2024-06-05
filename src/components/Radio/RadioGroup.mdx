@@ -22,8 +22,8 @@ function Example() {
           name="Controlled"
         >
           <RadioGroup.Title>Radio</RadioGroup.Title>
-          <RadioGroup.RadioList className="space-y-2">
-            <RadioGroup.RadioButton id="4" value={'number5'}>
+          <RadioGroup.List className="space-y-2">
+            <RadioGroup.Item id="4" value={'number5'}>
               {({ isSelected }) => (
                 <div className="flex w-full cursor-pointer justify-between rounded-md border border-black px-4 py-3">
                   <p>기호1</p>
@@ -43,9 +43,9 @@ function Example() {
                   </svg>
                 </div>
               )}
-            </RadioGroup.RadioButton>
+            </RadioGroup.Item>
 
-            <RadioGroup.RadioButton id="5" value={'number6'}>
+            <RadioGroup.Item id="5" value={'number6'}>
               {({ isSelected }) => (
                 <div className="flex w-full cursor-pointer justify-between rounded-md border border-black px-4 py-3">
                   <p>기호2</p>
@@ -65,9 +65,9 @@ function Example() {
                   </svg>
                 </div>
               )}
-            </RadioGroup.RadioButton>
+            </RadioGroup.Item>
 
-            <RadioGroup.RadioButton id="6" value={'number7'}>
+            <RadioGroup.Item id="6" value={'number7'}>
               {({ isSelected }) => (
                 <div className="flex w-full cursor-pointer justify-between rounded-md border border-black px-4 py-3">
                   <p>기호3</p>
@@ -87,8 +87,8 @@ function Example() {
                   </svg>
                 </div>
               )}
-            </RadioGroup.RadioButton>
-          </RadioGroup.RadioList>
+            </RadioGroup.Item>
+          </RadioGroup.List>
         </RadioGroup>
       </div>
   )
