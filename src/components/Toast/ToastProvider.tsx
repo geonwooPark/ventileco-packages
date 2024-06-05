@@ -58,7 +58,7 @@ function ToastProvider({ children, position = 'topLeft' }: ToastProviderProps) {
   )
 }
 
-ToastProvider.ToastList = ToastList
-ToastProvider.ToastWrapper = ToastWrapper
+ToastProvider.List = ToastList
+ToastProvider.Wrapper = ToastWrapper
 
 export default ToastProvider

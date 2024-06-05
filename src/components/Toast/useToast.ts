@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import { ToastContext } from './ToastProvider'
 
-export const useToast = () => {
+const useToast = () => {
   const { addToast } = useContext(ToastContext)
 
   return {
@@ -10,3 +10,5 @@ export const useToast = () => {
     error: addToast('error'),
   }
 }
+
+export default useToast

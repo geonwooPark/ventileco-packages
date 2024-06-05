@@ -17,13 +17,13 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
       {({ toasts }) => (
         <>
           <App />
-          <ToastProvider.Wrapper>
+          <ToastProvider.List>
             {toasts.map((toast) => (
-              <ToastProvider.ToastUI key={toast.id} id={toast.id}>
+              <ToastProvider.Wrapper key={toast.id} id={toast.id}>
                 // Toast로 사용하고 싶은 UI를 작성하세요.
-              </ToastProvider.ToastUI>
+              </ToastProvider.Wrapper>
             ))}
-          </ToastProvider.Wrapper>
+          </ToastProvider.List>
         </>
       )}
     </ToastProvider>

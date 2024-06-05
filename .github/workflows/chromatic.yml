@@ -7,10 +7,12 @@ on:
     branches: [main]
     paths:
       - '**.stories.tsx'
+      - '**.*.mdx'
   pull_request:
     branches: [main]
     paths:
       - '**.stories.tsx'
+      - '**.*.mdx'
 
 # List of jobs
 jobs:

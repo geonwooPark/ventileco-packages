@@ -1,4 +1,4 @@
-import { useToast } from './components/Toast/useToast'
+import useToast from './components/Toast/useToast'
 
 function App() {
   const addToast = useToast()
