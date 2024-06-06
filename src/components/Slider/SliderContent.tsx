@@ -1,4 +1,4 @@
-import { PropsWithChildren, useContext } from 'react'
+import { PropsWithChildren, useContext, useMemo } from 'react'
 import { SliderContext } from './Slider'
 
 interface SliderContentProps {
@@ -12,6 +12,8 @@ function SliderContent({
   const { slideContainer, gap, onDragStart, onThrottleDragMove, onDragEnd } =
     useContext(SliderContext)
 
+  const sliderStyle = useMemo(() => ({ gap: `${gap}px` }), [gap])
+
   return (
     <div
       role="slider"
@@ -20,8 +22,9 @@ function SliderContent({
       onMouseUp={onDragEnd}
       onMouseMove={onThrottleDragMove}
       onMouseLeave={onDragEnd}
-      style={{ gap: `${gap}px` }}
+      style={sliderStyle}
       className={className}
+      aria-live="polite"
     >
       {children}
     </div>

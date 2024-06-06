@@ -12,7 +12,11 @@ function SliderPrevButton({
   const { onPrevButtonClick } = useContext(SliderContext)
 
   return (
-    <button onClick={onPrevButtonClick} className={className}>
+    <button
+      onClick={onPrevButtonClick}
+      className={className}
+      aria-label="Previous Slide"
+    >
       {children}
     </button>
   )

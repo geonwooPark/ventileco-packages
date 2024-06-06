@@ -12,7 +12,11 @@ function SliderNextButton({
   const { onNextButtonClick } = useContext(SliderContext)
 
   return (
-    <button onClick={onNextButtonClick} className={className}>
+    <button
+      onClick={onNextButtonClick}
+      className={className}
+      aria-label="Next Slide"
+    >
       {children}
     </button>
   )

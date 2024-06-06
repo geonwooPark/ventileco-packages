@@ -2,6 +2,7 @@ import React, {
   PropsWithChildren,
   createContext,
   useCallback,
+  useMemo,
   useRef,
   useState,
 } from 'react'
@@ -154,19 +155,37 @@ function Slider({ children, gap, step = 1 }: PropsWithChildren<SliderProps>) {
 
   const onThrottleDragMove = throttle(onDragMove, 50)
 
-  const providerValue = {
-    slideContainer,
-    gap,
-    onDragStart,
-    onThrottleDragMove,
-    onDragEnd,
-    onPrevButtonClick,
-    onNextButtonClick,
-  }
+  const providerValue = useMemo(
+    () => ({
+      slideContainer,
+      gap,
+      onDragStart,
+      onThrottleDragMove,
+      onDragEnd,
+      onPrevButtonClick,
+      onNextButtonClick,
+    }),
+    [
+      slideContainer,
+      gap,
+      onDragStart,
+      onThrottleDragMove,
+      onDragEnd,
+      onPrevButtonClick,
+      onNextButtonClick,
+    ],
+  )
+
+  const sliderContainerStyle = useMemo(
+    () => ({ position: 'relative', width: '100%' }) as React.CSSProperties,
+    [],
+  )
 
   return (
     <SliderContext.Provider value={providerValue}>
-      <div style={{ position: 'relative', width: '100%' }}>{children}</div>
+      <div role="group" style={sliderContainerStyle}>
+        {children}
+      </div>
     </SliderContext.Provider>
   )
 }
