@@ -2,6 +2,7 @@ import {
   PropsWithChildren,
   createContext,
   useCallback,
+  useId,
   useMemo,
   useState,
 } from 'react'
@@ -14,6 +15,7 @@ interface AccordionProps {
 }
 
 type AccordionContextState = {
+  id: string
   activeItems: Set<number>
   onClick: (selectedTab: number) => void
   onFocus: (selectedTab: number) => void
@@ -21,6 +23,7 @@ type AccordionContextState = {
 }
 
 export const AccordionContext = createContext<AccordionContextState>({
+  id: '',
   activeItems: new Set(),
   onClick: () => null,
   onFocus: () => null,
@@ -28,6 +31,8 @@ export const AccordionContext = createContext<AccordionContextState>({
 })
 
 function Accordion({ children, className }: PropsWithChildren<AccordionProps>) {
+  const id = useId()
+
   const [activeItems, setActiveItems] = useState<Set<number>>(new Set())
 
   const onClick = useCallback((selectedItem: number) => {
@@ -65,7 +70,7 @@ function Accordion({ children, className }: PropsWithChildren<AccordionProps>) {
   }, [])
 
   const providerValue = useMemo(
-    () => ({ activeItems, onClick, onFocus, onBlur }),
+    () => ({ id, activeItems, onClick, onFocus, onBlur }),
     [activeItems, onClick, onFocus, onBlur],
   )
 
