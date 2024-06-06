@@ -1,4 +1,4 @@
-import { PropsWithChildren, useContext } from 'react'
+import { PropsWithChildren, useContext, useMemo } from 'react'
 import { createPortal } from 'react-dom'
 import { ToolTipContext } from './ToolTip'
 import { TOOLTIP_TRIANGLE_DIRECTION } from '../../constants'
@@ -21,27 +21,37 @@ function ToolTipContent({ children }: PropsWithChildren) {
     setIsOpen(false)
   }
 
+  const tooltipStyle = useMemo(
+    () => ({ position: 'fixed' }) as React.CSSProperties,
+    [],
+  )
+
+  const triangleStyle = useMemo(
+    () =>
+      ({
+        position: 'absolute',
+        zIndex: '-1',
+        width: '10px',
+        height: '10px',
+        ...TOOLTIP_TRIANGLE_DIRECTION[direction],
+      }) as React.CSSProperties,
+    [direction],
+  )
+
   return (
     <>
       {disabled ||
         (isOpen &&
           createPortal(
             <div
-              style={{ position: 'fixed' }}
+              role="tooltip"
+              style={tooltipStyle}
               ref={tooltipRef}
               onMouseOver={onMouseOver}
               onMouseLeave={onMouseLeave}
             >
               <div>{children}</div>
-              <div
-                style={{
-                  position: 'absolute',
-                  zIndex: '-1',
-                  width: '10px',
-                  height: '10px',
-                  ...TOOLTIP_TRIANGLE_DIRECTION[direction],
-                }}
-              />
+              <div style={triangleStyle} />
             </div>,
             portalRoot,
           ))}

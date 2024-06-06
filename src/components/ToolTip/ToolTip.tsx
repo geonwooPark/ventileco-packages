@@ -165,7 +165,13 @@ function ToolTip({
         setIsOpen,
       }}
     >
-      <div ref={containerRef} onMouseOver={onMouseOver} onMouseOut={onMouseOut}>
+      <div
+        ref={containerRef}
+        onMouseOver={onMouseOver}
+        onMouseOut={onMouseOut}
+        onFocus={onMouseOver}
+        onBlur={onMouseOut}
+      >
         {children}
       </div>
     </ToolTipContext.Provider>
