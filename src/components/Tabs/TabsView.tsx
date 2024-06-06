@@ -5,11 +5,7 @@ interface TabsViewProps {
 }
 
 function TabsView({ children, className }: PropsWithChildren<TabsViewProps>) {
-  return (
-    <div role="tabpanel" className={className}>
-      {children}
-    </div>
-  )
+  return <div className={className}>{children}</div>
 }
 
 export default TabsView

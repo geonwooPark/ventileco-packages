@@ -3,6 +3,7 @@ import React, {
   PropsWithChildren,
   createContext,
   useCallback,
+  useId,
   useMemo,
   useState,
 } from 'react'
@@ -12,6 +13,7 @@ import TabsContent from './TabsContent'
 import TabsItem from './TabsItem'
 
 type TabsContextState = {
+  id: string
   currentTab: number
   onClick: (selectedTab: number) => void
   onFocus: (selectedTab: number) => void
@@ -19,6 +21,7 @@ type TabsContextState = {
 }
 
 export const TabsContext = createContext<TabsContextState>({
+  id: '',
   currentTab: 0,
   onClick: () => null,
   onFocus: () => null,
@@ -26,6 +29,8 @@ export const TabsContext = createContext<TabsContextState>({
 })
 
 function Tabs({ children }: PropsWithChildren) {
+  const id = useId()
+
   const [currentTab, setCurrentTab] = useState(0)
 
   const onClick = useCallback((selectedTab: number) => {
@@ -64,8 +69,8 @@ function Tabs({ children }: PropsWithChildren) {
   )
 
   const providerValue = useMemo(
-    () => ({ currentTab, onClick, onFocus, onKeyboardSelect }),
-    [currentTab, onClick, onFocus, onKeyboardSelect],
+    () => ({ id, currentTab, onClick, onFocus, onKeyboardSelect }),
+    [id, currentTab, onClick, onFocus, onKeyboardSelect],
   )
 
   return (

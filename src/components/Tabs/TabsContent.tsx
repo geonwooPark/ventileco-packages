@@ -6,9 +6,17 @@ interface TabsContentProps {
 }
 
 function TabsContent({ children, index }: PropsWithChildren<TabsContentProps>) {
-  const { currentTab } = useContext(TabsContext)
+  const { id, currentTab } = useContext(TabsContext)
 
-  return currentTab === index ? children : null
+  return currentTab === index ? (
+    <div
+      id={`${id}-content-${index}`}
+      role="tabpanel"
+      aria-labelledby={`${id}-tab-${index}`}
+    >
+      {children}
+    </div>
+  ) : null
 }
 
 export default TabsContent

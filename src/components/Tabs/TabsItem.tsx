@@ -8,7 +8,7 @@ interface TabsItemProps {
 }
 
 function TabsItem({ children, index, className }: TabsItemProps) {
-  const { currentTab, onClick, onFocus, onKeyboardSelect } =
+  const { id, currentTab, onClick, onFocus, onKeyboardSelect } =
     useContext(TabsContext)
   const selected = index === currentTab
 
@@ -19,8 +19,11 @@ function TabsItem({ children, index, className }: TabsItemProps) {
 
   return (
     <li
+      id={`${id}-content-${index}`}
       role="tab"
       tabIndex={0}
+      aria-selected={selected}
+      aria-labelledby={`${id}-tab-${index}`}
       onClick={() => onClick(index)}
       onFocus={onFocusElement}
       onKeyDown={onKeyboardSelect}
