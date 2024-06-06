@@ -4,13 +4,13 @@ import { AccordionContext } from './Accordion'
 
 function AccordionContent({ children }: PropsWithChildren) {
   const { id } = useContext(AccordionContext)
-  const { isOpen } = useContext(AccordionItemContext)
+  const { isOpen, value } = useContext(AccordionItemContext)
 
   return isOpen ? (
     <div
-      id={id + '-content'}
+      id={`${id}-content-${value}`}
       role="tabpanel"
-      aria-labelledby={id + '-tap'}
+      aria-labelledby={`${id}-tab-${value}`}
       hidden={!isOpen}
     >
       {children}

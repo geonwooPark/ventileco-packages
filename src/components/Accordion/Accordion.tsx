@@ -6,9 +6,9 @@ import {
   useMemo,
   useState,
 } from 'react'
-import AccordionItem from './AccordionItem'
 import AccordionContent from './AccordionContent'
 import AccordionTrigger from './AccordionTrigger'
+import AccordionItem from './AccordionItem'
 
 interface AccordionProps {
   className?: string
@@ -71,7 +71,7 @@ function Accordion({ children, className }: PropsWithChildren<AccordionProps>) {
 
   const providerValue = useMemo(
     () => ({ id, activeItems, onClick, onFocus, onBlur }),
-    [activeItems, onClick, onFocus, onBlur],
+    [id, activeItems, onClick, onFocus, onBlur],
   )
 
   return (

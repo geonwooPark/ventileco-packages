@@ -14,11 +14,11 @@ function AccordionTrigger({ children }: PropsWithChildren) {
 
   return (
     <button
-      id={id + '-tap'}
+      id={`${id}-tab-${value}`}
       tabIndex={0}
       role="tab"
       aria-expanded={activeItems.has(value)}
-      aria-controls={id + '-content'}
+      aria-controls={`${id}-content-${value}`}
       onFocus={() => onFocus(value)}
       onBlur={() => onBlur(value)}
       onMouseDown={onMouseDown}
