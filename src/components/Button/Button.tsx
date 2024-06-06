@@ -16,7 +16,7 @@ function Button({
   ...props
 }: PropsWithChildren<ButtonProps>) {
   const onKeyDown = (e: React.KeyboardEvent<HTMLButtonElement>) => {
-    if (e.key === 'Enter') {
+    if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault()
       e.currentTarget.click()
     }
@@ -25,7 +25,6 @@ function Button({
   return (
     <button
       {...props}
-      role="button"
       onKeyDown={onKeyDown}
       style={{
         cursor: isLoading || disabled ? 'not-allowed' : undefined,
@@ -34,12 +33,22 @@ function Button({
       }}
       disabled={isLoading || disabled}
       className={className}
+      aria-disabled={isLoading || disabled}
+      aria-busy={isLoading}
+      aria-live={isLoading ? 'polite' : undefined}
     >
       {isLoading ? (
         <svg
           aria-hidden="true"
           role="status"
-          className="inline size-4 animate-spin text-white disabled:cursor-not-allowed"
+          style={{
+            display: 'inline-block',
+            width: '1rem',
+            height: '1rem',
+            animation: 'spin 1s linear infinite',
+            color: 'white',
+            cursor: 'not-allowed',
+          }}
           viewBox="0 0 100 101"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
