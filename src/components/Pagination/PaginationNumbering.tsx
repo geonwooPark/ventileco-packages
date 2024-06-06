@@ -19,7 +19,12 @@ function PaginationNumbering({
   }
 
   const pageNumbers = Array.from({ length: totalPage }).map((_, idx) => (
-    <button key={idx} onClick={() => onClick(idx)}>
+    <button
+      key={idx}
+      onClick={() => onClick(idx)}
+      aria-label={`Page ${idx + 1}`}
+      aria-current={page === idx + 1 ? 'page' : undefined}
+    >
       {children({ active: page === idx + 1, numbering: idx + 1 })}
     </button>
   ))

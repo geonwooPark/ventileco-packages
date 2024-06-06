@@ -1,4 +1,4 @@
-import { PropsWithChildren, useContext } from 'react'
+import { PropsWithChildren, useContext, useMemo } from 'react'
 import { PaginationContext } from './Pagination'
 import { getQueries } from '../../utils/getQueries'
 
@@ -11,16 +11,23 @@ function PaginationNextButton({ children }: PropsWithChildren) {
     onNavigate(`?page=${page + 1}${queries ? `${getQueries(queries)}` : ''}`)
   }
 
+  const nextButtonStyle = useMemo(
+    () => ({
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      opacity: page === totalPage ? '0.3' : '1',
+    }),
+    [page, totalPage],
+  )
+
   return (
     <button
       disabled={page === totalPage}
       onClick={onClick}
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        opacity: page === totalPage ? '0.3' : '1',
-      }}
+      style={nextButtonStyle}
+      aria-label="Next Page"
+      aria-disabled={page === totalPage}
     >
       {children}
     </button>

@@ -58,18 +58,27 @@ function Pagination({
     [totalItemCount, listItemCount],
   )
 
-  const providerValue = {
-    page,
-    totalPage,
-    numberingCount,
-    queries,
-    setPage,
-    onNavigate,
-  }
+  const providerValue = useMemo(
+    () => ({
+      page,
+      totalPage,
+      numberingCount,
+      queries,
+      setPage,
+      onNavigate,
+    }),
+    [page, totalPage, numberingCount, queries, onNavigate],
+  )
 
   return (
     <PaginationContext.Provider value={providerValue}>
-      <div className={className}>{children}</div>
+      <div
+        role="navigation"
+        aria-label="Pagination Navigation"
+        className={className}
+      >
+        {children}
+      </div>
     </PaginationContext.Provider>
   )
 }
