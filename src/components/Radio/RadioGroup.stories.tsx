@@ -22,8 +22,8 @@ export function Controlled() {
     <div className="w-[240px]">
       <RadioGroup defaultValue={value} setValue={setValue} name="Controlled">
         <RadioGroup.Title>제어 컴포넌트</RadioGroup.Title>
-        <RadioGroup.List className="space-y-2">
-          <RadioGroup.Item id="4" value={'number5'}>
+        <RadioGroup.List className="flex flex-col gap-2">
+          <RadioGroup.Item value={'number5'}>
             {({ isSelected }) => (
               <div className="flex w-full cursor-pointer justify-between rounded-md border border-black px-4 py-3">
                 <p>기호1</p>
@@ -45,7 +45,7 @@ export function Controlled() {
             )}
           </RadioGroup.Item>
 
-          <RadioGroup.Item id="5" value={'number6'}>
+          <RadioGroup.Item value={'number6'}>
             {({ isSelected }) => (
               <div className="flex w-full cursor-pointer justify-between rounded-md border border-black px-4 py-3">
                 <p>기호2</p>
@@ -67,7 +67,7 @@ export function Controlled() {
             )}
           </RadioGroup.Item>
 
-          <RadioGroup.Item id="6" value={'number7'}>
+          <RadioGroup.Item value={'number7'}>
             {({ isSelected }) => (
               <div className="flex w-full cursor-pointer justify-between rounded-md border border-black px-4 py-3">
                 <p>기호3</p>
@@ -110,7 +110,7 @@ export function WithReactHookForm() {
       <RadioGroup register={radioRegister} defaultValue="number1">
         <RadioGroup.Title>With React Hook Form</RadioGroup.Title>
         <RadioGroup.List className="flex gap-4">
-          <RadioGroup.Item id="0" value={'number1'}>
+          <RadioGroup.Item value={'number1'}>
             {({ isSelected }) => (
               <div className="cursor-pointer rounded-md border border-black px-3 py-2">
                 <div className="flex w-full justify-center">
@@ -134,7 +134,7 @@ export function WithReactHookForm() {
             )}
           </RadioGroup.Item>
 
-          <RadioGroup.Item id="1" value={'number2'}>
+          <RadioGroup.Item value={'number2'}>
             {({ isSelected }) => (
               <div className="cursor-pointer rounded-md border border-black px-3 py-2">
                 <div className="flex w-full justify-center">
@@ -158,7 +158,7 @@ export function WithReactHookForm() {
             )}
           </RadioGroup.Item>
 
-          <RadioGroup.Item id="2" value={'number3'}>
+          <RadioGroup.Item value={'number3'}>
             {({ isSelected }) => (
               <div className="cursor-pointer rounded-md border border-black px-3 py-2">
                 <div className="flex w-full justify-center">

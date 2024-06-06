@@ -3,18 +3,28 @@ import { RadioContext } from './RadioGroup'
 
 interface RadioButtonProps {
   children: (props: { isSelected: boolean }) => React.ReactNode
-  id: string
   value: string | number | readonly string[] | undefined
 }
 
-function RadioButton({ children, id, value }: RadioButtonProps) {
+function RadioButton({ children, value }: RadioButtonProps) {
   const { selectedValue, name, register, onClick } = useContext(RadioContext)
   const isSelected = selectedValue === value
 
+  const onKeyDown = (e: React.KeyboardEvent<HTMLLabelElement>) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault()
+      onClick(value)
+    }
+  }
+
   return (
-    <label role="radio" className="flex">
+    <label
+      role="radio"
+      tabIndex={0}
+      aria-checked={isSelected}
+      onKeyDown={onKeyDown}
+    >
       <input
-        id={id}
         type="radio"
         name={name}
         value={value}
