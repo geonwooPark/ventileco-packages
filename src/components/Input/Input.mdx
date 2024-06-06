@@ -20,18 +20,21 @@ function Example() {
   }
 
   return (
-      <Input
-        type="text"
-        name="email"
-        value={value}
-        onChange={onChange}
-        placeholder="Enter text"
-        className="flex h-[50px] w-[240px] items-center justify-between rounded-md border px-2 text-black data-[disabled]:opacity-50">
-        <Input.Icon>
+    <Input
+      type="text"
+      name="email"
+      value={value}
+      onChange={onChange}
+      placeholder="Enter text"
+    >
+      <Input.Label>Input</Input.Label>
+      <Input.InputBox className="flex h-[50px] w-[240px] items-center justify-between rounded-md border px-2 text-black data-[disabled]:opacity-50">
+        <div>
           <div className="mr-1 size-5 bg-gray-400" />
-        </Input.Icon>
+        </div>
         <Input.InputArea />
-      </Input>
+      </Input.InputBox>
+    </Input>
   )
 }
 ```
@@ -55,16 +58,19 @@ function Example() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-        <Input
-          type="text"
-          placeholder="Enter text"
-          register={inputRegister}
-          className="flex h-[50px] w-[240px] items-center justify-between rounded-md border px-2 text-black data-[disabled]:opacity-50">
-          <Input.Icon>
+      <Input
+        type="text"
+        register={inputRegister}
+        placeholder="Enter text"
+      >
+        <Input.Label>Input</Input.Label>
+        <Input.InputBox className="flex h-[50px] w-[240px] items-center justify-between rounded-md border px-2 text-black data-[disabled]:opacity-50">
+          <div>
             <div className="mr-1 size-5 bg-gray-400" />
-          </Input.Icon>
+          </div>
           <Input.InputArea />
-        </Input>
+        </Input.InputBox>
+      </Input>
     </form>
   )
 }

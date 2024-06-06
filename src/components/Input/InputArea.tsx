@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContext, useMemo } from 'react'
 import { InputContext } from './Input'
 
 interface InputAreaProps {
@@ -6,16 +6,27 @@ interface InputAreaProps {
 }
 
 function InputArea({ className }: InputAreaProps) {
-  const { register, disabled, ...props } = useContext(InputContext)
+  const { id, register, disabled, ...props } = useContext(InputContext)
+
+  const inputAreaStyle = useMemo(
+    () => ({
+      width: '100%',
+      backgroundColor: 'inherit',
+      outline: 'none',
+      cursor: disabled ? 'not-allowed' : 'text',
+    }),
+    [disabled],
+  )
 
   return (
     <input
-      role="input"
+      id={id}
       {...props}
       disabled={disabled}
-      data-disabled={disabled}
-      style={{ width: '100%', backgroundColor: 'inherit', outline: 'none' }}
+      aria-disabled={disabled}
+      style={inputAreaStyle}
       className={className}
+      aria-label="Input field"
       {...register}
     />
   )

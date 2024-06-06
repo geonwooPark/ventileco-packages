@@ -2,11 +2,13 @@ import {
   InputHTMLAttributes,
   PropsWithChildren,
   createContext,
+  useId,
   useMemo,
   useRef,
 } from 'react'
 import InputArea from './InputArea'
-import InputIcon from './InputIcon'
+import InputLabel from './InputLabel'
+import InputBox from './InputBox'
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   register?: any
@@ -14,11 +16,13 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 type InputContextState = {
+  id: string
   register: any
   disabled?: boolean
 }
 
 export const InputContext = createContext<InputContextState>({
+  id: '',
   register: null,
   disabled: false,
 })
@@ -30,6 +34,8 @@ function Input({
   disabled,
   ...props
 }: PropsWithChildren<InputProps>) {
+  const id = useId()
+
   const containerRef = useRef<HTMLDivElement>(null)
 
   const onClick = () => {
@@ -43,11 +49,20 @@ function Input({
 
   const providerValue = useMemo(
     () => ({
+      id,
       register,
       disabled,
       ...props,
     }),
-    [register, disabled, props],
+    [id, register, disabled, props],
+  )
+
+  const inputStyle = useMemo(
+    () => ({
+      opacity: disabled ? '0.5' : '1',
+      cursor: disabled ? 'not-allowed' : 'text',
+    }),
+    [disabled],
   )
 
   return (
@@ -56,7 +71,7 @@ function Input({
         ref={containerRef}
         onClick={onClick}
         data-disabled={disabled}
-        style={{ cursor: 'text' }}
+        style={inputStyle}
         className={className}
       >
         {children}
@@ -65,7 +80,8 @@ function Input({
   )
 }
 
+Input.Label = InputLabel
+Input.InputBox = InputBox
 Input.InputArea = InputArea
-Input.Icon = InputIcon
 
 export default Input

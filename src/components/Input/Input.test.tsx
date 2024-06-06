@@ -5,7 +5,7 @@ import { Normal } from './Input.stories'
 describe('Input', () => {
   it('Normal 인풋 컴포넌트가 렌더링되는지 확인', () => {
     render(<Normal />)
-    expect(screen.getByRole('input')).toBeInTheDocument()
+    expect(screen.getByRole('textbox')).toBeInTheDocument()
   })
 
   it('Normal 인풋 컴포넌트에 타이핑 하는 케이스', async () => {
