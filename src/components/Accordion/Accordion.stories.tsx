@@ -15,7 +15,7 @@ export function Normal() {
   return (
     <div className="w-[240px]">
       <Accordion className="flex flex-col rounded-md border">
-        <Accordion.Item value={0}>
+        <Accordion.Item index={0}>
           {({ isOpen }) => (
             <>
               <Accordion.Trigger>
@@ -31,7 +31,7 @@ export function Normal() {
             </>
           )}
         </Accordion.Item>
-        <Accordion.Item value={1}>
+        <Accordion.Item index={1}>
           {({ isOpen }) => (
             <>
               <Accordion.Trigger>
@@ -47,7 +47,7 @@ export function Normal() {
             </>
           )}
         </Accordion.Item>
-        <Accordion.Item value={2}>
+        <Accordion.Item index={2}>
           {({ isOpen }) => (
             <>
               <Accordion.Trigger>

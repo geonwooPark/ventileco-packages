@@ -3,24 +3,24 @@ import { AccordionContext } from './Accordion'
 
 interface AccordionItemProps {
   children: (props: { isOpen: boolean }) => React.ReactNode
-  value: number
+  index: number
 }
 
 type AccordionItemContextState = {
   isOpen: boolean
-  value: number
+  index: number
 }
 
 export const AccordionItemContext = createContext<AccordionItemContextState>({
   isOpen: false,
-  value: 0,
+  index: 0,
 })
 
-function AccordionItem({ children, value }: AccordionItemProps) {
+function AccordionItem({ children, index }: AccordionItemProps) {
   const { activeItems } = useContext(AccordionContext)
-  const isOpen = activeItems.has(value)
+  const isOpen = activeItems.has(index)
 
-  const providerValue = useMemo(() => ({ isOpen, value }), [isOpen, value])
+  const providerValue = useMemo(() => ({ isOpen, index }), [isOpen, index])
 
   return (
     <AccordionItemContext.Provider value={providerValue}>

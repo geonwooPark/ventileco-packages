@@ -3,24 +3,23 @@ import { AccordionContext } from './Accordion'
 import { AccordionItemContext } from './AccordionItem'
 
 function AccordionTrigger({ children }: PropsWithChildren) {
-  const { id, activeItems, onClick, onFocus, onBlur } =
-    useContext(AccordionContext)
-  const { value } = useContext(AccordionItemContext)
+  const { id, onClick, onFocus, onBlur } = useContext(AccordionContext)
+  const { index, isOpen } = useContext(AccordionItemContext)
 
   const onMouseDown = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault()
-    onClick(value)
+    onClick(index)
   }
 
   return (
     <button
-      id={`${id}-tab-${value}`}
+      id={`${id}-tab-${index}`}
       tabIndex={0}
       role="tab"
-      aria-expanded={activeItems.has(value)}
-      aria-controls={`${id}-content-${value}`}
-      onFocus={() => onFocus(value)}
-      onBlur={() => onBlur(value)}
+      aria-expanded={isOpen}
+      aria-controls={`${id}-content-${index}`}
+      onFocus={() => onFocus(index)}
+      onBlur={() => onBlur(index)}
       onMouseDown={onMouseDown}
     >
       {children}
