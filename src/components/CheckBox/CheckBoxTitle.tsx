@@ -1,7 +1,14 @@
 import { PropsWithChildren } from 'react'
 
-function CheckBoxTitle({ children }: PropsWithChildren) {
-  return <legend>{children}</legend>
+interface CheckBoxTitleProps {
+  className: string
+}
+
+function CheckBoxTitle({
+  children,
+  className,
+}: PropsWithChildren<CheckBoxTitleProps>) {
+  return <legend className={className}>{children}</legend>
 }
 
 export default CheckBoxTitle

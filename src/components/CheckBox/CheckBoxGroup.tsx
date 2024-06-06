@@ -2,6 +2,7 @@ import React, {
   PropsWithChildren,
   createContext,
   useCallback,
+  useMemo,
   useState,
 } from 'react'
 import CheckBoxTitle from './CheckBoxTitle'
@@ -57,7 +58,10 @@ function CheckBoxGroup({
     })
   }, [])
 
-  const providerValue = { activeItems, onClick }
+  const providerValue = useMemo(
+    () => ({ activeItems, onClick }),
+    [activeItems, onClick],
+  )
 
   return (
     <CheckBoxContext.Provider value={providerValue}>
