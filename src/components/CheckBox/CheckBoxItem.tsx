@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useMemo } from 'react'
 import { CheckBoxContext } from './CheckBoxGroup'
 
 interface CheckBoxItemProps {
@@ -8,7 +8,7 @@ interface CheckBoxItemProps {
 }
 
 function CheckBoxItem({ children, value, register }: CheckBoxItemProps) {
-  const { activeItems, onClick } = useContext(CheckBoxContext)
+  const { id, activeItems, onClick } = useContext(CheckBoxContext)
   const isSelected = activeItems.has(value)
 
   const onKeyDown = (e: React.KeyboardEvent<HTMLLabelElement>) => {
@@ -18,19 +18,23 @@ function CheckBoxItem({ children, value, register }: CheckBoxItemProps) {
     }
   }
 
+  const checkBoxItemStyle = useMemo(() => ({ display: 'none' }), [])
+
   return (
     <label
+      htmlFor={`${id}-${value}`}
       role="checkbox"
       aria-checked={isSelected}
       tabIndex={0}
       onKeyDown={onKeyDown}
     >
       <input
+        id={`${id}-${value}`}
         type="checkbox"
         value={value}
         checked={isSelected}
         onClick={() => onClick(value)}
-        style={{ display: 'none' }}
+        style={checkBoxItemStyle}
         {...register}
       />
       {children({ isSelected })}

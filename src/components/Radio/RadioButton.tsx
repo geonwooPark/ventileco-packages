@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useMemo } from 'react'
 import { RadioContext } from './RadioGroup'
 
 interface RadioButtonProps {
@@ -7,7 +7,8 @@ interface RadioButtonProps {
 }
 
 function RadioButton({ children, value }: RadioButtonProps) {
-  const { selectedValue, name, register, onClick } = useContext(RadioContext)
+  const { id, selectedValue, name, register, onClick } =
+    useContext(RadioContext)
   const isSelected = selectedValue === value
 
   const onKeyDown = (e: React.KeyboardEvent<HTMLLabelElement>) => {
@@ -17,20 +18,24 @@ function RadioButton({ children, value }: RadioButtonProps) {
     }
   }
 
+  const radioButtonStyle = useMemo(() => ({ display: 'none' }), [])
+
   return (
     <label
       role="radio"
+      htmlFor={`${id}-${value}`}
       tabIndex={0}
       aria-checked={isSelected}
       onKeyDown={onKeyDown}
     >
       <input
+        id={`${id}-${value}`}
         type="radio"
         name={name}
         value={value}
         onClick={() => onClick(value)}
         defaultChecked={isSelected}
-        style={{ display: 'none' }}
+        style={radioButtonStyle}
         {...register}
       />
       {children({ isSelected })}

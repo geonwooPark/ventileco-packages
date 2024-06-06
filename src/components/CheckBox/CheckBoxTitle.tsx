@@ -1,7 +1,7 @@
 import { PropsWithChildren } from 'react'
 
 interface CheckBoxTitleProps {
-  className: string
+  className?: string
 }
 
 function CheckBoxTitle({

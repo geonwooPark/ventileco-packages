@@ -2,6 +2,7 @@ import React, {
   PropsWithChildren,
   createContext,
   useCallback,
+  useId,
   useMemo,
   useState,
 } from 'react'
@@ -15,11 +16,13 @@ interface CheckBoxGroupProps {
 }
 
 type CheckBoxContextState = {
+  id: string
   activeItems: Set<string | number>
   onClick: (selectedItem: string | number) => void
 }
 
 export const CheckBoxContext = createContext<CheckBoxContextState>({
+  id: '',
   activeItems: new Set(),
   onClick: () => null,
 })
@@ -29,6 +32,8 @@ function CheckBoxGroup({
   defaultValues,
   setValues,
 }: PropsWithChildren<CheckBoxGroupProps>) {
+  const id = useId()
+
   const [activeItems, setActiveItems] = useState<Set<string | number>>(
     new Set(defaultValues),
   )
@@ -59,8 +64,8 @@ function CheckBoxGroup({
   }, [])
 
   const providerValue = useMemo(
-    () => ({ activeItems, onClick }),
-    [activeItems, onClick],
+    () => ({ id, activeItems, onClick }),
+    [id, activeItems, onClick],
   )
 
   return (

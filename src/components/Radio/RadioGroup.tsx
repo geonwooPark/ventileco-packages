@@ -20,6 +20,7 @@ interface RadioGroupProps {
 }
 
 type RadioContextProp = {
+  id: string
   onClick: (value: string | number | readonly string[] | undefined) => void
   selectedValue: string | number | readonly string[] | undefined
   name: string | undefined
@@ -27,6 +28,7 @@ type RadioContextProp = {
 }
 
 export const RadioContext = createContext<RadioContextProp>({
+  id: '',
   onClick: () => null,
   selectedValue: undefined,
   name: undefined,
@@ -40,6 +42,8 @@ function RadioGroup({
   name,
   register,
 }: PropsWithChildren<RadioGroupProps>) {
+  const id = useId()
+
   const [selectedValue, setSelectedValue] = useState(defaultValue)
 
   const onClick = useCallback(
@@ -54,12 +58,13 @@ function RadioGroup({
 
   const providerValue = useMemo(
     () => ({
+      id,
       selectedValue,
       name,
       register,
       onClick,
     }),
-    [selectedValue, name, register, onClick],
+    [id, selectedValue, name, register, onClick],
   )
 
   return (
