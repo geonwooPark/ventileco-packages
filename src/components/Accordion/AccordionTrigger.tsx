@@ -3,13 +3,16 @@ import { AccordionContext } from './Accordion'
 import { AccordionItemContext } from './AccordionItem'
 
 function AccordionTrigger({ children }: PropsWithChildren) {
-  const { onClick, onFocus, onBlur } = useContext(AccordionContext)
+  const { activeItems, onClick, onFocus, onBlur } = useContext(AccordionContext)
   const { value } = useContext(AccordionItemContext)
 
   return (
-    <div
-      role="tab"
+    <button
+      id={`tab-${value}`}
       tabIndex={0}
+      role="tab"
+      aria-expanded={activeItems.has(value)}
+      aria-controls={`panel-${value}`}
       onFocus={() => onFocus(value)}
       onBlur={() => onBlur(value)}
       onMouseDown={(e) => {
@@ -18,7 +21,7 @@ function AccordionTrigger({ children }: PropsWithChildren) {
       }}
     >
       {children}
-    </div>
+    </button>
   )
 }
 

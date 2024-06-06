@@ -24,7 +24,7 @@ function AccordionItem({ children, value }: AccordionItemProps) {
 
   return (
     <AccordionItemContext.Provider value={providerValue}>
-      <div>{children({ isOpen })}</div>
+      {children({ isOpen })}
     </AccordionItemContext.Provider>
   )
 }

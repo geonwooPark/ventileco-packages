@@ -14,13 +14,13 @@ export default meta
 export function Normal() {
   return (
     <div className="w-[240px]">
-      <Accordion className="rounded-md border">
+      <Accordion className="flex flex-col rounded-md border">
         <Accordion.Item value={0}>
           {({ isOpen }) => (
             <>
               <Accordion.Trigger>
                 <div
-                  className={`${isOpen && 'text-blue-600'} cursor-pointer border-b px-4 py-3`}
+                  className={`${isOpen && 'text-blue-600'} cursor-pointer border-b px-4 py-3 text-left`}
                 >
                   Title1
                 </div>
@@ -36,7 +36,7 @@ export function Normal() {
             <>
               <Accordion.Trigger>
                 <div
-                  className={`${isOpen && 'text-blue-600'} cursor-pointer border-b px-4 py-3 `}
+                  className={`${isOpen && 'text-blue-600'} cursor-pointer border-b px-4 py-3 text-left`}
                 >
                   Title2
                 </div>
@@ -52,7 +52,7 @@ export function Normal() {
             <>
               <Accordion.Trigger>
                 <div
-                  className={`${isOpen && 'border-b text-blue-600'} cursor-pointer px-4 py-3 `}
+                  className={`${isOpen && 'text-blue-600'} cursor-pointer border-b px-4 py-3 text-left`}
                 >
                   Title3
                 </div>
