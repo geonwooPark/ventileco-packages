@@ -1,15 +1,21 @@
-import { PropsWithChildren, useContext } from 'react'
+import { PropsWithChildren, useContext, useMemo } from 'react'
 import { ComboBoxContext } from './ComboBox'
 
 function ComboBoxTrigger({ children }: PropsWithChildren) {
-  const { onTrigger, onKeyboardTrigger } = useContext(ComboBoxContext)
+  const { onTrigger, onKeyboardTrigger, triggerRef } =
+    useContext(ComboBoxContext)
+
+  const comboBoxTriggerStyle = useMemo(
+    () => ({ position: 'relative', cursor: 'pointer' }) as React.CSSProperties,
+    [],
+  )
 
   return (
     <div
-      role="combobox"
+      ref={triggerRef}
       onClick={onTrigger}
       onKeyDown={onKeyboardTrigger}
-      style={{ position: 'relative', cursor: 'pointer' }}
+      style={comboBoxTriggerStyle}
     >
       {children}
     </div>

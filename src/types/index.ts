@@ -1,4 +1,4 @@
-export type OptionList = (
+export type Option =
   | {
       value: string
       label: string
@@ -9,7 +9,8 @@ export type OptionList = (
       label: string
       disabled: boolean
     }
-)[]
+
+export type OptionList = Option[]
 
 export type ToolTipDirection =
   | 'left'

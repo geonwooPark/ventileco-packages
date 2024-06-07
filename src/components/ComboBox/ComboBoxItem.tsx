@@ -5,6 +5,7 @@ interface ComboBoxItemProps {
   children: (props: {
     isSelected: boolean
     isDisabled: boolean
+    isFocused: boolean
   }) => React.ReactNode
   item: {
     value: string
@@ -14,27 +15,30 @@ interface ComboBoxItemProps {
 }
 
 function ComboBoxItem({ children, item }: ComboBoxItemProps) {
-  const { value, onSelect, onKeyboardSelect } = useContext(ComboBoxContext)
+  const { value, focusedItem, onSelect } = useContext(ComboBoxContext)
   const isSelected = value === item.value
   const isDisabled = item.disabled ? true : false
+  const isFocused = focusedItem === item.value
+
+  const onClick = () => {
+    onSelect({
+      value: item.value,
+      label: item.label,
+      disabled: item.disabled,
+    })
+  }
 
   return (
     <li
-      role="listitem"
-      tabIndex={0}
+      role="option"
+      aria-selected={isSelected}
       data-value={item.value}
       data-label={item.label}
       data-disabled={item.disabled}
-      onKeyDown={onKeyboardSelect}
-      onClick={() =>
-        onSelect({
-          value: item.value,
-          label: item.label,
-          disabled: item.disabled,
-        })
-      }
+      onClick={onClick}
+      style={{ cursor: isDisabled ? 'not-allowed' : 'pointer' }}
     >
-      {children({ isSelected, isDisabled })}
+      {children({ isSelected, isDisabled, isFocused })}
     </li>
   )
 }

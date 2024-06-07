@@ -8,10 +8,10 @@ interface ComboBoxListProps {
 }
 
 function ComboBoxList({ children, className }: ComboBoxListProps) {
-  const { isOpen, listRef, optionList } = useContext(ComboBoxContext)
+  const { id, isOpen, listRef, optionList } = useContext(ComboBoxContext)
 
   return isOpen ? (
-    <ul role="list" ref={listRef} className={className}>
+    <ul id={id} role="listbox" ref={listRef} className={className}>
       {children({ optionList })}
     </ul>
   ) : null

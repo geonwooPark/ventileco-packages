@@ -12,13 +12,13 @@ describe('ComboBox', () => {
     render(<Normal />)
 
     await userEvent.click(screen.getByRole('combobox'))
-    expect(screen.getByRole('list')).toBeInTheDocument()
+    expect(screen.getByRole('listbox')).toBeInTheDocument()
   })
 
   it('마우스를 사용하여 옵션을 선택하는 케이스', async () => {
     render(<Normal />)
 
-    const input = screen.getByRole('input') as HTMLInputElement
+    const input = screen.getByRole('combobox') as HTMLInputElement
     await userEvent.click(screen.getByRole('combobox'))
     await userEvent.click(screen.getByText('Kiwi'))
 
@@ -30,20 +30,20 @@ describe('ComboBox', () => {
   it('키보드를 사용하여 옵션을 선택하는 케이스', async () => {
     render(<Normal />)
 
-    const input = screen.getByRole('input') as HTMLInputElement
+    const input = screen.getByRole('combobox') as HTMLInputElement
     await userEvent.click(input)
     await userEvent.keyboard('[ArrowDown]')
     await userEvent.keyboard('[Enter]')
 
     await waitFor(() => {
-      expect(input.value).toBe('Kiwi')
+      expect(input.value).toBe('Grape')
     })
   })
 
   it('콤보박스를 사용하여 키워드를 검색하는 케이스', async () => {
     render(<Normal />)
 
-    const input = screen.getByRole('input') as HTMLInputElement
+    const input = screen.getByRole('combobox') as HTMLInputElement
     await userEvent.type(input, 'ki')
 
     expect(screen.getByText('Kiwi')).toBeInTheDocument()

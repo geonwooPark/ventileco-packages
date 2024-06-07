@@ -2,19 +2,21 @@ import React, {
   KeyboardEventHandler,
   PropsWithChildren,
   createContext,
+  useCallback,
   useEffect,
+  useId,
+  useMemo,
   useRef,
   useState,
 } from 'react'
-import ComboBoxLabel from './ComboBoxLabel'
+import ComboBoxTitle from './ComboBoxTitle'
 import ComboBoxTrigger from './ComboBoxTrigger'
 import ComboBoxInput from './ComboBoxInput'
-import { escapeRegExp } from '../../utils/escapeRegExp'
 import ComboBoxItem from './ComboBoxItem'
-import { OptionList } from '../../types'
 import ComboBoxClearButton from './ComboBoxClearButton'
-import ComboBoxArrowButton from './ComboBoxArrowButton'
 import ComboBoxList from './ComboBoxList'
+import { Option, OptionList } from '../../types'
+import { escapeRegExp } from '../../utils/escapeRegExp'
 
 export type ComboBoxProps = {
   value: string | undefined
@@ -23,18 +25,19 @@ export type ComboBoxProps = {
 }
 
 type ComboBoxContextState = {
+  id: string
   value: string | undefined
+  list: OptionList
   isOpen: boolean
   keyword: string
-  selectedItem: string | undefined
   triggerRef: React.RefObject<HTMLDivElement> | null
   listRef: React.RefObject<HTMLUListElement> | null
   inputRef: React.RefObject<HTMLInputElement> | null
-  focusedIndex: number | undefined
+  focusedItem: string | undefined
   optionList: OptionList
   onTextChange: (e: React.ChangeEvent<HTMLInputElement>) => void
   onTrigger: () => void
-  onClear: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
+  onClear: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
   onSelect: ({
     value,
     label,
@@ -45,47 +48,50 @@ type ComboBoxContextState = {
     disabled?: boolean
   }) => void
   onKeyboardTrigger: KeyboardEventHandler<HTMLDivElement>
-  onKeyboardSelect: React.KeyboardEventHandler<HTMLLIElement>
 }
 
 export const ComboBoxContext = createContext<ComboBoxContextState>({
+  id: '',
   value: '',
+  list: [],
   isOpen: false,
   keyword: '',
-  selectedItem: '',
   triggerRef: null,
   listRef: null,
   inputRef: null,
-  focusedIndex: undefined,
+  focusedItem: undefined,
   optionList: [],
   onTextChange: () => null,
   onClear: () => null,
   onTrigger: () => null,
   onSelect: () => null,
   onKeyboardTrigger: () => null,
-  onKeyboardSelect: () => null,
 })
 
 function ComboBox({ children, ...props }: PropsWithChildren<ComboBoxProps>) {
   const { value, setValue, list } = props
+  const id = useId()
 
   const [isOpen, setIsOpen] = useState(false)
   const [keyword, setKeyword] = useState<string>('')
-  const [selectedItem, setSelectedItem] = useState<string>()
-  const [focusedIndex, setFocusedIdx] = useState<number>()
+  const [focusedItem, setFocusedItem] = useState<string>()
   const [optionList, setOptionList] = useState(list)
 
-  const containerRef = useRef<HTMLDivElement>(null)
+  const containerRef = useRef<HTMLFieldSetElement>(null)
   const triggerRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
   const listRef = useRef<HTMLUListElement>(null)
 
-  const onTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target
-    setKeyword(value)
-  }
+  const focusedIndex = useMemo(
+    () => optionList.findIndex((r) => r.value === focusedItem),
+    [optionList, focusedItem],
+  )
 
-  const onTrigger = () => {
+  const onTextChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    setKeyword(e.target.value)
+  }, [])
+
+  const onTrigger = useCallback(() => {
     setIsOpen((prev) => {
       if (!inputRef?.current) return false
 
@@ -97,114 +103,134 @@ function ComboBox({ children, ...props }: PropsWithChildren<ComboBoxProps>) {
         return true
       }
     })
-    setOptionList(list)
-  }
+  }, [])
 
-  const onClear = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    e.stopPropagation()
+  const onClear = useCallback(
+    (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+      e.stopPropagation()
 
-    setIsOpen(false)
-    setValue(undefined)
-    setKeyword('')
-    setSelectedItem('')
-    setFocusedIdx(undefined)
-  }
+      setIsOpen(false)
+      setValue(undefined)
+      setKeyword('')
+      setFocusedItem(undefined)
+    },
+    [setValue],
+  )
 
-  const onKeyboardTrigger: KeyboardEventHandler<HTMLDivElement> = (e) => {
-    if (e.nativeEvent.isComposing) return
+  const onSelect = useCallback(
+    ({ value, label, disabled }: Option) => {
+      if (disabled) return
 
-    if (e.key === 'ArrowDown') {
-      e.preventDefault()
-      setIsOpen(true)
+      setIsOpen(false)
+      setValue(value)
+      setKeyword(label)
+      setFocusedItem(value)
+    },
+    [setValue],
+  )
+
+  const onKeyboardTrigger: KeyboardEventHandler<HTMLDivElement> = useCallback(
+    (e) => {
+      if (e.nativeEvent.isComposing) return
+
+      if (e.key !== 'Tab') {
+        setIsOpen(true)
+      }
 
       const nodesList = listRef?.current?.childNodes
-      if (!nodesList) return
+      if (nodesList) {
+        const element = nodesList[focusedIndex] as HTMLElement
 
-      if (nodesList.length === list.length) {
-        for (let i = 0; i < list?.length; i++) {
-          let node: ChildNode
-          if (typeof focusedIndex === 'undefined') {
-            node = nodesList[i]
-          } else {
-            node = nodesList[focusedIndex]
+        if (e.key === 'Enter') {
+          e.preventDefault()
+          onSelect({
+            value: element.dataset.value as string,
+            label: element.dataset.label as string,
+          })
+        }
+
+        if (e.key === 'ArrowDown') {
+          e.preventDefault()
+
+          if (!element.nextSibling) return
+
+          let nextChildNode = element.nextSibling as HTMLElement | null
+          while (nextChildNode && nextChildNode.dataset.disabled === 'true') {
+            nextChildNode = nextChildNode.nextSibling as HTMLElement | null
           }
-
-          if (node instanceof HTMLElement) {
-            if (node.dataset.disabled !== 'true') {
-              node.focus()
-              break
-            }
+          if (nextChildNode) {
+            setFocusedItem(nextChildNode.dataset.value)
           }
         }
+
+        if (e.key === 'ArrowUp') {
+          e.preventDefault()
+
+          if (!element.previousSibling) return
+
+          let prevChildNode = element.previousSibling as HTMLElement | null
+          while (prevChildNode && prevChildNode.dataset.disabled === 'true') {
+            prevChildNode = prevChildNode.previousSibling as HTMLElement | null
+          }
+          if (prevChildNode) {
+            setFocusedItem(prevChildNode.dataset.value)
+          }
+        }
+      }
+    },
+    [focusedIndex, onSelect],
+  )
+
+  useEffect(() => {
+    if (!isOpen) return
+
+    setOptionList(list)
+  }, [isOpen])
+
+  useEffect(() => {
+    if (!isOpen) return
+    if (!listRef.current) return
+    const nodesList = listRef.current.childNodes
+
+    for (let i = 0; i < list?.length; i++) {
+      let node: ChildNode
+      if (focusedIndex === -1) {
+        node = nodesList[i]
       } else {
-        for (let i = 0; i < nodesList?.length; i++) {
-          const node = nodesList[i]
-          if (node instanceof HTMLElement) {
-            if (node.dataset.disabled !== 'true') {
-              node.focus()
-              break
-            }
-          }
+        node = nodesList[focusedIndex]
+      }
+
+      if (node instanceof HTMLElement) {
+        if (node.dataset.disabled !== 'true') {
+          setFocusedItem(node.dataset.value)
+          break
         }
       }
     }
-  }
+  }, [isOpen, focusedIndex, optionList])
 
-  const onSelect = ({
-    value,
-    label,
-    disabled,
-  }: {
-    value: string
-    label: string
-    disabled?: boolean
-  }) => {
-    if (disabled) return
+  useEffect(() => {
+    if (!isOpen) return
+    if (focusedIndex === -1) return
 
-    const findIdx = list.findIndex((item) => item.value === value)
+    const childNode = listRef?.current?.childNodes[focusedIndex] as HTMLElement
+    if (childNode instanceof HTMLElement) {
+      childNode.scrollIntoView({ block: 'nearest' })
+    }
+  }, [isOpen, focusedIndex])
 
-    setIsOpen(false)
-    setValue(value)
-    setKeyword(label)
-    setSelectedItem(label)
-    setFocusedIdx(findIdx)
-  }
+  useEffect(() => {
+    if (!isOpen) return
 
-  const onKeyboardSelect: KeyboardEventHandler<HTMLLIElement> = (e) => {
-    e.preventDefault()
-    const element = e.target as HTMLElement
-
-    if (e.key === 'Enter') {
-      onSelect({
-        value: element.dataset.value as string,
-        label: element.dataset.label as string,
-      })
+    const onOutsideClick = (e: MouseEvent) => {
+      if (containerRef.current?.contains(e.target as Node)) return
+      setKeyword(value || '')
+      setIsOpen(false)
     }
 
-    if (e.key === 'ArrowDown') {
-      if (!element.nextSibling) return
-
-      let nextChildNode = element.nextSibling as HTMLElement | null
-      while (nextChildNode && nextChildNode.dataset.disabled === 'true') {
-        nextChildNode = nextChildNode.nextSibling as HTMLElement | null
-      }
-      if (nextChildNode) {
-        nextChildNode.focus()
-      }
-    }
-
-    if (e.key === 'ArrowUp') {
-      if (!element.previousSibling) return
-
-      let prevChildNode = element.previousSibling as HTMLElement | null
-      while (prevChildNode && prevChildNode.dataset.disabled === 'true') {
-        prevChildNode = prevChildNode.previousSibling as HTMLElement | null
-      }
-      if (prevChildNode) {
-        prevChildNode.focus()
-      }
-    }
-  }
+    document.addEventListener('click', onOutsideClick)
+    return () => document.removeEventListener('click', onOutsideClick)
+  }, [isOpen, value])
 
   useEffect(() => {
     const escapedKeyword = escapeRegExp(keyword)
@@ -213,66 +239,64 @@ function ComboBox({ children, ...props }: PropsWithChildren<ComboBoxProps>) {
       const filteredData = list.filter((item) => regex.test(item.label))
       setOptionList(filteredData)
     }
-
-    const timer = setTimeout(() => getFilteredData(), 300)
-
-    return () => clearTimeout(timer)
+    getFilteredData()
   }, [keyword])
 
-  useEffect(() => {
-    if (!isOpen) return
+  const providerValue = useMemo(
+    () => ({
+      id,
+      value,
+      list,
+      isOpen,
+      keyword,
+      triggerRef,
+      listRef,
+      inputRef,
+      focusedItem,
+      optionList,
+      onTextChange,
+      onTrigger,
+      onClear,
+      onSelect,
+      onKeyboardTrigger,
+    }),
+    [
+      id,
+      value,
+      list,
+      isOpen,
+      keyword,
+      triggerRef,
+      listRef,
+      inputRef,
+      focusedItem,
+      optionList,
+      onTextChange,
+      onTrigger,
+      onClear,
+      onSelect,
+      onKeyboardTrigger,
+    ],
+  )
 
-    const onOutsideClick = (e: MouseEvent) => {
-      if (containerRef.current?.contains(e.target as Node)) return
-      setKeyword(selectedItem || '')
-      setIsOpen(false)
-    }
-
-    document.addEventListener('click', onOutsideClick)
-    return () => document.removeEventListener('click', onOutsideClick)
-  }, [isOpen])
-
-  useEffect(() => {
-    if (!focusedIndex) return
-
-    const childNode = listRef?.current?.childNodes[focusedIndex] as HTMLElement
-    if (childNode instanceof HTMLElement) {
-      childNode.scrollIntoView()
-    }
-  }, [isOpen])
-
-  const providerValue = {
-    value,
-    isOpen,
-    keyword,
-    selectedItem,
-    triggerRef,
-    listRef,
-    inputRef,
-    focusedIndex,
-    optionList,
-    onTextChange,
-    onTrigger,
-    onClear,
-    onSelect,
-    onKeyboardTrigger,
-    onKeyboardSelect,
-  }
+  const comboBoxStyle = useMemo(
+    () => ({ position: 'relative' }) as React.CSSProperties,
+    [],
+  )
 
   return (
     <ComboBoxContext.Provider value={providerValue}>
-      <div ref={containerRef} style={{ position: 'relative' }}>
+      <fieldset ref={containerRef} style={comboBoxStyle}>
         {children}
-      </div>
+      </fieldset>
     </ComboBoxContext.Provider>
   )
 }
 
-ComboBox.Label = ComboBoxLabel
+ComboBox.Title = ComboBoxTitle
 ComboBox.Trigger = ComboBoxTrigger
 ComboBox.Input = ComboBoxInput
 ComboBox.ClearButton = ComboBoxClearButton
-ComboBox.ArrowButton = ComboBoxArrowButton
 ComboBox.List = ComboBoxList
 ComboBox.Item = ComboBoxItem
 
