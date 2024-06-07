@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContext, useMemo } from 'react'
 import { ComboBoxContext } from './ComboBox'
 
 interface ComboBoxItemProps {
@@ -15,7 +15,7 @@ interface ComboBoxItemProps {
 }
 
 function ComboBoxItem({ children, item }: ComboBoxItemProps) {
-  const { value, focusedItem, onSelect } = useContext(ComboBoxContext)
+  const { id, value, focusedItem, onSelect } = useContext(ComboBoxContext)
   const isSelected = value === item.value
   const isDisabled = item.disabled ? true : false
   const isFocused = focusedItem === item.value
@@ -28,15 +28,25 @@ function ComboBoxItem({ children, item }: ComboBoxItemProps) {
     })
   }
 
+  const comboBoxItemStyle = useMemo(
+    () =>
+      ({
+        cursor: isDisabled ? 'not-allowed' : 'pointer',
+      }) as React.CSSProperties,
+    [isDisabled],
+  )
+
   return (
     <li
+      id={`${id}-combobox-option-${item.value}`}
       role="option"
       aria-selected={isSelected}
+      aria-disabled={isDisabled}
       data-value={item.value}
       data-label={item.label}
       data-disabled={item.disabled}
       onClick={onClick}
-      style={{ cursor: isDisabled ? 'not-allowed' : 'pointer' }}
+      style={comboBoxItemStyle}
     >
       {children({ isSelected, isDisabled, isFocused })}
     </li>

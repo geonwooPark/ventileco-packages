@@ -6,7 +6,7 @@ interface ComboBoxInputProps {
 }
 
 function ComboBoxInput({ placeholder }: ComboBoxInputProps) {
-  const { id, isOpen, inputRef, keyword, onTextChange } =
+  const { id, isOpen, focusedItem, inputRef, keyword, onTextChange } =
     useContext(ComboBoxContext)
 
   const comboBoxInputStyle = useMemo(
@@ -21,7 +21,10 @@ function ComboBoxInput({ placeholder }: ComboBoxInputProps) {
       aria-autocomplete="list"
       aria-expanded={isOpen}
       aria-haspopup="listbox"
-      aria-controls={id}
+      aria-activedescendant={
+        focusedItem ? `${id}-combobox-option-${focusedItem}` : undefined
+      }
+      aria-controls={`${id}-combobox-list`}
       value={keyword}
       onChange={onTextChange}
       placeholder={placeholder}

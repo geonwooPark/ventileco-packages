@@ -1,10 +1,17 @@
 import { PropsWithChildren, useContext } from 'react'
 import { SelectContext } from './SelectBox'
 
-function SelectBoxTriggerText({ children }: PropsWithChildren) {
-  const { selectedItem } = useContext(SelectContext)
+interface SelectBoxTriggerTextProps {
+  className?: string
+}
 
-  return <div style={{ marginRight: '8px' }}>{selectedItem || children}</div>
+function SelectBoxTriggerText({
+  children,
+  className,
+}: PropsWithChildren<SelectBoxTriggerTextProps>) {
+  const { focusedLabel } = useContext(SelectContext)
+
+  return <p className={className}>{focusedLabel || children}</p>
 }
 
 export default SelectBoxTriggerText

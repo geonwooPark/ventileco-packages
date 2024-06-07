@@ -1,10 +1,11 @@
-import { useContext } from 'react'
+import { useContext, useMemo } from 'react'
 import { SelectContext } from './SelectBox'
 
 interface SelectItemProps {
   children: (props: {
     isSelected: boolean
     isDisabled: boolean
+    isFocused: boolean
   }) => React.ReactNode
 
   item: {
@@ -15,27 +16,37 @@ interface SelectItemProps {
 }
 
 function SelectBoxItem({ children, item }: SelectItemProps) {
-  const { value, onSelect, onKeyboardSelect } = useContext(SelectContext)
+  const { value, focusedItem, onSelect } = useContext(SelectContext)
   const isSelected = value === item.value
   const isDisabled = item.disabled ? true : false
+  const isFocused = focusedItem === item.value
+
+  const selectBoxItemStyle = useMemo(
+    () =>
+      ({
+        cursor: isDisabled ? 'not-allowed' : 'pointer',
+      }) as React.CSSProperties,
+    [isDisabled],
+  )
 
   return (
     <li
-      role="listitem"
-      tabIndex={0}
+      role="option"
+      aria-selected={isSelected}
+      aria-disabled={isDisabled}
       data-value={item.value}
       data-label={item.label}
       data-disabled={item.disabled}
-      onKeyDown={onKeyboardSelect}
+      tabIndex={0}
       onClick={() =>
         onSelect({
           value: item.value,
-          label: item.label,
           disabled: item.disabled,
         })
       }
+      style={selectBoxItemStyle}
     >
-      {children({ isSelected, isDisabled })}
+      {children({ isSelected, isDisabled, isFocused })}
     </li>
   )
 }

@@ -13,7 +13,7 @@ describe('SelectBox', () => {
     render(<Normal />)
 
     await userEvent.click(screen.getByText('메뉴를 선택하세요'))
-    expect(screen.getByRole('list')).toBeInTheDocument()
+    expect(screen.getByRole('listbox')).toBeInTheDocument()
   })
 
   it('마우스를 사용하여 옵션을 선택하는 케이스', async () => {
@@ -21,10 +21,10 @@ describe('SelectBox', () => {
 
     const trigger = screen.getByText('메뉴를 선택하세요')
     await userEvent.click(trigger)
-    await userEvent.click(screen.getByText('Kiwi'))
+    await userEvent.click(screen.getByText('Aloe'))
 
     await waitFor(() => {
-      expect(screen.getByText('Kiwi')).toBeInTheDocument()
+      expect(screen.getByText('Aloe')).toBeInTheDocument()
     })
   })
 
@@ -37,7 +37,7 @@ describe('SelectBox', () => {
     await userEvent.keyboard('[Enter]')
 
     await waitFor(() => {
-      expect(screen.getByText('Kiwi')).toBeInTheDocument()
+      expect(screen.getByText('Grape')).toBeInTheDocument()
     })
   })
 })

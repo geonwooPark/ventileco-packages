@@ -8,10 +8,15 @@ interface SelectListProps {
 }
 
 function SelectBoxList({ children, className }: SelectListProps) {
-  const { isOpen, listRef, optionList } = useContext(SelectContext)
+  const { id, isOpen, listRef, optionList } = useContext(SelectContext)
 
   return isOpen ? (
-    <ul role="list" ref={listRef} className={className}>
+    <ul
+      id={`${id}-select-list`}
+      ref={listRef}
+      role="listbox"
+      className={className}
+    >
       {children({ optionList })}
     </ul>
   ) : null
