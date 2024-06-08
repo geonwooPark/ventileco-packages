@@ -8,9 +8,9 @@ function AccordionContent({ children }: PropsWithChildren) {
 
   return isOpen ? (
     <div
-      id={`${id}-content-${index}`}
-      role="tabpanel"
-      aria-labelledby={`${id}-tab-${index}`}
+      id={`${id}-accordion-region-${index}`}
+      role="region"
+      aria-labelledby={`${id}-accordion-button-${index}`}
       hidden={!isOpen}
     >
       {children}

@@ -2,7 +2,7 @@ import { PropsWithChildren, useContext, useMemo } from 'react'
 import { ComboBoxContext } from './ComboBox'
 
 function ComboBoxTrigger({ children }: PropsWithChildren) {
-  const { onTrigger, onKeyboardTrigger, triggerRef } =
+  const { id, isOpen, triggerRef, onTrigger, onKeyboardTrigger } =
     useContext(ComboBoxContext)
 
   const comboBoxTriggerStyle = useMemo(
@@ -13,6 +13,9 @@ function ComboBoxTrigger({ children }: PropsWithChildren) {
   return (
     <div
       ref={triggerRef}
+      aria-expanded={isOpen}
+      aria-haspopup="listbox"
+      aria-controls={`${id}-combobox-list`}
       onClick={onTrigger}
       onKeyDown={onKeyboardTrigger}
       style={comboBoxTriggerStyle}

@@ -13,11 +13,10 @@ function AccordionTrigger({ children }: PropsWithChildren) {
 
   return (
     <button
-      id={`${id}-tab-${index}`}
+      id={`${id}-accordion-button-${index}`}
       tabIndex={0}
-      role="tab"
       aria-expanded={isOpen}
-      aria-controls={`${id}-content-${index}`}
+      aria-controls={`${id}-accordion-region-${index}`}
       onFocus={() => onFocus(index)}
       onBlur={() => onBlur(index)}
       onMouseDown={onMouseDown}

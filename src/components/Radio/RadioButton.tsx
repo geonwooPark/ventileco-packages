@@ -23,13 +23,13 @@ function RadioButton({ children, value }: RadioButtonProps) {
   return (
     <label
       role="radio"
-      htmlFor={`${id}-${value}`}
+      htmlFor={`${id}-radio-button-${value}`}
       tabIndex={0}
       aria-checked={isSelected}
       onKeyDown={onKeyDown}
     >
       <input
-        id={`${id}-${value}`}
+        id={`${id}-radio-button-${value}`}
         type="radio"
         name={name}
         value={value}

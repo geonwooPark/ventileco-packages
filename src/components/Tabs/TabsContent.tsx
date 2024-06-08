@@ -10,9 +10,9 @@ function TabsContent({ children, index }: PropsWithChildren<TabsContentProps>) {
 
   return currentTab === index ? (
     <div
-      id={`${id}-content-${index}`}
+      id={`${id}-tab-panel-${index}`}
       role="tabpanel"
-      aria-labelledby={`${id}-tab-${index}`}
+      aria-labelledby={`${id}-tab-button-${index}`}
     >
       {children}
     </div>

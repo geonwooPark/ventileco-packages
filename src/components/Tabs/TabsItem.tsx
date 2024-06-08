@@ -19,11 +19,11 @@ function TabsItem({ children, index, className }: TabsItemProps) {
 
   return (
     <li
-      id={`${id}-content-${index}`}
+      id={`${id}-tab-button-${index}`}
       role="tab"
       tabIndex={0}
       aria-selected={selected}
-      aria-labelledby={`${id}-tab-${index}`}
+      aria-controls={`${id}-tab-panel-${index}`}
       onClick={() => onClick(index)}
       onFocus={onFocusElement}
       onKeyDown={onKeyboardSelect}

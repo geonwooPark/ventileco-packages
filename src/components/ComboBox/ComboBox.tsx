@@ -286,7 +286,7 @@ function ComboBox({ children, ...props }: PropsWithChildren<ComboBoxProps>) {
 
   return (
     <ComboBoxContext.Provider value={providerValue}>
-      <fieldset ref={containerRef} style={comboBoxStyle}>
+      <fieldset ref={containerRef} role="group" style={comboBoxStyle}>
         {children}
       </fieldset>
     </ComboBoxContext.Provider>
