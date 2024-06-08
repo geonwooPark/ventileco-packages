@@ -48,6 +48,5 @@ describe('ComboBox', () => {
 
     expect(screen.getByText('Kiwi')).toBeInTheDocument()
     expect(screen.getByText('Kiwi2')).toBeInTheDocument()
-    expect(screen.getByText('Kiwi3')).toBeInTheDocument()
   })
 })

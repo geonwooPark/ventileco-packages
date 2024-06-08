@@ -11,58 +11,34 @@ const meta: Meta<typeof Accordion> = {
 
 export default meta
 
+const accordionList = [
+  { id: 0, title: 'Title1', content: 'Content1' },
+  { id: 1, title: 'Title2', content: 'Content2' },
+  { id: 2, title: 'Title3', content: 'Content3' },
+]
+
 export function Normal() {
   return (
     <div className="w-[240px]">
       <Accordion className="flex flex-col rounded-md border">
-        <Accordion.Item index={0}>
-          {({ isOpen }) => (
-            <>
-              <Accordion.Trigger>
-                <div
-                  className={`${isOpen && 'text-blue-600'} cursor-pointer border-b px-4 py-3 text-left`}
-                >
-                  Title1
-                </div>
-              </Accordion.Trigger>
-              <Accordion.Content>
-                <div className="border-b px-4 py-3">Content1</div>
-              </Accordion.Content>
-            </>
-          )}
-        </Accordion.Item>
-        <Accordion.Item index={1}>
-          {({ isOpen }) => (
-            <>
-              <Accordion.Trigger>
-                <div
-                  className={`${isOpen && 'text-blue-600'} cursor-pointer border-b px-4 py-3 text-left`}
-                >
-                  Title2
-                </div>
-              </Accordion.Trigger>
-              <Accordion.Content>
-                <div className="border-b px-4 py-3">Content2</div>
-              </Accordion.Content>
-            </>
-          )}
-        </Accordion.Item>
-        <Accordion.Item index={2}>
-          {({ isOpen }) => (
-            <>
-              <Accordion.Trigger>
-                <div
-                  className={`${isOpen && 'border-b text-blue-600'} cursor-pointer px-4 py-3 text-left`}
-                >
-                  Title3
-                </div>
-              </Accordion.Trigger>
-              <Accordion.Content>
-                <div className="px-4 py-3">Content3</div>
-              </Accordion.Content>
-            </>
-          )}
-        </Accordion.Item>
+        {accordionList.map((item) => (
+          <Accordion.Item key={item.id} index={item.id}>
+            {({ isOpen }) => (
+              <>
+                <Accordion.Trigger>
+                  <div
+                    className={`${isOpen && 'text-blue-600'} cursor-pointer border-b px-4 py-3 text-left`}
+                  >
+                    {item.title}
+                  </div>
+                </Accordion.Trigger>
+                <Accordion.Content>
+                  <div className="border-b px-4 py-3">{item.content}</div>
+                </Accordion.Content>
+              </>
+            )}
+          </Accordion.Item>
+        ))}
       </Accordion>
     </div>
   )
