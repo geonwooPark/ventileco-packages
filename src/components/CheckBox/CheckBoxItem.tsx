@@ -31,6 +31,7 @@ function CheckBoxItem({ children, value, register }: CheckBoxItemProps) {
       <input
         id={`${id}-${value}`}
         type="checkbox"
+        aria-hidden="true"
         value={value}
         checked={isSelected}
         onClick={() => onClick(value)}

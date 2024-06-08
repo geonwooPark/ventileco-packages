@@ -31,6 +31,7 @@ function RadioButton({ children, value }: RadioButtonProps) {
       <input
         id={`${id}-radio-button-${value}`}
         type="radio"
+        aria-hidden="true"
         name={name}
         value={value}
         onClick={() => onClick(value)}
