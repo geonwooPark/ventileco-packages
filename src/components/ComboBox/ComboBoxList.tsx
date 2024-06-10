@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { ComboBoxContext } from './ComboBox'
+import { ComboBoxContext } from './ComboBoxMain'
 import { OptionList } from '../../types'
 
 interface ComboBoxListProps {

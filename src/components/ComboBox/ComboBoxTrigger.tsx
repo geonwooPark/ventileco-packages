@@ -1,5 +1,5 @@
 import { PropsWithChildren, useContext, useMemo } from 'react'
-import { ComboBoxContext } from './ComboBox'
+import { ComboBoxContext } from './ComboBoxMain'
 
 function ComboBoxTrigger({ children }: PropsWithChildren) {
   const { id, isOpen, triggerRef, onTrigger, onKeyboardTrigger } =

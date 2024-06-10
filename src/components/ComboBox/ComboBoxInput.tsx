@@ -1,5 +1,5 @@
 import { useContext, useMemo } from 'react'
-import { ComboBoxContext } from './ComboBox'
+import { ComboBoxContext } from './ComboBoxMain'
 
 interface ComboBoxInputProps {
   placeholder: string

@@ -1,7 +1,8 @@
 import React, {
+  ElementType,
   KeyboardEventHandler,
-  PropsWithChildren,
   createContext,
+  forwardRef,
   useCallback,
   useEffect,
   useId,
@@ -18,11 +19,24 @@ import ComboBoxList from './ComboBoxList'
 import { Option, OptionList } from '../../types'
 import { escapeRegExp } from '../../utils/escapeRegExp'
 
-export type ComboBoxProps = {
-  value: string | undefined
-  setValue: (value: string | undefined) => void
-  list: OptionList
-}
+type TitleElement = 'legend' | 'label'
+
+type ComboBoxMainRef<T extends ElementType> =
+  React.ComponentPropsWithRef<T>['ref']
+
+type ComboBoxMainProps<T extends ElementType> =
+  React.ComponentPropsWithoutRef<T> & {
+    as?: T extends 'div' | 'fieldset' ? T : never
+    children?: React.ReactNode
+    ref?: ComboBoxMainRef<T>
+    value: string | undefined
+    setValue: (value: string | undefined) => void
+    list: OptionList
+  }
+
+type ComboBoxMainComponent = <T extends ElementType>(
+  props: ComboBoxMainProps<T>,
+) => React.ReactNode
 
 type ComboBoxContextState = {
   id: string
@@ -35,6 +49,7 @@ type ComboBoxContextState = {
   inputRef: React.RefObject<HTMLInputElement> | null
   focusedItem: string | undefined
   optionList: OptionList
+  Title: TitleElement
   onTextChange: (e: React.ChangeEvent<HTMLInputElement>) => void
   onTrigger: () => void
   onClear: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
@@ -61,6 +76,7 @@ export const ComboBoxContext = createContext<ComboBoxContextState>({
   inputRef: null,
   focusedItem: undefined,
   optionList: [],
+  Title: 'label',
   onTextChange: () => null,
   onClear: () => null,
   onTrigger: () => null,
@@ -68,8 +84,15 @@ export const ComboBoxContext = createContext<ComboBoxContextState>({
   onKeyboardTrigger: () => null,
 })
 
-function ComboBox({ children, ...props }: PropsWithChildren<ComboBoxProps>) {
-  const { value, setValue, list } = props
+const ComboBoxMain: ComboBoxMainComponent = forwardRef(function ComboBoxMain<
+  T extends ElementType,
+>(
+  { as, children, value, setValue, list }: ComboBoxMainProps<T>,
+  ref: ComboBoxMainRef<T>,
+) {
+  const Element = as || 'div'
+  const Title: TitleElement = Element === 'fieldset' ? 'legend' : 'label'
+
   const id = useId()
 
   const [isOpen, setIsOpen] = useState(false)
@@ -77,7 +100,6 @@ function ComboBox({ children, ...props }: PropsWithChildren<ComboBoxProps>) {
   const [focusedItem, setFocusedItem] = useState<string>()
   const [optionList, setOptionList] = useState(list)
 
-  const containerRef = useRef<HTMLFieldSetElement>(null)
   const triggerRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
   const listRef = useRef<HTMLUListElement>(null)
@@ -223,7 +245,10 @@ function ComboBox({ children, ...props }: PropsWithChildren<ComboBoxProps>) {
     if (!isOpen) return
 
     const onOutsideClick = (e: MouseEvent) => {
-      if (containerRef.current?.contains(e.target as Node)) return
+      if (triggerRef.current?.contains(e.target as Node)) return
+      if (listRef.current?.contains(e.target as Node)) return
+      if (inputRef.current?.contains(e.target as Node)) return
+
       setKeyword(value || '')
       setIsOpen(false)
     }
@@ -254,6 +279,7 @@ function ComboBox({ children, ...props }: PropsWithChildren<ComboBoxProps>) {
       inputRef,
       focusedItem,
       optionList,
+      Title,
       onTextChange,
       onTrigger,
       onClear,
@@ -271,6 +297,7 @@ function ComboBox({ children, ...props }: PropsWithChildren<ComboBoxProps>) {
       inputRef,
       focusedItem,
       optionList,
+      Title,
       onTextChange,
       onTrigger,
       onClear,
@@ -286,18 +313,25 @@ function ComboBox({ children, ...props }: PropsWithChildren<ComboBoxProps>) {
 
   return (
     <ComboBoxContext.Provider value={providerValue}>
-      <fieldset ref={containerRef} role="group" style={comboBoxStyle}>
+      <Element
+        id={`${id}_combobox`}
+        role="group"
+        ref={ref}
+        style={comboBoxStyle}
+      >
         {children}
-      </fieldset>
+      </Element>
     </ComboBoxContext.Provider>
   )
-}
+})
 
-ComboBox.Title = ComboBoxTitle
-ComboBox.Trigger = ComboBoxTrigger
-ComboBox.Input = ComboBoxInput
-ComboBox.ClearButton = ComboBoxClearButton
-ComboBox.List = ComboBoxList
-ComboBox.Item = ComboBoxItem
+const ComboBox = Object.assign(ComboBoxMain, {
+  Title: ComboBoxTitle,
+  Trigger: ComboBoxTrigger,
+  Input: ComboBoxInput,
+  ClearButton: ComboBoxClearButton,
+  List: ComboBoxList,
+  Item: ComboBoxItem,
+})
 
 export default ComboBox

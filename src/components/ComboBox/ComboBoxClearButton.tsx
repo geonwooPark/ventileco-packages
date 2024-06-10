@@ -1,5 +1,5 @@
 import { PropsWithChildren, useContext } from 'react'
-import { ComboBoxContext } from './ComboBox'
+import { ComboBoxContext } from './ComboBoxMain'
 
 function ComboBoxClearButton({ children }: PropsWithChildren) {
   const { value, onClear } = useContext(ComboBoxContext)
