@@ -1,12 +1,12 @@
 import React, { useContext, useMemo } from 'react'
-import { RadioContext } from './RadioGroup'
+import { RadioContext } from './RadioMain'
 
-interface RadioButtonProps {
+interface RadioItemProps {
   children: (props: { isSelected: boolean }) => React.ReactNode
   value: string | number | readonly string[] | undefined
 }
 
-function RadioButton({ children, value }: RadioButtonProps) {
+function RadioItem({ children, value }: RadioItemProps) {
   const { id, selectedValue, name, register, onClick } =
     useContext(RadioContext)
   const isSelected = selectedValue === value
@@ -44,4 +44,4 @@ function RadioButton({ children, value }: RadioButtonProps) {
   )
 }
 
-export default RadioButton
+export default RadioItem

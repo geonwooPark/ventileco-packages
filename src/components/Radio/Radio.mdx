@@ -2,14 +2,14 @@ import { Meta } from '@storybook/addon-docs'
 
 <Meta title="COMPONENTS/Radio" />
 
-# RadioGroup
+# Radio
 
 여러 옵션 중 하나를 선택할 때 사용되며, 단일 선택이 가능한 버튼 형태의 인터페이스 요소
 
 ## Controlled Example
 
 ```jsx
-import RadioGroup from 'ventileco-ui'
+import Radio from 'ventileco-ui'
 
 const radioList = [
   { id: 0, value: 'number1', label: '기호1' },
@@ -20,13 +20,20 @@ const radioList = [
 function Example() {
   const [value, setValue] = useState<string | number | readonly string[] | undefined>()
 
+  const ref = useRef<HTMLDivElement>(null)
+
   return (
     <div className="w-[240px]">
-      <RadioGroup defaultValue={value} setValue={setValue} name="Controlled">
-        <RadioGroup.Title>제어 컴포넌트</RadioGroup.Title>
-        <RadioGroup.List className="flex flex-col gap-2">
+      <Radio
+        defaultValue={value}
+        setValue={setValue}
+        name="Controlled"
+        ref={ref}
+      >
+        <Radio.Title>제어 컴포넌트</Radio.Title>
+        <Radio.List className="flex flex-col gap-2">
           {radioList.map((item) => (
-            <RadioGroup.Item key={item.id} value={item.value}>
+            <Radio.Item key={item.id} value={item.value}>
               {({ isSelected }) => (
                 <div className="flex w-full cursor-pointer justify-between rounded-md border border-black px-4 py-3">
                   <p>{item.label}</p>
@@ -46,10 +53,10 @@ function Example() {
                   </svg>
                 </div>
               )}
-            </RadioGroup.Item>
+            </Radio.Item>
           ))}
-        </RadioGroup.List>
-      </RadioGroup>
+        </Radio.List>
+      </Radio>
     </div>
   )
 }
@@ -58,7 +65,7 @@ function Example() {
 ## With React Hook Form Example
 
 ```jsx
-import RadioGroup from 'ventileco-ui'
+import Radio from 'ventileco-ui'
 import { useForm } from 'react-hook-form'
 
 const radioList = [
@@ -81,11 +88,11 @@ function Example() {
   return (
     <div className="w-[240px]">
       <form onSubmit={handleSubmit(onSubmit)}>
-        <RadioGroup register={radioRegister} defaultValue="number1">
-          <RadioGroup.Title>With React Hook Form</RadioGroup.Title>
-          <RadioGroup.List className="flex gap-4">
+        <Radio as="fieldset" register={radioRegister} defaultValue="number1">
+          <Radio.Title>With React Hook Form</Radio.Title>
+          <Radio.List className="flex gap-4">
             {radioList.map((item) => (
-              <RadioGroup.Item key={item.id} value={item.value}>
+              <Radio.Item key={item.id} value={item.value}>
                 {({ isSelected }) => (
                   <div className="cursor-pointer rounded-md border border-black px-3 py-2">
                     <div className="flex w-full justify-center">
@@ -107,10 +114,10 @@ function Example() {
                     <p>{item.label}</p>
                   </div>
                 )}
-              </RadioGroup.Item>
+              </Radio.Item>
             ))}
-          </RadioGroup.List>
-        </RadioGroup>
+          </Radio.List>
+        </Radio>
       </form>
     </div>
   )

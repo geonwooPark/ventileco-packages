@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react'
-import { CheckBoxGroup } from './components'
+import CheckBox from './components/CheckBox/CheckBoxMain'
 
 const checkBoxList = [
   { id: 0, value: 'january', label: 'January' },
@@ -14,16 +14,16 @@ function App() {
 
   return (
     <div>
-      <CheckBoxGroup
+      <CheckBox
         as="fieldset"
         defaultValues={values}
         setValues={setValues}
         ref={ref}
       >
-        <CheckBoxGroup.Title>Controlled</CheckBoxGroup.Title>
-        <CheckBoxGroup.List className="flex gap-2">
+        <CheckBox.Title>Controlled</CheckBox.Title>
+        <CheckBox.List className="flex gap-2">
           {checkBoxList.map((item) => (
-            <CheckBoxGroup.Item key={item.id} value={item.value}>
+            <CheckBox.Item key={item.id} value={item.value}>
               {({ isSelected }) => (
                 <div
                   className={`${isSelected && 'text-blue-600'} cursor-pointer rounded-md border border-black px-3 py-2`}
@@ -47,10 +47,10 @@ function App() {
                   <p>{item.label}</p>
                 </div>
               )}
-            </CheckBoxGroup.Item>
+            </CheckBox.Item>
           ))}
-        </CheckBoxGroup.List>
-      </CheckBoxGroup>
+        </CheckBox.List>
+      </CheckBox>
     </div>
   )
 }

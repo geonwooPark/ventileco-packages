@@ -1,11 +1,11 @@
 import type { Meta } from '@storybook/react'
-import CheckBoxGroup from './CheckBoxMain'
+import CheckBox from './CheckBoxMain'
 import { useForm } from 'react-hook-form'
 import { useRef, useState } from 'react'
 
-const meta: Meta<typeof CheckBoxGroup> = {
+const meta: Meta<typeof CheckBox> = {
   title: 'COMPONENTS/CheckBox',
-  component: CheckBoxGroup,
+  component: CheckBox,
   parameters: {
     layout: 'centered',
   },
@@ -25,11 +25,11 @@ export function Controlled() {
   const ref = useRef<HTMLDivElement>(null)
 
   return (
-    <CheckBoxGroup defaultValues={values} setValues={setValues} ref={ref}>
-      <CheckBoxGroup.Title>Controlled</CheckBoxGroup.Title>
-      <CheckBoxGroup.List className="flex gap-2">
+    <CheckBox defaultValues={values} setValues={setValues} ref={ref}>
+      <CheckBox.Title>Controlled</CheckBox.Title>
+      <CheckBox.List className="flex gap-2">
         {checkBoxList.map((item) => (
-          <CheckBoxGroup.Item key={item.id} value={item.value}>
+          <CheckBox.Item key={item.id} value={item.value}>
             {({ isSelected }) => (
               <div
                 className={`${isSelected && 'text-blue-600'} cursor-pointer rounded-md border border-black px-3 py-2`}
@@ -53,10 +53,10 @@ export function Controlled() {
                 <p>{item.label}</p>
               </div>
             )}
-          </CheckBoxGroup.Item>
+          </CheckBox.Item>
         ))}
-      </CheckBoxGroup.List>
-    </CheckBoxGroup>
+      </CheckBox.List>
+    </CheckBox>
   )
 }
 
@@ -73,11 +73,11 @@ export function WithReactHookForm() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <CheckBoxGroup as="fieldset" defaultValues={['January']}>
-        <CheckBoxGroup.Title>With React Hook Form</CheckBoxGroup.Title>
-        <CheckBoxGroup.List className="flex gap-2">
+      <CheckBox as="fieldset" defaultValues={['January']}>
+        <CheckBox.Title>With React Hook Form</CheckBox.Title>
+        <CheckBox.List className="flex gap-2">
           {checkBoxList.map((item) => (
-            <CheckBoxGroup.Item
+            <CheckBox.Item
               key={item.id}
               value={item.value}
               register={checkBoxRegister}
@@ -105,10 +105,10 @@ export function WithReactHookForm() {
                   <p>{item.label}</p>
                 </div>
               )}
-            </CheckBoxGroup.Item>
+            </CheckBox.Item>
           ))}
-        </CheckBoxGroup.List>
-      </CheckBoxGroup>
+        </CheckBox.List>
+      </CheckBox>
     </form>
   )
 }

@@ -1,11 +1,11 @@
 import type { Meta } from '@storybook/react'
-import { useState } from 'react'
-import RadioGroup from './RadioGroup'
+import { useRef, useState } from 'react'
+import Radio from './RadioMain'
 import { useForm } from 'react-hook-form'
 
-const meta: Meta<typeof RadioGroup> = {
+const meta: Meta<typeof Radio> = {
   title: 'COMPONENTS/Radio',
-  component: RadioGroup,
+  component: Radio,
   parameters: {
     layout: 'centered',
   },
@@ -24,13 +24,20 @@ export function Controlled() {
     string | number | readonly string[] | undefined
   >()
 
+  const ref = useRef<HTMLDivElement>(null)
+
   return (
     <div className="w-[240px]">
-      <RadioGroup defaultValue={value} setValue={setValue} name="Controlled">
-        <RadioGroup.Title>제어 컴포넌트</RadioGroup.Title>
-        <RadioGroup.List className="flex flex-col gap-2">
+      <Radio
+        defaultValue={value}
+        setValue={setValue}
+        name="Controlled"
+        ref={ref}
+      >
+        <Radio.Title>제어 컴포넌트</Radio.Title>
+        <Radio.List className="flex flex-col gap-2">
           {radioList.map((item) => (
-            <RadioGroup.Item key={item.id} value={item.value}>
+            <Radio.Item key={item.id} value={item.value}>
               {({ isSelected }) => (
                 <div className="flex w-full cursor-pointer justify-between rounded-md border border-black px-4 py-3">
                   <p>{item.label}</p>
@@ -50,10 +57,10 @@ export function Controlled() {
                   </svg>
                 </div>
               )}
-            </RadioGroup.Item>
+            </Radio.Item>
           ))}
-        </RadioGroup.List>
-      </RadioGroup>
+        </Radio.List>
+      </Radio>
     </div>
   )
 }
@@ -71,11 +78,11 @@ export function WithReactHookForm() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <RadioGroup register={radioRegister} defaultValue="number1">
-        <RadioGroup.Title>With React Hook Form</RadioGroup.Title>
-        <RadioGroup.List className="flex gap-4">
+      <Radio as="fieldset" register={radioRegister} defaultValue="number1">
+        <Radio.Title>With React Hook Form</Radio.Title>
+        <Radio.List className="flex gap-4">
           {radioList.map((item) => (
-            <RadioGroup.Item key={item.id} value={item.value}>
+            <Radio.Item key={item.id} value={item.value}>
               {({ isSelected }) => (
                 <div className="cursor-pointer rounded-md border border-black px-3 py-2">
                   <div className="flex w-full justify-center">
@@ -97,10 +104,10 @@ export function WithReactHookForm() {
                   <p>{item.label}</p>
                 </div>
               )}
-            </RadioGroup.Item>
+            </Radio.Item>
           ))}
-        </RadioGroup.List>
-      </RadioGroup>
+        </Radio.List>
+      </Radio>
     </form>
   )
 }
