@@ -1,5 +1,6 @@
 import type { Meta } from '@storybook/react'
 import Accordion from './Accordion'
+import React from 'react'
 
 const meta: Meta<typeof Accordion> = {
   title: 'COMPONENTS/Accordion',
@@ -24,7 +25,7 @@ export function Normal() {
         {accordionList.map((item) => (
           <Accordion.Item key={item.id} index={item.id}>
             {({ isOpen }) => (
-              <>
+              <React.Fragment>
                 <Accordion.Trigger>
                   <div
                     className={`${isOpen && 'text-blue-600'} cursor-pointer border-b px-4 py-3 text-left`}
@@ -35,7 +36,7 @@ export function Normal() {
                 <Accordion.Content>
                   <div className="border-b px-4 py-3">{item.content}</div>
                 </Accordion.Content>
-              </>
+              </React.Fragment>
             )}
           </Accordion.Item>
         ))}

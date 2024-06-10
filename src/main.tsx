@@ -8,7 +8,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <ToastProvider>
       {({ toasts }) => (
-        <>
+        <React.Fragment>
           <App />
           <ToastProvider.List>
             {toasts.map((toast) => (
@@ -29,7 +29,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
               </ToastProvider.Wrapper>
             ))}
           </ToastProvider.List>
-        </>
+        </React.Fragment>
       )}
     </ToastProvider>
   </React.StrictMode>,
