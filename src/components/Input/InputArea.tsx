@@ -1,12 +1,13 @@
 import { useContext, useMemo } from 'react'
-import { InputContext } from './Input'
+import { InputContext } from './InputMain'
 
-interface InputAreaProps {
+export interface InputAreaProps {
   className?: string
 }
 
 function InputArea({ className }: InputAreaProps) {
-  const { id, register, disabled, ...props } = useContext(InputContext)
+  const { id, register, disabled, forwardRef, ...props } =
+    useContext(InputContext)
 
   const inputAreaStyle = useMemo(
     () => ({
@@ -21,12 +22,13 @@ function InputArea({ className }: InputAreaProps) {
   return (
     <input
       id={id}
-      {...props}
+      ref={forwardRef}
       disabled={disabled}
       aria-disabled={disabled}
       style={inputAreaStyle}
       className={className}
       aria-label="Input field"
+      {...props}
       {...register}
     />
   )

@@ -1,14 +1,32 @@
-import useToast from './components/Toast/useToast'
+import { useRef, useState } from 'react'
+import { Input } from './components'
 
 function App() {
-  const addToast = useToast()
+  const inputRef = useRef<HTMLInputElement>(null)
+  const [value, setValue] = useState('')
+
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target
+    setValue(value)
+  }
 
   return (
-    <div>
-      <button onClick={() => addToast.success('성공 메시지')}>버튼</button>
-      <button onClick={() => addToast.error('실패 메시지')}>버튼</button>
-      <button onClick={() => addToast.info('인포 메시지')}>버튼</button>
-    </div>
+    <Input
+      type="text"
+      name="email"
+      value={value}
+      onChange={onChange}
+      placeholder="Enter text"
+      ref={inputRef}
+    >
+      <Input.Label>Input</Input.Label>
+      <Input.InputBox className="flex h-[50px] w-[240px] items-center justify-between rounded-md border px-2 text-black">
+        <div>
+          <div className="mr-1 size-5 bg-gray-400" />
+        </div>
+        <Input.InputArea />
+      </Input.InputBox>
+    </Input>
   )
 }
 

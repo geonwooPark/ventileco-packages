@@ -1,7 +1,9 @@
 import {
   InputHTMLAttributes,
   PropsWithChildren,
+  Ref,
   createContext,
+  forwardRef,
   useId,
   useMemo,
   useRef,
@@ -19,21 +21,26 @@ type InputContextState = {
   id: string
   register: any
   disabled?: boolean
+  forwardRef: Ref<HTMLInputElement>
 }
 
 export const InputContext = createContext<InputContextState>({
   id: '',
   register: null,
   disabled: false,
+  forwardRef: null,
 })
 
-function Input({
-  children,
-  className,
-  register,
-  disabled,
-  ...props
-}: PropsWithChildren<InputProps>) {
+const InputMain = forwardRef(function InputMain(
+  {
+    children,
+    className,
+    register,
+    disabled,
+    ...props
+  }: PropsWithChildren<InputProps>,
+  forwardRef: Ref<HTMLInputElement>,
+) {
   const id = useId()
 
   const containerRef = useRef<HTMLDivElement>(null)
@@ -52,9 +59,10 @@ function Input({
       id,
       register,
       disabled,
+      forwardRef,
       ...props,
     }),
-    [id, register, disabled, props],
+    [id, register, disabled, forwardRef, props],
   )
 
   const inputStyle = useMemo(
@@ -78,10 +86,12 @@ function Input({
       </div>
     </InputContext.Provider>
   )
-}
+})
 
-Input.Label = InputLabel
-Input.InputBox = InputBox
-Input.InputArea = InputArea
+const Input = Object.assign(InputMain, {
+  Label: InputLabel,
+  InputBox: InputBox,
+  InputArea: InputArea,
+})
 
 export default Input
