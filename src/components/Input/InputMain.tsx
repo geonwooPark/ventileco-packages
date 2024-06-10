@@ -21,14 +21,14 @@ type InputContextState = {
   id: string
   register: any
   disabled?: boolean
-  forwardRef: ForwardedRef<HTMLInputElement>
+  inputRef: React.RefObject<HTMLInputElement> | null
 }
 
 export const InputContext = createContext<InputContextState>({
   id: '',
   register: null,
   disabled: false,
-  forwardRef: null,
+  inputRef: null,
 })
 
 function InputMain(
@@ -43,32 +43,23 @@ function InputMain(
 ) {
   const id = useId()
 
-  const containerRef = useRef<HTMLDivElement>(null)
-
-  const onClick = () => {
-    if (!containerRef.current) return
-
-    const inputNodes = containerRef.current.querySelector(
-      'input',
-    ) as HTMLElement
-    inputNodes.focus()
-  }
+  const inputRef = useRef<HTMLInputElement>(null)
 
   const providerValue = useMemo(
     () => ({
       id,
       register,
       disabled,
-      forwardRef,
+      inputRef,
       ...props,
     }),
-    [id, register, disabled, forwardRef, props],
+    [id, register, disabled, inputRef, props],
   )
 
   const inputStyle = useMemo(
     () => ({
       opacity: disabled ? '0.5' : '1',
-      cursor: disabled ? 'not-allowed' : 'text',
+      cursor: disabled ? 'not-allowed' : '',
     }),
     [disabled],
   )
@@ -76,8 +67,7 @@ function InputMain(
   return (
     <InputContext.Provider value={providerValue}>
       <div
-        ref={containerRef}
-        onClick={onClick}
+        ref={forwardRef}
         data-disabled={disabled}
         style={inputStyle}
         className={className}

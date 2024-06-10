@@ -14,14 +14,13 @@ const meta: Meta<typeof Input> = {
 export default meta
 
 export function Normal() {
+  const inputRef = useRef<HTMLInputElement>(null)
   const [value, setValue] = useState('')
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target
     setValue(value)
   }
-
-  const ref = useRef<HTMLInputElement>(null)
 
   return (
     <Input
@@ -30,7 +29,7 @@ export function Normal() {
       value={value}
       onChange={onChange}
       placeholder="Enter text"
-      ref={ref}
+      ref={inputRef}
     >
       <Input.Label>Input</Input.Label>
       <Input.InputBox className="flex h-[50px] w-[240px] items-center justify-between rounded-md border px-2 text-black">

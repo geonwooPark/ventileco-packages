@@ -6,7 +6,7 @@ interface InputAreaProps {
 }
 
 function InputArea({ className }: InputAreaProps) {
-  const { id, register, disabled, inputRef, ...props } =
+  const { id, register, disabled, forwardRef, ...props } =
     useContext(InputContext)
 
   const inputAreaStyle = useMemo(
@@ -21,8 +21,8 @@ function InputArea({ className }: InputAreaProps) {
 
   return (
     <input
-      id={`${id}-input`}
-      ref={inputRef}
+      id={id}
+      ref={forwardRef}
       disabled={disabled}
       aria-disabled={disabled}
       style={inputAreaStyle}
