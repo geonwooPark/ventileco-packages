@@ -9,7 +9,7 @@ import { Meta } from '@storybook/addon-docs'
 ## Example
 
 ```jsx
-import Accordion from 'ventileco-ui'
+import { Accordion } from 'ventileco-ui'
 
 const accordionList = [
   { id: 0, title: 'Title1', content: 'Content1' },
@@ -21,7 +21,7 @@ export function Example() {
   return (
     <div className="w-[240px]">
       <Accordion className="flex flex-col rounded-md border">
-        {accodionList.map((item) => (
+        {accordionList.map((item) => (
           <Accordion.Item key={item.id} index={item.id}>
             {({ isOpen }) => (
               <React.Fragment>
