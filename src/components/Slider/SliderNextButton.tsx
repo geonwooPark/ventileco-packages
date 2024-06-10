@@ -1,5 +1,5 @@
 import { PropsWithChildren, useContext } from 'react'
-import { SliderContext } from './Slider'
+import { SliderContext } from './SliderMain'
 
 interface SliderNextButtonProps {
   className: string

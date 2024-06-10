@@ -1,5 +1,5 @@
 import { PropsWithChildren, useContext, useMemo } from 'react'
-import { SliderContext } from './Slider'
+import { SliderContext } from './SliderMain'
 
 interface SliderContentProps {
   className: string

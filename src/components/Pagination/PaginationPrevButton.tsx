@@ -1,5 +1,5 @@
 import { PropsWithChildren, useContext, useMemo } from 'react'
-import { PaginationContext } from './Pagination'
+import { PaginationContext } from './PaginationMain'
 import { getQueries } from '../../utils/getQueries'
 
 function PaginationPrevButton({ children }: PropsWithChildren) {

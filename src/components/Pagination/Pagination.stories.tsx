@@ -1,5 +1,5 @@
 import type { Meta } from '@storybook/react'
-import Pagination, { PaginationProps } from './Pagination'
+import Pagination, { PaginationProps } from './PaginationMain'
 
 const meta: Meta<typeof Pagination> = {
   title: 'COMPONENTS/Pagination',

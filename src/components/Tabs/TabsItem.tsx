@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { TabsContext } from './Tabs'
+import { TabsContext } from './TabsMain'
 
 interface TabsItemProps {
   children: (props: { selected: boolean }) => React.ReactNode

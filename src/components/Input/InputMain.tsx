@@ -31,7 +31,7 @@ export const InputContext = createContext<InputContextState>({
   forwardRef: null,
 })
 
-const InputMain = forwardRef(function InputMain(
+function InputMain(
   {
     children,
     className,
@@ -86,9 +86,9 @@ const InputMain = forwardRef(function InputMain(
       </div>
     </InputContext.Provider>
   )
-})
+}
 
-const Input = Object.assign(InputMain, {
+const Input = Object.assign(forwardRef(InputMain), {
   Label: InputLabel,
   InputBox: InputBox,
   InputArea: InputArea,

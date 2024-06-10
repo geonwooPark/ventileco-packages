@@ -1,5 +1,5 @@
 import React, { useContext, useMemo } from 'react'
-import { PaginationContext } from './Pagination'
+import { PaginationContext } from './PaginationMain'
 import { getChunk } from '../../utils/getChunk'
 import { getQueries } from '../../utils/getQueries'
 

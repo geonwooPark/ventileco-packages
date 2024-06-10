@@ -1,6 +1,8 @@
 import React, {
+  ForwardedRef,
   PropsWithChildren,
   createContext,
+  forwardRef,
   useMemo,
   useState,
 } from 'react'
@@ -41,15 +43,18 @@ export const PaginationContext = createContext<PaginationContextState>({
   onNavigate: () => {},
 })
 
-function Pagination({
-  children,
-  onNavigate,
-  totalItemCount,
-  numberingCount = 3,
-  queries,
-  listItemCount,
-  className,
-}: PropsWithChildren<PaginationProps>) {
+function PaginationMain(
+  {
+    children,
+    onNavigate,
+    totalItemCount,
+    numberingCount = 3,
+    queries,
+    listItemCount,
+    className,
+  }: PropsWithChildren<PaginationProps>,
+  forwardRef: ForwardedRef<HTMLDivElement>,
+) {
   const currentPage = Number(getParameterByName('page'))
   const [page, setPage] = useState(currentPage || 1)
 
@@ -74,6 +79,7 @@ function Pagination({
     <PaginationContext.Provider value={providerValue}>
       <div
         role="navigation"
+        ref={forwardRef}
         aria-label="Pagination Navigation"
         className={className}
       >
@@ -83,8 +89,10 @@ function Pagination({
   )
 }
 
-Pagination.PrevButton = PaginationPrevButton
-Pagination.NextButton = PaginationNextButton
-Pagination.Numbering = PaginationNumbering
+const Pagination = Object.assign(forwardRef(PaginationMain), {
+  PrevButton: PaginationPrevButton,
+  NextButton: PaginationNextButton,
+  Numbering: PaginationNumbering,
+})
 
 export default Pagination

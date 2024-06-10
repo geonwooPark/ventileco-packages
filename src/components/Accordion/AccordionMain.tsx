@@ -1,6 +1,8 @@
 import {
+  ForwardedRef,
   PropsWithChildren,
   createContext,
+  forwardRef,
   useCallback,
   useId,
   useMemo,
@@ -30,7 +32,10 @@ export const AccordionContext = createContext<AccordionContextState>({
   onBlur: () => null,
 })
 
-function Accordion({ children, className }: PropsWithChildren<AccordionProps>) {
+function AccordionMain(
+  { children, className }: PropsWithChildren<AccordionProps>,
+  forwardRef: ForwardedRef<HTMLDivElement>,
+) {
   const id = useId()
 
   const [activeItems, setActiveItems] = useState<Set<number>>(new Set())
@@ -76,15 +81,17 @@ function Accordion({ children, className }: PropsWithChildren<AccordionProps>) {
 
   return (
     <AccordionContext.Provider value={providerValue}>
-      <div role="tablist" className={className}>
+      <div role="tablist" ref={forwardRef} className={className}>
         {children}
       </div>
     </AccordionContext.Provider>
   )
 }
 
-Accordion.Item = AccordionItem
-Accordion.Trigger = AccordionTrigger
-Accordion.Content = AccordionContent
+const Accordion = Object.assign(forwardRef(AccordionMain), {
+  Item: AccordionItem,
+  Trigger: AccordionTrigger,
+  Content: AccordionContent,
+})
 
 export default Accordion

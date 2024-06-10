@@ -1,5 +1,5 @@
 import { PropsWithChildren, useContext } from 'react'
-import { TabsContext } from './Tabs'
+import { TabsContext } from './TabsMain'
 
 interface TabsContentProps {
   index: number

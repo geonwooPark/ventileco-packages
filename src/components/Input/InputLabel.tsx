@@ -1,7 +1,7 @@
 import { PropsWithChildren, useContext } from 'react'
 import { InputContext } from './InputMain'
 
-export interface InputLabelProps {
+interface InputLabelProps {
   className?: string
 }
 

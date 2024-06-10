@@ -1,5 +1,5 @@
 import { PropsWithChildren, useContext } from 'react'
-import { AccordionContext } from './Accordion'
+import { AccordionContext } from './AccordionMain'
 import { AccordionItemContext } from './AccordionItem'
 
 function AccordionTrigger({ children }: PropsWithChildren) {

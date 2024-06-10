@@ -1,6 +1,8 @@
 import React, {
+  ForwardedRef,
   PropsWithChildren,
   createContext,
+  forwardRef,
   useCallback,
   useMemo,
   useRef,
@@ -37,7 +39,10 @@ export const SliderContext = createContext<SliderContextState>({
   onNextButtonClick: () => {},
 })
 
-function Slider({ children, gap, step = 1 }: PropsWithChildren<SliderProps>) {
+function SliderMain(
+  { children, gap, step = 1 }: PropsWithChildren<SliderProps>,
+  forwardRef: ForwardedRef<HTMLDivElement>,
+) {
   const slideContainer = useRef<HTMLDivElement>(null)
 
   const [isDragging, setIsDragging] = useState(false)
@@ -52,64 +57,68 @@ function Slider({ children, gap, step = 1 }: PropsWithChildren<SliderProps>) {
     [],
   )
 
-  const onDragStart = (e: React.MouseEvent<HTMLDivElement>) => {
-    // preventUnexpectedEffects(e)
+  const onDragStart = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
     setIsDragging(true)
     const x = e.clientX
     setStartPoint(x)
     if (slideContainer.current && 'scrollLeft' in slideContainer.current) {
       setTotalX(x + slideContainer.current.scrollLeft)
     }
-  }
+  }, [])
 
-  const onDragMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!isDragging) return
-    preventUnexpectedEffects(e)
+  const onDragMove = useCallback(
+    (e: React.MouseEvent<HTMLDivElement>) => {
+      if (!isDragging) return
+      preventUnexpectedEffects(e)
 
-    const scrollLeft = totalX - e.clientX
+      const scrollLeft = totalX - e.clientX
 
-    if (slideContainer.current && 'scrollLeft' in slideContainer.current) {
-      slideContainer.current.scrollLeft = scrollLeft
-    }
-  }
+      if (slideContainer.current && 'scrollLeft' in slideContainer.current) {
+        slideContainer.current.scrollLeft = scrollLeft
+      }
+    },
+    [isDragging, preventUnexpectedEffects, totalX],
+  )
 
-  const onDragEnd = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!isDragging) return
-    if (!slideContainer.current) return
+  const onDragEnd = useCallback(
+    (e: React.MouseEvent<HTMLDivElement>) => {
+      if (!isDragging) return
+      if (!slideContainer.current) return
 
-    setIsDragging(false)
+      setIsDragging(false)
 
-    const endX = e.clientX
-    const childNodes = slideContainer.current?.childNodes
-    const dragDiff = Math.abs(startPoint - endX)
+      const endX = e.clientX
+      const childNodes = slideContainer.current?.childNodes
+      const dragDiff = Math.abs(startPoint - endX)
 
-    if (dragDiff > 10) {
-      childNodes.forEach((child) => {
-        child.addEventListener('click', preventUnexpectedEffects as any)
-      })
-    } else {
-      childNodes.forEach((child) => {
-        child.removeEventListener('click', preventUnexpectedEffects as any)
-      })
-    }
-  }
+      if (dragDiff > 10) {
+        childNodes.forEach((child) => {
+          child.addEventListener('click', preventUnexpectedEffects as any)
+        })
+      } else {
+        childNodes.forEach((child) => {
+          child.removeEventListener('click', preventUnexpectedEffects as any)
+        })
+      }
+    },
+    [isDragging, preventUnexpectedEffects, startPoint],
+  )
 
-  const onPrevButtonClick = () => {
+  const onPrevButtonClick = useCallback(() => {
     if (!slideContainer.current) return
     if (!gap) return
 
     const childNodes = slideContainer.current
       .childNodes as NodeListOf<HTMLElement>
-
     const width = childNodes[0].offsetWidth
 
     const firstViewChildIndex = Math.floor(
-      slideContainer.current?.scrollLeft / (width + gap),
+      slideContainer.current.scrollLeft / (width + gap),
     )
 
     if (
       firstViewChildIndex > 0 &&
-      Number.isInteger(slideContainer.current?.scrollLeft / (width + gap))
+      Number.isInteger(slideContainer.current.scrollLeft / (width + gap))
     ) {
       slideContainer.current.scrollLeft =
         firstViewChildIndex > step
@@ -119,26 +128,25 @@ function Slider({ children, gap, step = 1 }: PropsWithChildren<SliderProps>) {
       slideContainer.current.scrollLeft =
         childNodes[firstViewChildIndex].offsetLeft
     }
-  }
+  }, [gap, step])
 
-  const onNextButtonClick = () => {
+  const onNextButtonClick = useCallback(() => {
     if (!slideContainer.current) return
     if (!gap) return
 
     const childNodes = slideContainer.current
       .childNodes as NodeListOf<HTMLElement>
-
     const width = childNodes[0].offsetWidth
 
     const firstViewChildIndex = Math.floor(
-      slideContainer.current?.scrollLeft / (width + gap),
+      slideContainer.current.scrollLeft / (width + gap),
     )
 
     slideContainer.current.scrollLeft =
       firstViewChildIndex + step < childNodes.length
         ? childNodes[firstViewChildIndex + step].offsetLeft
         : 9999
-  }
+  }, [gap, step])
 
   const throttle = useCallback((callback: any, delay: number) => {
     let throttled = false
@@ -153,7 +161,10 @@ function Slider({ children, gap, step = 1 }: PropsWithChildren<SliderProps>) {
     }
   }, [])
 
-  const onThrottleDragMove = throttle(onDragMove, 50)
+  const onThrottleDragMove = useMemo(
+    () => throttle(onDragMove, 50),
+    [throttle, onDragMove],
+  )
 
   const providerValue = useMemo(
     () => ({
@@ -183,15 +194,17 @@ function Slider({ children, gap, step = 1 }: PropsWithChildren<SliderProps>) {
 
   return (
     <SliderContext.Provider value={providerValue}>
-      <div role="group" style={sliderContainerStyle}>
+      <div role="group" ref={forwardRef} style={sliderContainerStyle}>
         {children}
       </div>
     </SliderContext.Provider>
   )
 }
 
-Slider.PrevButton = SliderPrevButton
-Slider.Content = SliderContent
-Slider.NextButton = SliderNextButton
+const Slider = Object.assign(forwardRef(SliderMain), {
+  PrevButton: SliderPrevButton,
+  Content: SliderContent,
+  NextButton: SliderNextButton,
+})
 
 export default Slider

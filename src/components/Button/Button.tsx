@@ -1,4 +1,4 @@
-import React, { PropsWithChildren } from 'react'
+import React, { ForwardedRef, PropsWithChildren, forwardRef } from 'react'
 
 export interface ButtonProps {
   type: 'submit' | 'button'
@@ -8,13 +8,16 @@ export interface ButtonProps {
   onClick?: () => void
 }
 
-function Button({
-  children,
-  disabled,
-  isLoading,
-  className,
-  ...props
-}: PropsWithChildren<ButtonProps>) {
+function Button(
+  {
+    children,
+    disabled,
+    isLoading,
+    className,
+    ...props
+  }: PropsWithChildren<ButtonProps>,
+  forwardRef: ForwardedRef<HTMLButtonElement>,
+) {
   const onKeyDown = (e: React.KeyboardEvent<HTMLButtonElement>) => {
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault()
@@ -24,6 +27,7 @@ function Button({
 
   return (
     <button
+      ref={forwardRef}
       {...props}
       onKeyDown={onKeyDown}
       style={{
@@ -69,4 +73,4 @@ function Button({
   )
 }
 
-export default Button
+export default forwardRef(Button)

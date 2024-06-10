@@ -1,5 +1,5 @@
 import type { Meta } from '@storybook/react'
-import Accordion from './Accordion'
+import Accordion from './AccordionMain'
 import React from 'react'
 
 const meta: Meta<typeof Accordion> = {

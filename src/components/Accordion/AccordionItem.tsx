@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useMemo } from 'react'
-import { AccordionContext } from './Accordion'
+import { AccordionContext } from './AccordionMain'
 
 interface AccordionItemProps {
   children: (props: { isOpen: boolean }) => React.ReactNode

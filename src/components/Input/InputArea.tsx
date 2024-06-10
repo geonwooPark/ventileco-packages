@@ -1,7 +1,7 @@
 import { useContext, useMemo } from 'react'
 import { InputContext } from './InputMain'
 
-export interface InputAreaProps {
+interface InputAreaProps {
   className?: string
 }
 

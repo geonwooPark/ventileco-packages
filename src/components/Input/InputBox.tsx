@@ -1,6 +1,6 @@
 import { PropsWithChildren } from 'react'
 
-export interface InputBoxProps {
+interface InputBoxProps {
   className?: string
 }
 

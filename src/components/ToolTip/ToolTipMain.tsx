@@ -44,7 +44,7 @@ export const ToolTipContext = createContext<ToolTipContextState>({
   setIsOpen: () => null,
 })
 
-const ToolTipMain = forwardRef(function ToolTipMain(
+function ToolTipMain(
   {
     children,
     direction,
@@ -180,9 +180,9 @@ const ToolTipMain = forwardRef(function ToolTipMain(
       </div>
     </ToolTipContext.Provider>
   )
-})
+}
 
-const ToolTip = Object.assign(ToolTipMain, {
+const ToolTip = Object.assign(forwardRef(ToolTipMain), {
   Trigger: ToolTipTrigger,
   Content: ToolTipContent,
 })
