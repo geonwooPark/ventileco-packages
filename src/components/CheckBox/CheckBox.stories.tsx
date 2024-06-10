@@ -1,7 +1,7 @@
 import type { Meta } from '@storybook/react'
-import CheckBoxGroup from './CheckBoxGroup'
+import CheckBoxGroup from './CheckBoxMain'
 import { useForm } from 'react-hook-form'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 
 const meta: Meta<typeof CheckBoxGroup> = {
   title: 'COMPONENTS/CheckBox',
@@ -22,8 +22,10 @@ const checkBoxList = [
 export function Controlled() {
   const [values, setValues] = useState<(string | number)[]>([])
 
+  const ref = useRef<HTMLDivElement>(null)
+
   return (
-    <CheckBoxGroup defaultValues={values} setValues={setValues}>
+    <CheckBoxGroup defaultValues={values} setValues={setValues} ref={ref}>
       <CheckBoxGroup.Title>Controlled</CheckBoxGroup.Title>
       <CheckBoxGroup.List className="flex gap-2">
         {checkBoxList.map((item) => (
@@ -71,7 +73,7 @@ export function WithReactHookForm() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <CheckBoxGroup defaultValues={['January']}>
+      <CheckBoxGroup as="fieldset" defaultValues={['January']}>
         <CheckBoxGroup.Title>With React Hook Form</CheckBoxGroup.Title>
         <CheckBoxGroup.List className="flex gap-2">
           {checkBoxList.map((item) => (

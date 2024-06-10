@@ -1,32 +1,57 @@
 import { useRef, useState } from 'react'
-import { Input } from './components'
+import { CheckBoxGroup } from './components'
+
+const checkBoxList = [
+  { id: 0, value: 'january', label: 'January' },
+  { id: 1, value: 'february', label: 'February' },
+  { id: 2, value: 'march', label: 'March' },
+]
 
 function App() {
-  const inputRef = useRef<HTMLInputElement>(null)
-  const [value, setValue] = useState('')
+  const [values, setValues] = useState<(string | number)[]>([])
 
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target
-    setValue(value)
-  }
+  const ref = useRef<HTMLFieldSetElement>(null)
 
   return (
-    <Input
-      type="text"
-      name="email"
-      value={value}
-      onChange={onChange}
-      placeholder="Enter text"
-      ref={inputRef}
-    >
-      <Input.Label>Input</Input.Label>
-      <Input.InputBox className="flex h-[50px] w-[240px] items-center justify-between rounded-md border px-2 text-black">
-        <div>
-          <div className="mr-1 size-5 bg-gray-400" />
-        </div>
-        <Input.InputArea />
-      </Input.InputBox>
-    </Input>
+    <div>
+      <CheckBoxGroup
+        as="fieldset"
+        defaultValues={values}
+        setValues={setValues}
+        ref={ref}
+      >
+        <CheckBoxGroup.Title>Controlled</CheckBoxGroup.Title>
+        <CheckBoxGroup.List className="flex gap-2">
+          {checkBoxList.map((item) => (
+            <CheckBoxGroup.Item key={item.id} value={item.value}>
+              {({ isSelected }) => (
+                <div
+                  className={`${isSelected && 'text-blue-600'} cursor-pointer rounded-md border border-black px-3 py-2`}
+                >
+                  <div className="flex justify-center">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth="1.5"
+                      stroke="currentColor"
+                      className="size-6"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                      />
+                    </svg>
+                  </div>
+                  <p>{item.label}</p>
+                </div>
+              )}
+            </CheckBoxGroup.Item>
+          ))}
+        </CheckBoxGroup.List>
+      </CheckBoxGroup>
+    </div>
   )
 }
 

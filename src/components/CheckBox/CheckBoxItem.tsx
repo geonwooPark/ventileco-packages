@@ -1,5 +1,5 @@
 import React, { useContext, useMemo } from 'react'
-import { CheckBoxContext } from './CheckBoxGroup'
+import { CheckBoxContext } from './CheckBoxMain'
 
 interface CheckBoxItemProps {
   children: (props: { isSelected: boolean }) => React.ReactNode
@@ -33,7 +33,6 @@ function CheckBoxItem({ children, value, register }: CheckBoxItemProps) {
         type="checkbox"
         aria-hidden="true"
         value={value}
-        checked={isSelected}
         onClick={() => onClick(value)}
         style={checkBoxItemStyle}
         {...register}

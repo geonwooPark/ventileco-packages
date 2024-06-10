@@ -1,6 +1,6 @@
 export { default as Accordion } from './Accordion/AccordionMain'
 export { default as Button } from './Button/Button'
-export { default as CheckBoxGroup } from './CheckBox/CheckBoxGroup'
+export { default as CheckBoxGroup } from './CheckBox/CheckBoxMain'
 export { default as ComboBox } from './ComboBox/ComboBox'
 export { default as Input } from './Input/InputMain'
 export { default as Pagination } from './Pagination/PaginationMain'

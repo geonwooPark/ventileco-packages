@@ -14,7 +14,6 @@ function AccordionTrigger({ children }: PropsWithChildren) {
   return (
     <button
       id={`${id}-accordion-button-${index}`}
-      tabIndex={0}
       aria-expanded={isOpen}
       aria-controls={`${id}-accordion-region-${index}`}
       onFocus={() => onFocus(index)}

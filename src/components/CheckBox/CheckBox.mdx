@@ -20,9 +20,11 @@ const checkBoxList = [
 function Example() {
   const [values, setValues] = useState<(string | number)[]>([])
 
+  const ref = useRef<HTMLDivElement>(null)
+
   return (
     <div className="w-[240px]">
-      <CheckBoxGroup defaultValues={values} setValues={setValues}>
+      <CheckBoxGroup defaultValues={values} setValues={setValues} ref={ref}>
         <CheckBoxGroup.Title>Controlled</CheckBoxGroup.Title>
         <CheckBoxGroup.List className="flex gap-2">
           {checkBoxList.map((item) => (
@@ -53,7 +55,7 @@ function Example() {
             </CheckBoxGroup.Item>
           ))}
         </CheckBoxGroup.List>
-      </CheckBoxGroup>
+      </CheckBoxGro>
     </div>
   )
 }
@@ -85,7 +87,7 @@ function Example() {
   return (
     <div className="w-[240px]">
       <form onSubmit={handleSubmit(onSubmit)}>
-        <CheckBoxGroup defaultValues={['January']}>
+        <CheckBoxGroup as="fieldset" defaultValues={['January']}>
           <CheckBoxGroup.Title>With React Hook Form</CheckBoxGroup.Title>
           <CheckBoxGroup.List className="flex gap-2">
             {checkBoxList.map((item) => (
