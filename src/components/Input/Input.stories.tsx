@@ -14,13 +14,14 @@ const meta: Meta<typeof Input> = {
 export default meta
 
 export function Normal() {
-  const inputRef = useRef<HTMLInputElement>(null)
   const [value, setValue] = useState('')
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target
     setValue(value)
   }
+
+  const inputRef = useRef<HTMLInputElement>(null)
 
   return (
     <Input

@@ -6,7 +6,6 @@ import {
   forwardRef,
   useId,
   useMemo,
-  useRef,
 } from 'react'
 import InputArea from './InputArea'
 import InputLabel from './InputLabel'
@@ -21,14 +20,14 @@ type InputContextState = {
   id: string
   register: any
   disabled?: boolean
-  inputRef: React.RefObject<HTMLInputElement> | null
+  forwardRef: ForwardedRef<HTMLInputElement>
 }
 
 export const InputContext = createContext<InputContextState>({
   id: '',
   register: null,
   disabled: false,
-  inputRef: null,
+  forwardRef: null,
 })
 
 function InputMain(
@@ -43,17 +42,15 @@ function InputMain(
 ) {
   const id = useId()
 
-  const inputRef = useRef<HTMLInputElement>(null)
-
   const providerValue = useMemo(
     () => ({
       id,
       register,
       disabled,
-      inputRef,
+      forwardRef,
       ...props,
     }),
-    [id, register, disabled, inputRef, props],
+    [id, register, disabled, forwardRef, props],
   )
 
   const inputStyle = useMemo(
