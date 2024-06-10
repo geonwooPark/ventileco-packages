@@ -12,7 +12,7 @@ function InputLabel({
   const { id } = useContext(InputContext)
 
   return (
-    <label htmlFor={id} className={className}>
+    <label htmlFor={`${id}-input`} className={className}>
       {children}
     </label>
   )
