@@ -313,12 +313,7 @@ const ComboBoxMain: ComboBoxMainComponent = forwardRef(function ComboBoxMain<
 
   return (
     <ComboBoxContext.Provider value={providerValue}>
-      <Element
-        id={`${id}_combobox`}
-        role="group"
-        ref={ref}
-        style={comboBoxStyle}
-      >
+      <Element id={`${id}_combobox`} ref={ref} style={comboBoxStyle}>
         {children}
       </Element>
     </ComboBoxContext.Provider>

@@ -1,5 +1,5 @@
 import { PropsWithChildren, useContext, useMemo } from 'react'
-import { SelectContext } from './SelectBox'
+import { SelectContext } from './SelectBoxMain'
 
 function SelectBoxTrigger({ children }: PropsWithChildren) {
   const { id, isOpen, triggerRef, setIsOpen, onKeyboardTrigger } =

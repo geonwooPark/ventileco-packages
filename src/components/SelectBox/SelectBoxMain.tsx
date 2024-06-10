@@ -1,7 +1,8 @@
 import React, {
+  ElementType,
   KeyboardEventHandler,
-  PropsWithChildren,
   createContext,
+  forwardRef,
   useCallback,
   useEffect,
   useId,
@@ -9,18 +10,31 @@ import React, {
   useRef,
   useState,
 } from 'react'
-import SelectBoxLabel from './SelectBoxTitle'
 import SelectBoxTrigger from './SelectBoxTrigger'
 import SelectBoxTriggerText from './SelectBoxTriggerText'
 import SelectBoxItem from './SelectBoxItem'
 import { OptionList } from '../../types'
 import SelectBoxList from './SelectBoxList'
+import SelectBoxTitle from './SelectBoxTitle'
 
-interface SelectBoxProps {
-  value: string | undefined
-  setValue: (value: string | undefined) => void
-  list: OptionList
-}
+type TitleElement = 'legend' | 'label'
+
+type SelectBoxMainRef<T extends ElementType> =
+  React.ComponentPropsWithRef<T>['ref']
+
+type SelectBoxMainProps<T extends ElementType> =
+  React.ComponentPropsWithoutRef<T> & {
+    as?: T extends 'div' | 'fieldset' ? T : never
+    children?: React.ReactNode
+    ref?: SelectBoxMainRef<T>
+    value: string | undefined
+    setValue: (value: string | undefined) => void
+    list: OptionList
+  }
+
+type SelectBoxMainComponent = <T extends ElementType>(
+  props: SelectBoxMainProps<T>,
+) => React.ReactNode
 
 type SelectBoxContextState = {
   id: string
@@ -31,6 +45,7 @@ type SelectBoxContextState = {
   focusedItem: string | undefined
   focusedLabel: string
   optionList: OptionList
+  Title: TitleElement
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
   onKeyboardTrigger: KeyboardEventHandler<HTMLButtonElement>
   onSelect: ({ value, disabled }: { value: string; disabled?: boolean }) => void
@@ -45,19 +60,26 @@ export const SelectContext = createContext<SelectBoxContextState>({
   focusedItem: undefined,
   focusedLabel: '',
   optionList: [],
+  Title: 'label',
   setIsOpen: () => null,
   onKeyboardTrigger: () => null,
   onSelect: () => null,
 })
 
-function SelectBox({ children, ...props }: PropsWithChildren<SelectBoxProps>) {
-  const { value, setValue, list } = props
+const SelectBoxMain: SelectBoxMainComponent = forwardRef(function SelectBoxMain<
+  T extends ElementType,
+>(
+  { as, children, value, setValue, list }: SelectBoxMainProps<T>,
+  ref: SelectBoxMainRef<T>,
+) {
+  const Element = as || 'div'
+  const Title: TitleElement = Element === 'fieldset' ? 'legend' : 'label'
+
   const id = useId()
 
   const [isOpen, setIsOpen] = useState(false)
   const [focusedItem, setFocusedItem] = useState<string>()
 
-  const containerRef = useRef<HTMLFieldSetElement>(null)
   const triggerRef = useRef<HTMLButtonElement>(null)
   const listRef = useRef<HTMLUListElement>(null)
 
@@ -169,7 +191,9 @@ function SelectBox({ children, ...props }: PropsWithChildren<SelectBoxProps>) {
     if (!isOpen) return
 
     const onOutsideClick = (e: MouseEvent) => {
-      if (containerRef.current?.contains(e.target as Node)) return
+      if (triggerRef.current?.contains(e.target as Node)) return
+      if (listRef.current?.contains(e.target as Node)) return
+
       setIsOpen(false)
     }
 
@@ -187,6 +211,7 @@ function SelectBox({ children, ...props }: PropsWithChildren<SelectBoxProps>) {
       focusedItem,
       focusedLabel,
       optionList: list,
+      Title,
       setIsOpen,
       onKeyboardTrigger,
       onSelect,
@@ -198,6 +223,7 @@ function SelectBox({ children, ...props }: PropsWithChildren<SelectBoxProps>) {
       focusedItem,
       focusedLabel,
       list,
+      Title,
       onKeyboardTrigger,
       onSelect,
     ],
@@ -210,17 +236,19 @@ function SelectBox({ children, ...props }: PropsWithChildren<SelectBoxProps>) {
 
   return (
     <SelectContext.Provider value={providerValue}>
-      <fieldset ref={containerRef} style={selectBoxStyle}>
+      <Element id={`${id}_selectbox`} ref={ref} style={selectBoxStyle}>
         {children}
-      </fieldset>
+      </Element>
     </SelectContext.Provider>
   )
-}
+})
 
-SelectBox.Label = SelectBoxLabel
-SelectBox.Trigger = SelectBoxTrigger
-SelectBox.TriggerText = SelectBoxTriggerText
-SelectBox.List = SelectBoxList
-SelectBox.Item = SelectBoxItem
+const SelectBox = Object.assign(SelectBoxMain, {
+  Title: SelectBoxTitle,
+  Trigger: SelectBoxTrigger,
+  TriggerText: SelectBoxTriggerText,
+  List: SelectBoxList,
+  Item: SelectBoxItem,
+})
 
 export default SelectBox

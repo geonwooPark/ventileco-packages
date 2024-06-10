@@ -1,5 +1,5 @@
 import { PropsWithChildren, useContext } from 'react'
-import { SelectContext } from './SelectBox'
+import { SelectContext } from './SelectBoxMain'
 
 interface SelectBoxTriggerTextProps {
   className?: string

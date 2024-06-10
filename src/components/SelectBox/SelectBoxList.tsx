@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { SelectContext } from './SelectBox'
+import { SelectContext } from './SelectBoxMain'
 import { OptionList } from '../../types'
 
 interface SelectListProps {
