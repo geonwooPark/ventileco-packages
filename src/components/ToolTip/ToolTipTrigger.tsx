@@ -1,5 +1,5 @@
 import { PropsWithChildren, useContext } from 'react'
-import { ToolTipContext } from './ToolTip'
+import { ToolTipContext } from './ToolTipMain'
 
 function ToolTipTrigger({ children }: PropsWithChildren) {
   const { triggerRef } = useContext(ToolTipContext)

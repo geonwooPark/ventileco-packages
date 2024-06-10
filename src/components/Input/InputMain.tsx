@@ -1,7 +1,7 @@
 import {
+  ForwardedRef,
   InputHTMLAttributes,
   PropsWithChildren,
-  Ref,
   createContext,
   forwardRef,
   useId,
@@ -21,7 +21,7 @@ type InputContextState = {
   id: string
   register: any
   disabled?: boolean
-  forwardRef: Ref<HTMLInputElement>
+  forwardRef: ForwardedRef<HTMLInputElement>
 }
 
 export const InputContext = createContext<InputContextState>({
@@ -39,7 +39,7 @@ const InputMain = forwardRef(function InputMain(
     disabled,
     ...props
   }: PropsWithChildren<InputProps>,
-  forwardRef: Ref<HTMLInputElement>,
+  forwardRef: ForwardedRef<HTMLInputElement>,
 ) {
   const id = useId()
 

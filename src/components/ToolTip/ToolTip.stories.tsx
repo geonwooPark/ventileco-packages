@@ -1,4 +1,4 @@
-import ToolTip, { ToolTipProps } from './ToolTip'
+import ToolTip, { ToolTipProps } from './ToolTipMain'
 
 export default {
   title: 'COMPONENTS/ToolTip',

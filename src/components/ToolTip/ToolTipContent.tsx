@@ -1,6 +1,6 @@
-import { PropsWithChildren, useContext, useMemo } from 'react'
+import React, { PropsWithChildren, useContext, useMemo } from 'react'
 import { createPortal } from 'react-dom'
-import { ToolTipContext } from './ToolTip'
+import { ToolTipContext } from './ToolTipMain'
 import { TOOLTIP_TRIANGLE_DIRECTION } from '../../constants'
 
 const tooltipDiv = document.createElement('div')
@@ -39,7 +39,7 @@ function ToolTipContent({ children }: PropsWithChildren) {
   )
 
   return (
-    <>
+    <React.Fragment>
       {disabled ||
         (isOpen &&
           createPortal(
@@ -55,7 +55,7 @@ function ToolTipContent({ children }: PropsWithChildren) {
             </div>,
             portalRoot,
           ))}
-    </>
+    </React.Fragment>
   )
 }
 

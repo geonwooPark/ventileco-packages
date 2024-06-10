@@ -1,6 +1,8 @@
 import React, {
+  ForwardedRef,
   PropsWithChildren,
   createContext,
+  forwardRef,
   useEffect,
   useRef,
   useState,
@@ -42,17 +44,19 @@ export const ToolTipContext = createContext<ToolTipContextState>({
   setIsOpen: () => null,
 })
 
-function ToolTip({
-  children,
-  direction,
-  enterDelay,
-  leaveDelay,
-  disabled,
-  gap = 16,
-}: PropsWithChildren<ToolTipProps>) {
+const ToolTipMain = forwardRef(function ToolTipMain(
+  {
+    children,
+    direction,
+    enterDelay,
+    leaveDelay,
+    disabled,
+    gap = 16,
+  }: PropsWithChildren<ToolTipProps>,
+  forwardRef: ForwardedRef<HTMLDivElement>,
+) {
   const [isOpen, setIsOpen] = useState(false)
 
-  const containerRef = useRef<HTMLDivElement>(null)
   const triggerRef = useRef<HTMLDivElement>(null)
   const tooltipRef = useRef<HTMLDivElement>(null)
   const enterTimer = useRef<number | NodeJS.Timeout | undefined>(undefined)
@@ -166,7 +170,7 @@ function ToolTip({
       }}
     >
       <div
-        ref={containerRef}
+        ref={forwardRef}
         onMouseOver={onMouseOver}
         onMouseOut={onMouseOut}
         onFocus={onMouseOver}
@@ -176,9 +180,11 @@ function ToolTip({
       </div>
     </ToolTipContext.Provider>
   )
-}
+})
 
-ToolTip.Trigger = ToolTipTrigger
-ToolTip.Content = ToolTipContent
+const ToolTip = Object.assign(ToolTipMain, {
+  Trigger: ToolTipTrigger,
+  Content: ToolTipContent,
+})
 
 export default ToolTip
