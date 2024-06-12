@@ -1,0 +1,29 @@
+import { Meta } from '@storybook/addon-docs'
+
+<Meta title="COMPONENTS/Box" />
+
+# Box
+
+여러 다른 타입의 엘리먼트나 컴포넌트를 동적으로 렌더링할 수 있는 다형성 컴포넌트
+
+## Example
+
+```jsx
+import { Box } from 'ventileco-ui'
+
+function Example() {
+  const anchorRef = useRef(null)
+
+  return (
+    <Box
+      as="a"
+      target="_blank"
+      ref={anchorRef}
+      href="https://github.com/geonwooPark/ventileco-ui"
+      className="inline-block rounded-md bg-black px-10 py-4 text-base font-bold text-white transition-all duration-200 hover:opacity-80"
+    >
+      Link
+    </Box>
+  )
+}
+```

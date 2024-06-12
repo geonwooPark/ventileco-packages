@@ -10,5 +10,6 @@ export { default as Slider } from './Slider/SliderMain'
 export { default as Tabs } from './Tabs/TabsMain'
 export { default as ToolTip } from './ToolTip/ToolTipMain'
 export { default as ToastProvider } from './Toast/ToastProvider'
+export { default as Box } from './Box/Box'
 
 export { default as useToast } from './Toast/useToast'
