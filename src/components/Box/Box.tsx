@@ -1,7 +1,5 @@
 import { ElementType, forwardRef } from 'react'
-
-type PolymorphicRef<T extends ElementType> =
-  React.ComponentPropsWithRef<T>['ref']
+import { PolymorphicRef } from '../../types'
 
 type BoxProps<T extends React.ElementType> = {
   as?: T

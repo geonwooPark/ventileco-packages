@@ -15,20 +15,15 @@ import ComboBoxInput from './ComboBoxInput'
 import ComboBoxItem from './ComboBoxItem'
 import ComboBoxClearButton from './ComboBoxClearButton'
 import ComboBoxList from './ComboBoxList'
-import { Option, OptionList } from '../../types'
+import { Option, OptionList, PolymorphicRef, TitleElement } from '../../types'
 import { escapeRegExp } from '../../utils/escapeRegExp'
 import { _createContext } from '../../utils/_createContext'
-
-type TitleElement = 'legend' | 'label'
-
-type ComboBoxMainRef<T extends ElementType> =
-  React.ComponentPropsWithRef<T>['ref']
 
 type ComboBoxMainProps<T extends ElementType> =
   React.ComponentPropsWithoutRef<T> & {
     as?: T extends 'div' | 'fieldset' ? T : never
     children?: React.ReactNode
-    ref?: ComboBoxMainRef<T>
+    ref?: PolymorphicRef<T>
     value: string | undefined
     setValue: (value: string | undefined) => void
     list: OptionList
@@ -72,7 +67,7 @@ const ComboBoxMain: ComboBoxMainComponent = forwardRef(function ComboBoxMain<
   T extends ElementType,
 >(
   { as, children, value, setValue, list }: ComboBoxMainProps<T>,
-  ref: ComboBoxMainRef<T>,
+  ref: PolymorphicRef<T>,
 ) {
   const Element = as || 'div'
   const Title: TitleElement = Element === 'fieldset' ? 'legend' : 'label'

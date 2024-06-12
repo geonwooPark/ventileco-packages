@@ -12,21 +12,16 @@ import React, {
 import SelectBoxTrigger from './SelectBoxTrigger'
 import SelectBoxTriggerText from './SelectBoxTriggerText'
 import SelectBoxItem from './SelectBoxItem'
-import { OptionList } from '../../types'
+import { OptionList, PolymorphicRef, TitleElement } from '../../types'
 import SelectBoxList from './SelectBoxList'
 import SelectBoxTitle from './SelectBoxTitle'
 import { _createContext } from '../../utils/_createContext'
-
-type TitleElement = 'legend' | 'label'
-
-type SelectBoxMainRef<T extends ElementType> =
-  React.ComponentPropsWithRef<T>['ref']
 
 type SelectBoxMainProps<T extends ElementType> =
   React.ComponentPropsWithoutRef<T> & {
     as?: T extends 'div' | 'fieldset' ? T : never
     children?: React.ReactNode
-    ref?: SelectBoxMainRef<T>
+    ref?: PolymorphicRef<T>
     value: string | undefined
     setValue: (value: string | undefined) => void
     list: OptionList
@@ -58,7 +53,7 @@ const SelectBoxMain: SelectBoxMainComponent = forwardRef(function SelectBoxMain<
   T extends ElementType,
 >(
   { as, children, value, setValue, list }: SelectBoxMainProps<T>,
-  ref: SelectBoxMainRef<T>,
+  ref: PolymorphicRef<T>,
 ) {
   const Element = as || 'div'
   const Title: TitleElement = Element === 'fieldset' ? 'legend' : 'label'

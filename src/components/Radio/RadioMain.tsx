@@ -10,16 +10,13 @@ import RadioList from './RadioList'
 import RadioTitle from './RadioTitle'
 import RadioItem from './RadioItem'
 import { _createContext } from '../../utils/_createContext'
-
-type TitleElement = 'legend' | 'label'
-
-type RadioMainRef<T extends ElementType> = React.ComponentPropsWithRef<T>['ref']
+import { PolymorphicRef, TitleElement } from '../../types'
 
 type RadioMainProps<T extends ElementType> =
   React.ComponentPropsWithoutRef<T> & {
     as?: T extends 'div' | 'fieldset' ? T : never
     children?: React.ReactNode
-    ref?: RadioMainRef<T>
+    ref?: PolymorphicRef<T>
     setValue?: React.Dispatch<
       React.SetStateAction<string | number | readonly string[] | undefined>
     >
@@ -48,7 +45,7 @@ const RadioMain: RadioMainComponent = forwardRef(function RadioMain<
   T extends ElementType,
 >(
   { as, children, setValue, defaultValue, name, register }: RadioMainProps<T>,
-  ref: RadioMainRef<T>,
+  ref: PolymorphicRef<T>,
 ) {
   const Element = as || 'div'
   const Title: TitleElement = Element === 'fieldset' ? 'legend' : 'label'

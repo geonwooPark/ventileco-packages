@@ -1,3 +1,5 @@
+import { ElementType } from 'react'
+
 export type Option =
   | {
       value: string
@@ -35,3 +37,8 @@ export type ToastPosition =
   | 'bottomCenter'
   | 'bottomLeft'
   | 'bottomRight'
+
+export type TitleElement = 'legend' | 'label'
+
+export type PolymorphicRef<T extends ElementType> =
+  React.ComponentPropsWithRef<T>['ref']
