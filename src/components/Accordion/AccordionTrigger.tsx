@@ -3,8 +3,8 @@ import { useAccordionContext } from './AccordionMain'
 import { useAccordionItemContext } from './AccordionItem'
 
 function AccordionTrigger({ children }: PropsWithChildren) {
-  const { onClick, onFocus, onBlur } = useAccordionContext()
-  const { id, index, isOpen } = useAccordionItemContext()
+  const { id, onClick, onFocus, onBlur } = useAccordionContext()
+  const { index, isOpen } = useAccordionItemContext()
 
   const onMouseDown = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault()
