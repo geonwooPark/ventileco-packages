@@ -1,7 +1,6 @@
 import {
   ForwardedRef,
   PropsWithChildren,
-  createContext,
   forwardRef,
   useCallback,
   useId,
@@ -11,6 +10,7 @@ import {
 import AccordionContent from './AccordionContent'
 import AccordionTrigger from './AccordionTrigger'
 import AccordionItem from './AccordionItem'
+import { _createContext } from '../../utils/_createContext'
 
 interface AccordionProps {
   className?: string
@@ -24,13 +24,8 @@ type AccordionContextState = {
   onBlur: (selectedTab: number) => void
 }
 
-export const AccordionContext = createContext<AccordionContextState>({
-  id: '',
-  activeItems: new Set(),
-  onClick: () => null,
-  onFocus: () => null,
-  onBlur: () => null,
-})
+export const [useAccordionContext, AccordionProvider] =
+  _createContext<AccordionContextState>()
 
 function AccordionMain(
   { children, className }: PropsWithChildren<AccordionProps>,
@@ -80,11 +75,11 @@ function AccordionMain(
   )
 
   return (
-    <AccordionContext.Provider value={providerValue}>
+    <AccordionProvider value={providerValue}>
       <div role="tablist" ref={forwardRef} className={className}>
         {children}
       </div>
-    </AccordionContext.Provider>
+    </AccordionProvider>
   )
 }
 

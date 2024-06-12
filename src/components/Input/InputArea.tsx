@@ -1,13 +1,12 @@
-import { useContext, useMemo } from 'react'
-import { InputContext } from './InputMain'
+import { useMemo } from 'react'
+import { useInputContext } from './InputMain'
 
 interface InputAreaProps {
   className?: string
 }
 
 function InputArea({ className }: InputAreaProps) {
-  const { id, register, disabled, forwardRef, ...props } =
-    useContext(InputContext)
+  const { id, register, disabled, forwardRef, ...props } = useInputContext()
 
   const inputAreaStyle = useMemo(
     () => ({

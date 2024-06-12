@@ -1,5 +1,5 @@
-import React, { useContext, useMemo } from 'react'
-import { PaginationContext } from './PaginationMain'
+import React, { useMemo } from 'react'
+import { usePaginationContext } from './PaginationMain'
 import { getChunk } from '../../utils/getChunk'
 import { getQueries } from '../../utils/getQueries'
 
@@ -11,7 +11,7 @@ function PaginationNumbering({
   children,
 }: PaginationNumberingProps): React.ReactNode {
   const { page, totalPage, numberingCount, queries, setPage, onNavigate } =
-    useContext(PaginationContext)
+    usePaginationContext()
 
   const onClick = (i: number) => {
     setPage(i + 1)

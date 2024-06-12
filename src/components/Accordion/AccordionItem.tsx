@@ -1,5 +1,5 @@
-import React, { createContext, useContext, useMemo } from 'react'
-import { AccordionContext } from './AccordionMain'
+import React, { createContext, useMemo } from 'react'
+import { useAccordionContext } from './AccordionMain'
 
 interface AccordionItemProps {
   children: (props: { isOpen: boolean }) => React.ReactNode
@@ -17,7 +17,7 @@ export const AccordionItemContext = createContext<AccordionItemContextState>({
 })
 
 function AccordionItem({ children, index }: AccordionItemProps) {
-  const { activeItems } = useContext(AccordionContext)
+  const { activeItems } = useAccordionContext()
   const isOpen = activeItems.has(index)
 
   const providerValue = useMemo(() => ({ isOpen, index }), [isOpen, index])

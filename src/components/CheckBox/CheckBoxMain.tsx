@@ -1,6 +1,5 @@
 import React, {
   ElementType,
-  createContext,
   forwardRef,
   useCallback,
   useId,
@@ -10,6 +9,7 @@ import React, {
 import CheckBoxTitle from './CheckBoxTitle'
 import CheckBoxList from './CheckBoxList'
 import CheckBoxItem from './CheckBoxItem'
+import { _createContext } from '../../utils/_createContext'
 
 type TitleElement = 'legend' | 'label'
 
@@ -36,12 +36,8 @@ type CheckBoxContextState = {
   Title: TitleElement
 }
 
-export const CheckBoxContext = createContext<CheckBoxContextState>({
-  id: '',
-  activeItems: new Set(),
-  onClick: () => null,
-  Title: 'label',
-})
+export const [useCheckBoxContext, CheckBoxProvider] =
+  _createContext<CheckBoxContextState>()
 
 const CheckBoxMain: CheckBoxMainComponent = forwardRef(function CheckBoxMain<
   T extends ElementType,
@@ -92,11 +88,11 @@ const CheckBoxMain: CheckBoxMainComponent = forwardRef(function CheckBoxMain<
   )
 
   return (
-    <CheckBoxContext.Provider value={providerValue}>
+    <CheckBoxProvider value={providerValue}>
       <Element id={`${id}_checkbox`} role="group" ref={ref}>
         {children}
       </Element>
-    </CheckBoxContext.Provider>
+    </CheckBoxProvider>
   )
 })
 

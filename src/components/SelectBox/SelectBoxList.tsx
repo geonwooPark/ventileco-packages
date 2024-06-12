@@ -1,5 +1,5 @@
-import React, { useContext } from 'react'
-import { SelectContext } from './SelectBoxMain'
+import React from 'react'
+import { useSelectBoxContext } from './SelectBoxMain'
 import { OptionList } from '../../types'
 
 interface SelectListProps {
@@ -8,7 +8,7 @@ interface SelectListProps {
 }
 
 function SelectBoxList({ children, className }: SelectListProps) {
-  const { id, isOpen, listRef, optionList } = useContext(SelectContext)
+  const { id, isOpen, listRef, optionList } = useSelectBoxContext()
 
   return isOpen ? (
     <ul

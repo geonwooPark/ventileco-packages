@@ -1,5 +1,5 @@
-import { PropsWithChildren, useContext } from 'react'
-import { RadioContext } from './RadioMain'
+import { PropsWithChildren } from 'react'
+import { useRadioContext } from './RadioMain'
 
 interface RadioTitleProps {
   className?: string
@@ -9,7 +9,7 @@ function RadioTitle({
   children,
   className,
 }: PropsWithChildren<RadioTitleProps>) {
-  const { id, Title } = useContext(RadioContext)
+  const { id, Title } = useRadioContext()
 
   return (
     <Title

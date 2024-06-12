@@ -1,5 +1,5 @@
-import { PropsWithChildren, useContext } from 'react'
-import { CheckBoxContext } from './CheckBoxMain'
+import { PropsWithChildren } from 'react'
+import { useCheckBoxContext } from './CheckBoxMain'
 
 interface CheckBoxTitleProps {
   className?: string
@@ -9,7 +9,7 @@ function CheckBoxTitle({
   children,
   className,
 }: PropsWithChildren<CheckBoxTitleProps>) {
-  const { id, Title } = useContext(CheckBoxContext)
+  const { id, Title } = useCheckBoxContext()
 
   return (
     <Title

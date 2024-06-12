@@ -1,9 +1,9 @@
 import { PropsWithChildren, useContext } from 'react'
 import { AccordionItemContext } from './AccordionItem'
-import { AccordionContext } from './AccordionMain'
+import { useAccordionContext } from './AccordionMain'
 
 function AccordionContent({ children }: PropsWithChildren) {
-  const { id } = useContext(AccordionContext)
+  const { id } = useAccordionContext()
   const { isOpen, index } = useContext(AccordionItemContext)
 
   return isOpen ? (

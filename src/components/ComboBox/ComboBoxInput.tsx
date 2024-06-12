@@ -1,5 +1,5 @@
-import { useContext, useMemo } from 'react'
-import { ComboBoxContext } from './ComboBoxMain'
+import { useMemo } from 'react'
+import { useComboBoxContext } from './ComboBoxMain'
 
 interface ComboBoxInputProps {
   placeholder: string
@@ -7,7 +7,7 @@ interface ComboBoxInputProps {
 
 function ComboBoxInput({ placeholder }: ComboBoxInputProps) {
   const { id, focusedItem, inputRef, keyword, onTextChange } =
-    useContext(ComboBoxContext)
+    useComboBoxContext()
 
   const comboBoxInputStyle = useMemo(
     () => ({ width: '100%', outline: 'none' }),

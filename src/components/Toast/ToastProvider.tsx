@@ -1,7 +1,8 @@
-import React, { createContext, useCallback, useMemo, useState } from 'react'
+import React, { useCallback, useMemo, useState } from 'react'
 import { ToastPosition, ToastType } from '../../types'
 import ToastList from './ToastList'
 import ToastWrapper from './ToastWrapper'
+import { _createContext } from '../../utils/_createContext'
 
 interface ToastProviderProps {
   children: (props: {
@@ -16,11 +17,8 @@ type ToastContextState = {
   position: ToastPosition
 }
 
-export const ToastContext = createContext<ToastContextState>({
-  addToast: () => () => null,
-  removeToast: () => null,
-  position: 'topCenter',
-})
+export const [useToastContext, ToastContextProvider] =
+  _createContext<ToastContextState>()
 
 function ToastProvider({ children, position = 'topLeft' }: ToastProviderProps) {
   const [toasts, setToasts] = useState<
@@ -52,9 +50,9 @@ function ToastProvider({ children, position = 'topLeft' }: ToastProviderProps) {
   )
 
   return (
-    <ToastContext.Provider value={providerValue}>
+    <ToastContextProvider value={providerValue}>
       {children({ toasts })}
-    </ToastContext.Provider>
+    </ToastContextProvider>
   )
 }
 

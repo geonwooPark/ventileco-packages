@@ -1,5 +1,5 @@
-import { PropsWithChildren, useContext } from 'react'
-import { SliderContext } from './SliderMain'
+import { PropsWithChildren } from 'react'
+import { useSliderContext } from './SliderMain'
 
 interface SliderNextButtonProps {
   className: string
@@ -9,7 +9,7 @@ function SliderNextButton({
   children,
   className,
 }: PropsWithChildren<SliderNextButtonProps>) {
-  const { onNextButtonClick } = useContext(SliderContext)
+  const { onNextButtonClick } = useSliderContext()
 
   return (
     <button

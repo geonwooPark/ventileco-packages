@@ -1,5 +1,5 @@
-import React, { useContext, useMemo } from 'react'
-import { CheckBoxContext } from './CheckBoxMain'
+import React, { useMemo } from 'react'
+import { useCheckBoxContext } from './CheckBoxMain'
 
 interface CheckBoxItemProps {
   children: (props: { isSelected: boolean }) => React.ReactNode
@@ -8,7 +8,7 @@ interface CheckBoxItemProps {
 }
 
 function CheckBoxItem({ children, value, register }: CheckBoxItemProps) {
-  const { id, activeItems, onClick } = useContext(CheckBoxContext)
+  const { id, activeItems, onClick } = useCheckBoxContext()
   const isSelected = activeItems.has(value)
 
   const onKeyDown = (e: React.KeyboardEvent<HTMLLabelElement>) => {

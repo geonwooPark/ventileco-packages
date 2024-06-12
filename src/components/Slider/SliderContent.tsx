@@ -1,5 +1,5 @@
-import { PropsWithChildren, useContext, useMemo } from 'react'
-import { SliderContext } from './SliderMain'
+import { PropsWithChildren, useMemo } from 'react'
+import { useSliderContext } from './SliderMain'
 
 interface SliderContentProps {
   className: string
@@ -10,7 +10,7 @@ function SliderContent({
   className,
 }: PropsWithChildren<SliderContentProps>) {
   const { slideContainer, gap, onDragStart, onThrottleDragMove, onDragEnd } =
-    useContext(SliderContext)
+    useSliderContext()
 
   const sliderStyle = useMemo(() => ({ gap: `${gap}px` }), [gap])
 

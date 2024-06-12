@@ -2,7 +2,6 @@ import {
   ForwardedRef,
   InputHTMLAttributes,
   PropsWithChildren,
-  createContext,
   forwardRef,
   useId,
   useMemo,
@@ -10,6 +9,7 @@ import {
 import InputArea from './InputArea'
 import InputLabel from './InputLabel'
 import InputBox from './InputBox'
+import { _createContext } from '../../utils/_createContext'
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   register?: any
@@ -23,12 +23,8 @@ type InputContextState = {
   forwardRef: ForwardedRef<HTMLInputElement>
 }
 
-export const InputContext = createContext<InputContextState>({
-  id: '',
-  register: null,
-  disabled: false,
-  forwardRef: null,
-})
+export const [useInputContext, InputProvider] =
+  _createContext<InputContextState>()
 
 function InputMain(
   {
@@ -62,7 +58,7 @@ function InputMain(
   )
 
   return (
-    <InputContext.Provider value={providerValue}>
+    <InputProvider value={providerValue}>
       <div
         ref={forwardRef}
         data-disabled={disabled}
@@ -71,7 +67,7 @@ function InputMain(
       >
         {children}
       </div>
-    </InputContext.Provider>
+    </InputProvider>
   )
 }
 

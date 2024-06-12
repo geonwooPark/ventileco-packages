@@ -1,7 +1,6 @@
 import React, {
   ElementType,
   KeyboardEventHandler,
-  createContext,
   forwardRef,
   useCallback,
   useEffect,
@@ -18,6 +17,7 @@ import ComboBoxClearButton from './ComboBoxClearButton'
 import ComboBoxList from './ComboBoxList'
 import { Option, OptionList } from '../../types'
 import { escapeRegExp } from '../../utils/escapeRegExp'
+import { _createContext } from '../../utils/_createContext'
 
 type TitleElement = 'legend' | 'label'
 
@@ -65,24 +65,8 @@ type ComboBoxContextState = {
   onKeyboardTrigger: KeyboardEventHandler<HTMLDivElement>
 }
 
-export const ComboBoxContext = createContext<ComboBoxContextState>({
-  id: '',
-  value: '',
-  list: [],
-  isOpen: false,
-  keyword: '',
-  triggerRef: null,
-  listRef: null,
-  inputRef: null,
-  focusedItem: undefined,
-  optionList: [],
-  Title: 'label',
-  onTextChange: () => null,
-  onClear: () => null,
-  onTrigger: () => null,
-  onSelect: () => null,
-  onKeyboardTrigger: () => null,
-})
+export const [useComboBoxContext, ComboBoxProvider] =
+  _createContext<ComboBoxContextState>()
 
 const ComboBoxMain: ComboBoxMainComponent = forwardRef(function ComboBoxMain<
   T extends ElementType,
@@ -312,11 +296,11 @@ const ComboBoxMain: ComboBoxMainComponent = forwardRef(function ComboBoxMain<
   )
 
   return (
-    <ComboBoxContext.Provider value={providerValue}>
+    <ComboBoxProvider value={providerValue}>
       <Element id={`${id}_combobox`} ref={ref} style={comboBoxStyle}>
         {children}
       </Element>
-    </ComboBoxContext.Provider>
+    </ComboBoxProvider>
   )
 })
 

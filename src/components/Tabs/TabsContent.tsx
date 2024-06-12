@@ -1,12 +1,12 @@
-import { PropsWithChildren, useContext } from 'react'
-import { TabsContext } from './TabsMain'
+import { PropsWithChildren } from 'react'
+import { useTabsContext } from './TabsMain'
 
 interface TabsContentProps {
   index: number
 }
 
 function TabsContent({ children, index }: PropsWithChildren<TabsContentProps>) {
-  const { id, currentTab } = useContext(TabsContext)
+  const { id, currentTab } = useTabsContext()
 
   return currentTab === index ? (
     <div

@@ -1,9 +1,9 @@
-import { PropsWithChildren, useContext, useMemo } from 'react'
+import { PropsWithChildren, useMemo } from 'react'
 import { TOAST_POSITION } from '../../constants'
-import { ToastContext } from './ToastProvider'
+import { useToastContext } from './ToastProvider'
 
 function ToastList({ children }: PropsWithChildren) {
-  const { position } = useContext(ToastContext)
+  const { position } = useToastContext()
 
   const toastListStyle = useMemo(
     () =>

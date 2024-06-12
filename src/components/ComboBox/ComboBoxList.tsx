@@ -1,5 +1,5 @@
-import React, { useContext } from 'react'
-import { ComboBoxContext } from './ComboBoxMain'
+import React from 'react'
+import { useComboBoxContext } from './ComboBoxMain'
 import { OptionList } from '../../types'
 
 interface ComboBoxListProps {
@@ -8,7 +8,7 @@ interface ComboBoxListProps {
 }
 
 function ComboBoxList({ children, className }: ComboBoxListProps) {
-  const { id, isOpen, listRef, optionList } = useContext(ComboBoxContext)
+  const { id, isOpen, listRef, optionList } = useComboBoxContext()
 
   return isOpen ? (
     <ul

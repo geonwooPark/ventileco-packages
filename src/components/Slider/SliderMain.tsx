@@ -1,7 +1,6 @@
 import React, {
   ForwardedRef,
   PropsWithChildren,
-  createContext,
   forwardRef,
   useCallback,
   useMemo,
@@ -11,6 +10,7 @@ import React, {
 import SliderPrevButton from './SliderPrevButton'
 import SliderContent from './SliderContent'
 import SliderNextButton from './SliderNextButton'
+import { _createContext } from '../../utils/_createContext'
 
 export interface SliderProps {
   /** 슬라이드 아이템 간의 간격을 설정 */
@@ -29,15 +29,8 @@ type SliderContextState = {
   onNextButtonClick: () => void
 }
 
-export const SliderContext = createContext<SliderContextState>({
-  slideContainer: null,
-  gap: 0,
-  onDragStart: () => {},
-  onThrottleDragMove: () => {},
-  onDragEnd: () => {},
-  onPrevButtonClick: () => {},
-  onNextButtonClick: () => {},
-})
+export const [useSliderContext, SliderProvider] =
+  _createContext<SliderContextState>()
 
 function SliderMain(
   { children, gap, step = 1 }: PropsWithChildren<SliderProps>,
@@ -193,11 +186,11 @@ function SliderMain(
   )
 
   return (
-    <SliderContext.Provider value={providerValue}>
+    <SliderProvider value={providerValue}>
       <div role="group" ref={forwardRef} style={sliderContainerStyle}>
         {children}
       </div>
-    </SliderContext.Provider>
+    </SliderProvider>
   )
 }
 

@@ -1,8 +1,8 @@
-import { PropsWithChildren, useContext } from 'react'
-import { ComboBoxContext } from './ComboBoxMain'
+import { PropsWithChildren } from 'react'
+import { useComboBoxContext } from './ComboBoxMain'
 
 function ComboBoxClearButton({ children }: PropsWithChildren) {
-  const { value, onClear } = useContext(ComboBoxContext)
+  const { value, onClear } = useComboBoxContext()
 
   return value ? (
     <button aria-label="Clear Button" onClick={onClear}>

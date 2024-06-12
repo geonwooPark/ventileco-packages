@@ -1,8 +1,8 @@
-import { PropsWithChildren, useContext } from 'react'
-import { ToolTipContext } from './ToolTipMain'
+import { PropsWithChildren } from 'react'
+import { useToolTipContext } from './ToolTipMain'
 
 function ToolTipTrigger({ children }: PropsWithChildren) {
-  const { triggerRef } = useContext(ToolTipContext)
+  const { triggerRef } = useToolTipContext()
 
   return (
     <div ref={triggerRef} aria-describedby="tooltip">

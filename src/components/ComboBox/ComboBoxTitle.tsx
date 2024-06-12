@@ -1,5 +1,5 @@
-import { PropsWithChildren, useContext } from 'react'
-import { ComboBoxContext } from './ComboBoxMain'
+import { PropsWithChildren } from 'react'
+import { useComboBoxContext } from './ComboBoxMain'
 
 interface ComboBoxTitleProps {
   className?: string
@@ -9,7 +9,7 @@ function ComboBoxTitle({
   children,
   className,
 }: PropsWithChildren<ComboBoxTitleProps>) {
-  const { id, Title } = useContext(ComboBoxContext)
+  const { id, Title } = useComboBoxContext()
 
   return (
     <Title

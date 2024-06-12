@@ -1,7 +1,6 @@
 import React, {
   ElementType,
   KeyboardEventHandler,
-  createContext,
   forwardRef,
   useCallback,
   useEffect,
@@ -16,6 +15,7 @@ import SelectBoxItem from './SelectBoxItem'
 import { OptionList } from '../../types'
 import SelectBoxList from './SelectBoxList'
 import SelectBoxTitle from './SelectBoxTitle'
+import { _createContext } from '../../utils/_createContext'
 
 type TitleElement = 'legend' | 'label'
 
@@ -51,20 +51,8 @@ type SelectBoxContextState = {
   onSelect: ({ value, disabled }: { value: string; disabled?: boolean }) => void
 }
 
-export const SelectContext = createContext<SelectBoxContextState>({
-  id: '',
-  value: '',
-  isOpen: false,
-  triggerRef: null,
-  listRef: null,
-  focusedItem: undefined,
-  focusedLabel: '',
-  optionList: [],
-  Title: 'label',
-  setIsOpen: () => null,
-  onKeyboardTrigger: () => null,
-  onSelect: () => null,
-})
+export const [useSelectBoxContext, SelectBoxProvider] =
+  _createContext<SelectBoxContextState>()
 
 const SelectBoxMain: SelectBoxMainComponent = forwardRef(function SelectBoxMain<
   T extends ElementType,
@@ -235,11 +223,11 @@ const SelectBoxMain: SelectBoxMainComponent = forwardRef(function SelectBoxMain<
   )
 
   return (
-    <SelectContext.Provider value={providerValue}>
+    <SelectBoxProvider value={providerValue}>
       <Element id={`${id}_selectbox`} ref={ref} style={selectBoxStyle}>
         {children}
       </Element>
-    </SelectContext.Provider>
+    </SelectBoxProvider>
   )
 })
 

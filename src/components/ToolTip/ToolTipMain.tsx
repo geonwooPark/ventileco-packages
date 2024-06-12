@@ -1,7 +1,6 @@
 import React, {
   ForwardedRef,
   PropsWithChildren,
-  createContext,
   forwardRef,
   useEffect,
   useRef,
@@ -10,6 +9,7 @@ import React, {
 import ToolTipTrigger from './ToolTipTrigger'
 import ToolTipContent from './ToolTipContent'
 import { ToolTipDirection } from '../../types'
+import { _createContext } from '../../utils/_createContext'
 
 export interface ToolTipProps {
   /** 툴팁이 생성되는 방향을 결정합니다. */
@@ -34,15 +34,8 @@ type ToolTipContextState = {
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-export const ToolTipContext = createContext<ToolTipContextState>({
-  isOpen: false,
-  disabled: false,
-  direction: 'top',
-  triggerRef: null,
-  tooltipRef: null,
-  leaveTimer: null as any,
-  setIsOpen: () => null,
-})
+export const [useToolTipContext, ToolTipProvider] =
+  _createContext<ToolTipContextState>()
 
 function ToolTipMain(
   {
@@ -158,7 +151,7 @@ function ToolTipMain(
   }, [isOpen])
 
   return (
-    <ToolTipContext.Provider
+    <ToolTipProvider
       value={{
         isOpen,
         disabled,
@@ -178,7 +171,7 @@ function ToolTipMain(
       >
         {children}
       </div>
-    </ToolTipContext.Provider>
+    </ToolTipProvider>
   )
 }
 

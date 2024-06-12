@@ -1,5 +1,5 @@
-import { useContext, useMemo } from 'react'
-import { SelectContext } from './SelectBoxMain'
+import { useMemo } from 'react'
+import { useSelectBoxContext } from './SelectBoxMain'
 
 interface SelectItemProps {
   children: (props: {
@@ -16,7 +16,7 @@ interface SelectItemProps {
 }
 
 function SelectBoxItem({ children, item }: SelectItemProps) {
-  const { value, focusedItem, onSelect } = useContext(SelectContext)
+  const { value, focusedItem, onSelect } = useSelectBoxContext()
   const isSelected = value === item.value
   const isDisabled = item.disabled ? true : false
   const isFocused = focusedItem === item.value

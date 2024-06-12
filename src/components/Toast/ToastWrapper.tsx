@@ -1,12 +1,12 @@
-import { PropsWithChildren, useContext, useMemo } from 'react'
-import { ToastContext } from './ToastProvider'
+import { PropsWithChildren, useMemo } from 'react'
+import { useToastContext } from './ToastProvider'
 
 interface ToastUIProps {
   id: number
 }
 
 function ToastWrapper({ children, id }: PropsWithChildren<ToastUIProps>) {
-  const { removeToast } = useContext(ToastContext)
+  const { removeToast } = useToastContext()
 
   const onKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
     if (e.key === 'Enter' || e.key === ' ') {

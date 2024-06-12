@@ -2,7 +2,6 @@ import React, {
   ForwardedRef,
   KeyboardEventHandler,
   PropsWithChildren,
-  createContext,
   forwardRef,
   useCallback,
   useId,
@@ -13,6 +12,7 @@ import TabsList from './TabsList'
 import TabsView from './TabsView'
 import TabsContent from './TabsContent'
 import TabsItem from './TabsItem'
+import { _createContext } from '../../utils/_createContext'
 
 type TabsContextState = {
   id: string
@@ -22,13 +22,7 @@ type TabsContextState = {
   onKeyboardSelect: React.KeyboardEventHandler<HTMLLIElement>
 }
 
-export const TabsContext = createContext<TabsContextState>({
-  id: '',
-  currentTab: 0,
-  onClick: () => null,
-  onFocus: () => null,
-  onKeyboardSelect: () => null,
-})
+export const [useTabsContext, TabsProvider] = _createContext<TabsContextState>()
 
 function TabsMain(
   { children }: PropsWithChildren,
@@ -79,9 +73,9 @@ function TabsMain(
   )
 
   return (
-    <TabsContext.Provider value={providerValue}>
+    <TabsProvider value={providerValue}>
       <div ref={forwardRef}>{children}</div>
-    </TabsContext.Provider>
+    </TabsProvider>
   )
 }
 

@@ -1,5 +1,5 @@
-import { PropsWithChildren, useContext } from 'react'
-import { SelectContext } from './SelectBoxMain'
+import { PropsWithChildren } from 'react'
+import { useSelectBoxContext } from './SelectBoxMain'
 
 interface SelectBoxTitleProps {
   className?: string
@@ -9,7 +9,7 @@ function SelectBoxTitle({
   children,
   className,
 }: PropsWithChildren<SelectBoxTitleProps>) {
-  const { id, Title } = useContext(SelectContext)
+  const { id, Title } = useSelectBoxContext()
 
   return (
     <Title

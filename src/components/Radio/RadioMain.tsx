@@ -1,6 +1,5 @@
 import React, {
   ElementType,
-  createContext,
   forwardRef,
   useCallback,
   useId,
@@ -10,6 +9,7 @@ import React, {
 import RadioList from './RadioList'
 import RadioTitle from './RadioTitle'
 import RadioItem from './RadioItem'
+import { _createContext } from '../../utils/_createContext'
 
 type TitleElement = 'legend' | 'label'
 
@@ -41,14 +41,8 @@ type RadioContextProp = {
   Title: TitleElement
 }
 
-export const RadioContext = createContext<RadioContextProp>({
-  id: '',
-  onClick: () => null,
-  selectedValue: undefined,
-  name: undefined,
-  register: null,
-  Title: 'label',
-})
+export const [useRadioContext, RadioProvider] =
+  _createContext<RadioContextProp>()
 
 const RadioMain: RadioMainComponent = forwardRef(function RadioMain<
   T extends ElementType,
@@ -86,11 +80,11 @@ const RadioMain: RadioMainComponent = forwardRef(function RadioMain<
   )
 
   return (
-    <RadioContext.Provider value={providerValue}>
+    <RadioProvider value={providerValue}>
       <Element id={`${id}-radio`} role="radiogroup" ref={ref}>
         {children}
       </Element>
-    </RadioContext.Provider>
+    </RadioProvider>
   )
 })
 

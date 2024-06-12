@@ -1,5 +1,5 @@
-import { useContext, useMemo } from 'react'
-import { ComboBoxContext } from './ComboBoxMain'
+import { useMemo } from 'react'
+import { useComboBoxContext } from './ComboBoxMain'
 
 interface ComboBoxItemProps {
   children: (props: {
@@ -15,7 +15,7 @@ interface ComboBoxItemProps {
 }
 
 function ComboBoxItem({ children, item }: ComboBoxItemProps) {
-  const { id, value, focusedItem, onSelect } = useContext(ComboBoxContext)
+  const { id, value, focusedItem, onSelect } = useComboBoxContext()
   const isSelected = value === item.value
   const isDisabled = item.disabled ? true : false
   const isFocused = focusedItem === item.value

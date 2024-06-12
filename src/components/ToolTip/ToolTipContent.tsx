@@ -1,6 +1,6 @@
-import React, { PropsWithChildren, useContext, useMemo } from 'react'
+import React, { PropsWithChildren, useMemo } from 'react'
 import { createPortal } from 'react-dom'
-import { ToolTipContext } from './ToolTipMain'
+import { useToolTipContext } from './ToolTipMain'
 import { TOOLTIP_TRIANGLE_DIRECTION } from '../../constants'
 
 const tooltipDiv = document.createElement('div')
@@ -10,7 +10,7 @@ const portalRoot = document.getElementById('tool-tip-ventileco') as HTMLElement
 
 function ToolTipContent({ children }: PropsWithChildren) {
   const { isOpen, disabled, direction, tooltipRef, leaveTimer, setIsOpen } =
-    useContext(ToolTipContext)
+    useToolTipContext()
 
   const onMouseOver = () => {
     clearTimeout(leaveTimer.current)

@@ -1,9 +1,9 @@
-import { PropsWithChildren, useContext, useMemo } from 'react'
-import { PaginationContext } from './PaginationMain'
+import { PropsWithChildren, useMemo } from 'react'
+import { usePaginationContext } from './PaginationMain'
 import { getQueries } from '../../utils/getQueries'
 
 function PaginationPrevButton({ children }: PropsWithChildren) {
-  const { page, queries, setPage, onNavigate } = useContext(PaginationContext)
+  const { page, queries, setPage, onNavigate } = usePaginationContext()
 
   const onClick = () => {
     setPage((prev) => prev - 1)

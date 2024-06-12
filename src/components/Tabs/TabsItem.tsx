@@ -1,5 +1,5 @@
-import React, { useContext } from 'react'
-import { TabsContext } from './TabsMain'
+import React from 'react'
+import { useTabsContext } from './TabsMain'
 
 interface TabsItemProps {
   children: (props: { selected: boolean }) => React.ReactNode
@@ -9,7 +9,7 @@ interface TabsItemProps {
 
 function TabsItem({ children, index, className }: TabsItemProps) {
   const { id, currentTab, onClick, onFocus, onKeyboardSelect } =
-    useContext(TabsContext)
+    useTabsContext()
   const selected = index === currentTab
 
   const onFocusElement = (e: React.FocusEvent<HTMLLIElement, Element>) => {

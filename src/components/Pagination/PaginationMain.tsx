@@ -1,7 +1,6 @@
 import React, {
   ForwardedRef,
   PropsWithChildren,
-  createContext,
   forwardRef,
   useMemo,
   useState,
@@ -10,6 +9,7 @@ import { getParameterByName } from '../../utils/getParameterByName'
 import PaginationPrevButton from './PaginationPrevButton'
 import PaginationNextButton from './PaginationNextButton'
 import PaginationNumbering from './PaginationNumbering'
+import { _createContext } from '../../utils/_createContext'
 
 export interface PaginationProps {
   /** 페이지 이동을 위해 실행하는 콜백함수 */
@@ -34,14 +34,8 @@ type PaginationContextState = {
   onNavigate: (path: string) => void
 }
 
-export const PaginationContext = createContext<PaginationContextState>({
-  page: 0,
-  totalPage: 0,
-  numberingCount: 0,
-  queries: {},
-  setPage: () => {},
-  onNavigate: () => {},
-})
+export const [usePaginationContext, PaginationProvider] =
+  _createContext<PaginationContextState>()
 
 function PaginationMain(
   {
@@ -76,7 +70,7 @@ function PaginationMain(
   )
 
   return (
-    <PaginationContext.Provider value={providerValue}>
+    <PaginationProvider value={providerValue}>
       <div
         role="navigation"
         ref={forwardRef}
@@ -85,7 +79,7 @@ function PaginationMain(
       >
         {children}
       </div>
-    </PaginationContext.Provider>
+    </PaginationProvider>
   )
 }
 

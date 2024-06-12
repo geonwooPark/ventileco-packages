@@ -1,5 +1,5 @@
-import React, { useContext, useMemo } from 'react'
-import { RadioContext } from './RadioMain'
+import React, { useMemo } from 'react'
+import { useRadioContext } from './RadioMain'
 
 interface RadioItemProps {
   children: (props: { isSelected: boolean }) => React.ReactNode
@@ -7,8 +7,7 @@ interface RadioItemProps {
 }
 
 function RadioItem({ children, value }: RadioItemProps) {
-  const { id, selectedValue, name, register, onClick } =
-    useContext(RadioContext)
+  const { id, selectedValue, name, register, onClick } = useRadioContext()
   const isSelected = selectedValue === value
 
   const onKeyDown = (e: React.KeyboardEvent<HTMLLabelElement>) => {
