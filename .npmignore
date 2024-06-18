@@ -1,5 +1,6 @@
 .github/
 .storybook/
+.husky/
 coverage/
 node_modules/
 public/

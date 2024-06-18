@@ -20,7 +20,13 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "chromatic": "npx chromatic --project-token=chpt_58bae08c9c6afa4",
-    "prepare": "rm -rf dist && mkdir dist && tsc"
+    "prepare": "rm -rf dist && mkdir dist && tsc && husky install"
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "prettier --write",
+      "eslint --fix"
+    ]
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^1.5.0",
@@ -52,7 +58,9 @@
     "eslint-plugin-react-refresh": "^0.4.5",
     "eslint-plugin-storybook": "^0.8.0",
     "eslint-plugin-tailwindcss": "^3.14.2",
+    "husky": "^8.0.0",
     "jsdom": "^24.0.0",
+    "lint-staged": "^15.2.7",
     "postcss": "^8.4.38",
     "prettier": "^3.2.5",
     "react": "^18.2.0",

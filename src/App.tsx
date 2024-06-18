@@ -1,22 +1,36 @@
-import { useRef, useState } from 'react'
-import Box from './components/Box/Box'
+import React from 'react'
+import { Accordion } from './components'
+
+const accordionList = [
+  { id: 0, title: 'Title1', content: 'Content1' },
+  { id: 1, title: 'Title2', content: 'Content2' },
+  { id: 2, title: 'Title3', content: 'Content3' },
+]
 
 function App() {
-  const ref = useRef<HTMLDivElement>(null)
-  const [isOpen, setIsOpen] = useState(false)
-
   return (
-    <Box>
-      <Box as="div" className="size-[40px] bg-red-400" ref={ref} />
-      <Box
-        as="button"
-        onClick={() => setIsOpen(true)}
-        className="bg-blue-400 px-4 py-3"
-      >
-        Button
-      </Box>
-      {isOpen && <div className="h-[3000px] w-[200px] bg-red-400"></div>}
-    </Box>
+    <div className="w-[240px]">
+      <Accordion className="flex flex-col rounded-md border">
+        {accordionList.map((item) => (
+          <Accordion.Item key={item.id} index={item.id}>
+            {({ isOpen }) => (
+              <React.Fragment>
+                <Accordion.Trigger>
+                  <div
+                    className={`${isOpen && 'text-blue-600'} cursor-pointer border-b px-4 py-3 text-left`}
+                  >
+                    {item.title}
+                  </div>
+                </Accordion.Trigger>
+                <Accordion.Content>
+                  <div className="border-b px-4 py-3">{item.content}</div>
+                </Accordion.Content>
+              </React.Fragment>
+            )}
+          </Accordion.Item>
+        ))}
+      </Accordion>
+    </div>
   )
 }
 
