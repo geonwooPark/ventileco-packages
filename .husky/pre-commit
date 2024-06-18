@@ -1,4 +1,25 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
+# lint-staged 실행
+echo "Lint-staged를 실행합니다."
 npx lint-staged
+
+# lint-staged 결과 확인
+if [ $? -ne 0 ]; then
+  echo "Lint-staged가 실패했습니다. 커밋을 중단합니다."
+  exit 1
+fi
+
+# Vitest 실행
+echo "테스트를 실행합니다."
+npm run test
+
+# 테스트 결과 확인
+if [ $? -ne 0 ]; then
+  echo "테스트가 실패했습니다. 커밋을 중단합니다."
+  exit 1
+fi
+
+echo "테스트가 성공적으로 완료되었습니다!"
+exit 0

@@ -24,5 +24,6 @@ export default defineConfig({
         'src/**/*.test.{js,ts,jsx,tsx}',
       ],
     },
+    watch: false,
   },
 })
