@@ -71,7 +71,7 @@ function AccordionMain(
 
   const providerValue = useMemo(
     () => ({ id, activeItems, onClick, onFocus, onBlur }),
-    [id, activeItems, onClick, onFocus, onBlur],
+    [id, activeItems],
   )
 
   return (

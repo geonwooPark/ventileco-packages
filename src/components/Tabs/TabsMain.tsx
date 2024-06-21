@@ -69,7 +69,7 @@ function TabsMain(
 
   const providerValue = useMemo(
     () => ({ id, currentTab, onClick, onFocus, onKeyboardSelect }),
-    [id, currentTab, onClick, onFocus, onKeyboardSelect],
+    [id, currentTab],
   )
 
   return (

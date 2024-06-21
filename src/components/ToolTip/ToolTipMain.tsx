@@ -3,6 +3,7 @@ import React, {
   PropsWithChildren,
   forwardRef,
   useEffect,
+  useMemo,
   useRef,
   useState,
 } from 'react'
@@ -150,18 +151,21 @@ function ToolTipMain(
     })
   }, [isOpen])
 
+  const providerValue = useMemo(
+    () => ({
+      isOpen,
+      disabled,
+      direction,
+      tooltipRef,
+      triggerRef,
+      leaveTimer,
+      setIsOpen,
+    }),
+    [isOpen, disabled, direction, tooltipRef, triggerRef, leaveTimer],
+  )
+
   return (
-    <ToolTipProvider
-      value={{
-        isOpen,
-        disabled,
-        direction,
-        tooltipRef,
-        triggerRef,
-        leaveTimer,
-        setIsOpen,
-      }}
-    >
+    <ToolTipProvider value={providerValue}>
       <div
         ref={forwardRef}
         onMouseOver={onMouseOver}

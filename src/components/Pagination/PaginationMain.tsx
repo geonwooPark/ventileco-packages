@@ -66,7 +66,7 @@ function PaginationMain(
       setPage,
       onNavigate,
     }),
-    [page, totalPage, numberingCount, queries, onNavigate],
+    [page, totalPage, numberingCount, queries],
   )
 
   return (

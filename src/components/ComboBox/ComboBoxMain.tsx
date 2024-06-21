@@ -115,20 +115,17 @@ const ComboBoxMain: ComboBoxMainComponent = forwardRef(function ComboBoxMain<
       setKeyword('')
       setFocusedItem(undefined)
     },
-    [setValue],
+    [],
   )
 
-  const onSelect = useCallback(
-    ({ value, label, disabled }: Option) => {
-      if (disabled) return
+  const onSelect = useCallback(({ value, label, disabled }: Option) => {
+    if (disabled) return
 
-      setIsOpen(false)
-      setValue(value)
-      setKeyword(label)
-      setFocusedItem(value)
-    },
-    [setValue],
-  )
+    setIsOpen(false)
+    setValue(value)
+    setKeyword(label)
+    setFocusedItem(value)
+  }, [])
 
   const onKeyboardTrigger: KeyboardEventHandler<HTMLDivElement> = useCallback(
     (e) => {
@@ -179,7 +176,7 @@ const ComboBoxMain: ComboBoxMainComponent = forwardRef(function ComboBoxMain<
         }
       }
     },
-    [focusedIndex, onSelect],
+    [focusedIndex],
   )
 
   useEffect(() => {
@@ -277,11 +274,6 @@ const ComboBoxMain: ComboBoxMainComponent = forwardRef(function ComboBoxMain<
       focusedItem,
       optionList,
       Title,
-      onTextChange,
-      onTrigger,
-      onClear,
-      onSelect,
-      onKeyboardTrigger,
     ],
   )
 

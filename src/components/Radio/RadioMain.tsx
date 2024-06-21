@@ -61,7 +61,7 @@ const RadioMain: RadioMainComponent = forwardRef(function RadioMain<
       }
       setSelectedValue(value)
     },
-    [setValue],
+    [],
   )
 
   const providerValue = useMemo(
@@ -73,7 +73,7 @@ const RadioMain: RadioMainComponent = forwardRef(function RadioMain<
       Title,
       onClick,
     }),
-    [id, selectedValue, name, register, Title, onClick],
+    [id, selectedValue, name, register, Title],
   )
 
   return (

@@ -46,7 +46,7 @@ function ToastProvider({ children, position = 'topLeft' }: ToastProviderProps) {
 
   const providerValue = useMemo(
     () => ({ addToast, removeToast, position }),
-    [addToast, removeToast],
+    [position],
   )
 
   return (

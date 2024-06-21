@@ -50,37 +50,34 @@ const CheckBoxMain: CheckBoxMainComponent = forwardRef(function CheckBoxMain<
     new Set(defaultValues),
   )
 
-  const onClick = useCallback(
-    (selectedItem: string | number) => {
-      if (setValues) {
-        setValues((prev) => {
-          let newItem = [...prev]
-          if (prev.includes(selectedItem)) {
-            newItem = newItem.filter((item) => item !== selectedItem)
-          } else {
-            newItem.push(selectedItem)
-          }
-
-          return newItem
-        })
-      }
-      setActiveItems((prev) => {
-        const newItem = new Set(prev)
-        if (prev.has(selectedItem)) {
-          newItem.delete(selectedItem)
+  const onClick = useCallback((selectedItem: string | number) => {
+    if (setValues) {
+      setValues((prev) => {
+        let newItem = [...prev]
+        if (prev.includes(selectedItem)) {
+          newItem = newItem.filter((item) => item !== selectedItem)
         } else {
-          newItem.add(selectedItem)
+          newItem.push(selectedItem)
         }
 
         return newItem
       })
-    },
-    [setValues],
-  )
+    }
+    setActiveItems((prev) => {
+      const newItem = new Set(prev)
+      if (prev.has(selectedItem)) {
+        newItem.delete(selectedItem)
+      } else {
+        newItem.add(selectedItem)
+      }
+
+      return newItem
+    })
+  }, [])
 
   const providerValue = useMemo(
     () => ({ id, activeItems, Title, onClick }),
-    [id, activeItems, Title, onClick],
+    [id, activeItems, Title],
   )
 
   return (

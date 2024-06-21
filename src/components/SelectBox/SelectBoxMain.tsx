@@ -84,7 +84,7 @@ const SelectBoxMain: SelectBoxMainComponent = forwardRef(function SelectBoxMain<
       setValue(value)
       setFocusedItem(value)
     },
-    [setValue],
+    [],
   )
 
   const onKeyboardTrigger: KeyboardEventHandler<HTMLButtonElement> =
@@ -135,7 +135,7 @@ const SelectBoxMain: SelectBoxMainComponent = forwardRef(function SelectBoxMain<
           }
         }
       },
-      [focusedIndex, onSelect],
+      [focusedIndex],
     )
 
   useEffect(() => {
@@ -199,17 +199,7 @@ const SelectBoxMain: SelectBoxMainComponent = forwardRef(function SelectBoxMain<
       onKeyboardTrigger,
       onSelect,
     }),
-    [
-      id,
-      value,
-      isOpen,
-      focusedItem,
-      focusedLabel,
-      list,
-      Title,
-      onKeyboardTrigger,
-      onSelect,
-    ],
+    [id, value, isOpen, focusedItem, focusedLabel, list, Title],
   )
 
   const selectBoxStyle = useMemo(
