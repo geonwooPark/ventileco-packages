@@ -13,6 +13,7 @@ function AccordionTrigger({ children }: PropsWithChildren) {
 
   return (
     <button
+      role="heading"
       id={`${id}-accordion-button-${index}`}
       aria-expanded={isOpen}
       aria-controls={`${id}-accordion-region-${index}`}
