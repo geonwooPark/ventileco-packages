@@ -1,21 +1,21 @@
-import type { Meta } from '@storybook/react'
-import Counter, { CounterMainProps } from './CounterMain'
+import { Meta } from '@storybook/addon-docs'
 
-const meta: Meta<typeof Counter> = {
-  title: 'COMPONENTS/Counter',
-  component: Counter,
-  parameters: {
-    layout: 'centered',
-  },
-}
+<Meta title="COMPONENTS/Counter" />
 
-export default meta
+# Counter
 
-export function Normal(arg: CounterMainProps) {
+사용자가 클릭 이벤트를 통해 숫자 값을 증가 또는 감소시킬 수 있는 UI 요소
+
+## Example
+
+```jsx
+import { Counter } from 'ventileco-ui'
+
+function Example() {
   return (
-    <Counter {...arg}>
+    <Counter initValue={5} maximum={10} minimum={0}>
       <div className="flex items-center gap-2">
-        <Counter.Number className="h-8 w-20 rounded-md border border-gray-700 text-center text-xl" />
+        <Counter.Number className="h-8 w-20 rounded-md border border-gray-700 text-center text-2xl" />
         <div className="flex flex-col">
           <Counter.Up>
             <svg
@@ -54,8 +54,4 @@ export function Normal(arg: CounterMainProps) {
     </Counter>
   )
 }
-Normal.args = {
-  initValue: undefined,
-  minimum: undefined,
-  maximum: undefined,
-}
+```
