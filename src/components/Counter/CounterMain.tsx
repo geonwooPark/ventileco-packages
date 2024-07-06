@@ -12,7 +12,7 @@ import CountUp from './CountUp'
 import CountDown from './CountDown'
 import CountNumber from './CountNumber'
 
-interface CounterMainProps {
+export interface CounterMainProps {
   initValue?: number
   minimum?: number
   maximum?: number
