@@ -1,5 +1,6 @@
 import type { Meta } from '@storybook/react'
 import Counter, { CounterMainProps } from './CounterMain'
+import { useState } from 'react'
 
 const meta: Meta<typeof Counter> = {
   title: 'COMPONENTS/Counter',
@@ -11,9 +12,11 @@ const meta: Meta<typeof Counter> = {
 
 export default meta
 
-export function Normal(arg: CounterMainProps) {
+export function Normal(arg: Pick<CounterMainProps, 'minimum' | 'maximum'>) {
+  const [value, setValue] = useState(3)
+
   return (
-    <Counter {...arg}>
+    <Counter value={value} setValue={setValue} {...arg}>
       <div className="flex items-center gap-2">
         <Counter.Number className="h-8 w-20 rounded-md border border-gray-700 text-center text-xl" />
         <div className="flex flex-col">
@@ -53,9 +56,4 @@ export function Normal(arg: CounterMainProps) {
       </div>
     </Counter>
   )
-}
-Normal.args = {
-  initValue: undefined,
-  minimum: undefined,
-  maximum: undefined,
 }

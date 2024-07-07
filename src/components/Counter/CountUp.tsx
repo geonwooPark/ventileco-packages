@@ -9,7 +9,12 @@ function CountUp({ children, isDisabled }: PropsWithChildren<CountUpProps>) {
   const { up } = useCounterContext()
 
   return (
-    <button onClick={up} disabled={isDisabled} aria-label="Increase counter">
+    <button
+      type="button"
+      onClick={up}
+      disabled={isDisabled}
+      aria-label="Increase counter"
+    >
       {children}
     </button>
   )

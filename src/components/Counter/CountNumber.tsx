@@ -5,15 +5,15 @@ interface CountNumberProps {
 }
 
 function CountNumber({ className }: CountNumberProps) {
-  const { number, register, onChange } = useCounterContext()
+  const { number } = useCounterContext()
 
   return (
     <input
+      type="number"
       value={number}
-      onChange={onChange}
+      readOnly
       className={className}
       aria-label="Counter value"
-      {...register}
     />
   )
 }

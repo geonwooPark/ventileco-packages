@@ -12,7 +12,12 @@ function CountDown({
   const { down } = useCounterContext()
 
   return (
-    <button onClick={down} disabled={isDisabled} aria-label="Decrease counter">
+    <button
+      type="button"
+      onClick={down}
+      disabled={isDisabled}
+      aria-label="Decrease counter"
+    >
       {children}
     </button>
   )

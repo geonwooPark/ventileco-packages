@@ -1,36 +1,50 @@
-import React from 'react'
-import { Accordion } from './components'
-
-const accordionList = [
-  { id: 0, title: 'Title1', content: 'Content1' },
-  { id: 1, title: 'Title2', content: 'Content2' },
-  { id: 2, title: 'Title3', content: 'Content3' },
-]
+import { useState } from 'react'
+import Counter from './components/Counter/CounterMain'
 
 function App() {
+  const [value, setValue] = useState(0)
+  console.log('🚀 ~ App ~ value:', value)
+
   return (
-    <div className="w-[240px]">
-      <Accordion className="flex flex-col rounded-md border">
-        {accordionList.map((item) => (
-          <Accordion.Item key={item.id} index={item.id}>
-            {({ isOpen }) => (
-              <React.Fragment>
-                <Accordion.Trigger>
-                  <div
-                    className={`${isOpen && 'text-blue-600'} cursor-pointer border-b px-4 py-3 text-left`}
-                  >
-                    {item.title}
-                  </div>
-                </Accordion.Trigger>
-                <Accordion.Content>
-                  <div className="border-b px-4 py-3">{item.content}</div>
-                </Accordion.Content>
-              </React.Fragment>
-            )}
-          </Accordion.Item>
-        ))}
-      </Accordion>
-    </div>
+    <Counter value={value} setValue={setValue} maximum={10} minimum={-4}>
+      <div className="flex items-center gap-2">
+        <Counter.Number className="h-8 w-20 rounded-md border border-gray-700 text-center text-2xl" />
+        <div className="flex flex-col">
+          <Counter.Up>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth="1.5"
+              stroke="currentColor"
+              className="size-6"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="m4.5 15.75 7.5-7.5 7.5 7.5"
+              />
+            </svg>
+          </Counter.Up>
+          <Counter.Down>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth="1.5"
+              stroke="currentColor"
+              className="size-6"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="m19.5 8.25-7.5 7.5-7.5-7.5"
+              />
+            </svg>
+          </Counter.Down>
+        </div>
+      </div>
+    </Counter>
   )
 }
 

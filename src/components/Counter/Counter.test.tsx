@@ -34,7 +34,7 @@ describe('Counter', () => {
   })
 
   it('최솟값을 제한하는 minimal Props가 동작하는지 확인', async () => {
-    render(<Normal initValue={2} minimum={2} />)
+    render(<Normal minimum={3} />)
 
     const downButton = screen.getByLabelText('Decrease counter')
     const input = screen.getByLabelText('Counter value') as HTMLInputElement
@@ -47,7 +47,7 @@ describe('Counter', () => {
   })
 
   it('최댓값을 제한하는 maximum Props가 동작하는지 확인', async () => {
-    render(<Normal initValue={2} maximum={2} />)
+    render(<Normal maximum={3} />)
 
     const upButton = screen.getByLabelText('Increase counter')
     const input = screen.getByLabelText('Counter value') as HTMLInputElement

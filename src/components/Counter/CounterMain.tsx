@@ -1,11 +1,9 @@
 import {
-  ChangeEventHandler,
   ForwardedRef,
   PropsWithChildren,
   forwardRef,
   useCallback,
   useMemo,
-  useState,
 } from 'react'
 import { _createContext } from '../../utils/_createContext'
 import CountUp from './CountUp'
@@ -13,16 +11,14 @@ import CountDown from './CountDown'
 import CountNumber from './CountNumber'
 
 export interface CounterMainProps {
-  initValue?: number
+  value: number
+  setValue: React.Dispatch<React.SetStateAction<number>>
   minimum?: number
   maximum?: number
-  register?: any
 }
 
 type CounterState = {
   number: number
-  register: any
-  onChange: ChangeEventHandler<HTMLInputElement>
   up: () => void
   down: () => void
 }
@@ -33,27 +29,21 @@ export const [useCounterContext, CounterProvider] =
 function CounterMain(
   {
     children,
-    register,
-    initValue,
+    value: number,
+    setValue,
     minimum,
     maximum,
   }: PropsWithChildren<CounterMainProps>,
   forwardRef: ForwardedRef<HTMLDivElement>,
 ) {
-  const [number, setNumber] = useState(initValue || 0)
-
-  const onChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-    setNumber(Number(e.target.value))
-  }
-
   const up = useCallback(() => {
-    setNumber((prev) =>
+    setValue((prev) =>
       maximum === undefined || prev < maximum ? prev + 1 : prev,
     )
   }, [maximum])
 
   const down = useCallback(() => {
-    setNumber((prev) =>
+    setValue((prev) =>
       minimum === undefined || prev > minimum ? prev - 1 : prev,
     )
   }, [minimum])
@@ -61,12 +51,10 @@ function CounterMain(
   const providerValue = useMemo(
     () => ({
       number,
-      register,
-      onChange,
       up,
       down,
     }),
-    [number, register],
+    [number],
   )
 
   return (
