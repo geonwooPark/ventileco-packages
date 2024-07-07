@@ -12,8 +12,10 @@ import { Meta } from '@storybook/addon-docs'
 import { Counter } from 'ventileco-ui'
 
 function Example() {
+  const [value, setValue] = useState(4)
+
   return (
-    <Counter initValue={5} maximum={10} minimum={0}>
+    <Counter value={value} setValue={setValue} maximum={10} minimum={0}>
       <div className="flex items-center gap-2">
         <Counter.Number className="h-8 w-20 rounded-md border border-gray-700 text-center text-2xl" />
         <div className="flex flex-col">

@@ -9,7 +9,7 @@ function CountNumber({ className }: CountNumberProps) {
 
   return (
     <input
-      type="number"
+      type="text"
       value={number}
       readOnly
       className={className}

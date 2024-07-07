@@ -18,7 +18,7 @@ export function Normal(arg: Pick<CounterMainProps, 'minimum' | 'maximum'>) {
   return (
     <Counter value={value} setValue={setValue} {...arg}>
       <div className="flex items-center gap-2">
-        <Counter.Number className="h-8 w-20 rounded-md border border-gray-700 text-center text-xl" />
+        <Counter.Number className="h-8 w-20 rounded-md border border-gray-700 text-center text-xl outline-none" />
         <div className="flex flex-col">
           <Counter.Up>
             <svg
