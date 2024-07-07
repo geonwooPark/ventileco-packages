@@ -1,10 +1,16 @@
-import { cleanup, render } from '@testing-library/react'
+import {
+  cleanup,
+  render,
+  RenderOptions,
+  RenderResult,
+} from '@testing-library/react'
+import { ReactElement } from 'react'
 
 afterEach(() => {
   cleanup()
 })
 
-function customRender(ui: React.ReactElement, options = {}) {
+function customRender(ui: ReactElement, options?: RenderOptions): RenderResult {
   return render(ui, {
     // wrap provider(s) here if needed
     wrapper: ({ children }) => children,

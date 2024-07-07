@@ -13,7 +13,7 @@ const meta: Meta<typeof Counter> = {
 export default meta
 
 export function Normal(arg: Pick<CounterMainProps, 'minimum' | 'maximum'>) {
-  const [value, setValue] = useState(3)
+  const [value, setValue] = useState(4)
 
   return (
     <Counter value={value} setValue={setValue} {...arg}>
