@@ -33,8 +33,7 @@ describe('SelectBox', () => {
 
     const trigger = screen.getByText('메뉴를 선택하세요')
     await userEvent.click(trigger)
-    await userEvent.keyboard('[ArrowDown]')
-    await userEvent.keyboard('[Enter]')
+    await userEvent.keyboard('[ArrowDown][Enter]')
 
     await waitFor(() => {
       expect(screen.getByText('Grape')).toBeInTheDocument()

@@ -23,8 +23,7 @@ describe('CheckBox', () => {
     const checkboxes = screen.getAllByRole('checkbox')
     const firstCheckbox = checkboxes[0]
 
-    await userEvent.keyboard('[Tab]')
-    await userEvent.keyboard('[Enter]')
+    await userEvent.keyboard('[Tab][Enter]')
 
     expect(firstCheckbox).toBeChecked()
   })

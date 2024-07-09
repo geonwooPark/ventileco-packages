@@ -35,8 +35,7 @@ describe('ComboBox', () => {
 
     const combobox = screen.getByRole('combobox') as HTMLInputElement
     await userEvent.click(combobox)
-    await userEvent.keyboard('[ArrowDown]')
-    await userEvent.keyboard('[Enter]')
+    await userEvent.keyboard('[ArrowDown][Enter]')
 
     await waitFor(() => {
       expect(combobox.value).toBe('Grape')
