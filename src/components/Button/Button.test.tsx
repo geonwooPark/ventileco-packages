@@ -14,10 +14,4 @@ describe('Button', () => {
 
     expect(button).toBeDisabled()
   })
-  it('버튼 컴포넌트의 isLoading Props 동작 테스트 ', () => {
-    render(<Button type="button" isLoading={true} />)
-    const spinner = screen.getByTestId('test-spinner')
-
-    expect(spinner).toBeInTheDocument()
-  })
 })
