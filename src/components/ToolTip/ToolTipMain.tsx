@@ -21,8 +21,10 @@ export interface ToolTipProps {
   leaveDelay?: number
   /** 툴팁의 사용 여부를 결정합니다. */
   disabled?: boolean
-  /** 	툴팁과 컨텐츠 사이의 간격을 조절합니다. */
+  /** 툴팁과 컨텐츠 사이의 간격을 조절합니다. */
   gap?: number
+  /** 삼각형 모양의 말풍선 꼬리를 렌더링합니다. */
+  triangle?: boolean
 }
 
 type ToolTipContextState = {
@@ -32,6 +34,7 @@ type ToolTipContextState = {
   triggerRef: React.RefObject<HTMLDivElement> | null
   tooltipRef: React.RefObject<HTMLDivElement> | null
   leaveTimer: React.MutableRefObject<number | NodeJS.Timeout | undefined>
+  triangle?: boolean
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
 
@@ -45,6 +48,7 @@ function ToolTipMain(
     enterDelay,
     leaveDelay,
     disabled,
+    triangle = true,
     gap = 16,
   }: PropsWithChildren<ToolTipProps>,
   forwardRef: ForwardedRef<HTMLDivElement>,
@@ -146,9 +150,11 @@ function ToolTipMain(
         : ''
 
     Object.assign(tooltipNode.style, position[direction])
-    Object.assign(triangleNode.style, {
-      backgroundColor: contentBackgroundColor,
-    })
+    if (triangle) {
+      Object.assign(triangleNode.style, {
+        backgroundColor: contentBackgroundColor,
+      })
+    }
   }, [isOpen])
 
   const providerValue = useMemo(
@@ -159,9 +165,10 @@ function ToolTipMain(
       tooltipRef,
       triggerRef,
       leaveTimer,
+      triangle,
       setIsOpen,
     }),
-    [isOpen, disabled, direction, tooltipRef, triggerRef, leaveTimer],
+    [isOpen, disabled, direction, tooltipRef, triggerRef, leaveTimer, triangle],
   )
 
   return (

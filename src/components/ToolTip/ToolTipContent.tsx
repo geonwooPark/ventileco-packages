@@ -9,8 +9,15 @@ document.body.appendChild(tooltipDiv)
 const portalRoot = document.getElementById('tool-tip-ventileco') as HTMLElement
 
 function ToolTipContent({ children }: PropsWithChildren) {
-  const { isOpen, disabled, direction, tooltipRef, leaveTimer, setIsOpen } =
-    useToolTipContext()
+  const {
+    isOpen,
+    disabled,
+    direction,
+    tooltipRef,
+    leaveTimer,
+    triangle,
+    setIsOpen,
+  } = useToolTipContext()
 
   const onMouseOver = () => {
     clearTimeout(leaveTimer.current)
@@ -51,7 +58,7 @@ function ToolTipContent({ children }: PropsWithChildren) {
               onMouseLeave={onMouseLeave}
             >
               <div>{children}</div>
-              <div style={triangleStyle} />
+              {triangle && <div style={triangleStyle} />}
             </div>,
             portalRoot,
           ))}
