@@ -1,6 +1,7 @@
 import type { Meta } from '@storybook/react'
 import ComboBox from './ComboBoxMain'
 import { useState } from 'react'
+import { motion } from 'framer-motion'
 
 const meta: Meta<typeof ComboBox> = {
   title: 'COMPONENTS/ComboBox',
@@ -56,7 +57,10 @@ export function Normal() {
           </div>
         </ComboBox.Trigger>
 
-        <ComboBox.List className="absolute z-[200] mt-1 max-h-[240px] w-full overflow-hidden overflow-y-scroll rounded-md border bg-white">
+        <ComboBox.List
+          motion={motion}
+          className="absolute z-[200] mt-1 max-h-[240px] w-full overflow-hidden overflow-y-scroll rounded-md border bg-white"
+        >
           {({ optionList }) =>
             optionList.length !== 0 ? (
               optionList.map((item) => (
