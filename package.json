@@ -1,7 +1,7 @@
 {
   "name": "ventileco-ui",
   "private": false,
-  "version": "0.1.01",
+  "version": "0.1.02",
   "description": "Headless UI Kit",
   "main": "dist/components/index.js",
   "types": "dist/components/index.d.ts",
