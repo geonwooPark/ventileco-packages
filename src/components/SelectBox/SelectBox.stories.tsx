@@ -1,6 +1,7 @@
 import type { Meta } from '@storybook/react'
 import { useState } from 'react'
 import SelectBox from './SelectBoxMain'
+import { motion } from 'framer-motion'
 
 const meta: Meta<typeof SelectBox> = {
   title: 'COMPONENTS/SelectBox',
@@ -39,7 +40,10 @@ export function Normal() {
           </div>
         </SelectBox.Trigger>
 
-        <SelectBox.List className="absolute z-[200] mt-1 max-h-[240px] w-full overflow-hidden overflow-y-scroll rounded-md border bg-white">
+        <SelectBox.List
+          motion={motion}
+          className="absolute z-[200] mt-1 max-h-[240px] w-full overflow-hidden overflow-y-scroll rounded-md border bg-white"
+        >
           {({ optionList }) =>
             optionList.map((item) => (
               <SelectBox.Item key={item.value} item={item}>
