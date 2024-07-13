@@ -39,6 +39,36 @@ export function Normal() {
 
         <Tabs.View className="rounded-b-md border bg-gray-50">
           {tabList.map((item) => (
+            <Tabs.Content key={item.id} index={item.id}>
+              <div className="px-4 py-3">{item.content}</div>
+            </Tabs.Content>
+          ))}
+        </Tabs.View>
+      </Tabs>
+    </div>
+  )
+}
+
+export function WithFramerMotion() {
+  return (
+    <div className="w-[240px]">
+      <Tabs>
+        <Tabs.List className="hide-scroll flex overflow-x-scroll rounded-t-md border bg-blue-100">
+          {tabList.map((item) => (
+            <Tabs.Item key={item.id} index={item.id} className="w-full">
+              {({ selected }) => (
+                <div
+                  className={`${selected && 'bg-blue-600 text-white'} w-full cursor-pointer px-4 py-3 text-center transition duration-200 hover:opacity-50`}
+                >
+                  {item.title}
+                </div>
+              )}
+            </Tabs.Item>
+          ))}
+        </Tabs.List>
+
+        <Tabs.View className="rounded-b-md border bg-gray-50">
+          {tabList.map((item) => (
             <Tabs.Content key={item.id} motion={motion} index={item.id}>
               <div className="px-4 py-3">{item.content}</div>
             </Tabs.Content>
