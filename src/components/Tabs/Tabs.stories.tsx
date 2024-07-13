@@ -1,5 +1,6 @@
 import type { Meta } from '@storybook/react'
 import Tabs from './TabsMain'
+import { motion } from 'framer-motion'
 
 const meta: Meta<typeof Tabs> = {
   title: 'COMPONENTS/Tabs',
@@ -35,9 +36,10 @@ export function Normal() {
             </Tabs.Item>
           ))}
         </Tabs.List>
+
         <Tabs.View className="rounded-b-md border bg-gray-50">
           {tabList.map((item) => (
-            <Tabs.Content key={item.id} index={item.id}>
+            <Tabs.Content key={item.id} motion={motion} index={item.id}>
               <div className="px-4 py-3">{item.content}</div>
             </Tabs.Content>
           ))}

@@ -3,19 +3,42 @@ import { useTabsContext } from './TabsMain'
 
 interface TabsContentProps {
   index: number
+  motion?: any
+  animationProps?: object
 }
 
-function TabsContent({ children, index }: PropsWithChildren<TabsContentProps>) {
+function TabsContent({
+  children,
+  index,
+  motion,
+  animationProps,
+}: PropsWithChildren<TabsContentProps>) {
   const { id, currentTab } = useTabsContext()
 
+  const Component = motion ? motion['div'] : 'div'
+
+  const props = motion
+    ? animationProps || {
+        variants: {
+          hidden: { opacity: 0, y: 20 },
+          visible: { opacity: 1, y: 0 },
+        },
+        initial: 'hidden',
+        animate: 'visible',
+        viewport: { once: true },
+        transition: { duration: 0.3 },
+      }
+    : {}
+
   return currentTab === index ? (
-    <div
+    <Component
       id={`${id}-tab-panel-${index}`}
       role="tabpanel"
       aria-labelledby={`${id}-tab-button-${index}`}
+      {...props}
     >
       {children}
-    </div>
+    </Component>
   ) : null
 }
 
