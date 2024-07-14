@@ -64,7 +64,6 @@ export function Normal() {
         <div className="size-[200px] bg-blue-400"></div>
         <div className="size-[200px] bg-green-400"></div>
         <div className="size-[200px] bg-pink-400"></div>
-        <div className="size-[200px] bg-purple-400"></div>
       </Slider.Content>
       <Slider.NextButton className="absolute right-4 top-1/2 -translate-y-1/2 rounded-full bg-black p-2 text-white shadow-md">
         <svg
