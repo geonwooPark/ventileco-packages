@@ -1,6 +1,7 @@
 import React, {
   ElementType,
   KeyboardEventHandler,
+  ReactNode,
   forwardRef,
   useCallback,
   useEffect,
@@ -19,19 +20,22 @@ import { Option, OptionList, PolymorphicRef, TitleElement } from '../../types'
 import { escapeRegExp } from '../../utils/escapeRegExp'
 import { _createContext } from '../../utils/_createContext'
 
-type ComboBoxMainProps<T extends ElementType> =
-  React.ComponentPropsWithoutRef<T> & {
-    as?: T extends 'div' | 'fieldset' ? T : never
-    children?: React.ReactNode
-    ref?: PolymorphicRef<T>
-    value: string | undefined
-    setValue: (value: string | undefined) => void
-    list: OptionList
-  }
+type ComboBoxMainProps<T extends ElementType> = {
+  as?: T extends 'div' | 'fieldset' ? T : never
+  children?: ReactNode
+  value: string | undefined
+  setValue: (value: string | undefined) => void
+  list: OptionList
+} & Omit<
+  React.ComponentPropsWithoutRef<T>,
+  'as' | 'children' | 'value' | 'setValue' | 'list'
+>
 
 type ComboBoxMainComponent = <T extends ElementType>(
-  props: ComboBoxMainProps<T>,
-) => React.ReactNode
+  props: ComboBoxMainProps<T> & {
+    ref?: React.ComponentPropsWithRef<T>['ref']
+  },
+) => ReactNode
 
 type ComboBoxContextState = {
   id: string

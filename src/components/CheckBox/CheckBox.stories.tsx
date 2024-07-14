@@ -1,23 +1,66 @@
-import type { Meta } from '@storybook/react'
 import CheckBox from './CheckBoxMain'
 import { useForm } from 'react-hook-form'
 import { useRef, useState } from 'react'
+import { checkBoxList } from '../../dummy'
+import { Meta } from '@storybook/react'
 
-const meta: Meta<typeof CheckBox> = {
+export default {
   title: 'COMPONENTS/CheckBox',
   component: CheckBox,
   parameters: {
     layout: 'centered',
   },
-}
-
-export default meta
-
-const checkBoxList = [
-  { id: 0, value: 'january', label: 'January' },
-  { id: 1, value: 'february', label: 'February' },
-  { id: 2, value: 'march', label: 'March' },
-]
+  argTypes: {
+    as: {
+      description: 'div 또는 fieldset 중 하나를 선택합니다.',
+      table: {
+        type: { summary: 'div | fieldset' },
+      },
+    },
+    ref: {
+      description: '컴포넌트의 인스턴스에 직접 접근하는 방법을 제공합니다.',
+      table: {
+        type: {
+          summary: 'RefObject<HTMLDivElement> | RefObject<HTMLFieldSetElement>',
+        },
+      },
+    },
+    children: {
+      description: '자식 요소들을 포함합니다.',
+      table: {
+        type: { summary: 'ReactNode' },
+      },
+    },
+    defaultValues: {
+      description: '기본 값들을 설정합니다.',
+      table: {
+        type: { summary: '(string | number)[]' },
+      },
+    },
+    setValues: {
+      description: '값들을 설정하는 함수입니다.',
+      table: {
+        type: {
+          summary: 'Dispatch<React.SetStateAction<(string | number)[]>>',
+        },
+      },
+    },
+    value: {
+      description: '아이템이 가지는 고유한 값입니다.',
+      table: {
+        type: { summary: 'string | number' },
+        category: 'CheckBox.Item',
+      },
+    },
+    register: {
+      description: 'React Hook Form을 사용하기 위한 register를 등록합니다.',
+      table: {
+        type: { summary: 'any' },
+        category: 'CheckBox.Item',
+      },
+    },
+  },
+} as Meta
 
 export function Controlled() {
   const [values, setValues] = useState<(string | number)[]>([])

@@ -1,22 +1,52 @@
 import type { Meta } from '@storybook/react'
-import Counter, { CounterMainProps } from './CounterMain'
+import Counter from './CounterMain'
 import { useState } from 'react'
 
-const meta: Meta<typeof Counter> = {
+export default {
   title: 'COMPONENTS/Counter',
   component: Counter,
   parameters: {
     layout: 'centered',
   },
-}
+  argTypes: {
+    ref: {
+      description: '컴포넌트의 인스턴스에 직접 접근하는 방법을 제공합니다.',
+      table: {
+        type: { summary: 'RefObject<HTMLDivElement>' },
+      },
+    },
+    value: {
+      description: '현재 카운터의 값입니다.',
+      table: {
+        type: { summary: 'number' },
+      },
+    },
+    setValue: {
+      description: '카운터 값을 설정하는 함수입니다.',
+      table: {
+        type: { summary: 'React.Dispatch<React.SetStateAction<number>>' },
+      },
+    },
+    minimum: {
+      description: '카운터의 최소값입니다. 설정하지 않으면 제한이 없습니다.',
+      table: {
+        type: { summary: 'number' },
+      },
+    },
+    maximum: {
+      description: '카운터의 최대값입니다. 설정하지 않으면 제한이 없습니다.',
+      table: {
+        type: { summary: 'number' },
+      },
+    },
+  },
+} as Meta
 
-export default meta
-
-export function Normal(arg: Pick<CounterMainProps, 'minimum' | 'maximum'>) {
+export function Normal() {
   const [value, setValue] = useState(4)
 
   return (
-    <Counter value={value} setValue={setValue} {...arg}>
+    <Counter value={value} setValue={setValue} maximum={10} minimum={4}>
       <div className="flex items-center gap-2">
         <Counter.Number className="h-8 w-20 rounded-md border border-gray-700 text-center text-xl outline-none" />
         <div className="flex flex-col">

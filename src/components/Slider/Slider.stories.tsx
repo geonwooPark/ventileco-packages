@@ -1,19 +1,38 @@
 import type { Meta } from '@storybook/react'
-import Slider, { SliderProps } from './SliderMain'
+import Slider from './SliderMain'
 
-const meta: Meta<typeof Slider> = {
+export default {
   title: 'COMPONENTS/Slider',
   component: Slider,
   parameters: {
     layout: 'top',
   },
-}
+  argTypes: {
+    ref: {
+      description: '컴포넌트의 인스턴스에 직접 접근하는 방법을 제공합니다.',
+      table: {
+        type: { summary: 'RefObject<HTMLDivElement>' },
+      },
+    },
+    gap: {
+      description: '슬라이드 아이템 간의 간격을 설정합니다.',
+      table: {
+        type: { summary: 'number' },
+      },
+    },
+    step: {
+      description:
+        '버튼을 사용하여 슬라이드 조작 시 건너뛰는 아이템의 갯수를 설정합니다.',
+      table: {
+        type: { summary: 'number' },
+      },
+    },
+  },
+} as Meta
 
-export default meta
-
-export function Normal(args: SliderProps) {
+export function Normal() {
   return (
-    <Slider {...args}>
+    <Slider gap={16} step={4}>
       <Slider.PrevButton className="absolute left-4 top-1/2 -translate-y-1/2 rounded-full bg-black p-2 text-white shadow-md">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -65,8 +84,4 @@ export function Normal(args: SliderProps) {
       </Slider.NextButton>
     </Slider>
   )
-}
-Normal.args = {
-  gap: 16,
-  step: 4,
 }

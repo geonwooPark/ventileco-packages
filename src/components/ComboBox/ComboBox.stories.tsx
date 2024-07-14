@@ -2,30 +2,101 @@ import type { Meta } from '@storybook/react'
 import ComboBox from './ComboBoxMain'
 import { useState } from 'react'
 import { motion } from 'framer-motion'
+import { comboBoxList } from '../../dummy'
 
-const meta: Meta<typeof ComboBox> = {
+export default {
   title: 'COMPONENTS/ComboBox',
   component: ComboBox,
   parameters: {
     layout: 'centered',
   },
-}
-
-export default meta
-
-const comboBoxList = [
-  { value: 'apple', label: 'Apple', disabled: true },
-  { value: 'kiwi', label: 'Kiwi' },
-  { value: 'peach', label: 'Peach', disabled: true },
-  { value: 'grape', label: 'Grape' },
-  { value: 'aloe', label: 'Aloe' },
-  { value: 'apple2', label: 'Apple2' },
-  { value: 'banana2', label: 'Banana2', disabled: true },
-  { value: 'kiwi2', label: 'Kiwi2' },
-  { value: 'peach2', label: 'Peach2', disabled: true },
-  { value: 'grape2', label: 'Grape2' },
-  { value: 'aloe2', label: 'Aloe2' },
-]
+  argTypes: {
+    as: {
+      description: 'div 또는 fieldset 중 하나를 선택합니다.',
+      table: {
+        type: { summary: 'div | fieldset' },
+        category: 'ComboBox',
+      },
+    },
+    ref: {
+      description: '컴포넌트의 인스턴스에 직접 접근하는 방법을 제공합니다.',
+      table: {
+        type: {
+          summary: 'RefObject<HTMLDivElement> | RefObject<HTMLFieldSetElement>',
+        },
+        category: 'ComboBox',
+      },
+    },
+    children: {
+      description: '자식 요소들을 포함합니다.',
+      table: {
+        type: { summary: 'ReactNode' },
+        category: 'ComboBox',
+      },
+    },
+    value: {
+      description: '기본 값을 설정합니다.',
+      table: {
+        type: { summary: 'string' },
+        category: 'ComboBox',
+      },
+    },
+    setValue: {
+      description: '값을 설정하는 함수입니다.',
+      table: {
+        type: { summary: '(value: string | undefined) => void' },
+        category: 'ComboBox',
+      },
+    },
+    list: {
+      description: '옵션 목록을 제공합니다.',
+      table: {
+        type: {
+          summary: 'OptionList',
+          detail: `
+            {value: string, label: string, disabled?: boolean}[]
+          `,
+        },
+        category: 'ComboBox',
+      },
+    },
+    placeholder: {
+      description: 'Input의 Placeholder를 지정합니다.',
+      table: {
+        type: { summary: 'string' },
+        category: 'ComboBox.Input',
+      },
+    },
+    motion: {
+      description:
+        'Framer Motion의 motion 모듈을 받아서 애니메이션을 적용시킵니다.',
+      table: {
+        type: { summary: 'any' },
+        category: 'ComboBox.List',
+      },
+    },
+    animationProps: {
+      description:
+        'Framer Motion의 애니메이션 속성을 조절하기 위한 객체입니다.',
+      table: {
+        type: { summary: 'object' },
+        category: 'ComboBox.List',
+      },
+    },
+    item: {
+      description: '반복되는 list에서 고유의 항목을 가져옵니다.',
+      table: {
+        type: {
+          summary: 'OptionItem',
+          detail: `
+          {value: string, label: string, disabled?: boolean}
+        `,
+        },
+        category: 'ComboBox.Item',
+      },
+    },
+  },
+} as Meta
 
 export function Normal() {
   const [value, setValue] = useState<string>()

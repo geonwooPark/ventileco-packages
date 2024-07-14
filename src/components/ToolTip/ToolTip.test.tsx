@@ -1,10 +1,10 @@
 import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { Direction } from './ToolTip.stories'
+import { Normal } from './ToolTip.stories'
 
 describe('ToolTip', () => {
   it('기본 툴팁에 마우스를 호버, 언호버하는 케이스', async () => {
-    render(<Direction direction="top" />)
+    render(<Normal />)
 
     const triggerElement = screen.getByText('Trigger')
 

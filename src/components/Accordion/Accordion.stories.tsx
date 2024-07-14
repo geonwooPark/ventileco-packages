@@ -2,22 +2,54 @@ import type { Meta } from '@storybook/react'
 import Accordion from './AccordionMain'
 import React from 'react'
 import { motion } from 'framer-motion'
+import { accordionList } from '../../dummy'
 
-const meta: Meta<typeof Accordion> = {
+export default {
   title: 'COMPONENTS/Accordion',
   component: Accordion,
   parameters: {
     layout: 'centered',
   },
-}
-
-export default meta
-
-const accordionList = [
-  { id: 0, title: 'Title1', content: 'Content1' },
-  { id: 1, title: 'Title2', content: 'Content2' },
-  { id: 2, title: 'Title3', content: 'Content3' },
-]
+  argTypes: {
+    className: {
+      description: '최상위 요소의 클래스를 지정합니다.',
+      table: {
+        type: { summary: 'string' },
+        category: 'Accordion',
+      },
+    },
+    ref: {
+      description: '컴포넌트의 인스턴스에 직접 접근하는 방법을 제공합니다.',
+      table: {
+        type: { summary: 'RefObject<HTMLDivElement>' },
+        category: 'Accordion',
+      },
+    },
+    index: {
+      description: '아이템의 고유한 값입니다.',
+      table: {
+        type: { summary: 'number', required: true },
+        category: 'Accordion.Item',
+      },
+    },
+    motion: {
+      description:
+        'Framer Motion의 motion 모듈을 받아서 애니메이션을 적용시킵니다.',
+      table: {
+        type: { summary: 'any' },
+        category: 'Accordion.Content',
+      },
+    },
+    animationProps: {
+      description:
+        'Framer Motion의 애니메이션 속성을 조절하기 위한 객체입니다.',
+      table: {
+        type: { summary: 'object' },
+        category: 'Accordion.Content',
+      },
+    },
+  },
+} as Meta
 
 export function Normal() {
   return (

@@ -13,17 +13,11 @@ import { ToolTipDirection } from '../../types'
 import { _createContext } from '../../utils/_createContext'
 
 export interface ToolTipProps {
-  /** 툴팁이 생성되는 방향을 결정합니다. */
   direction: ToolTipDirection
-  /** 툴팁이 나타나기까지의 타임을 조절합니다. */
   enterDelay?: number
-  /** 툴팁이 사라지기까지의 타임을 조절합니다. */
   leaveDelay?: number
-  /** 툴팁의 사용 여부를 결정합니다. */
   disabled?: boolean
-  /** 툴팁과 컨텐츠 사이의 간격을 조절합니다. */
   gap?: number
-  /** 삼각형 모양의 말풍선 꼬리를 렌더링합니다. */
   triangle?: boolean
 }
 

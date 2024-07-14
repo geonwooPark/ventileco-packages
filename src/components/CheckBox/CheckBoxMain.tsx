@@ -1,5 +1,9 @@
 import React, {
+  ComponentPropsWithRef,
+  ComponentPropsWithoutRef,
+  Dispatch,
   ElementType,
+  ReactNode,
   forwardRef,
   useCallback,
   useId,
@@ -12,18 +16,21 @@ import CheckBoxItem from './CheckBoxItem'
 import { _createContext } from '../../utils/_createContext'
 import { PolymorphicRef, TitleElement } from '../../types'
 
-type CheckBoxMainProps<T extends ElementType> =
-  React.ComponentPropsWithoutRef<T> & {
-    as?: T extends 'div' | 'fieldset' ? T : never
-    children?: React.ReactNode
-    ref?: PolymorphicRef<T>
-    defaultValues?: (string | number)[]
-    setValues?: React.Dispatch<React.SetStateAction<(string | number)[]>>
-  }
+type CheckBoxMainProps<T extends ElementType> = {
+  as?: T extends 'div' | 'fieldset' ? T : never
+  children?: ReactNode
+  defaultValues?: (string | number)[]
+  setValues?: Dispatch<React.SetStateAction<(string | number)[]>>
+} & Omit<
+  ComponentPropsWithoutRef<T>,
+  'as' | 'children' | 'defaultValues' | 'setValues'
+>
 
 type CheckBoxMainComponent = <T extends ElementType>(
-  props: CheckBoxMainProps<T>,
-) => React.ReactNode
+  props: CheckBoxMainProps<T> & {
+    ref?: ComponentPropsWithRef<T>['ref']
+  },
+) => ReactNode
 
 type CheckBoxContextState = {
   id: string
@@ -40,7 +47,7 @@ const CheckBoxMain: CheckBoxMainComponent = forwardRef(function CheckBoxMain<
 >(
   { as, children, defaultValues, setValues }: CheckBoxMainProps<T>,
   ref: PolymorphicRef<T>,
-): React.ReactNode {
+): ReactNode {
   const Element = as || 'div'
   const Title: TitleElement = Element === 'fieldset' ? 'legend' : 'label'
 

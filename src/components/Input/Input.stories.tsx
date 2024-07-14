@@ -3,15 +3,33 @@ import Input from './InputMain'
 import { Meta } from '@storybook/react'
 import { useForm } from 'react-hook-form'
 
-const meta: Meta<typeof Input> = {
+export default {
   title: 'COMPONENTS/Input',
   component: Input,
   parameters: {
     layout: 'centered',
   },
-}
-
-export default meta
+  argTypes: {
+    ref: {
+      description: '컴포넌트의 인스턴스에 직접 접근하는 방법을 제공합니다.',
+      table: {
+        type: { summary: 'RefObject<HTMLDivElement>' },
+      },
+    },
+    className: {
+      description: '최상위 요소의 클래스를 지정합니다.',
+      table: {
+        type: { summary: 'string' },
+      },
+    },
+    register: {
+      description: 'React Hook Form을 사용하기 위한 register를 등록합니다.',
+      table: {
+        type: { summary: 'any' },
+      },
+    },
+  },
+} as Meta
 
 export function Normal() {
   const [value, setValue] = useState('')

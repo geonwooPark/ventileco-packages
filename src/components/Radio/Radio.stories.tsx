@@ -2,22 +2,81 @@ import type { Meta } from '@storybook/react'
 import { useRef, useState } from 'react'
 import Radio from './RadioMain'
 import { useForm } from 'react-hook-form'
+import { radioList } from '../../dummy'
 
-const meta: Meta<typeof Radio> = {
+export default {
   title: 'COMPONENTS/Radio',
   component: Radio,
   parameters: {
     layout: 'centered',
   },
-}
-
-export default meta
-
-const radioList = [
-  { id: 0, value: 'number1', label: '기호1' },
-  { id: 1, value: 'number2', label: '기호2' },
-  { id: 2, value: 'number3', label: '기호3' },
-]
+  argTypes: {
+    as: {
+      description: 'div 또는 fieldset 중 하나를 선택합니다.',
+      table: {
+        type: { summary: 'div | fieldset' },
+        category: 'Radio',
+      },
+    },
+    ref: {
+      description: '컴포넌트의 인스턴스에 직접 접근하는 방법을 제공합니다.',
+      table: {
+        type: {
+          summary: 'RefObject<HTMLDivElement> | RefObject<HTMLFieldSetElement>',
+        },
+        category: 'Radio',
+      },
+    },
+    children: {
+      description: '자식 요소들을 포함합니다.',
+      table: {
+        type: { summary: 'ReactNode' },
+        category: 'Radio',
+      },
+    },
+    defaultValue: {
+      description: '기본 값을 설정합니다.',
+      table: {
+        type: {
+          summary: '(string | number | readonly string[] | undefined)[]',
+        },
+        category: 'Radio',
+      },
+    },
+    setValue: {
+      description: '값을 설정하는 함수입니다.',
+      table: {
+        type: {
+          summary:
+            'Dispatch<React.SetStateAction<string | number | readonly string[] | undefined>>',
+        },
+        category: 'Radio',
+      },
+    },
+    name: {
+      description:
+        'Radio Group의 이름입니다. 설정하지 않으면 기본값이 없습니다.',
+      table: {
+        type: { summary: 'string' },
+        category: 'Radio',
+      },
+    },
+    register: {
+      description: 'React Hook Form을 사용하기 위한 register를 등록합니다.',
+      table: {
+        type: { summary: 'any' },
+        category: 'Radio',
+      },
+    },
+    value: {
+      description: '아이템이 가지는 고유한 값입니다.',
+      table: {
+        type: { summary: 'string | number | readonly string[] | undefined' },
+        category: 'Radio.Item',
+      },
+    },
+  },
+} as Meta
 
 export function Controlled() {
   const [value, setValue] = useState<

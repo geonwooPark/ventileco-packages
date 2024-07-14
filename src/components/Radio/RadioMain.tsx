@@ -1,4 +1,5 @@
 import React, {
+  ComponentPropsWithRef,
   ElementType,
   forwardRef,
   useCallback,
@@ -12,21 +13,24 @@ import RadioItem from './RadioItem'
 import { _createContext } from '../../utils/_createContext'
 import { PolymorphicRef, TitleElement } from '../../types'
 
-type RadioMainProps<T extends ElementType> =
-  React.ComponentPropsWithoutRef<T> & {
-    as?: T extends 'div' | 'fieldset' ? T : never
-    children?: React.ReactNode
-    ref?: PolymorphicRef<T>
-    setValue?: React.Dispatch<
-      React.SetStateAction<string | number | readonly string[] | undefined>
-    >
-    defaultValue?: string | number | readonly string[] | undefined
-    name?: string
-    register?: any
-  }
+type RadioMainProps<T extends ElementType> = {
+  as?: T extends 'div' | 'fieldset' ? T : never
+  children?: React.ReactNode
+  defaultValue?: string | number | readonly string[] | undefined
+  setValue?: React.Dispatch<
+    React.SetStateAction<string | number | readonly string[] | undefined>
+  >
+  name?: string
+  register?: any
+} & Omit<
+  React.ComponentPropsWithoutRef<T>,
+  'as' | 'children' | 'defaultValue' | 'setValue' | 'name' | 'register'
+>
 
 type RadioMainComponent = <T extends ElementType>(
-  props: RadioMainProps<T>,
+  props: RadioMainProps<T> & {
+    ref?: ComponentPropsWithRef<T>['ref']
+  },
 ) => React.ReactNode
 
 type RadioContextProp = {

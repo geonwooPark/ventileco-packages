@@ -2,14 +2,14 @@ import { PropsWithChildren } from 'react'
 import { useTabsContext } from './TabsMain'
 
 interface TabsContentProps {
-  index: number
+  contentIndex: number
   motion?: any
   animationProps?: object
 }
 
 function TabsContent({
   children,
-  index,
+  contentIndex: index,
   motion,
   animationProps,
 }: PropsWithChildren<TabsContentProps>) {

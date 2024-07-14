@@ -40,6 +40,7 @@ function Button(
       color: disabled ? '#9ca3af' : undefined,
       display: 'flex',
       justifyContent: 'center',
+      alignItems: 'center',
     }),
     [disabled],
   )

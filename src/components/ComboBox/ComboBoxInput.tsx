@@ -2,10 +2,11 @@ import { useMemo } from 'react'
 import { useComboBoxContext } from './ComboBoxMain'
 
 interface ComboBoxInputProps {
+  className?: string
   placeholder: string
 }
 
-function ComboBoxInput({ placeholder }: ComboBoxInputProps) {
+function ComboBoxInput({ className, placeholder }: ComboBoxInputProps) {
   const { id, focusedItem, inputRef, keyword, onTextChange } =
     useComboBoxContext()
 
@@ -25,6 +26,7 @@ function ComboBoxInput({ placeholder }: ComboBoxInputProps) {
       value={keyword}
       onChange={onTextChange}
       placeholder={placeholder}
+      className={className}
       style={comboBoxInputStyle}
     />
   )

@@ -3,11 +3,11 @@ import { useTabsContext } from './TabsMain'
 
 interface TabsItemProps {
   children: (props: { selected: boolean }) => React.ReactNode
-  index: number
+  tabIndex: number
   className?: string
 }
 
-function TabsItem({ children, index, className }: TabsItemProps) {
+function TabsItem({ children, tabIndex: index, className }: TabsItemProps) {
   const { id, currentTab, onClick, onFocus, onKeyboardSelect } =
     useTabsContext()
   const selected = index === currentTab

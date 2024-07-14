@@ -1,19 +1,68 @@
 import type { Meta } from '@storybook/react'
-import Pagination, { PaginationProps } from './PaginationMain'
+import Pagination from './PaginationMain'
 
-const meta: Meta<typeof Pagination> = {
+export default {
   title: 'COMPONENTS/Pagination',
   component: Pagination,
   parameters: {
     layout: 'centered',
   },
-}
+  argTypes: {
+    ref: {
+      description: '컴포넌트의 인스턴스에 직접 접근하는 방법을 제공합니다.',
+      table: {
+        type: { summary: 'RefObject<HTMLDivElement>' },
+      },
+    },
+    className: {
+      description: '최상위 요소의 클래스를 지정합니다.',
+      table: {
+        type: { summary: 'string' },
+      },
+    },
+    totalItemCount: {
+      description: '전체 아이템 갯수를 설정합니다.',
+      table: {
+        type: { summary: 'number' },
+      },
+    },
+    listItemCount: {
+      description: '한 페이지에 보여지는 아이템의 갯수를 설정합니다.',
+      table: {
+        type: { summary: 'number' },
+      },
+    },
+    numberingCount: {
+      description:
+        '페이지네이션 UI에 한번에 보여지는 페이지 갯수를 설정합니다.',
+      table: {
+        type: { summary: 'number' },
+      },
+    },
+    queries: {
+      description: '페이지 외 필터, 정렬 등의 쿼리를 설정합니다.',
+      table: {
+        type: { summary: 'Record<string, string>' },
+      },
+    },
+    onNavigate: {
+      description: '페이지 이동을 위해 실행하는 콜백함수입니다.',
+      table: {
+        type: { summary: '(path: string) => void' },
+      },
+    },
+  },
+} as Meta
 
-export default meta
-
-export function Normal(args: PaginationProps) {
+export function Normal() {
   return (
-    <Pagination {...args} className="flex items-center gap-4">
+    <Pagination
+      className="flex items-center gap-4"
+      listItemCount={5}
+      totalItemCount={24}
+      numberingCount={3}
+      onNavigate={() => null}
+    >
       <Pagination.PrevButton>
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -57,9 +106,4 @@ export function Normal(args: PaginationProps) {
       </Pagination.NextButton>
     </Pagination>
   )
-}
-Normal.args = {
-  listItemCount: 5,
-  totalItemCount: 24,
-  numberingCount: 3,
 }

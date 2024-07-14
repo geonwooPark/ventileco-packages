@@ -1,6 +1,7 @@
 import React, {
   ElementType,
   KeyboardEventHandler,
+  ReactNode,
   forwardRef,
   useCallback,
   useEffect,
@@ -17,18 +18,21 @@ import SelectBoxList from './SelectBoxList'
 import SelectBoxTitle from './SelectBoxTitle'
 import { _createContext } from '../../utils/_createContext'
 
-type SelectBoxMainProps<T extends ElementType> =
-  React.ComponentPropsWithoutRef<T> & {
-    as?: T extends 'div' | 'fieldset' ? T : never
-    children?: React.ReactNode
-    ref?: PolymorphicRef<T>
-    value: string | undefined
-    setValue: (value: string | undefined) => void
-    list: OptionList
-  }
+type SelectBoxMainProps<T extends ElementType> = {
+  as?: T extends 'div' | 'fieldset' ? T : never
+  children?: ReactNode
+  value: string | undefined
+  setValue: (value: string | undefined) => void
+  list: OptionList
+} & Omit<
+  React.ComponentPropsWithoutRef<T>,
+  'as' | 'children' | 'value' | 'setValue' | 'list'
+>
 
 type SelectBoxMainComponent = <T extends ElementType>(
-  props: SelectBoxMainProps<T>,
+  props: SelectBoxMainProps<T> & {
+    ref?: React.ComponentPropsWithRef<T>['ref']
+  },
 ) => React.ReactNode
 
 type SelectBoxContextState = {

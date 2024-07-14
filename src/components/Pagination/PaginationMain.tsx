@@ -12,15 +12,10 @@ import PaginationNumbering from './PaginationNumbering'
 import { _createContext } from '../../utils/_createContext'
 
 export interface PaginationProps {
-  /** 페이지 이동을 위해 실행하는 콜백함수 */
   onNavigate: (path: string) => void
-  /** 페이지로 나눌 전체 아이템 갯수를 설정 */
   totalItemCount: number
-  /** 한 페이지에 보여지는 아이템의 갯수를 설정 */
   listItemCount: number
-  /** 페이지네이션 UI에 한번에 보여지는 페이지 갯수를 설정 */
   numberingCount?: number
-  /** 페이지 외 필터, 정렬 등의 쿼리를 설정 */
   queries?: Record<string, string>
   className?: string
 }
