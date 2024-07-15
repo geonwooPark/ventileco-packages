@@ -11,6 +11,7 @@ function InputArea({ className }: InputAreaProps) {
   const inputAreaStyle = useMemo(
     () => ({
       width: '100%',
+      height: '100%',
       backgroundColor: 'inherit',
       outline: 'none',
       cursor: disabled ? 'not-allowed' : 'text',

@@ -63,9 +63,9 @@ export function Normal() {
   return (
     <Button
       type="button"
-      className="h-[50px] w-[320px] rounded-md bg-black text-base font-bold text-white transition-all duration-200 hover:opacity-80"
+      className="h-[50px] w-[320px] rounded-md bg-pink-600 text-base font-bold text-white transition-all duration-200 hover:opacity-80"
     >
-      BUTTON
+      🍑 Peach
     </Button>
   )
 }
@@ -78,9 +78,9 @@ export function DisabledStatus(args: ButtonProps) {
     <Button
       {...args}
       type="button"
-      className={`h-[50px] w-[320px] rounded-md bg-black text-base font-bold text-white transition-all duration-200 ${!isLoading && !disabled && 'hover:opacity-80'}`}
+      className={`h-[50px] w-[320px] rounded-md bg-pink-600 text-base font-bold text-white transition-all duration-200 ${!isLoading && !disabled && 'hover:opacity-80'}`}
     >
-      BUTTON
+      🍑 Peach
     </Button>
   )
 }

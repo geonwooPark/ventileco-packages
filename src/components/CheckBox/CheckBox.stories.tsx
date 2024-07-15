@@ -70,12 +70,12 @@ export function Controlled() {
   return (
     <CheckBox defaultValues={values} setValues={setValues} ref={ref}>
       <CheckBox.Title>Controlled</CheckBox.Title>
-      <CheckBox.List className="flex gap-2">
+      <CheckBox.List className="flex flex-col gap-2">
         {checkBoxList.map((item) => (
           <CheckBox.Item key={item.id} value={item.value}>
             {({ isSelected }) => (
               <div
-                className={`${isSelected && 'text-blue-600'} cursor-pointer rounded-md border border-black px-3 py-2`}
+                className={`${isSelected && 'border-blue-600 text-blue-600'} flex cursor-pointer items-center gap-2 rounded-md border px-4 py-2 duration-200`}
               >
                 <div className="flex justify-center">
                   <svg
@@ -93,7 +93,7 @@ export function Controlled() {
                     />
                   </svg>
                 </div>
-                <p>{item.label}</p>
+                <p className="text-2xl text-black">{item.label}</p>
               </div>
             )}
           </CheckBox.Item>
@@ -127,7 +127,7 @@ export function WithReactHookForm() {
             >
               {({ isSelected }) => (
                 <div
-                  className={`${isSelected && 'text-blue-600'} cursor-pointer rounded-md border border-black px-3 py-2`}
+                  className={`${isSelected && 'text-blue-600'} flex cursor-pointer items-center gap-1 rounded-md border border-black px-3 py-2 duration-200`}
                 >
                   <div className="flex justify-center">
                     <svg
@@ -145,7 +145,7 @@ export function WithReactHookForm() {
                       />
                     </svg>
                   </div>
-                  <p>{item.label}</p>
+                  <p className="text-2xl">{item.label}</p>
                 </div>
               )}
             </CheckBox.Item>

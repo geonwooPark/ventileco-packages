@@ -107,8 +107,8 @@ export function Normal() {
         <ComboBox.Title>ComboBox</ComboBox.Title>
 
         <ComboBox.Trigger>
-          <div className="flex w-full items-center rounded-md border px-3 py-2">
-            <ComboBox.Input placeholder="Fruits" />
+          <div className="flex w-full items-center rounded-md border border-black px-3 py-2">
+            <ComboBox.Input placeholder="🐝 Fruits" />
             <ComboBox.ClearButton>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -161,8 +161,8 @@ export function WithFramerMotion() {
         <ComboBox.Title>ComboBox</ComboBox.Title>
 
         <ComboBox.Trigger>
-          <div className="flex w-full items-center rounded-md border px-3 py-2">
-            <ComboBox.Input placeholder="Fruits" />
+          <div className="flex w-full items-center rounded-md border border-black px-3 py-2">
+            <ComboBox.Input placeholder="🐝 Fruits" />
             <ComboBox.ClearButton>
               <svg
                 xmlns="http://www.w3.org/2000/svg"

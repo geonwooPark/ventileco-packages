@@ -51,11 +51,22 @@ export function Normal() {
       ref={inputRef}
     >
       <Input.Label>Input</Input.Label>
-      <Input.InputBox className="flex h-[50px] w-[240px] items-center justify-between rounded-md border px-2 text-black">
-        <div>
-          <div className="mr-1 size-5 bg-gray-400" />
-        </div>
-        <Input.InputArea />
+      <Input.InputBox className="flex h-[40px] w-[240px] items-center justify-between rounded-md border border-black px-2 text-black">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth="1.5"
+          stroke="currentColor"
+          className="size-5"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
+          />
+        </svg>
+        <Input.InputArea className="ml-2" />
       </Input.InputBox>
     </Input>
   )
@@ -74,11 +85,22 @@ export function WithReactHookForm() {
     <form onSubmit={handleSubmit(onSubmit)}>
       <Input type="text" placeholder="Enter text" register={inputRegister}>
         <Input.Label>Input</Input.Label>
-        <Input.InputBox className="flex h-[50px] w-[240px] items-center justify-between rounded-md border px-2 text-black">
-          <div>
-            <div className="mr-1 size-5 bg-gray-400" />
-          </div>
-          <Input.InputArea />
+        <Input.InputBox className="flex h-[40px] w-[240px] items-center justify-between rounded-md border border-black px-2 text-black">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth="1.5"
+            stroke="currentColor"
+            className="size-5"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
+            />
+          </svg>
+          <Input.InputArea className="ml-2" />
         </Input.InputBox>
       </Input>
     </form>
@@ -102,11 +124,22 @@ export function DisabledStatus() {
       placeholder="Enter text"
     >
       <Input.Label>Input</Input.Label>
-      <Input.InputBox className="flex h-[50px] w-[240px] items-center justify-between rounded-md border px-2 text-black">
-        <div>
-          <div className="mr-1 size-5 bg-gray-400" />
-        </div>
-        <Input.InputArea />
+      <Input.InputBox className="flex h-[40px] w-[240px] items-center justify-between rounded-md border border-black px-2 text-black">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth="1.5"
+          stroke="currentColor"
+          className="size-5"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
+          />
+        </svg>
+        <Input.InputArea className="ml-2" />
       </Input.InputBox>
     </Input>
   )

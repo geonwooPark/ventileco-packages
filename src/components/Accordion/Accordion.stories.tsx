@@ -54,21 +54,37 @@ export default {
 export function Normal() {
   return (
     <div className="w-[240px]">
-      <Accordion className="flex flex-col overflow-hidden rounded-md border">
+      <Accordion className="flex flex-col overflow-hidden rounded-md border border-black">
         {accordionList.map((item) => (
           <Accordion.Item key={item.id} index={item.id}>
             {({ isOpen }) => (
               <React.Fragment>
-                <Accordion.Trigger>
+                <Accordion.Trigger className="outline-none">
                   <div
-                    className={`${isOpen && 'text-blue-600'} cursor-pointer border-y px-4 py-3 text-left`}
+                    className={`${isOpen && 'text-blue-600'} flex cursor-pointer items-center justify-between border-y px-4 py-2 text-left`}
                   >
                     {item.title}
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth="1.5"
+                      stroke="currentColor"
+                      className={`size-4 duration-200 ${isOpen && 'rotate-180'}`}
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="m19.5 8.25-7.5 7.5-7.5-7.5"
+                      />
+                    </svg>
                   </div>
                 </Accordion.Trigger>
 
                 <Accordion.Content>
-                  <div className="px-4 py-3">{item.content}</div>
+                  <div className="w-full break-words bg-gray-50 px-4 py-3">
+                    {item.content}
+                  </div>
                 </Accordion.Content>
               </React.Fragment>
             )}
@@ -82,21 +98,37 @@ export function Normal() {
 export function WithFramerMotion() {
   return (
     <div className="w-[240px]">
-      <Accordion className="flex flex-col overflow-hidden rounded-md border">
+      <Accordion className="flex flex-col overflow-hidden rounded-md border border-black">
         {accordionList.map((item) => (
           <Accordion.Item key={item.id} index={item.id}>
             {({ isOpen }) => (
               <React.Fragment>
-                <Accordion.Trigger>
+                <Accordion.Trigger className="outline-none">
                   <div
-                    className={`${isOpen && 'text-blue-600'} cursor-pointer border-y px-4 py-3 text-left`}
+                    className={`${isOpen && 'text-blue-600'} flex cursor-pointer items-center justify-between border-y px-4 py-2 text-left`}
                   >
                     {item.title}
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth="1.5"
+                      stroke="currentColor"
+                      className={`size-4 duration-200 ${isOpen && 'rotate-180'}`}
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="m19.5 8.25-7.5 7.5-7.5-7.5"
+                      />
+                    </svg>
                   </div>
                 </Accordion.Trigger>
 
                 <Accordion.Content motion={motion}>
-                  <div className="px-4 py-3">{item.content}</div>
+                  <div className="w-full break-words bg-gray-50 px-4 py-3">
+                    {item.content}
+                  </div>
                 </Accordion.Content>
               </React.Fragment>
             )}

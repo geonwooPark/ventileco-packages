@@ -97,9 +97,9 @@ export function Normal() {
   return (
     <div className="w-[240px] text-sm">
       <SelectBox value={value} setValue={setValue} list={selectBoxList}>
-        <SelectBox.Title>레이블</SelectBox.Title>
+        <SelectBox.Title>Label</SelectBox.Title>
         <SelectBox.Trigger>
-          <div className="flex w-full items-center justify-between rounded-md border px-3 py-2">
+          <div className="flex w-full items-center rounded-md border border-black px-3 py-2">
             <SelectBox.TriggerText>메뉴를 선택하세요</SelectBox.TriggerText>
           </div>
         </SelectBox.Trigger>
@@ -132,7 +132,7 @@ export function WithFramerMotion() {
       <SelectBox value={value} setValue={setValue} list={selectBoxList}>
         <SelectBox.Title>레이블</SelectBox.Title>
         <SelectBox.Trigger>
-          <div className="flex w-full items-center justify-between rounded-md border px-3 py-2">
+          <div className="flex w-full items-center rounded-md border border-black px-3 py-2">
             <SelectBox.TriggerText>메뉴를 선택하세요</SelectBox.TriggerText>
           </div>
         </SelectBox.Trigger>

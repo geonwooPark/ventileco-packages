@@ -2,7 +2,14 @@ import { PropsWithChildren } from 'react'
 import { useAccordionContext } from './AccordionMain'
 import { useAccordionItemContext } from './AccordionItem'
 
-function AccordionTrigger({ children }: PropsWithChildren) {
+interface AccordionTriggerProps {
+  className?: string
+}
+
+function AccordionTrigger({
+  children,
+  className,
+}: PropsWithChildren<AccordionTriggerProps>) {
   const { id, onClick, onFocus, onBlur } = useAccordionContext()
   const { index, isOpen } = useAccordionItemContext()
 
@@ -20,6 +27,7 @@ function AccordionTrigger({ children }: PropsWithChildren) {
       onFocus={() => onFocus(index)}
       onBlur={() => onBlur(index)}
       onMouseDown={onMouseDown}
+      className={className}
     >
       {children}
     </button>

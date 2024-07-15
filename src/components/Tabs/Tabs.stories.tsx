@@ -55,14 +55,18 @@ export default {
 
 export function Normal() {
   return (
-    <div className="w-[240px]">
+    <div className="w-[280px]">
       <Tabs>
-        <Tabs.List className="hide-scroll flex overflow-x-scroll rounded-t-md border bg-blue-100">
+        <Tabs.List className="hide-scroll flex overflow-x-scroll rounded-t-md border bg-white">
           {tabList.map((item) => (
-            <Tabs.Item key={item.id} tabIndex={item.id} className="w-full">
+            <Tabs.Item
+              key={item.id}
+              tabIndex={item.id}
+              className="w-full outline-none"
+            >
               {({ selected }) => (
                 <div
-                  className={`${selected && 'bg-blue-600 text-white'} w-full cursor-pointer px-4 py-3 text-center transition duration-200 hover:opacity-50`}
+                  className={`${selected && 'border-b-2 border-blue-600'} w-full cursor-pointer px-4 py-3 text-center transition duration-200 hover:opacity-50`}
                 >
                   {item.title}
                 </div>
@@ -74,7 +78,7 @@ export function Normal() {
         <Tabs.View className="rounded-b-md border bg-gray-50">
           {tabList.map((item) => (
             <Tabs.Content key={item.id} contentIndex={item.id}>
-              <div className="px-4 py-3">{item.content}</div>
+              <div className="break-words px-4 py-3">{item.content}</div>
             </Tabs.Content>
           ))}
         </Tabs.View>
@@ -85,14 +89,18 @@ export function Normal() {
 
 export function WithFramerMotion() {
   return (
-    <div className="w-[240px]">
+    <div className="w-[280px]">
       <Tabs>
-        <Tabs.List className="hide-scroll flex overflow-x-scroll rounded-t-md border bg-blue-100">
+        <Tabs.List className="hide-scroll flex overflow-x-scroll rounded-t-md border bg-white">
           {tabList.map((item) => (
-            <Tabs.Item key={item.id} tabIndex={item.id} className="w-full">
+            <Tabs.Item
+              key={item.id}
+              tabIndex={item.id}
+              className="w-full outline-none"
+            >
               {({ selected }) => (
                 <div
-                  className={`${selected && 'bg-blue-600 text-white'} w-full cursor-pointer px-4 py-3 text-center transition duration-200 hover:opacity-50`}
+                  className={`${selected && 'border-b-2 border-blue-600'} w-full cursor-pointer px-4 py-3 text-center transition duration-200 hover:opacity-50`}
                 >
                   {item.title}
                 </div>
@@ -103,8 +111,8 @@ export function WithFramerMotion() {
 
         <Tabs.View className="rounded-b-md border bg-gray-50">
           {tabList.map((item) => (
-            <Tabs.Content key={item.id} motion={motion} contentIndex={item.id}>
-              <div className="px-4 py-3">{item.content}</div>
+            <Tabs.Content key={item.id} contentIndex={item.id} motion={motion}>
+              <div className="break-words px-4 py-3">{item.content}</div>
             </Tabs.Content>
           ))}
         </Tabs.View>
