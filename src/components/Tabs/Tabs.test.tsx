@@ -9,11 +9,11 @@ describe('Tabs', () => {
   })
   it('마우스를 사용하여 옵션을 선택하는 케이스', async () => {
     render(<Normal />)
-    const secondTab = screen.getByText('Title2')
+    const secondTab = screen.getByText('🍒 Cherry')
 
     await userEvent.click(secondTab)
 
-    const secondContent = screen.getByText('Content2')
+    const secondContent = screen.getByText('Content4')
     expect(secondContent).toBeInTheDocument()
   })
   it('키보드를 사용하여 옵션을 선택하는 케이스', async () => {
@@ -21,7 +21,7 @@ describe('Tabs', () => {
 
     await userEvent.keyboard('[Tab][Tab][Enter]')
 
-    const secondContent = screen.getByText('Content2')
+    const secondContent = screen.getByText('🍒 Cherry')
     expect(secondContent).toBeInTheDocument()
   })
 })

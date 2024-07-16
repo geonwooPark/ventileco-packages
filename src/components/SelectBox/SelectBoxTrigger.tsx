@@ -1,27 +1,35 @@
 import { PropsWithChildren, useMemo } from 'react'
 import { useSelectBoxContext } from './SelectBoxMain'
 
-function SelectBoxTrigger({ children }: PropsWithChildren) {
+interface SelectBoxTriggerProps {
+  className?: string
+}
+
+function SelectBoxTrigger({
+  children,
+  className,
+}: PropsWithChildren<SelectBoxTriggerProps>) {
   const { id, isOpen, triggerRef, setIsOpen, onKeyboardTrigger } =
     useSelectBoxContext()
 
   const selectBoxTriggerStyle = useMemo(
-    () => ({ width: '100%' }) as React.CSSProperties,
+    () => ({ width: '100%', cursor: 'pointer' }) as React.CSSProperties,
     [],
   )
 
   return (
-    <button
+    <div
       ref={triggerRef}
-      aria-haspopup="listbox"
       aria-expanded={isOpen}
+      aria-haspopup="listbox"
       aria-controls={`${id}-select-list`}
-      onKeyDown={onKeyboardTrigger}
       onClick={() => setIsOpen((prev) => !prev)}
+      onKeyDown={onKeyboardTrigger}
       style={selectBoxTriggerStyle}
+      className={className}
     >
       {children}
-    </button>
+    </div>
   )
 }
 

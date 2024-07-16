@@ -6,37 +6,37 @@ describe('SelectBox', () => {
   it('SelectBox 컴포넌트가 렌더링되는지 확인', () => {
     render(<Normal />)
 
-    expect(screen.getByText('메뉴를 선택하세요')).toBeInTheDocument()
+    expect(screen.getByPlaceholderText('🐝 Fruits')).toBeInTheDocument()
   })
 
   it('트리거를 클릭하여 리스트박스가 보이는지 확인', async () => {
     render(<Normal />)
 
-    await userEvent.click(screen.getByText('메뉴를 선택하세요'))
+    await userEvent.click(screen.getByPlaceholderText('🐝 Fruits'))
     expect(screen.getByRole('listbox')).toBeInTheDocument()
   })
 
   it('마우스를 사용하여 옵션을 선택하는 케이스', async () => {
     render(<Normal />)
 
-    const trigger = screen.getByText('메뉴를 선택하세요')
+    const trigger = screen.getByPlaceholderText('🐝 Fruits')
     await userEvent.click(trigger)
-    await userEvent.click(screen.getByText('Aloe'))
+    await userEvent.click(screen.getByText('🍑 Peach'))
 
     await waitFor(() => {
-      expect(screen.getByText('Aloe')).toBeInTheDocument()
+      expect(screen.getByText('🍑 Peach')).toBeInTheDocument()
     })
   })
 
   it('키보드를 사용하여 옵션을 선택하는 케이스', async () => {
     render(<Normal />)
 
-    const trigger = screen.getByText('메뉴를 선택하세요')
+    const trigger = screen.getByPlaceholderText('🐝 Fruits') as HTMLInputElement
     await userEvent.click(trigger)
     await userEvent.keyboard('[ArrowDown][Enter]')
 
     await waitFor(() => {
-      expect(screen.getByText('Grape')).toBeInTheDocument()
+      expect(trigger.value).toBe('🍇 Grape')
     })
   })
 })

@@ -3,6 +3,7 @@ import { useState } from 'react'
 import SelectBox from './SelectBoxMain'
 import { motion } from 'framer-motion'
 import { selectBoxList } from '../../dummy'
+import SelectBoxInput from './SelectBoxInput'
 
 export default {
   title: 'COMPONENTS/SelectBox',
@@ -97,10 +98,11 @@ export function Normal() {
   return (
     <div className="w-[240px] text-sm">
       <SelectBox value={value} setValue={setValue} list={selectBoxList}>
-        <SelectBox.Title>Label</SelectBox.Title>
+        <SelectBox.Title>SelectBox</SelectBox.Title>
+
         <SelectBox.Trigger>
           <div className="flex w-full items-center rounded-md border border-black px-3 py-2">
-            <SelectBox.TriggerText>메뉴를 선택하세요</SelectBox.TriggerText>
+            <SelectBoxInput placeholder="🐝 Fruits" />
           </div>
         </SelectBox.Trigger>
 
@@ -130,10 +132,10 @@ export function WithFramerMotion() {
   return (
     <div className="w-[240px] text-sm">
       <SelectBox value={value} setValue={setValue} list={selectBoxList}>
-        <SelectBox.Title>레이블</SelectBox.Title>
+        <SelectBox.Title>SelectBox</SelectBox.Title>
         <SelectBox.Trigger>
           <div className="flex w-full items-center rounded-md border border-black px-3 py-2">
-            <SelectBox.TriggerText>메뉴를 선택하세요</SelectBox.TriggerText>
+            <SelectBoxInput placeholder="🐝 Fruits" />
           </div>
         </SelectBox.Trigger>
 

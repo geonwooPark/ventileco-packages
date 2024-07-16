@@ -1,7 +1,14 @@
 import { PropsWithChildren, useMemo } from 'react'
 import { useComboBoxContext } from './ComboBoxMain'
 
-function ComboBoxTrigger({ children }: PropsWithChildren) {
+interface ComboBoxTriggerProps {
+  className?: string
+}
+
+function ComboBoxTrigger({
+  children,
+  className,
+}: PropsWithChildren<ComboBoxTriggerProps>) {
   const { id, isOpen, triggerRef, onTrigger, onKeyboardTrigger } =
     useComboBoxContext()
 
@@ -19,6 +26,7 @@ function ComboBoxTrigger({ children }: PropsWithChildren) {
       onClick={onTrigger}
       onKeyDown={onKeyboardTrigger}
       style={comboBoxTriggerStyle}
+      className={className}
     >
       {children}
     </div>

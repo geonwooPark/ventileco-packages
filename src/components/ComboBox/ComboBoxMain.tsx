@@ -6,6 +6,7 @@ import React, {
   useCallback,
   useEffect,
   useId,
+  useLayoutEffect,
   useMemo,
   useRef,
   useState,
@@ -211,7 +212,7 @@ const ComboBoxMain: ComboBoxMainComponent = forwardRef(function ComboBoxMain<
     }
   }, [isOpen, focusedIndex, optionList])
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!isOpen) return
     if (focusedIndex === -1) return
 

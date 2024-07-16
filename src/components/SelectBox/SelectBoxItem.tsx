@@ -16,7 +16,7 @@ interface SelectItemProps {
 }
 
 function SelectBoxItem({ children, item }: SelectItemProps) {
-  const { value, focusedItem, onSelect } = useSelectBoxContext()
+  const { id, value, focusedItem, onSelect } = useSelectBoxContext()
   const isSelected = value === item.value
   const isDisabled = item.disabled ? true : false
   const isFocused = focusedItem === item.value
@@ -32,6 +32,7 @@ function SelectBoxItem({ children, item }: SelectItemProps) {
   return (
     <li
       role="option"
+      id={`${id}-selectbox-option-${focusedItem}`}
       aria-selected={isSelected}
       aria-disabled={isDisabled}
       data-value={item.value}
