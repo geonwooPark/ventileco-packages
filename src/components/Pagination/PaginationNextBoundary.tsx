@@ -6,7 +6,7 @@ interface PaginationNextBoundaryProps {
 }
 
 export default function PaginationNextBoundary({
-  nextBoundary,
+  nextBoundary = 1,
   className,
 }: PaginationNextBoundaryProps) {
   const { page, totalPage, numberingIndex, numberingCount, onClick } =
@@ -17,7 +17,7 @@ export default function PaginationNextBoundary({
   return numberingIndex !== lastIndex - 1 ? (
     <>
       ...
-      {Array.from({ length: nextBoundary || 1 })
+      {Array.from({ length: nextBoundary })
         .map((_, idx) => (
           <button
             key={idx}

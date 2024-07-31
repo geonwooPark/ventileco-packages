@@ -6,14 +6,14 @@ interface PaginationPrevBoundaryProps {
 }
 
 export default function PaginationPrevBoundary({
-  prevBoundary,
+  prevBoundary = 1,
   className,
 }: PaginationPrevBoundaryProps) {
   const { page, numberingIndex, onClick } = usePaginationContext()
 
   return numberingIndex !== 0 ? (
     <>
-      {Array.from({ length: prevBoundary || 1 }).map((_, idx) => (
+      {Array.from({ length: prevBoundary }).map((_, idx) => (
         <button
           key={idx}
           onClick={() => onClick(idx)}

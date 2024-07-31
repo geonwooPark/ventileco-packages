@@ -12,24 +12,21 @@ export default {
       description: '컴포넌트의 인스턴스에 직접 접근하는 방법을 제공합니다.',
       table: {
         type: { summary: 'RefObject<HTMLDivElement>' },
-      },
-    },
-    className: {
-      description: '최상위 요소의 클래스를 지정합니다.',
-      table: {
-        type: { summary: 'string' },
+        category: 'Pagination',
       },
     },
     totalItemCount: {
       description: '전체 아이템 갯수를 설정합니다.',
       table: {
         type: { summary: 'number' },
+        category: 'Pagination',
       },
     },
     listItemCount: {
       description: '한 페이지에 보여지는 아이템의 갯수를 설정합니다.',
       table: {
         type: { summary: 'boolean' },
+        category: 'Pagination',
       },
     },
     numberingCount: {
@@ -37,18 +34,28 @@ export default {
         '페이지네이션 UI에 한번에 보여지는 페이지 갯수를 설정합니다.',
       table: {
         type: { summary: 'boolean' },
-      },
-    },
-    queries: {
-      description: '페이지 외 필터, 정렬 등의 쿼리를 설정합니다.',
-      table: {
-        type: { summary: 'Record<string, string>' },
+        category: 'Pagination',
       },
     },
     onNavigate: {
       description: '페이지 이동을 위해 실행하는 콜백함수입니다.',
       table: {
         type: { summary: '(path: string) => void' },
+        category: 'Pagination',
+      },
+    },
+    prevBoundary: {
+      description: '시작에 항상 표시되는 페이지의 수를 설정합니다.',
+      table: {
+        type: { summary: 'boolean' },
+        category: 'Pagination.PrevBoundary',
+      },
+    },
+    nextBoundary: {
+      description: '끝에 항상 표시되는 페이지의 수를 설정합니다.',
+      table: {
+        type: { summary: 'boolean' },
+        category: 'Pagination.NextBoundary',
       },
     },
   },
