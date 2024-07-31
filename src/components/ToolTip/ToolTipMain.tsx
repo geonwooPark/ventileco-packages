@@ -11,6 +11,7 @@ import ToolTipTrigger from './ToolTipTrigger'
 import ToolTipContent from './ToolTipContent'
 import { ToolTipDirection } from '../../types'
 import { _createContext } from '../../utils/_createContext'
+import ToolTipTriangle from './ToolTipTriangle'
 
 export interface ToolTipProps {
   direction: ToolTipDirection
@@ -18,7 +19,6 @@ export interface ToolTipProps {
   leaveDelay?: number
   disabled?: boolean
   gap?: number
-  triangle?: boolean
 }
 
 type ToolTipContextState = {
@@ -28,7 +28,6 @@ type ToolTipContextState = {
   triggerRef: React.RefObject<HTMLDivElement> | null
   tooltipRef: React.RefObject<HTMLDivElement> | null
   leaveTimer: React.MutableRefObject<number | NodeJS.Timeout | undefined>
-  triangle?: boolean
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
 
@@ -42,7 +41,6 @@ function ToolTipMain(
     enterDelay,
     leaveDelay,
     disabled,
-    triangle = true,
     gap = 16,
   }: PropsWithChildren<ToolTipProps>,
   forwardRef: ForwardedRef<HTMLDivElement>,
@@ -80,8 +78,6 @@ function ToolTipMain(
 
     const triggerNode = triggerRef.current as HTMLElement
     const tooltipNode = tooltipRef.current as HTMLElement
-    const contentNode = tooltipNode.childNodes[0].childNodes[0] as HTMLElement
-    const triangleNode = tooltipNode.childNodes[1] as HTMLElement
 
     const { left, right, top, bottom, width, height } =
       triggerNode.getBoundingClientRect()
@@ -138,17 +134,7 @@ function ToolTipMain(
       },
     }
 
-    const contentBackgroundColor =
-      contentNode instanceof HTMLElement
-        ? window.getComputedStyle(contentNode).backgroundColor
-        : ''
-
     Object.assign(tooltipNode.style, position[direction])
-    if (triangle) {
-      Object.assign(triangleNode.style, {
-        backgroundColor: contentBackgroundColor,
-      })
-    }
   }, [isOpen])
 
   const providerValue = useMemo(
@@ -159,10 +145,9 @@ function ToolTipMain(
       tooltipRef,
       triggerRef,
       leaveTimer,
-      triangle,
       setIsOpen,
     }),
-    [isOpen, disabled, direction, tooltipRef, triggerRef, leaveTimer, triangle],
+    [isOpen, disabled, direction, tooltipRef, triggerRef, leaveTimer],
   )
 
   return (
@@ -183,6 +168,7 @@ function ToolTipMain(
 const ToolTip = Object.assign(forwardRef(ToolTipMain), {
   Trigger: ToolTipTrigger,
   Content: ToolTipContent,
+  Triangle: ToolTipTriangle,
 })
 
 export default ToolTip

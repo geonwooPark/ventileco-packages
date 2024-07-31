@@ -1,7 +1,6 @@
 import React, { PropsWithChildren, useMemo } from 'react'
 import { createPortal } from 'react-dom'
 import { useToolTipContext } from './ToolTipMain'
-import { TOOLTIP_TRIANGLE_DIRECTION } from '../../constants'
 
 const tooltipDiv = document.createElement('div')
 tooltipDiv.id = 'tool-tip-ventileco'
@@ -9,15 +8,8 @@ document.body.appendChild(tooltipDiv)
 const portalRoot = document.getElementById('tool-tip-ventileco') as HTMLElement
 
 function ToolTipContent({ children }: PropsWithChildren) {
-  const {
-    isOpen,
-    disabled,
-    direction,
-    tooltipRef,
-    leaveTimer,
-    triangle,
-    setIsOpen,
-  } = useToolTipContext()
+  const { isOpen, disabled, tooltipRef, leaveTimer, setIsOpen } =
+    useToolTipContext()
 
   const onMouseOver = () => {
     clearTimeout(leaveTimer.current)
@@ -33,18 +25,6 @@ function ToolTipContent({ children }: PropsWithChildren) {
     [],
   )
 
-  const triangleStyle = useMemo(
-    () =>
-      ({
-        position: 'absolute',
-        zIndex: '-1',
-        width: '10px',
-        height: '10px',
-        ...TOOLTIP_TRIANGLE_DIRECTION[direction],
-      }) as React.CSSProperties,
-    [direction],
-  )
-
   return (
     <React.Fragment>
       {disabled ||
@@ -57,8 +37,7 @@ function ToolTipContent({ children }: PropsWithChildren) {
               onMouseOver={onMouseOver}
               onMouseLeave={onMouseLeave}
             >
-              <div>{children}</div>
-              {triangle && <div style={triangleStyle} />}
+              {children}
             </div>,
             portalRoot,
           ))}

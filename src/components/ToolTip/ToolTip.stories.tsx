@@ -67,7 +67,7 @@ export default {
 
 export function Normal() {
   return (
-    <ToolTip direction="top">
+    <ToolTip direction="bottom">
       <ToolTip.Trigger>
         <div className="rounded-md bg-gray-800 px-2 py-1 text-white">
           Trigger
@@ -77,6 +77,7 @@ export function Normal() {
         <div className="rounded-md bg-black px-3 py-5 text-white shadow-md">
           Content
         </div>
+        <ToolTip.Triangle className="size-2.5 bg-black" />
       </ToolTip.Content>
     </ToolTip>
   )
