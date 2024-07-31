@@ -29,14 +29,14 @@ export default {
     listItemCount: {
       description: '한 페이지에 보여지는 아이템의 갯수를 설정합니다.',
       table: {
-        type: { summary: 'number' },
+        type: { summary: 'boolean' },
       },
     },
     numberingCount: {
       description:
         '페이지네이션 UI에 한번에 보여지는 페이지 갯수를 설정합니다.',
       table: {
-        type: { summary: 'number' },
+        type: { summary: 'boolean' },
       },
     },
     queries: {
@@ -57,10 +57,10 @@ export default {
 export function Normal() {
   return (
     <Pagination
-      className="flex items-center gap-4"
+      className="flex items-center gap-4 text-lg"
       listItemCount={5}
-      totalItemCount={24}
-      numberingCount={3}
+      totalItemCount={92}
+      numberingCount={5}
       onNavigate={() => null}
     >
       <Pagination.PrevButton>
@@ -79,15 +79,21 @@ export function Normal() {
           />
         </svg>
       </Pagination.PrevButton>
+
+      <Pagination.PrevBoundary prevBoundary={2} className="size-8" />
+
       <Pagination.Numbering>
         {({ active, numbering }) => (
           <div
-            className={`flex size-6 items-center justify-center rounded-full border ${active ? 'border-blue-600 text-blue-600' : 'border-transparent text-black'} `}
+            className={`flex size-8 items-center justify-center rounded-full border ${active ? 'border-blue-600 text-blue-600' : 'border-transparent text-black'} `}
           >
             {numbering}
           </div>
         )}
       </Pagination.Numbering>
+
+      <Pagination.NextBoundary nextBoundary={2} className="size-8" />
+
       <Pagination.NextButton>
         <svg
           xmlns="http://www.w3.org/2000/svg"

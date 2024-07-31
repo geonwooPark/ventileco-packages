@@ -1,7 +1,6 @@
-import React, { useMemo } from 'react'
+import React from 'react'
 import { usePaginationContext } from './PaginationMain'
 import { getChunk } from '../../utils/getChunk'
-import { getQueries } from '../../utils/getQueries'
 
 interface PaginationNumberingProps {
   children: (props: { active: boolean; numbering: number }) => React.ReactNode
@@ -10,13 +9,8 @@ interface PaginationNumberingProps {
 function PaginationNumbering({
   children,
 }: PaginationNumberingProps): React.ReactNode {
-  const { page, totalPage, numberingCount, queries, setPage, onNavigate } =
+  const { page, totalPage, numberingCount, numberingIndex, onClick } =
     usePaginationContext()
-
-  const onClick = (i: number) => {
-    setPage(i + 1)
-    onNavigate(`?page=${i + 1}${queries ? `${getQueries(queries)}` : ''}`)
-  }
 
   const pageNumbers = Array.from({ length: totalPage }).map((_, idx) => (
     <button
@@ -30,10 +24,6 @@ function PaginationNumbering({
   ))
 
   const chunkedTotalPageArr = getChunk(pageNumbers, numberingCount)
-  const numberingIndex = useMemo(
-    () => Math.floor((page - 1) / (numberingCount as number)),
-    [page, numberingCount],
-  )
 
   return chunkedTotalPageArr[numberingIndex]
 }

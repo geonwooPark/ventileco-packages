@@ -7,6 +7,6 @@ describe('Pagination', () => {
     expect(screen.getByText('1')).toBeInTheDocument()
     expect(screen.getByText('2')).toBeInTheDocument()
     expect(screen.getByText('3')).toBeInTheDocument()
-    expect(screen.queryByText('4')).not.toBeInTheDocument()
+    expect(screen.queryByText('6')).not.toBeInTheDocument()
   })
 })

@@ -1,32 +1,35 @@
-import React, {
+import {
   ForwardedRef,
   PropsWithChildren,
   forwardRef,
+  useCallback,
   useMemo,
   useState,
 } from 'react'
 import { getParameterByName } from '../../utils/getParameterByName'
+import { _createContext } from '../../utils/_createContext'
 import PaginationPrevButton from './PaginationPrevButton'
 import PaginationNextButton from './PaginationNextButton'
 import PaginationNumbering from './PaginationNumbering'
-import { _createContext } from '../../utils/_createContext'
+import PaginationPrevBoundary from './PaginationPrevBoundary'
+import PaginationNextBoundary from './PaginationNextBoundary'
 
 export interface PaginationProps {
-  onNavigate: (path: string) => void
   totalItemCount: number
   listItemCount: number
   numberingCount?: number
-  queries?: Record<string, string>
   className?: string
+  onNavigate: any
 }
 
 type PaginationContextState = {
   page: number
   totalPage: number
-  numberingCount?: number
-  queries?: Record<string, string>
-  setPage: React.Dispatch<React.SetStateAction<number>>
-  onNavigate: (path: string) => void
+  numberingCount: number
+  numberingIndex: number
+  onClick: (i: number) => void
+  onNextClick: () => void
+  onPrevClick: () => void
 }
 
 export const [usePaginationContext, PaginationProvider] =
@@ -35,12 +38,11 @@ export const [usePaginationContext, PaginationProvider] =
 function PaginationMain(
   {
     children,
-    onNavigate,
     totalItemCount,
     numberingCount = 3,
-    queries,
     listItemCount,
     className,
+    onNavigate,
   }: PropsWithChildren<PaginationProps>,
   forwardRef: ForwardedRef<HTMLDivElement>,
 ) {
@@ -52,16 +54,37 @@ function PaginationMain(
     [totalItemCount, listItemCount],
   )
 
+  const numberingIndex = useMemo(
+    () => Math.floor((page - 1) / (numberingCount as number)),
+    [page, numberingCount],
+  )
+
+  const onClick = useCallback((i: number) => {
+    setPage(i + 1)
+    onNavigate()
+  }, [])
+
+  const onNextClick = useCallback(() => {
+    setPage((prev) => prev + 1)
+    onNavigate()
+  }, [])
+
+  const onPrevClick = useCallback(() => {
+    setPage((prev) => prev - 1)
+    onNavigate()
+  }, [])
+
   const providerValue = useMemo(
     () => ({
       page,
       totalPage,
       numberingCount,
-      queries,
-      setPage,
-      onNavigate,
+      numberingIndex,
+      onClick,
+      onNextClick,
+      onPrevClick,
     }),
-    [page, totalPage, numberingCount, queries],
+    [page, totalPage, numberingCount, numberingIndex],
   )
 
   return (
@@ -80,7 +103,9 @@ function PaginationMain(
 
 const Pagination = Object.assign(forwardRef(PaginationMain), {
   PrevButton: PaginationPrevButton,
+  PrevBoundary: PaginationPrevBoundary,
   NextButton: PaginationNextButton,
+  NextBoundary: PaginationNextBoundary,
   Numbering: PaginationNumbering,
 })
 

@@ -1,14 +1,8 @@
 import { PropsWithChildren, useMemo } from 'react'
 import { usePaginationContext } from './PaginationMain'
-import { getQueries } from '../../utils/getQueries'
 
 function PaginationPrevButton({ children }: PropsWithChildren) {
-  const { page, queries, setPage, onNavigate } = usePaginationContext()
-
-  const onClick = () => {
-    setPage((prev) => prev - 1)
-    onNavigate(`?page=${page - 1}${queries ? `${getQueries(queries)}` : ''}`)
-  }
+  const { page, onPrevClick } = usePaginationContext()
 
   const prevButtonStyle = useMemo(
     () => ({
@@ -23,7 +17,7 @@ function PaginationPrevButton({ children }: PropsWithChildren) {
   return (
     <button
       disabled={page === 1}
-      onClick={onClick}
+      onClick={onPrevClick}
       style={prevButtonStyle}
       aria-label="Previous Page"
       aria-disabled={page === 1}
