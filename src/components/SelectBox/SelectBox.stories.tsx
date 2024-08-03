@@ -1,5 +1,5 @@
 import type { Meta } from '@storybook/react'
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import SelectBox from './SelectBoxMain'
 import { motion } from 'framer-motion'
 import { selectBoxList } from '../../dummy'
@@ -128,10 +128,43 @@ export function Normal() {
 
 export function WithFramerMotion() {
   const [value, setValue] = useState<string>()
+  const selectRef = useRef<HTMLDivElement>(null)
+
+  const [reverse, setReverse] = useState(false)
+
+  const handleListDirection = () => {
+    if (selectRef.current) {
+      const { bottom } = selectRef.current.getBoundingClientRect()
+      if (reverse) {
+        if (window.innerHeight - bottom > 240) {
+          setReverse(false)
+        }
+      } else {
+        if (window.innerHeight - bottom <= 240) {
+          setReverse(true)
+        }
+      }
+    }
+  }
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleListDirection)
+    return () => window.removeEventListener('scroll', handleListDirection)
+  }, [selectRef.current?.getBoundingClientRect().top])
+
+  useEffect(() => {
+    window.addEventListener('resize', handleListDirection)
+    return () => window.removeEventListener('resize', handleListDirection)
+  }, [window.innerHeight])
 
   return (
     <div className="w-[240px] text-sm">
-      <SelectBox value={value} setValue={setValue} list={selectBoxList}>
+      <SelectBox
+        ref={selectRef}
+        value={value}
+        setValue={setValue}
+        list={selectBoxList}
+      >
         <SelectBox.Title>SelectBox</SelectBox.Title>
         <SelectBox.Trigger>
           <div className="flex w-full items-center rounded-md border border-black px-3 py-2">
@@ -141,7 +174,7 @@ export function WithFramerMotion() {
 
         <SelectBox.List
           motion={motion}
-          className="absolute z-[200] mt-1 max-h-[240px] w-full overflow-hidden overflow-y-scroll rounded-md border bg-white"
+          className={`absolute z-[200] max-h-[240px] w-full overflow-hidden overflow-y-scroll rounded-md border bg-white ${reverse ? 'bottom-10' : ''}`}
         >
           {({ optionList }) =>
             optionList.map((item) => (
