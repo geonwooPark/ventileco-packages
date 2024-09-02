@@ -20,19 +20,16 @@ describe('Accordion', () => {
   it('Tab키를 사용하여 탭을 이동히는 케이스', async () => {
     render(<Normal />)
 
-    await userEvent.keyboard('[Tab]')
+    await userEvent.tab()
+    await userEvent.keyboard('{Enter}')
     const firstContent = screen.getByText('Content1')
 
     expect(firstContent).toBeInTheDocument()
 
-    await userEvent.keyboard('[Tab]')
+    await userEvent.tab()
+    await userEvent.keyboard('[Enter]')
     const secondContent = screen.getByText('Content2')
 
     expect(secondContent).toBeInTheDocument()
-
-    await userEvent.keyboard('{Shift>}{Tab}{/Shift}')
-    const firstContent2 = screen.getByText('Content1')
-
-    expect(firstContent2).toBeInTheDocument()
   })
 })

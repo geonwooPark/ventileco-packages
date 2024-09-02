@@ -20,7 +20,10 @@ const accordionList = [
 export function Example() {
   return (
     <div className="w-[240px]">
-      <Accordion className="flex flex-col overflow-hidden rounded-md border">
+      <Accordion
+        multiple
+        className="flex flex-col overflow-hidden rounded-md border"
+      >
         {accordionList.map((item) => (
           <Accordion.Item key={item.id} index={item.id}>
             {({ isOpen }) => (

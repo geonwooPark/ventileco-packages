@@ -1,4 +1,4 @@
-import { PropsWithChildren } from 'react'
+import { PropsWithChildren, useCallback } from 'react'
 import { useAccordionContext } from './AccordionMain'
 import { useAccordionItemContext } from './AccordionItem'
 
@@ -10,13 +10,23 @@ function AccordionTrigger({
   children,
   className,
 }: PropsWithChildren<AccordionTriggerProps>) {
-  const { id, onClick, onFocus, onBlur } = useAccordionContext()
+  const { id, handleOpen } = useAccordionContext()
   const { index, isOpen } = useAccordionItemContext()
 
-  const onMouseDown = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    e.preventDefault()
-    onClick(index)
-  }
+  const onMouseDown = useCallback(
+    (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+      e.preventDefault()
+      handleOpen(index)
+    },
+    [],
+  )
+
+  const onKeyDown = useCallback((e: React.KeyboardEvent<HTMLButtonElement>) => {
+    if (e.key === 'Enter') {
+      e.preventDefault()
+      handleOpen(index)
+    }
+  }, [])
 
   return (
     <button
@@ -24,9 +34,8 @@ function AccordionTrigger({
       id={`${id}-accordion-button-${index}`}
       aria-expanded={isOpen}
       aria-controls={`${id}-accordion-region-${index}`}
-      onFocus={() => onFocus(index)}
-      onBlur={() => onBlur(index)}
       onMouseDown={onMouseDown}
+      onKeyDown={onKeyDown}
       className={className}
     >
       {children}

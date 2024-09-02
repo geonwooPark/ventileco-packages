@@ -25,6 +25,13 @@ export default {
         category: 'Accordion',
       },
     },
+    multiple: {
+      description: 'Accordion Item의 다중 오픈 여부를 결정합니다.',
+      table: {
+        type: { summary: 'boolean' },
+        category: 'Accordion',
+      },
+    },
     index: {
       description: '아이템의 고유한 값입니다.',
       table: {
@@ -54,7 +61,10 @@ export default {
 export function Normal() {
   return (
     <div className="w-[240px]">
-      <Accordion className="flex flex-col overflow-hidden rounded-md border border-black">
+      <Accordion
+        multiple
+        className="flex flex-col overflow-hidden rounded-md border border-black"
+      >
         {accordionList.map((item) => (
           <Accordion.Item key={item.id} index={item.id}>
             {({ isOpen }) => (

@@ -14,28 +14,27 @@ import { _createContext } from '../../utils/_createContext'
 
 interface AccordionProps {
   className?: string
+  multiple?: boolean
 }
 
 type AccordionContextState = {
   id: string
   activeItems: Set<number>
-  onClick: (selectedTab: number) => void
-  onFocus: (selectedTab: number) => void
-  onBlur: (selectedTab: number) => void
+  handleOpen: (selectedTab: number) => void
 }
 
 export const [useAccordionContext, AccordionProvider] =
   _createContext<AccordionContextState>()
 
 function AccordionMain(
-  { children, className }: PropsWithChildren<AccordionProps>,
+  { children, className, multiple = false }: PropsWithChildren<AccordionProps>,
   forwardRef: ForwardedRef<HTMLDivElement>,
 ) {
   const id = useId()
 
   const [activeItems, setActiveItems] = useState<Set<number>>(new Set())
 
-  const onClick = useCallback((selectedItem: number) => {
+  const handleSingleOpen = useCallback((selectedItem: number) => {
     setActiveItems((prev) => {
       const newItem = new Set(prev)
       if (prev.has(selectedItem)) {
@@ -48,10 +47,12 @@ function AccordionMain(
     })
   }, [])
 
-  const onFocus = useCallback((selectedItem: number) => {
+  const handleMultipleOpen = useCallback((selectedItem: number) => {
     setActiveItems((prev) => {
-      const newItem = new Set(prev)
-      if (!prev.has(selectedItem)) {
+      const newItem = new Set<number>([])
+      if (prev.has(selectedItem)) {
+        newItem.delete(selectedItem)
+      } else {
         newItem.add(selectedItem)
       }
 
@@ -59,18 +60,12 @@ function AccordionMain(
     })
   }, [])
 
-  const onBlur = useCallback((selectedItem: number) => {
-    setActiveItems((prev) => {
-      const newItem = new Set(prev)
-      if (prev.has(selectedItem)) {
-        newItem.delete(selectedItem)
-      }
-      return newItem
-    })
-  }, [])
-
   const providerValue = useMemo(
-    () => ({ id, activeItems, onClick, onFocus, onBlur }),
+    () => ({
+      id,
+      activeItems,
+      handleOpen: multiple ? handleSingleOpen : handleMultipleOpen,
+    }),
     [id, activeItems],
   )
 
