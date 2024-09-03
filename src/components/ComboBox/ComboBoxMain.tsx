@@ -32,12 +32,6 @@ type ComboBoxMainProps<T extends ElementType> = {
   'as' | 'children' | 'value' | 'setValue' | 'list'
 >
 
-type ComboBoxMainComponent = <T extends ElementType>(
-  props: ComboBoxMainProps<T> & {
-    ref?: React.ComponentPropsWithRef<T>['ref']
-  },
-) => ReactNode
-
 type ComboBoxContextState = {
   id: string
   value: string | undefined

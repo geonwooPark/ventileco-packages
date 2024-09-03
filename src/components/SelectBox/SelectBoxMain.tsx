@@ -26,7 +26,7 @@ type SelectBoxMainProps<T extends ElementType> = {
   setValue: (value: string | undefined) => void
   list: OptionList
 } & Omit<
-  React.ComponentPropsWithRef<T>,
+  React.ComponentPropsWithoutRef<T>,
   'as' | 'children' | 'value' | 'setValue' | 'list'
 >
 
@@ -48,7 +48,7 @@ type SelectBoxContextState = {
 export const [useSelectBoxContext, SelectBoxProvider] =
   _createContext<SelectBoxContextState>()
 
-const SelectBoxMain = forwardRef(function SelectBoxMain<T extends ElementType>(
+const SelectBoxMain = function SelectBoxMain<T extends ElementType>(
   { as, children, value, setValue, list }: SelectBoxMainProps<T>,
   ref: PolymorphicRef<T>,
 ) {
@@ -209,9 +209,9 @@ const SelectBoxMain = forwardRef(function SelectBoxMain<T extends ElementType>(
       </Element>
     </SelectBoxProvider>
   )
-})
+}
 
-const SelectBox = Object.assign(SelectBoxMain, {
+const SelectBox = Object.assign(forwardRef(SelectBoxMain), {
   Title: SelectBoxTitle,
   Trigger: SelectBoxTrigger,
   Input: SelectBoxInput,
