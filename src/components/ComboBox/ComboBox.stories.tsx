@@ -154,7 +154,6 @@ export function Normal() {
 
 export function WithFramerMotion() {
   const [value, setValue] = useState<string>()
-
   const comboRef = useRef<HTMLDivElement>(null)
 
   return (
