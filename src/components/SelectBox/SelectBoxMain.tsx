@@ -26,7 +26,7 @@ type SelectBoxMainProps<T extends ElementType> = {
   setValue: (value: string | undefined) => void
   list: OptionList
 } & Omit<
-  React.ComponentPropsWithoutRef<T>,
+  React.ComponentPropsWithRef<T>,
   'as' | 'children' | 'value' | 'setValue' | 'list'
 >
 
