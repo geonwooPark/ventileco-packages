@@ -27,13 +27,16 @@ type ComboBoxMainProps<T extends ElementType> = {
   value: string | undefined
   setValue: (value: string | undefined) => void
   list: OptionList
-} & React.ComponentPropsWithoutRef<T>
+} & Omit<
+  React.ComponentPropsWithoutRef<T>,
+  'as' | 'children' | 'value' | 'setValue' | 'list'
+>
 
-// type ComboBoxMainComponent = <T extends ElementType>(
-//   props: ComboBoxMainProps<T> & {
-//     ref?: React.ComponentPropsWithRef<T>['ref']
-//   },
-// ) => ReactNode
+type ComboBoxMainComponent = <T extends ElementType>(
+  props: ComboBoxMainProps<T> & {
+    ref?: React.ComponentPropsWithRef<T>['ref']
+  },
+) => ReactNode
 
 type ComboBoxContextState = {
   id: string
@@ -65,7 +68,7 @@ type ComboBoxContextState = {
 export const [useComboBoxContext, ComboBoxProvider] =
   _createContext<ComboBoxContextState>()
 
-const ComboBoxMain = forwardRef(function ComboBoxMain<T extends ElementType>(
+const ComboBoxMain = function ComboBoxMain<T extends ElementType>(
   { as, children, value, setValue, list }: ComboBoxMainProps<T>,
   ref: PolymorphicRef<T>,
 ) {
@@ -289,9 +292,9 @@ const ComboBoxMain = forwardRef(function ComboBoxMain<T extends ElementType>(
       </Element>
     </ComboBoxProvider>
   )
-})
+}
 
-const ComboBox = Object.assign(ComboBoxMain, {
+const ComboBox = Object.assign(forwardRef(ComboBoxMain), {
   Title: ComboBoxTitle,
   Trigger: ComboBoxTrigger,
   Input: ComboBoxInput,
