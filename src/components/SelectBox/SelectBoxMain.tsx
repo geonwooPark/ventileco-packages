@@ -30,12 +30,6 @@ type SelectBoxMainProps<T extends ElementType> = {
   'as' | 'children' | 'value' | 'setValue' | 'list'
 >
 
-type SelectBoxMainComponent = <T extends ElementType>(
-  props: SelectBoxMainProps<T> & {
-    ref?: React.ComponentPropsWithRef<T>['ref']
-  },
-) => React.ReactNode
-
 type SelectBoxContextState = {
   id: string
   value: string | undefined
@@ -54,9 +48,7 @@ type SelectBoxContextState = {
 export const [useSelectBoxContext, SelectBoxProvider] =
   _createContext<SelectBoxContextState>()
 
-const SelectBoxMain: SelectBoxMainComponent = forwardRef(function SelectBoxMain<
-  T extends ElementType,
->(
+const SelectBoxMain = forwardRef(function SelectBoxMain<T extends ElementType>(
   { as, children, value, setValue, list }: SelectBoxMainProps<T>,
   ref: PolymorphicRef<T>,
 ) {
