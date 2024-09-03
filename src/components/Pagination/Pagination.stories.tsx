@@ -87,7 +87,7 @@ export function Normal() {
         </svg>
       </Pagination.PrevButton>
 
-      <Pagination.PrevBoundary prevBoundary={2} className="size-8" />
+      <Pagination.PrevBoundary prevBoundary={3} className="size-8" />
 
       <Pagination.Numbering>
         {({ active, numbering }) => (
@@ -99,7 +99,7 @@ export function Normal() {
         )}
       </Pagination.Numbering>
 
-      <Pagination.NextBoundary nextBoundary={2} className="size-8" />
+      <Pagination.NextBoundary nextBoundary={3} className="size-8" />
 
       <Pagination.NextButton>
         <svg
