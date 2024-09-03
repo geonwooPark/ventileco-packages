@@ -94,10 +94,16 @@ export default {
 
 export function Normal() {
   const [value, setValue] = useState<string>()
+  const selectRef = useRef<HTMLButtonElement>(null)
 
   return (
     <div className="w-[240px] text-sm">
-      <SelectBox value={value} setValue={setValue} list={selectBoxList}>
+      <SelectBox
+        ref={selectRef}
+        value={value}
+        setValue={setValue}
+        list={selectBoxList}
+      >
         <SelectBox.Title>SelectBox</SelectBox.Title>
 
         <SelectBox.Trigger>
@@ -128,10 +134,18 @@ export function Normal() {
 
 export function WithFramerMotion() {
   const [value, setValue] = useState<string>()
+  const selectRef = useRef<HTMLElement>(null)
+
+  console.log(selectRef)
 
   return (
     <div className="w-[240px] text-sm">
-      <SelectBox value={value} setValue={setValue} list={selectBoxList}>
+      <SelectBox
+        ref={selectRef}
+        value={value}
+        setValue={setValue}
+        list={selectBoxList}
+      >
         <SelectBox.Title>SelectBox</SelectBox.Title>
         <SelectBox.Trigger>
           <div className="flex w-full items-center rounded-md border border-black px-3 py-2">

@@ -12,7 +12,7 @@ import React, {
   useState,
 } from 'react'
 import { _createContext } from '../../utils/_createContext'
-import { OptionList, PolymorphicRef, TitleElement } from '../../types'
+import { OptionList, TitleElement } from '../../types'
 import SelectBoxTrigger from './SelectBoxTrigger'
 import SelectBoxItem from './SelectBoxItem'
 import SelectBoxList from './SelectBoxList'
@@ -25,16 +25,10 @@ type SelectBoxMainProps<T extends ElementType> = {
   value: string | undefined
   setValue: (value: string | undefined) => void
   list: OptionList
-} & Omit<
-  React.ComponentPropsWithoutRef<T>,
-  'as' | 'children' | 'value' | 'setValue' | 'list'
->
+}
 
-type SelectBoxMainComponent = <T extends ElementType>(
-  props: SelectBoxMainProps<T> & {
-    ref?: React.ComponentPropsWithRef<T>['ref']
-  },
-) => React.ReactNode
+type PolymorphicRef<T extends ElementType> =
+  React.ComponentPropsWithRef<T>['ref']
 
 type SelectBoxContextState = {
   id: string
@@ -54,9 +48,7 @@ type SelectBoxContextState = {
 export const [useSelectBoxContext, SelectBoxProvider] =
   _createContext<SelectBoxContextState>()
 
-const SelectBoxMain: SelectBoxMainComponent = forwardRef(function SelectBoxMain<
-  T extends ElementType,
->(
+const SelectBoxMain = forwardRef(function SelectBoxMain<T extends ElementType>(
   { as, children, value, setValue, list }: SelectBoxMainProps<T>,
   ref: PolymorphicRef<T>,
 ) {
