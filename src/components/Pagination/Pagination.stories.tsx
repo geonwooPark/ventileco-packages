@@ -64,7 +64,7 @@ export default {
 export function Normal() {
   return (
     <Pagination
-      className="flex items-center gap-4 text-lg"
+      className="flex items-center gap-3 text-lg"
       listItemCount={5}
       totalItemCount={92}
       numberingCount={5}

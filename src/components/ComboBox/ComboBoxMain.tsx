@@ -17,7 +17,7 @@ import ComboBoxInput from './ComboBoxInput'
 import ComboBoxItem from './ComboBoxItem'
 import ComboBoxClearButton from './ComboBoxClearButton'
 import ComboBoxList from './ComboBoxList'
-import { Option, OptionList, PolymorphicRef, TitleElement } from '../../types'
+import { Option, OptionList, TitleElement } from '../../types'
 import { escapeRegExp } from '../../utils/escapeRegExp'
 import { _createContext } from '../../utils/_createContext'
 
@@ -27,16 +27,10 @@ type ComboBoxMainProps<T extends ElementType> = {
   value: string | undefined
   setValue: (value: string | undefined) => void
   list: OptionList
-} & Omit<
-  React.ComponentPropsWithoutRef<T>,
-  'as' | 'children' | 'value' | 'setValue' | 'list'
->
+}
 
-type ComboBoxMainComponent = <T extends ElementType>(
-  props: ComboBoxMainProps<T> & {
-    ref?: React.ComponentPropsWithRef<T>['ref']
-  },
-) => ReactNode
+type PolymorphicRef<T extends ElementType> =
+  React.ComponentPropsWithRef<T>['ref']
 
 type ComboBoxContextState = {
   id: string
@@ -68,9 +62,7 @@ type ComboBoxContextState = {
 export const [useComboBoxContext, ComboBoxProvider] =
   _createContext<ComboBoxContextState>()
 
-const ComboBoxMain: ComboBoxMainComponent = forwardRef(function ComboBoxMain<
-  T extends ElementType,
->(
+const ComboBoxMain = forwardRef(function ComboBoxMain<T extends ElementType>(
   { as, children, value, setValue, list }: ComboBoxMainProps<T>,
   ref: PolymorphicRef<T>,
 ) {
