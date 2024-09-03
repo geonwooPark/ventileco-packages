@@ -154,9 +154,10 @@ export function Normal() {
 
 export function WithFramerMotion() {
   const [value, setValue] = useState<string>()
-  const comboRef = useRef<HTMLDivElement>(null)
 
   const [reverse, setReverse] = useState(false)
+
+  const comboRef = useRef<HTMLDivElement>(null)
 
   const handleListDirection = () => {
     if (comboRef.current) {
