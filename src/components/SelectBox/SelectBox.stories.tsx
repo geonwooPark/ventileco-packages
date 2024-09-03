@@ -1,5 +1,5 @@
 import type { Meta } from '@storybook/react'
-import { useEffect, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import SelectBox from './SelectBoxMain'
 import { motion } from 'framer-motion'
 import { selectBoxList } from '../../dummy'
@@ -130,33 +130,6 @@ export function WithFramerMotion() {
   const [value, setValue] = useState<string>()
   const selectRef = useRef<HTMLDivElement>(null)
 
-  const [reverse, setReverse] = useState(false)
-
-  const handleListDirection = () => {
-    if (selectRef.current) {
-      const { bottom } = selectRef.current.getBoundingClientRect()
-      if (reverse) {
-        if (window.innerHeight - bottom > 240) {
-          setReverse(false)
-        }
-      } else {
-        if (window.innerHeight - bottom <= 240) {
-          setReverse(true)
-        }
-      }
-    }
-  }
-
-  useEffect(() => {
-    window.addEventListener('scroll', handleListDirection)
-    return () => window.removeEventListener('scroll', handleListDirection)
-  }, [selectRef.current?.getBoundingClientRect().top])
-
-  useEffect(() => {
-    window.addEventListener('resize', handleListDirection)
-    return () => window.removeEventListener('resize', handleListDirection)
-  }, [window.innerHeight])
-
   return (
     <div className="w-[240px] text-sm">
       <SelectBox
@@ -174,7 +147,7 @@ export function WithFramerMotion() {
 
         <SelectBox.List
           motion={motion}
-          className={`absolute z-[200] max-h-[240px] w-full overflow-hidden overflow-y-scroll rounded-md border bg-white ${reverse ? 'bottom-10' : ''}`}
+          className={`absolute z-[200] max-h-[240px] w-full overflow-hidden overflow-y-scroll rounded-md border bg-white`}
         >
           {({ optionList }) =>
             optionList.map((item) => (

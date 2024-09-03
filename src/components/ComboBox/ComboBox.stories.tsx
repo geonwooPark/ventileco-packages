@@ -1,6 +1,6 @@
 import type { Meta } from '@storybook/react'
 import ComboBox from './ComboBoxMain'
-import { useEffect, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import { comboBoxList } from '../../dummy'
 
@@ -155,34 +155,7 @@ export function Normal() {
 export function WithFramerMotion() {
   const [value, setValue] = useState<string>()
 
-  const [reverse, setReverse] = useState(false)
-
   const comboRef = useRef<HTMLDivElement>(null)
-
-  const handleListDirection = () => {
-    if (comboRef.current) {
-      const { bottom } = comboRef.current.getBoundingClientRect()
-      if (reverse) {
-        if (window.innerHeight - bottom > 240) {
-          setReverse(false)
-        }
-      } else {
-        if (window.innerHeight - bottom <= 240) {
-          setReverse(true)
-        }
-      }
-    }
-  }
-
-  useEffect(() => {
-    window.addEventListener('scroll', handleListDirection)
-    return () => window.removeEventListener('scroll', handleListDirection)
-  }, [comboRef.current?.getBoundingClientRect().top])
-
-  useEffect(() => {
-    window.addEventListener('resize', handleListDirection)
-    return () => window.removeEventListener('resize', handleListDirection)
-  }, [window.innerHeight])
 
   return (
     <div className="w-[240px] text-sm">
@@ -218,7 +191,7 @@ export function WithFramerMotion() {
 
         <ComboBox.List
           motion={motion}
-          className={`absolute z-[200] max-h-[240px] w-full overflow-hidden overflow-y-scroll rounded-md border bg-white ${reverse ? 'bottom-10' : ''}`}
+          className={`absolute z-[200] max-h-[240px] w-full overflow-hidden overflow-y-scroll rounded-md border bg-white`}
         >
           {({ optionList }) =>
             optionList.length !== 0 ? (
