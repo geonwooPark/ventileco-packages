@@ -81,13 +81,11 @@ const ComboBoxMain = forwardRef(function ComboBoxMain<T extends ElementType>(
   const inputRef = useRef<HTMLInputElement>(null)
   const listRef = useRef<HTMLUListElement>(null)
 
-  const focusedIndex = useMemo(
-    () =>
-      optionList.findIndex((r) => r.value === focusedItem) === -1
-        ? 0
-        : optionList.findIndex((r) => r.value === focusedItem),
-    [optionList, focusedItem],
-  )
+  const focusedIndex = useMemo(() => {
+    const index = optionList.findIndex((r) => r.value === focusedItem)
+
+    return index === -1 ? 0 : index
+  }, [optionList, focusedItem])
 
   const onTextChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     setKeyword(e.target.value)

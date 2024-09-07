@@ -22,7 +22,7 @@ function SelectBoxInput({ className, placeholder }: ComboBoxInputProps) {
       aria-activedescendant={
         focusedItem ? `${id}-selectbox-option-${focusedItem}` : undefined
       }
-      defaultValue={focusedLabel}
+      value={focusedLabel}
       placeholder={placeholder}
       className={className}
       style={selectBoxInputStyle}

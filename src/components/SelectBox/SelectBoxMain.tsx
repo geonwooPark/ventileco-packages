@@ -22,6 +22,7 @@ import SelectBoxInput from './SelectBoxInput'
 type SelectBoxMainProps<T extends ElementType> = {
   as?: T extends 'div' | 'fieldset' ? T : never
   children?: ReactNode
+  className?: string
   value: string | undefined
   setValue: (value: string | undefined) => void
   list: OptionList
@@ -63,10 +64,11 @@ const SelectBoxMain = forwardRef(function SelectBoxMain<T extends ElementType>(
   const triggerRef = useRef<HTMLDivElement>(null)
   const listRef = useRef<HTMLUListElement>(null)
 
-  const focusedIndex = useMemo(
-    () => list.findIndex((r) => r.value === focusedItem),
-    [list, focusedItem],
-  )
+  const focusedIndex = useMemo(() => {
+    const index = list.findIndex((r) => r.value === focusedItem)
+
+    return index === -1 ? 0 : index
+  }, [list, focusedItem])
 
   const focusedLabel = useMemo(
     () => (focusedIndex !== -1 ? list[focusedIndex].label : ''),
@@ -90,12 +92,14 @@ const SelectBoxMain = forwardRef(function SelectBoxMain<T extends ElementType>(
         setIsOpen(true)
       }
 
-      const nodesList = listRef?.current?.childNodes
+      const nodesList = listRef?.current?.childNodes[0].childNodes
+
       if (nodesList) {
         const element = nodesList[focusedIndex] as HTMLElement
 
         if (e.key === 'Enter') {
           e.preventDefault()
+
           onSelect({
             value: element.dataset.value as string,
           })
@@ -136,7 +140,8 @@ const SelectBoxMain = forwardRef(function SelectBoxMain<T extends ElementType>(
   useEffect(() => {
     if (!isOpen) return
     if (!listRef.current) return
-    const nodesList = listRef.current.childNodes
+
+    const nodesList = listRef?.current?.childNodes[0].childNodes
 
     for (let i = 0; i < list?.length; i++) {
       let node: ChildNode

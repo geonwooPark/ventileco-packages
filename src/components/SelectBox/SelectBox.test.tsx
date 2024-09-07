@@ -36,7 +36,7 @@ describe('SelectBox', () => {
     await userEvent.keyboard('[ArrowDown][Enter]')
 
     await waitFor(() => {
-      expect(trigger.value).toBe('🍇 Grape')
+      expect(trigger.value).toBe('🥝 Kiwi')
     })
   })
 })

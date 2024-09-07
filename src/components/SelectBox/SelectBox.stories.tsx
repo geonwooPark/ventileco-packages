@@ -96,25 +96,40 @@ export function Normal() {
   const [value, setValue] = useState<string>()
   const selectRef = useRef<HTMLButtonElement>(null)
 
+  const animationProps = {
+    variants: {
+      hidden: { opacity: 0, y: 20 },
+      visible: { opacity: 1, y: 0 },
+    },
+    initial: 'hidden',
+    animate: 'visible',
+    viewport: { once: true },
+    transition: { duration: 0.3 },
+  }
+
   return (
-    <div className="w-[240px] text-sm">
-      <SelectBox
-        ref={selectRef}
-        value={value}
-        setValue={setValue}
-        list={selectBoxList}
-      >
-        <SelectBox.Title>SelectBox</SelectBox.Title>
+    <SelectBox
+      ref={selectRef}
+      value={value}
+      setValue={setValue}
+      list={selectBoxList}
+      className="w-[240px] text-sm"
+    >
+      <SelectBox.Title>SelectBox</SelectBox.Title>
 
-        <SelectBox.Trigger>
-          <div className="flex w-full items-center rounded-md border border-black px-3 py-2">
-            <SelectBoxInput placeholder="🐝 Fruits" />
-          </div>
-        </SelectBox.Trigger>
+      <SelectBox.Trigger>
+        <div className="flex w-full items-center rounded-md border border-black px-3 py-2">
+          <SelectBoxInput placeholder="🐝 Fruits" />
+        </div>
+      </SelectBox.Trigger>
 
-        <SelectBox.List className="absolute z-[200] mt-1 max-h-[240px] w-full overflow-hidden overflow-y-scroll rounded-md border bg-white">
-          {({ optionList }) =>
-            optionList.map((item) => (
+      <SelectBox.List>
+        {({ optionList }) => (
+          <motion.div
+            {...animationProps}
+            className="absolute z-[200] max-h-[240px] w-full overflow-hidden overflow-y-scroll rounded-md border bg-white"
+          >
+            {optionList.map((item) => (
               <SelectBox.Item key={item.value} item={item}>
                 {({ isSelected, isDisabled, isFocused }) => (
                   <div
@@ -124,46 +139,10 @@ export function Normal() {
                   </div>
                 )}
               </SelectBox.Item>
-            ))
-          }
-        </SelectBox.List>
-      </SelectBox>
-    </div>
-  )
-}
-
-export function WithFramerMotion() {
-  const [value, setValue] = useState<string>()
-
-  return (
-    <div className="w-[240px] text-sm">
-      <SelectBox value={value} setValue={setValue} list={selectBoxList}>
-        <SelectBox.Title>SelectBox</SelectBox.Title>
-        <SelectBox.Trigger>
-          <div className="flex w-full items-center rounded-md border border-black px-3 py-2">
-            <SelectBox.Input placeholder="🐝 Fruits" />
-          </div>
-        </SelectBox.Trigger>
-
-        <SelectBox.List
-          motion={motion}
-          className={`absolute z-[200] max-h-[240px] w-full overflow-hidden overflow-y-scroll rounded-md border bg-white`}
-        >
-          {({ optionList }) =>
-            optionList.map((item) => (
-              <SelectBox.Item key={item.value} item={item}>
-                {({ isSelected, isDisabled, isFocused }) => (
-                  <div
-                    className={`${isSelected && 'text-blue-600'} ${isDisabled && 'text-gray-300'} ${isFocused && 'bg-blue-100'} w-full px-3 py-2 hover:bg-gray-100`}
-                  >
-                    {item.label}
-                  </div>
-                )}
-              </SelectBox.Item>
-            ))
-          }
-        </SelectBox.List>
-      </SelectBox>
-    </div>
+            ))}
+          </motion.div>
+        )}
+      </SelectBox.List>
+    </SelectBox>
   )
 }
