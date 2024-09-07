@@ -39,22 +39,6 @@ export default {
         category: 'Accordion.Item',
       },
     },
-    motion: {
-      description:
-        'Framer Motion의 motion 모듈을 받아서 애니메이션을 적용시킵니다.',
-      table: {
-        type: { summary: 'any' },
-        category: 'Accordion.Content',
-      },
-    },
-    animationProps: {
-      description:
-        'Framer Motion의 애니메이션 속성을 조절하기 위한 객체입니다.',
-      table: {
-        type: { summary: 'object' },
-        category: 'Accordion.Content',
-      },
-    },
   },
 } as Meta
 

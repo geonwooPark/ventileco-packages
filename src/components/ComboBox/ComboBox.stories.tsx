@@ -18,6 +18,13 @@ export default {
         category: 'ComboBox',
       },
     },
+    className: {
+      description: '최상위 요소의 클래스를 지정합니다.',
+      table: {
+        type: { summary: 'string' },
+        category: 'ComboBox',
+      },
+    },
     ref: {
       description: '컴포넌트의 인스턴스에 직접 접근하는 방법을 제공합니다.',
       table: {
@@ -65,22 +72,6 @@ export default {
       table: {
         type: { summary: 'string' },
         category: 'ComboBox.Input',
-      },
-    },
-    motion: {
-      description:
-        'Framer Motion의 motion 모듈을 받아서 애니메이션을 적용시킵니다.',
-      table: {
-        type: { summary: 'any' },
-        category: 'ComboBox.List',
-      },
-    },
-    animationProps: {
-      description:
-        'Framer Motion의 애니메이션 속성을 조절하기 위한 객체입니다.',
-      table: {
-        type: { summary: 'object' },
-        category: 'ComboBox.List',
       },
     },
     item: {

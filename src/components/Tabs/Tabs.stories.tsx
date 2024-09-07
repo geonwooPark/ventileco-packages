@@ -18,7 +18,7 @@ export default {
       },
     },
     className: {
-      description: '컴포넌트에 클래스를 등록합니다.',
+      description: '최상위 요소의 클래스를 지정합니다.',
       table: {
         type: { summary: 'string' },
         category: 'Tabs',
