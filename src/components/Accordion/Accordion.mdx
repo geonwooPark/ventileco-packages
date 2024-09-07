@@ -18,6 +18,17 @@ const accordionList = [
 ]
 
 export function Example() {
+  const animationProps = {
+    variants: {
+      hidden: { opacity: 0, y: 20 },
+      visible: { opacity: 1, y: 0 },
+    },
+    initial: 'hidden',
+    animate: 'visible',
+    viewport: { once: true },
+    transition: { duration: 0.3 },
+  }
+
   return (
     <div className="w-[240px]">
       <Accordion
@@ -37,48 +48,12 @@ export function Example() {
                 </Accordion.Trigger>
 
                 <Accordion.Content>
-                  <div className="px-4 py-3">{item.content}</div>
-                </Accordion.Content>
-              </React.Fragment>
-            )}
-          </Accordion.Item>
-        ))}
-      </Accordion>
-    </div>
-  )
-}
-```
-
-## With Framer Motion
-
-```jsx
-import { Accordion } from 'ventileco-ui'
-import { motion } from 'framer-motion'
-
-const accordionList = [
-  { id: 0, title: 'Title1', content: 'Content1' },
-  { id: 1, title: 'Title2', content: 'Content2' },
-  { id: 2, title: 'Title3', content: 'Content3' },
-]
-
-export function Example() {
-  return (
-    <div className="w-[240px]">
-      <Accordion className="flex flex-col overflow-hidden rounded-md border">
-        {accordionList.map((item) => (
-          <Accordion.Item key={item.id} index={item.id}>
-            {({ isOpen }) => (
-              <React.Fragment>
-                <Accordion.Trigger>
-                  <div
-                    className={`${isOpen && 'text-blue-600'} cursor-pointer border-y px-4 py-3 text-left`}
+                  <motion.div
+                    className="w-full break-words bg-gray-50 px-4 py-3"
+                    {...animationProps}
                   >
-                    {item.title}
-                  </div>
-                </Accordion.Trigger>
-
-                <Accordion.Content motion={motion}>
-                  <div className="px-4 py-3">{item.content}</div>
+                    {item.content}
+                  </motion.div>{' '}
                 </Accordion.Content>
               </React.Fragment>
             )}
