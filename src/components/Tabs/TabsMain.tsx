@@ -6,39 +6,37 @@ import React, {
   useCallback,
   useId,
   useMemo,
-  useState,
+  useRef,
 } from 'react'
-import TabsList from './TabsList'
-import TabsView from './TabsView'
 import TabsContent from './TabsContent'
 import TabsItem from './TabsItem'
 import { _createContext } from '../../utils/_createContext'
+import TabsList from './TabsList'
+import TabsIndicator from './TabsIndicator'
+
+interface TabsProps {
+  currentTab: any
+  onChange: (value: any) => void
+  className?: string
+}
 
 type TabsContextState = {
   id: string
   currentTab: number
-  onClick: (selectedTab: number) => void
-  onFocus: (selectedTab: number) => void
+  listRef: React.RefObject<HTMLUListElement>
+  onChange: (value: any) => void
   onKeyboardSelect: React.KeyboardEventHandler<HTMLLIElement>
 }
 
 export const [useTabsContext, TabsProvider] = _createContext<TabsContextState>()
 
 function TabsMain(
-  { children }: PropsWithChildren,
+  { children, currentTab, onChange, className }: PropsWithChildren<TabsProps>,
   forwardRef: ForwardedRef<HTMLDivElement>,
 ) {
   const id = useId()
 
-  const [currentTab, setCurrentTab] = useState(0)
-
-  const onClick = useCallback((selectedTab: number) => {
-    setCurrentTab(selectedTab)
-  }, [])
-
-  const onFocus = useCallback((selectedTab: number) => {
-    setCurrentTab(selectedTab)
-  }, [])
+  const listRef = useRef<HTMLUListElement>(null)
 
   const onKeyboardSelect: KeyboardEventHandler<HTMLLIElement> = useCallback(
     (e) => {
@@ -68,13 +66,15 @@ function TabsMain(
   )
 
   const providerValue = useMemo(
-    () => ({ id, currentTab, onClick, onFocus, onKeyboardSelect }),
-    [id, currentTab],
+    () => ({ id, currentTab, listRef, onChange, onKeyboardSelect }),
+    [id, currentTab, listRef],
   )
 
   return (
     <TabsProvider value={providerValue}>
-      <div ref={forwardRef}>{children}</div>
+      <div ref={forwardRef} className={className}>
+        {children}
+      </div>
     </TabsProvider>
   )
 }
@@ -82,7 +82,7 @@ function TabsMain(
 const Tabs = Object.assign(forwardRef(TabsMain), {
   List: TabsList,
   Item: TabsItem,
-  View: TabsView,
+  Indicator: TabsIndicator,
   Content: TabsContent,
 })
 

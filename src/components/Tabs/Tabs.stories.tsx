@@ -1,7 +1,7 @@
 import type { Meta } from '@storybook/react'
 import Tabs from './TabsMain'
-import { motion } from 'framer-motion'
 import { tabList } from '../../dummy'
+import { useState } from 'react'
 
 export default {
   title: 'COMPONENTS/Tabs',
@@ -17,106 +17,70 @@ export default {
         category: 'Tabs',
       },
     },
-    tabIndex: {
-      description:
-        '아이템의 고유한 값으로 tabIndex와 contentIndex는 일치해야 합니다.',
+    className: {
+      description: '컴포넌트에 클래스를 등록합니다.',
       table: {
-        type: { summary: 'number', required: true },
-        category: 'Tabs.Item',
+        type: { summary: 'string' },
+        category: 'Tabs',
       },
     },
-    contentIndex: {
-      description:
-        '아이템의 고유한 값으로 tabIndex와 contentIndex는 일치해야 합니다.',
-
-      table: {
-        type: { summary: 'number', required: true },
-        category: 'Tabs.Content',
-      },
-    },
-    motion: {
-      description:
-        'Framer Motion의 motion 모듈을 받아서 애니메이션을 적용시킵니다.',
+    currentTab: {
+      description: '현재 활성화 된 탭입니다.',
       table: {
         type: { summary: 'any' },
-        category: 'Tabs.Content',
+        category: 'Tabs',
       },
     },
-    animationProps: {
-      description:
-        'Framer Motion의 애니메이션 속성을 조절하기 위한 객체입니다.',
+    onChange: {
+      description: '활성화 시킬 탭을 변경하는 함수입니다.',
       table: {
-        type: { summary: 'object' },
-        category: 'Tabs.Content',
+        type: { summary: '(value: any) => void' },
+        category: 'Tabs',
+      },
+    },
+    value: {
+      description: '탭이 가지는 고유한 값입니다.',
+      table: {
+        type: { summary: '(value: any) => void' },
+        category: 'Tabs.Item',
       },
     },
   },
 } as Meta
 
 export function Normal() {
+  const [currentTab, setCurrentTab] = useState(0)
+
+  const onChange = (value: any) => {
+    setCurrentTab(value)
+  }
+
   return (
-    <div className="w-[280px]">
-      <Tabs>
-        <Tabs.List className="hide-scroll flex overflow-x-scroll rounded-t-md border bg-white">
-          {tabList.map((item) => (
-            <Tabs.Item
-              key={item.id}
-              tabIndex={item.id}
-              className="w-full outline-none"
-            >
-              {({ selected }) => (
-                <div
-                  className={`${selected && 'border-b-2 border-blue-600'} w-full cursor-pointer px-4 py-3 text-center transition duration-200 hover:opacity-50`}
-                >
-                  {item.title}
-                </div>
-              )}
-            </Tabs.Item>
-          ))}
-        </Tabs.List>
+    <Tabs currentTab={currentTab} onChange={onChange}>
+      <Tabs.List>
+        {tabList.map((item) => (
+          <Tabs.Item key={item.id} value={item.id} className="outline-none">
+            {({ selected }) => (
+              <div
+                className={`${selected && 'text-blue-600'} cursor-pointer px-4 py-3 text-center transition duration-200 hover:opacity-50`}
+              >
+                {item.title}
+              </div>
+            )}
+          </Tabs.Item>
+        ))}
+      </Tabs.List>
 
-        <Tabs.View className="rounded-b-md border bg-gray-50">
-          {tabList.map((item) => (
-            <Tabs.Content key={item.id} contentIndex={item.id}>
-              <div className="break-words px-4 py-3">{item.content}</div>
-            </Tabs.Content>
-          ))}
-        </Tabs.View>
-      </Tabs>
-    </div>
-  )
-}
+      <Tabs.Indicator className="h-[2px] bg-black" />
 
-export function WithFramerMotion() {
-  return (
-    <div className="w-[280px]">
-      <Tabs>
-        <Tabs.List className="hide-scroll flex overflow-x-scroll rounded-t-md border bg-white">
-          {tabList.map((item) => (
-            <Tabs.Item
-              key={item.id}
-              tabIndex={item.id}
-              className="w-full outline-none"
-            >
-              {({ selected }) => (
-                <div
-                  className={`${selected && 'border-b-2 border-blue-600'} w-full cursor-pointer px-4 py-3 text-center transition duration-200 hover:opacity-50`}
-                >
-                  {item.title}
-                </div>
-              )}
-            </Tabs.Item>
-          ))}
-        </Tabs.List>
-
-        <Tabs.View className="rounded-b-md border bg-gray-50">
-          {tabList.map((item) => (
-            <Tabs.Content key={item.id} contentIndex={item.id} motion={motion}>
-              <div className="break-words px-4 py-3">{item.content}</div>
-            </Tabs.Content>
-          ))}
-        </Tabs.View>
-      </Tabs>
-    </div>
+      <Tabs.Content className="w-[500px] px-4 py-3">
+        {currentTab === 0 && (
+          <div>Content1Content1Content1Content1Content1Content1</div>
+        )}
+        {currentTab === 1 && <div>Content2</div>}
+        {currentTab === 2 && <div>Content3</div>}
+        {currentTab === 3 && <div>Content4</div>}
+      </Tabs.Content>
+    </Tabs>
   )
 }

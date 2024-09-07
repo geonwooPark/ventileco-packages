@@ -1,32 +1,39 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { useTabsContext } from './TabsMain'
 
 interface TabsItemProps {
   children: (props: { selected: boolean }) => React.ReactNode
-  tabIndex: number
+  value: any
   className?: string
 }
 
-function TabsItem({ children, tabIndex: index, className }: TabsItemProps) {
-  const { id, currentTab, onClick, onFocus, onKeyboardSelect } =
-    useTabsContext()
-  const selected = index === currentTab
+function TabsItem({ children, value, className }: TabsItemProps) {
+  const { id, currentTab, onChange, onKeyboardSelect } = useTabsContext()
+  const selected = value === currentTab
 
   const onFocusElement = (e: React.FocusEvent<HTMLLIElement, Element>) => {
     e.target.scrollIntoView({ behavior: 'smooth', block: 'center' })
-    onFocus(index)
+    onChange(value)
   }
+
+  const itemStyle = useMemo(
+    () => ({
+      flex: 1,
+    }),
+    [],
+  )
 
   return (
     <li
-      id={`${id}-tab-button-${index}`}
+      id={`${id}-tab-button-${value}`}
       role="tab"
       tabIndex={0}
       aria-selected={selected}
-      aria-controls={`${id}-tab-panel-${index}`}
-      onClick={() => onClick(index)}
+      aria-controls={`${id}-tab-panel-${value}`}
+      onClick={() => onChange(value)}
       onFocus={onFocusElement}
       onKeyDown={onKeyboardSelect}
+      style={itemStyle}
       className={className}
     >
       {children({ selected })}

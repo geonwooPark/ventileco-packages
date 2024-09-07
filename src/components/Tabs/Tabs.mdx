@@ -19,75 +19,39 @@ const tabList = [
 ]
 
 function Example() {
+  const [currentTab, setCurrentTab] = useState(0)
+
+  const onChange = (value: any) => {
+    setCurrentTab(value)
+  }
+
   return (
-    <div className="w-[240px]">
-      <Tabs>
-        <Tabs.List className="hide-scroll flex overflow-x-scroll rounded-t-md border bg-blue-100">
-          {tabList.map((item) => (
-            <Tabs.Item key={item.id} index={item.id} className="w-full">
-              {({ selected }) => (
-                <div
-                  className={`${selected && 'bg-blue-600 text-white'} w-full cursor-pointer px-4 py-3 text-center transition duration-200 hover:opacity-50`}
-                >
-                  {item.title}
-                </div>
-              )}
-            </Tabs.Item>
-          ))}
-        </Tabs.List>
-        <Tabs.View className="rounded-b-md border bg-gray-50">
-          {tabList.map((item) => (
-            <Tabs.Content key={item.id} index={item.id}>
-              <div className="px-4 py-3">{item.content}</div>
-            </Tabs.Content>
-          ))}
-        </Tabs.View>
-      </Tabs>
-    </div>
-  )
-}
-```
+    <Tabs currentTab={currentTab} onChange={onChange}>
+      <Tabs.List>
+        {tabList.map((item) => (
+          <Tabs.Item key={item.id} value={item.id} className="outline-none">
+            {({ selected }) => (
+              <div
+                className={`${selected && 'text-blue-600'} cursor-pointer px-4 py-3 text-center transition duration-200 hover:opacity-50`}
+              >
+                {item.title}
+              </div>
+            )}
+          </Tabs.Item>
+        ))}
+      </Tabs.List>
 
-## With Framer Motion
+      <Tabs.Indicator className="h-[2px] bg-black" />
 
-```jsx
-import { Tabs } from 'ventileco-ui'
-import { motion } from 'framer-motion'
-
-const tabList = [
-  { id: 0, title: 'Title1', content: 'Content1' },
-  { id: 1, title: 'Title2', content: 'Content2' },
-  { id: 2, title: 'Title3', content: 'Content3' },
-  { id: 3, title: 'Title4', content: 'Content4' },
-]
-
-function Example() {
-  return (
-    <div className="w-[240px]">
-      <Tabs>
-        <Tabs.List className="hide-scroll flex overflow-x-scroll rounded-t-md border bg-blue-100">
-          {tabList.map((item) => (
-            <Tabs.Item key={item.id} index={item.id} className="w-full">
-              {({ selected }) => (
-                <div
-                  className={`${selected && 'bg-blue-600 text-white'} w-full cursor-pointer px-4 py-3 text-center transition duration-200 hover:opacity-50`}
-                >
-                  {item.title}
-                </div>
-              )}
-            </Tabs.Item>
-          ))}
-        </Tabs.List>
-
-        <Tabs.View className="rounded-b-md border bg-gray-50">
-          {tabList.map((item) => (
-            <Tabs.Content key={item.id} motion={motion} index={item.id}>
-              <div className="px-4 py-3">{item.content}</div>
-            </Tabs.Content>
-          ))}
-        </Tabs.View>
-      </Tabs>
-    </div>
+      <Tabs.Content className="w-[500px] px-4 py-3">
+        {currentTab === 0 && (
+          <div>Content1Content1Content1Content1Content1Content1</div>
+        )}
+        {currentTab === 1 && <div>Content2</div>}
+        {currentTab === 2 && <div>Content3</div>}
+        {currentTab === 3 && <div>Content4</div>}
+      </Tabs.Content>
+    </Tabs>
   )
 }
 ```
