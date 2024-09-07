@@ -24,6 +24,7 @@ import { _createContext } from '../../utils/_createContext'
 type ComboBoxMainProps<T extends ElementType> = {
   as?: T extends 'div' | 'fieldset' ? T : never
   children?: ReactNode
+  className?: string
   value: string | undefined
   setValue: (value: string | undefined) => void
   list: OptionList
@@ -63,7 +64,7 @@ export const [useComboBoxContext, ComboBoxProvider] =
   _createContext<ComboBoxContextState>()
 
 const ComboBoxMain = forwardRef(function ComboBoxMain<T extends ElementType>(
-  { as, children, value, setValue, list }: ComboBoxMainProps<T>,
+  { as, children, className, value, setValue, list }: ComboBoxMainProps<T>,
   ref: PolymorphicRef<T>,
 ) {
   const Element = as || 'div'
@@ -81,7 +82,10 @@ const ComboBoxMain = forwardRef(function ComboBoxMain<T extends ElementType>(
   const listRef = useRef<HTMLUListElement>(null)
 
   const focusedIndex = useMemo(
-    () => optionList.findIndex((r) => r.value === focusedItem),
+    () =>
+      optionList.findIndex((r) => r.value === focusedItem) === -1
+        ? 0
+        : optionList.findIndex((r) => r.value === focusedItem),
     [optionList, focusedItem],
   )
 
@@ -132,7 +136,8 @@ const ComboBoxMain = forwardRef(function ComboBoxMain<T extends ElementType>(
         setIsOpen(true)
       }
 
-      const nodesList = listRef?.current?.childNodes
+      const nodesList = listRef?.current?.childNodes[0].childNodes
+
       if (nodesList) {
         const element = nodesList[focusedIndex] as HTMLElement
 
@@ -185,7 +190,8 @@ const ComboBoxMain = forwardRef(function ComboBoxMain<T extends ElementType>(
   useEffect(() => {
     if (!isOpen) return
     if (!listRef.current) return
-    const nodesList = listRef.current.childNodes
+
+    const nodesList = listRef?.current?.childNodes[0].childNodes
 
     for (let i = 0; i < list?.length; i++) {
       let node: ChildNode
@@ -209,6 +215,7 @@ const ComboBoxMain = forwardRef(function ComboBoxMain<T extends ElementType>(
     if (focusedIndex === -1) return
 
     const childNode = listRef?.current?.childNodes[focusedIndex] as HTMLElement
+
     if (childNode instanceof HTMLElement) {
       childNode.scrollIntoView({ block: 'nearest' })
     }
@@ -233,10 +240,12 @@ const ComboBoxMain = forwardRef(function ComboBoxMain<T extends ElementType>(
   useEffect(() => {
     const escapedKeyword = escapeRegExp(keyword)
     const regex = new RegExp(escapedKeyword, 'i')
+
     const getFilteredData = () => {
       const filteredData = list.filter((item) => regex.test(item.label))
       setOptionList(filteredData)
     }
+
     getFilteredData()
   }, [keyword])
 
@@ -281,7 +290,12 @@ const ComboBoxMain = forwardRef(function ComboBoxMain<T extends ElementType>(
 
   return (
     <ComboBoxProvider value={providerValue}>
-      <Element id={`${id}_combobox`} ref={ref} style={comboBoxStyle}>
+      <Element
+        id={`${id}_combobox`}
+        ref={ref}
+        style={comboBoxStyle}
+        className={className}
+      >
         {children}
       </Element>
     </ComboBoxProvider>

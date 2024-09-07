@@ -38,7 +38,7 @@ describe('ComboBox', () => {
     await userEvent.keyboard('[ArrowDown][Enter]')
 
     await waitFor(() => {
-      expect(combobox.value).toBe('🍇 Grape')
+      expect(combobox.value).toBe('🥝 Kiwi')
     })
   })
 
