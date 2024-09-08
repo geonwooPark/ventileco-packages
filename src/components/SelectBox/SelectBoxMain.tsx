@@ -137,7 +137,7 @@ const SelectBoxMain = forwardRef(function SelectBoxMain<T extends ElementType>(
     [focusedIndex],
   )
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!isOpen) return
     if (!listRef.current) return
 
@@ -164,7 +164,10 @@ const SelectBoxMain = forwardRef(function SelectBoxMain<T extends ElementType>(
     if (!isOpen) return
     if (focusedIndex === -1) return
 
-    const childNode = listRef?.current?.childNodes[focusedIndex] as HTMLElement
+    const childNode = listRef?.current?.childNodes[0].childNodes[
+      focusedIndex
+    ] as HTMLElement
+
     if (childNode instanceof HTMLElement) {
       childNode.scrollIntoView({ block: 'nearest' })
     }

@@ -185,7 +185,7 @@ const ComboBoxMain = forwardRef(function ComboBoxMain<T extends ElementType>(
     setOptionList(list)
   }, [isOpen])
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!isOpen) return
     if (!listRef.current) return
 
@@ -212,7 +212,9 @@ const ComboBoxMain = forwardRef(function ComboBoxMain<T extends ElementType>(
     if (!isOpen) return
     if (focusedIndex === -1) return
 
-    const childNode = listRef?.current?.childNodes[focusedIndex] as HTMLElement
+    const childNode = listRef?.current?.childNodes[0].childNodes[
+      focusedIndex
+    ] as HTMLElement
 
     if (childNode instanceof HTMLElement) {
       childNode.scrollIntoView({ block: 'nearest' })
