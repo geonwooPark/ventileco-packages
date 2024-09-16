@@ -1,4 +1,4 @@
-import { PropsWithChildren, useCallback } from 'react'
+import { PropsWithChildren, useCallback, useMemo } from 'react'
 import { useAccordionContext } from './AccordionMain'
 import { useAccordionItemContext } from './AccordionItem'
 
@@ -28,6 +28,8 @@ function AccordionTrigger({
     }
   }, [])
 
+  const triggerStyle = useMemo(() => ({ width: '100%' }), [])
+
   return (
     <button
       role="heading"
@@ -36,6 +38,7 @@ function AccordionTrigger({
       aria-controls={`${id}-accordion-region-${index}`}
       onMouseDown={onMouseDown}
       onKeyDown={onKeyDown}
+      style={triggerStyle}
       className={className}
     >
       {children}

@@ -5,6 +5,7 @@ import { _createContext } from '../../utils/_createContext'
 interface AccordionItemProps {
   children: (props: { isOpen: boolean }) => React.ReactNode
   index: number
+  className?: string
 }
 
 type AccordionItemContextState = {
@@ -15,7 +16,7 @@ type AccordionItemContextState = {
 export const [useAccordionItemContext, AccordionItemProvider] =
   _createContext<AccordionItemContextState>()
 
-function AccordionItem({ children, index }: AccordionItemProps) {
+function AccordionItem({ children, index, className }: AccordionItemProps) {
   const { activeItems } = useAccordionContext()
   const isOpen = activeItems.has(index)
 
@@ -23,7 +24,7 @@ function AccordionItem({ children, index }: AccordionItemProps) {
 
   return (
     <AccordionItemProvider value={providerValue}>
-      {children({ isOpen })}
+      <div className={className}>{children({ isOpen })}</div>
     </AccordionItemProvider>
   )
 }
