@@ -15,8 +15,6 @@ function ToastWrapper({
 }: PropsWithChildren<ToastUIProps>) {
   const { removeToast } = useToastContext()
 
-  const Component = motion ? motion['div'] : 'div'
-
   const props = motion
     ? animationProps || {
         variants: {
@@ -39,7 +37,7 @@ function ToastWrapper({
   const toastWrapperStyle = useMemo(() => ({ cursor: 'pointer' }), [])
 
   return (
-    <Component
+    <div
       role="alert"
       tabIndex={0}
       aria-atomic="true"
@@ -49,7 +47,7 @@ function ToastWrapper({
       {...props}
     >
       {children}
-    </Component>
+    </div>
   )
 }
 

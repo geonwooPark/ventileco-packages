@@ -14,8 +14,6 @@ export default function ToolTipTriangle({ className }: ToolTipTriangleProps) {
       ({
         position: 'absolute',
         zIndex: '-1',
-        // width: '10px',
-        // height: '10px',
         ...TOOLTIP_TRIANGLE_DIRECTION[direction],
       }) as React.CSSProperties,
     [direction],
