@@ -3,7 +3,6 @@ import { useRef, useState } from 'react'
 import SelectBox from './SelectBoxMain'
 import { motion } from 'framer-motion'
 import { selectBoxList } from '../../dummy'
-import SelectBoxInput from './SelectBoxInput'
 
 export default {
   title: 'COMPONENTS/SelectBox',
