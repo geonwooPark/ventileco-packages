@@ -7,7 +7,7 @@ interface ComboBoxInputProps {
 }
 
 function SelectBoxInput({ className, placeholder }: ComboBoxInputProps) {
-  const { id, focusedItem, focusedLabel } = useSelectBoxContext()
+  const { id, value, focusedItem, focusedLabel } = useSelectBoxContext()
 
   const selectBoxInputStyle = useMemo(
     () => ({ width: '100%', outline: 'none', cursor: 'pointer' }),
@@ -20,7 +20,7 @@ function SelectBoxInput({ className, placeholder }: ComboBoxInputProps) {
       role="combobox"
       aria-autocomplete="list"
       aria-activedescendant={
-        focusedItem ? `${id}-selectbox-option-${focusedItem}` : undefined
+        focusedItem ? `${id}-selectbox-option-${value}` : undefined
       }
       value={focusedLabel}
       placeholder={placeholder}

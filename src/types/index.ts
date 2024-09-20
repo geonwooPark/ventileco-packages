@@ -2,12 +2,12 @@ import { ElementType } from 'react'
 
 export type Option =
   | {
-      value: string
+      value: any
       label: string
       disabled?: undefined
     }
   | {
-      value: string
+      value: any
       label: string
       disabled: boolean
     }

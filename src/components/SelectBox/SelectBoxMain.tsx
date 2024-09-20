@@ -23,8 +23,8 @@ type SelectBoxMainProps<T extends ElementType> = {
   as?: T extends 'div' | 'fieldset' ? T : never
   children?: ReactNode
   className?: string
-  value: string | undefined
-  setValue: (value: string | undefined) => void
+  value: any
+  setValue: (value: any) => void
   list: OptionList
 }
 
@@ -33,7 +33,7 @@ type PolymorphicRef<T extends ElementType> =
 
 type SelectBoxContextState = {
   id: string
-  value: string | undefined
+  value: any
   isOpen: boolean
   triggerRef: React.RefObject<HTMLDivElement> | null
   listRef: React.RefObject<HTMLUListElement> | null
@@ -50,7 +50,7 @@ export const [useSelectBoxContext, SelectBoxProvider] =
   _createContext<SelectBoxContextState>()
 
 const SelectBoxMain = forwardRef(function SelectBoxMain<T extends ElementType>(
-  { as, children, value, setValue, list }: SelectBoxMainProps<T>,
+  { as, children, className, value, setValue, list }: SelectBoxMainProps<T>,
   ref: PolymorphicRef<T>,
 ) {
   const Element = as || 'div'
@@ -59,13 +59,15 @@ const SelectBoxMain = forwardRef(function SelectBoxMain<T extends ElementType>(
   const id = useId()
 
   const [isOpen, setIsOpen] = useState(false)
-  const [focusedItem, setFocusedItem] = useState<string>()
+  const [focusedItem, setFocusedItem] = useState<string>(
+    value && value.toString(),
+  )
 
   const triggerRef = useRef<HTMLDivElement>(null)
   const listRef = useRef<HTMLUListElement>(null)
 
   const focusedIndex = useMemo(() => {
-    const index = list.findIndex((r) => r.value === focusedItem)
+    const index = list.findIndex((r) => r.value.toString() === focusedItem)
 
     return index === -1 ? 0 : index
   }, [list, focusedItem])
@@ -80,8 +82,8 @@ const SelectBoxMain = forwardRef(function SelectBoxMain<T extends ElementType>(
       if (disabled) return
 
       setIsOpen(false)
+      setFocusedItem(value.toString())
       setValue(value)
-      setFocusedItem(value)
     },
     [],
   )
@@ -101,7 +103,7 @@ const SelectBoxMain = forwardRef(function SelectBoxMain<T extends ElementType>(
           e.preventDefault()
 
           onSelect({
-            value: element.dataset.value as string,
+            value: list[focusedIndex].value,
           })
         }
 
@@ -115,7 +117,7 @@ const SelectBoxMain = forwardRef(function SelectBoxMain<T extends ElementType>(
             nextChildNode = nextChildNode.nextSibling as HTMLElement | null
           }
           if (nextChildNode) {
-            setFocusedItem(nextChildNode.dataset.value)
+            setFocusedItem(nextChildNode.dataset.value as string)
           }
         }
 
@@ -129,7 +131,7 @@ const SelectBoxMain = forwardRef(function SelectBoxMain<T extends ElementType>(
             prevChildNode = prevChildNode.previousSibling as HTMLElement | null
           }
           if (prevChildNode) {
-            setFocusedItem(prevChildNode.dataset.value)
+            setFocusedItem(prevChildNode.dataset.value as string)
           }
         }
       }
@@ -153,7 +155,7 @@ const SelectBoxMain = forwardRef(function SelectBoxMain<T extends ElementType>(
 
       if (node instanceof HTMLElement) {
         if (node.dataset.disabled !== 'true') {
-          setFocusedItem(node.dataset.value)
+          setFocusedItem(node.dataset.value as string)
           break
         }
       }
@@ -212,7 +214,12 @@ const SelectBoxMain = forwardRef(function SelectBoxMain<T extends ElementType>(
 
   return (
     <SelectBoxProvider value={providerValue}>
-      <Element id={`${id}_selectbox`} ref={ref} style={selectBoxStyle}>
+      <Element
+        id={`${id}_selectbox`}
+        ref={ref}
+        style={selectBoxStyle}
+        className={className}
+      >
         {children}
       </Element>
     </SelectBoxProvider>

@@ -9,7 +9,7 @@ interface SelectItemProps {
   }) => React.ReactNode
 
   item: {
-    value: string
+    value: any
     label: string
     disabled?: boolean
   }
@@ -17,9 +17,11 @@ interface SelectItemProps {
 
 function SelectBoxItem({ children, item }: SelectItemProps) {
   const { id, value, focusedItem, onSelect } = useSelectBoxContext()
-  const isSelected = value === item.value
+
+  const isSelected =
+    value !== undefined && value.toString() === item.value.toString()
   const isDisabled = item.disabled ? true : false
-  const isFocused = focusedItem === item.value
+  const isFocused = focusedItem === item.value.toString()
 
   const selectBoxItemStyle = useMemo(
     () =>
@@ -32,7 +34,7 @@ function SelectBoxItem({ children, item }: SelectItemProps) {
   return (
     <li
       role="option"
-      id={`${id}-selectbox-option-${focusedItem}`}
+      id={`${id}-selectbox-option-${item.value}`}
       aria-selected={isSelected}
       aria-disabled={isDisabled}
       data-value={item.value}
