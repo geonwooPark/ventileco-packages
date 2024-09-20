@@ -52,7 +52,7 @@ export default {
     setValue: {
       description: '값을 설정하는 함수입니다.',
       table: {
-        type: { summary: '(value: string | undefined) => void' },
+        type: { summary: '(value: any) => void' },
         category: 'SelectBox',
       },
     },
@@ -62,7 +62,7 @@ export default {
         type: {
           summary: 'OptionList',
           detail: `
-            {value: string, label: string, disabled?: boolean}[]
+            {value: any, label: string, disabled?: boolean}[]
           `,
         },
         category: 'SelectBox',
@@ -74,7 +74,7 @@ export default {
         type: {
           summary: 'OptionItem',
           detail: `
-          {value: string, label: string, disabled?: boolean}
+          {value: any, label: string, disabled?: boolean}
         `,
         },
         category: 'SelectBox.Item',
@@ -109,9 +109,10 @@ export function Normal() {
       <SelectBox.Title>SelectBox</SelectBox.Title>
 
       <SelectBox.Trigger>
-        <div className="flex w-full items-center rounded-md border border-black px-3 py-2">
-          <SelectBoxInput placeholder="🐝 Fruits" />
-        </div>
+        <SelectBox.Input
+          placeholder="🐝 Fruits"
+          className="flex w-full items-center rounded-md border border-black px-3 py-2"
+        />
       </SelectBox.Trigger>
 
       <SelectBox.List>

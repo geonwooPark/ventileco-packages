@@ -41,7 +41,7 @@ function Example() {
   }
 
   return (
-     <SelectBox
+      <SelectBox
       ref={selectRef}
       value={value}
       setValue={setValue}
@@ -51,9 +51,10 @@ function Example() {
       <SelectBox.Title>SelectBox</SelectBox.Title>
 
       <SelectBox.Trigger>
-        <div className="flex w-full items-center rounded-md border border-black px-3 py-2">
-          <SelectBoxInput placeholder="🐝 Fruits" />
-        </div>
+        <SelectBox.Input
+          placeholder="🐝 Fruits"
+          className="flex w-full items-center rounded-md border border-black px-3 py-2"
+        />
       </SelectBox.Trigger>
 
       <SelectBox.List>
