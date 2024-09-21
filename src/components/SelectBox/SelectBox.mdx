@@ -41,12 +41,12 @@ function Example() {
   }
 
   return (
-      <SelectBox
+    <SelectBox
       ref={selectRef}
       value={value}
       setValue={setValue}
       list={selectBoxList}
-      className="w-[240px] text-sm"
+      className="w-[100px] text-sm"
     >
       <SelectBox.Title>SelectBox</SelectBox.Title>
 
@@ -57,12 +57,13 @@ function Example() {
         />
       </SelectBox.Trigger>
 
-      <SelectBox.List>
+      <SelectBox.List
+        as={motion.ul}
+        {...animationProps}
+        className='"absolute bg-white" z-[200] max-h-[240px] w-full overflow-hidden overflow-y-scroll rounded-md border'
+      >
         {({ optionList }) => (
-          <motion.div
-            {...animationProps}
-            className="absolute z-[200] max-h-[240px] w-full overflow-hidden overflow-y-scroll rounded-md border bg-white"
-          >
+          <>
             {optionList.map((item) => (
               <SelectBox.Item key={item.value} item={item}>
                 {({ isSelected, isDisabled, isFocused }) => (
@@ -74,7 +75,7 @@ function Example() {
                 )}
               </SelectBox.Item>
             ))}
-          </motion.div>
+          </>
         )}
       </SelectBox.List>
     </SelectBox>

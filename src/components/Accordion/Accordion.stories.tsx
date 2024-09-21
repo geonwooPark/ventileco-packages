@@ -32,6 +32,13 @@ export default {
         category: 'Accordion',
       },
     },
+    as: {
+      description: '렌더링할 태그를 입력합니다.',
+      table: {
+        type: { summary: 'ElementType' },
+        category: 'Accordion.Content',
+      },
+    },
     index: {
       description: '아이템의 고유한 값입니다.',
       table: {
@@ -89,13 +96,12 @@ export function Normal() {
                 </div>
               </Accordion.Trigger>
 
-              <Accordion.Content>
-                <motion.div
-                  className="w-full break-words bg-gray-50 px-4 py-3"
-                  {...animationProps}
-                >
-                  {item.content}
-                </motion.div>
+              <Accordion.Content
+                as={motion.div}
+                {...animationProps}
+                className="w-full break-words bg-gray-50 px-4 py-3"
+              >
+                {item.content}
               </Accordion.Content>
             </React.Fragment>
           )}

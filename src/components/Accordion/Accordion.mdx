@@ -64,13 +64,12 @@ export function Example() {
                 </div>
               </Accordion.Trigger>
 
-              <Accordion.Content>
-                <motion.div
-                  className="w-full break-words bg-gray-50 px-4 py-3"
-                  {...animationProps}
-                >
-                  {item.content}
-                </motion.div>
+              <Accordion.Content
+                as={motion.div}
+                {...animationProps}
+                className="w-full break-words bg-gray-50 px-4 py-3"
+              >
+                {item.content}
               </Accordion.Content>
             </React.Fragment>
           )}
