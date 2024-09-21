@@ -18,6 +18,8 @@ dist/providers/**/*.test.d.ts
 dist/*.{js,ts,d.ts,css}
 dist/constants/list.{d.ts,js}
 dist/test/
+dist/dummy/
+
 
 .prettierrc
 .eslintrc.json

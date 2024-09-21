@@ -11,13 +11,6 @@ export default {
     layout: 'centered',
   },
   argTypes: {
-    as: {
-      description: 'div 또는 fieldset 중 하나를 선택합니다.',
-      table: {
-        type: { summary: 'div | fieldset' },
-        category: 'SelectBox',
-      },
-    },
     className: {
       description: '최상위 요소의 클래스를 지정합니다.',
       table: {
@@ -67,6 +60,13 @@ export default {
         category: 'SelectBox',
       },
     },
+    as: {
+      description: '렌더링할 태그를 입력합니다.',
+      table: {
+        type: { summary: 'ElementType' },
+        category: 'SelectBox.List',
+      },
+    },
     item: {
       description: '반복되는 list에서 고유의 항목을 가져옵니다.',
       table: {
@@ -84,7 +84,7 @@ export default {
 
 export function Normal() {
   const [value, setValue] = useState<string>()
-  const selectRef = useRef<HTMLButtonElement>(null)
+  const selectRef = useRef<HTMLDivElement>(null)
 
   const animationProps = {
     variants: {
@@ -103,7 +103,7 @@ export function Normal() {
       value={value}
       setValue={setValue}
       list={selectBoxList}
-      className="w-[240px] text-sm"
+      className="w-[100px] text-sm"
     >
       <SelectBox.Title>SelectBox</SelectBox.Title>
 
@@ -114,12 +114,13 @@ export function Normal() {
         />
       </SelectBox.Trigger>
 
-      <SelectBox.List>
+      <SelectBox.List
+        as={motion.ul}
+        {...animationProps}
+        className='"absolute bg-white" z-[200] max-h-[240px] w-full overflow-hidden overflow-y-scroll rounded-md border'
+      >
         {({ optionList }) => (
-          <motion.div
-            {...animationProps}
-            className="absolute z-[200] max-h-[240px] w-full overflow-hidden overflow-y-scroll rounded-md border bg-white"
-          >
+          <>
             {optionList.map((item) => (
               <SelectBox.Item key={item.value} item={item}>
                 {({ isSelected, isDisabled, isFocused }) => (
@@ -131,7 +132,7 @@ export function Normal() {
                 )}
               </SelectBox.Item>
             ))}
-          </motion.div>
+          </>
         )}
       </SelectBox.List>
     </SelectBox>

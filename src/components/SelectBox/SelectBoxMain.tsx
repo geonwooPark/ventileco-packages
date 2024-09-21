@@ -1,5 +1,4 @@
 import React, {
-  ElementType,
   KeyboardEventHandler,
   ReactNode,
   forwardRef,
@@ -12,24 +11,20 @@ import React, {
   useState,
 } from 'react'
 import { _createContext } from '../../utils/_createContext'
-import { OptionList, TitleElement } from '../../types'
+import { OptionList } from '../../types'
 import SelectBoxTrigger from './SelectBoxTrigger'
 import SelectBoxItem from './SelectBoxItem'
 import SelectBoxList from './SelectBoxList'
 import SelectBoxTitle from './SelectBoxTitle'
 import SelectBoxInput from './SelectBoxInput'
 
-type SelectBoxMainProps<T extends ElementType> = {
-  as?: T extends 'div' | 'fieldset' ? T : never
+interface SelectBoxMainProps {
   children?: ReactNode
   className?: string
   value: any
   setValue: (value: any) => void
   list: OptionList
 }
-
-type PolymorphicRef<T extends ElementType> =
-  React.ComponentPropsWithRef<T>['ref']
 
 type SelectBoxContextState = {
   id: string
@@ -38,9 +33,7 @@ type SelectBoxContextState = {
   triggerRef: React.RefObject<HTMLDivElement> | null
   listRef: React.RefObject<HTMLUListElement> | null
   focusedItem: string | undefined
-  focusedLabel: string
   optionList: OptionList
-  Title: TitleElement
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
   onKeyboardTrigger: KeyboardEventHandler<HTMLDivElement>
   onSelect: ({ value, disabled }: { value: string; disabled?: boolean }) => void
@@ -49,182 +42,176 @@ type SelectBoxContextState = {
 export const [useSelectBoxContext, SelectBoxProvider] =
   _createContext<SelectBoxContextState>()
 
-const SelectBoxMain = forwardRef(function SelectBoxMain<T extends ElementType>(
-  { as, children, className, value, setValue, list }: SelectBoxMainProps<T>,
-  ref: PolymorphicRef<T>,
-) {
-  const Element = as || 'div'
-  const Title: TitleElement = Element === 'fieldset' ? 'legend' : 'label'
+const SelectBoxMain = forwardRef<HTMLDivElement, SelectBoxMainProps>(
+  function SelectBoxMain(
+    { children, className, value, setValue, list },
+    ref: any,
+  ) {
+    const id = useId()
 
-  const id = useId()
+    const [isOpen, setIsOpen] = useState(false)
 
-  const [isOpen, setIsOpen] = useState(false)
-  const [focusedItem, setFocusedItem] = useState<string>(
-    value && value.toString(),
-  )
+    const [focusedItem, setFocusedItem] = useState<string>(
+      value && value.toString(),
+    )
 
-  const triggerRef = useRef<HTMLDivElement>(null)
-  const listRef = useRef<HTMLUListElement>(null)
+    const triggerRef = useRef<HTMLDivElement>(null)
 
-  const focusedIndex = useMemo(() => {
-    const index = list.findIndex((r) => r.value.toString() === focusedItem)
+    const listRef = useRef<HTMLUListElement>(null)
 
-    return index === -1 ? 0 : index
-  }, [list, focusedItem])
+    const focusedIndex = useMemo(() => {
+      const index = list.findIndex((r) => r.value.toString() === focusedItem)
+      return index === -1 ? 0 : index
+    }, [list, focusedItem])
 
-  const focusedLabel = useMemo(
-    () => (focusedIndex !== -1 ? list[focusedIndex].label : ''),
-    [focusedIndex, list],
-  )
+    const onSelect = useCallback(
+      ({ value, disabled }: { value: string; disabled?: boolean }) => {
+        if (disabled) return
 
-  const onSelect = useCallback(
-    ({ value, disabled }: { value: string; disabled?: boolean }) => {
-      if (disabled) return
+        setIsOpen(false)
+        setFocusedItem(value.toString())
+        setValue(value)
+      },
+      [],
+    )
 
-      setIsOpen(false)
-      setFocusedItem(value.toString())
-      setValue(value)
-    },
-    [],
-  )
-
-  const onKeyboardTrigger: KeyboardEventHandler<HTMLDivElement> = useCallback(
-    (e) => {
-      if (e.key === 'ArrowDown' || e.key === 'ArrowDown') {
-        setIsOpen(true)
-      }
-
-      const nodesList = listRef?.current?.childNodes[0].childNodes
-
-      if (nodesList) {
-        const element = nodesList[focusedIndex] as HTMLElement
-
-        if (e.key === 'Enter') {
-          e.preventDefault()
-
-          onSelect({
-            value: list[focusedIndex].value,
-          })
+    const onKeyboardTrigger: KeyboardEventHandler<HTMLDivElement> = useCallback(
+      (e) => {
+        if (e.key === 'ArrowDown' || e.key === 'ArrowDown') {
+          setIsOpen(true)
         }
 
-        if (e.key === 'ArrowDown') {
-          e.preventDefault()
+        const nodesList = listRef?.current?.childNodes
 
-          if (!element.nextSibling) return
+        if (nodesList) {
+          const element = nodesList[focusedIndex] as HTMLElement
 
-          let nextChildNode = element.nextSibling as HTMLElement | null
-          while (nextChildNode && nextChildNode.dataset.disabled === 'true') {
-            nextChildNode = nextChildNode.nextSibling as HTMLElement | null
+          if (e.key === 'Enter') {
+            e.preventDefault()
+
+            onSelect({
+              value: list[focusedIndex].value,
+            })
           }
-          if (nextChildNode) {
-            setFocusedItem(nextChildNode.dataset.value as string)
+
+          if (e.key === 'ArrowDown') {
+            e.preventDefault()
+
+            if (!element.nextSibling) return
+
+            let nextChildNode = element.nextSibling as HTMLElement | null
+            while (nextChildNode && nextChildNode.dataset.disabled === 'true') {
+              nextChildNode = nextChildNode.nextSibling as HTMLElement | null
+            }
+            if (nextChildNode) {
+              setFocusedItem(nextChildNode.dataset.value as string)
+            }
+          }
+
+          if (e.key === 'ArrowUp') {
+            e.preventDefault()
+
+            if (!element.previousSibling) return
+
+            let prevChildNode = element.previousSibling as HTMLElement | null
+            while (prevChildNode && prevChildNode.dataset.disabled === 'true') {
+              prevChildNode =
+                prevChildNode.previousSibling as HTMLElement | null
+            }
+            if (prevChildNode) {
+              setFocusedItem(prevChildNode.dataset.value as string)
+            }
           }
         }
+      },
+      [focusedIndex],
+    )
 
-        if (e.key === 'ArrowUp') {
-          e.preventDefault()
+    useLayoutEffect(() => {
+      if (!isOpen) return
+      if (!listRef.current) return
 
-          if (!element.previousSibling) return
+      const nodesList = listRef?.current?.childNodes
 
-          let prevChildNode = element.previousSibling as HTMLElement | null
-          while (prevChildNode && prevChildNode.dataset.disabled === 'true') {
-            prevChildNode = prevChildNode.previousSibling as HTMLElement | null
-          }
-          if (prevChildNode) {
-            setFocusedItem(prevChildNode.dataset.value as string)
+      for (let i = 0; i < list?.length; i++) {
+        let node: ChildNode
+        if (focusedIndex === -1) {
+          node = nodesList[i]
+        } else {
+          node = nodesList[focusedIndex]
+        }
+
+        if (node instanceof HTMLElement) {
+          if (node.dataset.disabled !== 'true') {
+            setFocusedItem(node.dataset.value as string)
+            break
           }
         }
       }
-    },
-    [focusedIndex],
-  )
+    }, [isOpen, focusedIndex])
 
-  useLayoutEffect(() => {
-    if (!isOpen) return
-    if (!listRef.current) return
+    useLayoutEffect(() => {
+      if (!isOpen) return
+      if (focusedIndex === -1) return
 
-    const nodesList = listRef?.current?.childNodes[0].childNodes
+      const childNode = listRef?.current?.childNodes[
+        focusedIndex
+      ] as HTMLElement
 
-    for (let i = 0; i < list?.length; i++) {
-      let node: ChildNode
-      if (focusedIndex === -1) {
-        node = nodesList[i]
-      } else {
-        node = nodesList[focusedIndex]
+      if (childNode instanceof HTMLElement) {
+        childNode.scrollIntoView({ block: 'nearest' })
+      }
+    }, [isOpen, focusedIndex])
+
+    useEffect(() => {
+      if (!isOpen) return
+
+      const onOutsideClick = (e: MouseEvent) => {
+        if (triggerRef.current?.contains(e.target as Node)) return
+        if (listRef.current?.contains(e.target as Node)) return
+
+        setIsOpen(false)
       }
 
-      if (node instanceof HTMLElement) {
-        if (node.dataset.disabled !== 'true') {
-          setFocusedItem(node.dataset.value as string)
-          break
-        }
-      }
-    }
-  }, [isOpen, focusedIndex])
+      document.addEventListener('click', onOutsideClick)
+      return () => document.removeEventListener('click', onOutsideClick)
+    }, [isOpen])
 
-  useLayoutEffect(() => {
-    if (!isOpen) return
-    if (focusedIndex === -1) return
+    const providerValue = useMemo(
+      () => ({
+        id,
+        value,
+        isOpen,
+        triggerRef,
+        listRef,
+        focusedItem,
+        optionList: list,
+        setIsOpen,
+        onKeyboardTrigger,
+        onSelect,
+      }),
+      [id, value, isOpen, focusedItem, list],
+    )
 
-    const childNode = listRef?.current?.childNodes[0].childNodes[
-      focusedIndex
-    ] as HTMLElement
+    const selectBoxStyle = useMemo(
+      () => ({ position: 'relative' }) as React.CSSProperties,
+      [],
+    )
 
-    if (childNode instanceof HTMLElement) {
-      childNode.scrollIntoView({ block: 'nearest' })
-    }
-  }, [isOpen, focusedIndex])
-
-  useEffect(() => {
-    if (!isOpen) return
-
-    const onOutsideClick = (e: MouseEvent) => {
-      if (triggerRef.current?.contains(e.target as Node)) return
-      if (listRef.current?.contains(e.target as Node)) return
-
-      setIsOpen(false)
-    }
-
-    document.addEventListener('click', onOutsideClick)
-    return () => document.removeEventListener('click', onOutsideClick)
-  }, [isOpen])
-
-  const providerValue = useMemo(
-    () => ({
-      id,
-      value,
-      isOpen,
-      triggerRef,
-      listRef,
-      focusedItem,
-      focusedLabel,
-      optionList: list,
-      Title,
-      setIsOpen,
-      onKeyboardTrigger,
-      onSelect,
-    }),
-    [id, value, isOpen, focusedItem, focusedLabel, list, Title],
-  )
-
-  const selectBoxStyle = useMemo(
-    () => ({ position: 'relative' }) as React.CSSProperties,
-    [],
-  )
-
-  return (
-    <SelectBoxProvider value={providerValue}>
-      <Element
-        id={`${id}_selectbox`}
-        ref={ref}
-        style={selectBoxStyle}
-        className={className}
-      >
-        {children}
-      </Element>
-    </SelectBoxProvider>
-  )
-})
+    return (
+      <SelectBoxProvider value={providerValue}>
+        <div
+          id={`${id}_selectbox`}
+          ref={ref}
+          style={selectBoxStyle}
+          className={className}
+        >
+          {children}
+        </div>
+      </SelectBoxProvider>
+    )
+  },
+)
 
 const SelectBox = Object.assign(SelectBoxMain, {
   Title: SelectBoxTitle,

@@ -9,16 +9,12 @@ function SelectBoxTitle({
   children,
   className,
 }: PropsWithChildren<SelectBoxTitleProps>) {
-  const { id, Title } = useSelectBoxContext()
+  const { id } = useSelectBoxContext()
 
   return (
-    <Title
-      htmlFor={`${id}-selectbox`}
-      aria-labelledby={`${id}-selectbox`}
-      className={className}
-    >
+    <div aria-labelledby={`${id}-selectbox`} className={className}>
       {children}
-    </Title>
+    </div>
   )
 }
 
