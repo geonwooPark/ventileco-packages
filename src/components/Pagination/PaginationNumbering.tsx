@@ -15,7 +15,8 @@ function PaginationNumbering({
   const pageNumbers = Array.from({ length: totalPage }).map((_, idx) => (
     <button
       key={idx}
-      onClick={() => onClick(idx)}
+      onClick={(e) => onClick(Number(e.currentTarget.value))}
+      value={idx + 1}
       aria-label={`Page ${idx + 1}`}
       aria-current={page === idx + 1 ? 'page' : undefined}
     >

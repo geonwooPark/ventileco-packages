@@ -12,13 +12,20 @@ import { Meta } from '@storybook/addon-docs'
 import { Pagination } from 'ventileco-ui'
 
 function Example() {
+  const [page, setPage] = useState(1)
+
+  const onNavigate = (value: number) => {
+    setPage(value)
+  }
+
   return (
     <Pagination
-      className="flex items-center gap-4 text-lg"
+      page={page}
       listItemCount={5}
       totalItemCount={92}
       numberingCount={5}
-      onNavigate={() => null}
+      onNavigate={onNavigate}
+      className="flex items-center gap-3 text-lg"
     >
       <Pagination.PrevButton>
         <svg
@@ -37,7 +44,7 @@ function Example() {
         </svg>
       </Pagination.PrevButton>
 
-      <Pagination.PrevBoundary prevBoundary={2} className="size-8" />
+      <Pagination.PrevBoundary prevBoundary={3} className="size-8" />
 
       <Pagination.Numbering>
         {({ active, numbering }) => (
@@ -49,7 +56,7 @@ function Example() {
         )}
       </Pagination.Numbering>
 
-      <Pagination.NextBoundary nextBoundary={2} className="size-8" />
+      <Pagination.NextBoundary nextBoundary={3} className="size-8" />
 
       <Pagination.NextButton>
         <svg

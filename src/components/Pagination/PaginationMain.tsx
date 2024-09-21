@@ -4,9 +4,7 @@ import {
   forwardRef,
   useCallback,
   useMemo,
-  useState,
 } from 'react'
-import { getParameterByName } from '../../utils/getParameterByName'
 import { _createContext } from '../../utils/_createContext'
 import PaginationPrevButton from './PaginationPrevButton'
 import PaginationNextButton from './PaginationNextButton'
@@ -18,8 +16,9 @@ export interface PaginationProps {
   totalItemCount: number
   listItemCount: number
   numberingCount?: number
+  page?: number
   className?: string
-  onNavigate: any
+  onNavigate: (value: number) => void
 }
 
 type PaginationContextState = {
@@ -38,6 +37,7 @@ export const [usePaginationContext, PaginationProvider] =
 function PaginationMain(
   {
     children,
+    page = 1,
     totalItemCount,
     numberingCount = 3,
     listItemCount,
@@ -46,9 +46,6 @@ function PaginationMain(
   }: PropsWithChildren<PaginationProps>,
   forwardRef: ForwardedRef<HTMLDivElement>,
 ) {
-  const currentPage = Number(getParameterByName('page'))
-  const [page, setPage] = useState(currentPage || 1)
-
   const totalPage = useMemo(
     () => Math.ceil(totalItemCount / listItemCount),
     [totalItemCount, listItemCount],
@@ -59,20 +56,17 @@ function PaginationMain(
     [page, numberingCount],
   )
 
-  const onClick = useCallback((i: number) => {
-    setPage(i + 1)
-    onNavigate()
+  const onClick = useCallback((value: number) => {
+    onNavigate(value)
   }, [])
 
   const onNextClick = useCallback(() => {
-    setPage((prev) => prev + 1)
-    onNavigate()
-  }, [])
+    onNavigate(page + 1)
+  }, [page])
 
   const onPrevClick = useCallback(() => {
-    setPage((prev) => prev - 1)
-    onNavigate()
-  }, [])
+    onNavigate(page - 1)
+  }, [page])
 
   const providerValue = useMemo(
     () => ({

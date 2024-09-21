@@ -21,7 +21,8 @@ export default function PaginationNextBoundary({
         .map((_, idx) => (
           <button
             key={idx}
-            onClick={() => onClick(totalPage - idx - 1)}
+            onClick={(e) => onClick(Number(e.currentTarget.value))}
+            value={totalPage - idx}
             aria-label={`Page ${totalPage - idx}`}
             aria-current={page === totalPage - idx ? 'page' : undefined}
             className={className}

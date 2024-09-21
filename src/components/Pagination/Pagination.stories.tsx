@@ -1,5 +1,6 @@
 import type { Meta } from '@storybook/react'
 import Pagination from './PaginationMain'
+import { useState } from 'react'
 
 export default {
   title: 'COMPONENTS/Pagination',
@@ -69,13 +70,20 @@ export default {
 } as Meta
 
 export function Normal() {
+  const [page, setPage] = useState(1)
+
+  const onNavigate = (value: number) => {
+    setPage(value)
+  }
+
   return (
     <Pagination
-      className="flex items-center gap-3 text-lg"
+      page={page}
       listItemCount={5}
       totalItemCount={92}
       numberingCount={5}
-      onNavigate={() => null}
+      onNavigate={onNavigate}
+      className="flex items-center gap-3 text-lg"
     >
       <Pagination.PrevButton>
         <svg
