@@ -38,11 +38,18 @@ export default {
         category: 'Tabs',
       },
     },
-    value: {
-      description: '탭이 가지는 고유한 값입니다.',
+    value_1: {
+      description: '탭의 순서를 결정하는 고유한 값입니다.',
       table: {
-        type: { summary: '(value: any) => void' },
+        type: { summary: 'number' },
         category: 'Tabs.Item',
+      },
+    },
+    value_2: {
+      description: '탭 컨텐츠의 순서를 결정하는 고유한 값입니다.',
+      table: {
+        type: { summary: 'number' },
+        category: 'Tabs.Content',
       },
     },
   },
@@ -57,29 +64,38 @@ export function Normal() {
 
   return (
     <Tabs currentTab={currentTab} onChange={onChange}>
-      <Tabs.List>
-        {tabList.map((item) => (
-          <Tabs.Item key={item.id} value={item.id} className="outline-none">
-            {({ selected }) => (
-              <div
-                className={`${selected && 'text-blue-600'} cursor-pointer px-4 py-3 text-center transition duration-200 hover:opacity-50`}
-              >
-                {item.title}
-              </div>
-            )}
-          </Tabs.Item>
-        ))}
-      </Tabs.List>
+      <Tabs.Container className="w-[420px]">
+        <Tabs.List>
+          {tabList.map((item, idx) => (
+            <Tabs.Item
+              key={item.id}
+              value={idx}
+              className="w-full outline-none"
+            >
+              {({ selected }) => (
+                <div
+                  className={`${selected && 'text-blue-600'} cursor-pointer px-4 py-3 text-center transition duration-200 hover:opacity-50`}
+                >
+                  {item.title}
+                </div>
+              )}
+            </Tabs.Item>
+          ))}
+        </Tabs.List>
+        <Tabs.Indicator className="h-[2px] bg-black" />
+      </Tabs.Container>
 
-      <Tabs.Indicator className="h-[2px] bg-black" />
-
-      <Tabs.Content className="w-[500px] px-4 py-3">
-        {currentTab === 0 && (
-          <div>Content1Content1Content1Content1Content1Content1</div>
-        )}
-        {currentTab === 1 && <div>Content2</div>}
-        {currentTab === 2 && <div>Content3</div>}
-        {currentTab === 3 && <div>Content4</div>}
+      <Tabs.Content value={0} className="w-full px-4 py-3">
+        <div>Content1Content1Cont</div>
+      </Tabs.Content>
+      <Tabs.Content value={1} className="w-full px-4 py-3">
+        <div>Content2</div>
+      </Tabs.Content>
+      <Tabs.Content value={2} className="w-full px-4 py-3">
+        <div>Content3</div>
+      </Tabs.Content>
+      <Tabs.Content value={3} className="w-full px-4 py-3">
+        <div>Content4</div>
       </Tabs.Content>
     </Tabs>
   )

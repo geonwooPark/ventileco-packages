@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React from 'react'
 import { useTabsContext } from './TabsMain'
 
 interface TabsItemProps {
@@ -16,13 +16,6 @@ function TabsItem({ children, value, className }: TabsItemProps) {
     onChange(value)
   }
 
-  const itemStyle = useMemo(
-    () => ({
-      flex: 1,
-    }),
-    [],
-  )
-
   return (
     <li
       id={`${id}-tab-button-${value}`}
@@ -33,7 +26,6 @@ function TabsItem({ children, value, className }: TabsItemProps) {
       onClick={() => onChange(value)}
       onFocus={onFocusElement}
       onKeyDown={onKeyboardSelect}
-      style={itemStyle}
       className={className}
     >
       {children({ selected })}

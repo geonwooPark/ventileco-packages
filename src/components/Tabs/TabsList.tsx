@@ -1,14 +1,10 @@
 import { PropsWithChildren, useMemo } from 'react'
 import { useTabsContext } from './TabsMain'
 
-interface TabsListProps {
-  className?: string
-}
-
-function TabsList({ children, className }: PropsWithChildren<TabsListProps>) {
+function TabsList({ children }: PropsWithChildren) {
   const { listRef } = useTabsContext()
 
-  const listStyle = useMemo(
+  const listStyle = useMemo<React.CSSProperties>(
     () => ({
       display: 'flex',
     }),
@@ -16,7 +12,7 @@ function TabsList({ children, className }: PropsWithChildren<TabsListProps>) {
   )
 
   return (
-    <ul role="tablist" ref={listRef} style={listStyle} className={className}>
+    <ul role="tablist" ref={listRef} style={listStyle}>
       {children}
     </ul>
   )

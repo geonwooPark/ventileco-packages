@@ -2,16 +2,18 @@ import { PropsWithChildren } from 'react'
 import { useTabsContext } from './TabsMain'
 
 interface TabsContentProps {
+  value: any
   className?: string
 }
 
 function TabsContent({
   children,
+  value,
   className,
 }: PropsWithChildren<TabsContentProps>) {
   const { id, currentTab } = useTabsContext()
 
-  return (
+  return value === currentTab ? (
     <div
       id={`${id}-tab-panel-${currentTab}`}
       role="tabpanel"
@@ -20,7 +22,7 @@ function TabsContent({
     >
       {children}
     </div>
-  )
+  ) : null
 }
 
 export default TabsContent

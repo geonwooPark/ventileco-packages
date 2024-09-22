@@ -1,4 +1,4 @@
-import { useLayoutEffect, useMemo, useState } from 'react'
+import { CSSProperties, useLayoutEffect, useMemo, useState } from 'react'
 import { useTabsContext } from './TabsMain'
 
 interface TabsIndicatorProps {
@@ -11,7 +11,7 @@ export default function TabsIndicator({ className }: TabsIndicatorProps) {
   const [width, setWidth] = useState<number | undefined>(0)
   const [left, setLeft] = useState<number | undefined>(0)
 
-  useLayoutEffect(() => {
+  const updateIndicator = () => {
     const tab = document.getElementById(`${id}-tab-button-${currentTab}`)
     const list = listRef.current
 
@@ -22,9 +22,19 @@ export default function TabsIndicator({ className }: TabsIndicatorProps) {
       setWidth(tabRect.width)
       setLeft(tabRect.left - listRect.left)
     }
+  }
+
+  useLayoutEffect(() => {
+    updateIndicator()
+
+    window.addEventListener('resize', updateIndicator)
+
+    return () => {
+      window.removeEventListener('resize', updateIndicator)
+    }
   }, [id, currentTab, listRef])
 
-  const indicatorStyle = useMemo(
+  const indicatorStyle = useMemo<CSSProperties>(
     () => ({
       width: `${width}px`,
       transform: `translateX(${left}px)`,

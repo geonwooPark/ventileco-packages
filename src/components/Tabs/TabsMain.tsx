@@ -8,16 +8,16 @@ import React, {
   useMemo,
   useRef,
 } from 'react'
-import TabsContent from './TabsContent'
 import TabsItem from './TabsItem'
 import { _createContext } from '../../utils/_createContext'
 import TabsList from './TabsList'
 import TabsIndicator from './TabsIndicator'
+import TabsContainer from './TabsContainer'
+import TabsContent from './TabsContent'
 
 interface TabsProps {
   currentTab: any
   onChange: (value: any) => void
-  className?: string
 }
 
 type TabsContextState = {
@@ -31,7 +31,7 @@ type TabsContextState = {
 export const [useTabsContext, TabsProvider] = _createContext<TabsContextState>()
 
 function TabsMain(
-  { children, currentTab, onChange, className }: PropsWithChildren<TabsProps>,
+  { children, currentTab, onChange }: PropsWithChildren<TabsProps>,
   forwardRef: ForwardedRef<HTMLDivElement>,
 ) {
   const id = useId()
@@ -72,14 +72,13 @@ function TabsMain(
 
   return (
     <TabsProvider value={providerValue}>
-      <div ref={forwardRef} className={className}>
-        {children}
-      </div>
+      <div ref={forwardRef}>{children}</div>
     </TabsProvider>
   )
 }
 
 const Tabs = Object.assign(forwardRef(TabsMain), {
+  Container: TabsContainer,
   List: TabsList,
   Item: TabsItem,
   Indicator: TabsIndicator,
