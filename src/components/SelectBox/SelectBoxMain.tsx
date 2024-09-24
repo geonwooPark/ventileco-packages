@@ -193,8 +193,8 @@ const SelectBoxMain = forwardRef<HTMLDivElement, SelectBoxMainProps>(
       [id, value, isOpen, focusedItem, list],
     )
 
-    const selectBoxStyle = useMemo(
-      () => ({ position: 'relative' }) as React.CSSProperties,
+    const selectBoxStyle = useMemo<React.CSSProperties>(
+      () => ({ position: 'relative' }),
       [],
     )
 

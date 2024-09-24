@@ -20,6 +20,7 @@ function SelectBoxTrigger({
   return (
     <div
       ref={triggerRef}
+      tabIndex={-1}
       aria-expanded={isOpen}
       aria-haspopup="listbox"
       aria-controls={`${id}-select-list`}

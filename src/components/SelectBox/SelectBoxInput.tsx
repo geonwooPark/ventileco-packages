@@ -3,7 +3,7 @@ import { useSelectBoxContext } from './SelectBoxMain'
 
 interface ComboBoxInputProps {
   className?: string
-  placeholder: string
+  placeholder?: string
 }
 
 function SelectBoxInput({ className, placeholder }: ComboBoxInputProps) {
@@ -17,7 +17,12 @@ function SelectBoxInput({ className, placeholder }: ComboBoxInputProps) {
   const selectedLabel = selectedItem?.label
 
   const selectBoxInputStyle = useMemo(
-    () => ({ width: '100%', outline: 'none', cursor: 'pointer' }),
+    () => ({
+      width: '100%',
+      outline: 'none',
+      backgroundColor: 'transparent',
+      cursor: 'pointer',
+    }),
     [],
   )
 

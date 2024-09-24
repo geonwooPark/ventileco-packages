@@ -103,21 +103,18 @@ export function Normal() {
       value={value}
       setValue={setValue}
       list={selectBoxList}
-      className="w-[100px] text-sm"
+      className="w-[240px] text-sm"
     >
       <SelectBox.Title>SelectBox</SelectBox.Title>
 
-      <SelectBox.Trigger>
-        <SelectBox.Input
-          placeholder="🐝 Fruits"
-          className="flex w-full items-center rounded-md border border-black px-3 py-2"
-        />
+      <SelectBox.Trigger className="flex items-center rounded-md border border-black px-3 py-2">
+        <SelectBox.Input placeholder="🐝 Fruits" />
       </SelectBox.Trigger>
 
       <SelectBox.List
         as={motion.ul}
         {...animationProps}
-        className='"absolute bg-white" z-[200] max-h-[240px] w-full overflow-hidden overflow-y-scroll rounded-md border'
+        className='bg-white" absolute z-[200] max-h-[240px] w-full overflow-hidden overflow-y-scroll rounded-md border'
       >
         {({ optionList }) => (
           <>
