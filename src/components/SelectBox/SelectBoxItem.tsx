@@ -23,11 +23,10 @@ function SelectBoxItem({ children, item }: SelectItemProps) {
   const isDisabled = item.disabled ? true : false
   const isFocused = focusedItem === item.value.toString()
 
-  const selectBoxItemStyle = useMemo(
-    () =>
-      ({
-        cursor: isDisabled ? 'not-allowed' : 'pointer',
-      }) as React.CSSProperties,
+  const selectBoxItemStyle = useMemo<React.CSSProperties>(
+    () => ({
+      cursor: isDisabled ? 'not-allowed' : 'pointer',
+    }),
     [isDisabled],
   )
 
