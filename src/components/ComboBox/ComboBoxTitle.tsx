@@ -9,16 +9,16 @@ function ComboBoxTitle({
   children,
   className,
 }: PropsWithChildren<ComboBoxTitleProps>) {
-  const { id, Title } = useComboBoxContext()
+  const { id } = useComboBoxContext()
 
   return (
-    <Title
+    <label
       htmlFor={`${id}-combobox`}
       aria-labelledby={`${id}-combobox`}
       className={className}
     >
       {children}
-    </Title>
+    </label>
   )
 }
 

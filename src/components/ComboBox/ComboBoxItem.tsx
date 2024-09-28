@@ -16,23 +16,16 @@ interface ComboBoxItemProps {
 
 function ComboBoxItem({ children, item }: ComboBoxItemProps) {
   const { id, value, focusedItem, onSelect } = useComboBoxContext()
-  const isSelected = value === item.value
+
+  const isSelected =
+    value !== undefined && value.toString() === item.value.toString()
   const isDisabled = item.disabled ? true : false
-  const isFocused = focusedItem === item.value
+  const isFocused = focusedItem === item.value.toString()
 
-  const onClick = () => {
-    onSelect({
-      value: item.value,
-      label: item.label,
-      disabled: item.disabled,
-    })
-  }
-
-  const comboBoxItemStyle = useMemo(
-    () =>
-      ({
-        cursor: isDisabled ? 'not-allowed' : 'pointer',
-      }) as React.CSSProperties,
+  const comboBoxItemStyle = useMemo<React.CSSProperties>(
+    () => ({
+      cursor: isDisabled ? 'not-allowed' : 'pointer',
+    }),
     [isDisabled],
   )
 
@@ -45,7 +38,13 @@ function ComboBoxItem({ children, item }: ComboBoxItemProps) {
       data-value={item.value}
       data-label={item.label}
       data-disabled={item.disabled}
-      onClick={onClick}
+      onClick={() =>
+        onSelect({
+          value: item.value,
+          label: item.label,
+          disabled: item.disabled,
+        })
+      }
       style={comboBoxItemStyle}
     >
       {children({ isSelected, isDisabled, isFocused })}

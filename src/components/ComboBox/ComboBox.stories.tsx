@@ -1,6 +1,6 @@
 import type { Meta } from '@storybook/react'
 import ComboBox from './ComboBoxMain'
-import { useRef, useState } from 'react'
+import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { comboBoxList } from '../../dummy'
 
@@ -11,13 +11,6 @@ export default {
     layout: 'centered',
   },
   argTypes: {
-    as: {
-      description: 'div 또는 fieldset 중 하나를 선택합니다.',
-      table: {
-        type: { summary: 'div | fieldset' },
-        category: 'ComboBox',
-      },
-    },
     className: {
       description: '최상위 요소의 클래스를 지정합니다.',
       table: {
@@ -29,7 +22,7 @@ export default {
       description: '컴포넌트의 인스턴스에 직접 접근하는 방법을 제공합니다.',
       table: {
         type: {
-          summary: 'RefObject<HTMLDivElement> | RefObject<HTMLFieldSetElement>',
+          summary: 'RefObject<HTMLDivElement>',
         },
         category: 'ComboBox',
       },
@@ -44,14 +37,14 @@ export default {
     value: {
       description: '기본 값을 설정합니다.',
       table: {
-        type: { summary: 'string' },
+        type: { summary: 'any' },
         category: 'ComboBox',
       },
     },
     setValue: {
       description: '값을 설정하는 함수입니다.',
       table: {
-        type: { summary: '(value: string | undefined) => void' },
+        type: { summary: '(value: any) => void' },
         category: 'ComboBox',
       },
     },
@@ -61,7 +54,7 @@ export default {
         type: {
           summary: 'OptionList',
           detail: `
-            {value: string, label: string, disabled?: boolean}[]
+            {value: any, label: string, disabled?: boolean}[]
           `,
         },
         category: 'ComboBox',
@@ -74,13 +67,20 @@ export default {
         category: 'ComboBox.Input',
       },
     },
+    as: {
+      description: '렌더링할 태그를 입력합니다.',
+      table: {
+        type: { summary: 'ElementType' },
+        category: 'ComboBox.List',
+      },
+    },
     item: {
       description: '반복되는 list에서 고유의 항목을 가져옵니다.',
       table: {
         type: {
           summary: 'OptionItem',
           detail: `
-          {value: string, label: string, disabled?: boolean}
+          {value: any, label: string, disabled?: boolean}
         `,
         },
         category: 'ComboBox.Item',
@@ -91,7 +91,6 @@ export default {
 
 export function Normal() {
   const [value, setValue] = useState<string>()
-  const comboRef = useRef<HTMLDivElement>(null)
 
   const animationProps = {
     variants: {
@@ -106,14 +105,12 @@ export function Normal() {
 
   return (
     <ComboBox
-      ref={comboRef}
       value={value}
       setValue={setValue}
       list={comboBoxList}
       className="w-[240px] text-sm"
     >
       <ComboBox.Title>ComboBox</ComboBox.Title>
-
       <ComboBox.Trigger>
         <div className="flex w-full items-center rounded-md border border-black px-3 py-2">
           <ComboBox.Input placeholder="🐝 Fruits" />
@@ -135,14 +132,14 @@ export function Normal() {
           </ComboBox.ClearButton>
         </div>
       </ComboBox.Trigger>
-
-      <ComboBox.List>
+      <ComboBox.List
+        as={motion.ul}
+        {...animationProps}
+        className='bg-white" absolute z-[200] max-h-[240px] w-full overflow-hidden overflow-y-scroll rounded-md border'
+      >
         {({ optionList }) =>
           optionList.length !== 0 ? (
-            <motion.div
-              {...animationProps}
-              className="absolute z-[200] max-h-[240px] w-full overflow-hidden overflow-y-scroll rounded-md border bg-white"
-            >
+            <>
               {optionList.map((item) => (
                 <ComboBox.Item key={item.value} item={item}>
                   {({ isSelected, isDisabled, isFocused }) => (
@@ -154,7 +151,7 @@ export function Normal() {
                   )}
                 </ComboBox.Item>
               ))}
-            </motion.div>
+            </>
           ) : (
             <div className="w-full rounded-md border bg-white px-3 py-2 text-black/50">
               No Results

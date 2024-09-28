@@ -32,14 +32,13 @@ function SelectBoxItem({ children, item }: SelectItemProps) {
 
   return (
     <li
-      role="option"
       id={`${id}-selectbox-option-${item.value}`}
+      role="option"
       aria-selected={isSelected}
       aria-disabled={isDisabled}
       data-value={item.value}
       data-label={item.label}
       data-disabled={item.disabled}
-      tabIndex={0}
       onClick={() =>
         onSelect({
           value: item.value,

@@ -8,7 +8,7 @@ interface SelectListProps {
   className?: string
 }
 
-function SelectBoxList({ children, as, className, ...props }: SelectListProps) {
+function SelectBoxList({ children, as, className }: SelectListProps) {
   const { id, isOpen, listRef, optionList } = useSelectBoxContext()
 
   const Tag = as ? as : 'ul'
@@ -19,7 +19,6 @@ function SelectBoxList({ children, as, className, ...props }: SelectListProps) {
       ref={listRef}
       role="listbox"
       className={className}
-      {...props}
     >
       {children({ optionList })}
     </Tag>

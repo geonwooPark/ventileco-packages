@@ -186,6 +186,7 @@ const SelectBoxMain = forwardRef<HTMLDivElement, SelectBoxMainProps>(
         listRef,
         focusedItem,
         optionList: list,
+
         setIsOpen,
         onKeyboardTrigger,
         onSelect,

@@ -27,7 +27,6 @@ const comboBoxList = [
 
 function Example() {
  const [value, setValue] = useState<string>()
-  const comboRef = useRef<HTMLDivElement>(null)
 
   const animationProps = {
     variants: {
@@ -42,14 +41,12 @@ function Example() {
 
   return (
      <ComboBox
-      ref={comboRef}
       value={value}
       setValue={setValue}
       list={comboBoxList}
       className="w-[240px] text-sm"
     >
       <ComboBox.Title>ComboBox</ComboBox.Title>
-
       <ComboBox.Trigger>
         <div className="flex w-full items-center rounded-md border border-black px-3 py-2">
           <ComboBox.Input placeholder="🐝 Fruits" />
@@ -71,14 +68,14 @@ function Example() {
           </ComboBox.ClearButton>
         </div>
       </ComboBox.Trigger>
-
-      <ComboBox.List>
+      <ComboBox.List
+        as={motion.ul}
+        {...animationProps}
+        className='bg-white" absolute z-[200] max-h-[240px] w-full overflow-hidden overflow-y-scroll rounded-md border'
+      >
         {({ optionList }) =>
           optionList.length !== 0 ? (
-            <motion.div
-              {...animationProps}
-              className="absolute z-[200] max-h-[240px] w-full overflow-hidden overflow-y-scroll rounded-md border bg-white"
-            >
+            <>
               {optionList.map((item) => (
                 <ComboBox.Item key={item.value} item={item}>
                   {({ isSelected, isDisabled, isFocused }) => (
@@ -90,7 +87,7 @@ function Example() {
                   )}
                 </ComboBox.Item>
               ))}
-            </motion.div>
+            </>
           ) : (
             <div className="w-full rounded-md border bg-white px-3 py-2 text-black/50">
               No Results

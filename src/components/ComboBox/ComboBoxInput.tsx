@@ -7,8 +7,7 @@ interface ComboBoxInputProps {
 }
 
 function ComboBoxInput({ className, placeholder }: ComboBoxInputProps) {
-  const { id, focusedItem, inputRef, keyword, onTextChange } =
-    useComboBoxContext()
+  const { id, value, inputRef, keyword, onTextChange } = useComboBoxContext()
 
   const comboBoxInputStyle = useMemo(
     () => ({ width: '100%', outline: 'none' }),
@@ -18,10 +17,11 @@ function ComboBoxInput({ className, placeholder }: ComboBoxInputProps) {
   return (
     <input
       ref={inputRef}
+      type="text"
       role="combobox"
       aria-autocomplete="list"
       aria-activedescendant={
-        focusedItem ? `${id}-combobox-option-${focusedItem}` : undefined
+        value ? `${id}-combobox-option-${value}` : undefined
       }
       value={keyword}
       onChange={onTextChange}

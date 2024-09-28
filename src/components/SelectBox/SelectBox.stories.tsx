@@ -22,7 +22,7 @@ export default {
       description: '컴포넌트의 인스턴스에 직접 접근하는 방법을 제공합니다.',
       table: {
         type: {
-          summary: 'RefObject<HTMLDivElement> | RefObject<HTMLFieldSetElement>',
+          summary: 'RefObject<HTMLDivElement>',
         },
         category: 'SelectBox',
       },
@@ -37,7 +37,7 @@ export default {
     value: {
       description: '기본 값을 설정합니다.',
       table: {
-        type: { summary: 'string' },
+        type: { summary: 'any' },
         category: 'SelectBox',
       },
     },
