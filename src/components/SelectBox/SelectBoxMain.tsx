@@ -43,10 +43,7 @@ export const [useSelectBoxContext, SelectBoxProvider] =
   _createContext<SelectBoxContextState>()
 
 const SelectBoxMain = forwardRef<HTMLDivElement, SelectBoxMainProps>(
-  function SelectBoxMain(
-    { children, className, value, setValue, list },
-    ref: any,
-  ) {
+  function SelectBoxMain({ children, className, value, setValue, list }, ref) {
     const id = useId()
 
     const [isOpen, setIsOpen] = useState(false)

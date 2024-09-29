@@ -10,12 +10,6 @@ export default {
     layout: 'centered',
   },
   argTypes: {
-    as: {
-      description: '렌더링할 태그를 설정합니다.',
-      table: {
-        type: { summary: 'ElementType' },
-      },
-    },
     ref: {
       description: '컴포넌트의 인스턴스에 직접 접근하는 방법을 제공합니다.',
       table: {
