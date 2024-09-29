@@ -8,7 +8,12 @@ interface ComboBoxListProps {
   className?: string
 }
 
-function ComboBoxList({ children, as, className }: ComboBoxListProps) {
+function ComboBoxList({
+  children,
+  as,
+  className,
+  ...otherProps
+}: ComboBoxListProps) {
   const { id, isOpen, listRef, optionList } = useComboBoxContext()
 
   const Tag = as ? as : 'ul'
@@ -19,6 +24,7 @@ function ComboBoxList({ children, as, className }: ComboBoxListProps) {
       ref={listRef}
       role="listbox"
       className={className}
+      {...otherProps}
     >
       {children({ optionList })}
     </Tag>

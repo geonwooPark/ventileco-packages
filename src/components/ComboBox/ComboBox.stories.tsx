@@ -135,7 +135,7 @@ export function Normal() {
       <ComboBox.List
         as={motion.ul}
         {...animationProps}
-        className='bg-white" absolute z-[200] max-h-[240px] w-full overflow-hidden overflow-y-scroll rounded-md border'
+        className="absolute z-[200] max-h-[240px] w-full overflow-hidden overflow-y-scroll rounded-md border bg-white"
       >
         {({ optionList }) =>
           optionList.length !== 0 ? (
@@ -153,7 +153,7 @@ export function Normal() {
               ))}
             </>
           ) : (
-            <div className="w-full rounded-md border bg-white px-3 py-2 text-black/50">
+            <div className="w-full rounded-md bg-white px-3 py-2 text-black/50">
               No Results
             </div>
           )
