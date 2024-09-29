@@ -10,6 +10,12 @@ export default {
     layout: 'centered',
   },
   argTypes: {
+    className: {
+      description: '최상위 요소의 클래스를 지정합니다.',
+      table: {
+        type: { summary: 'string' },
+      },
+    },
     ref: {
       description: '컴포넌트의 인스턴스에 직접 접근하는 방법을 제공합니다.',
       table: {
