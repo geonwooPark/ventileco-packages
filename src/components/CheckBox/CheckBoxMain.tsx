@@ -1,26 +1,24 @@
-import React, {
+import {
   ComponentPropsWithRef,
   ComponentPropsWithoutRef,
-  Dispatch,
   ElementType,
   ReactNode,
   forwardRef,
   useCallback,
   useId,
   useMemo,
-  useState,
 } from 'react'
 import CheckBoxTitle from './CheckBoxTitle'
 import CheckBoxList from './CheckBoxList'
 import CheckBoxItem from './CheckBoxItem'
 import { _createContext } from '../../utils/_createContext'
-import { PolymorphicRef, TitleElement } from '../../types'
+import { PolymorphicRef } from '../../types'
 
 type CheckBoxMainProps<T extends ElementType> = {
-  as?: T extends 'div' | 'fieldset' ? T : never
+  as?: T
   children?: ReactNode
-  defaultValues?: (string | number)[]
-  setValues?: Dispatch<React.SetStateAction<(string | number)[]>>
+  value: any[]
+  onChange: (value: any) => void
 } & Omit<
   ComponentPropsWithoutRef<T>,
   'as' | 'children' | 'defaultValues' | 'setValues'
@@ -34,9 +32,8 @@ type CheckBoxMainComponent = <T extends ElementType>(
 
 type CheckBoxContextState = {
   id: string
-  activeItems: Set<string | number>
-  onClick: (selectedItem: string | number) => void
-  Title: TitleElement
+  value: any[]
+  onClick: (selectedItem: any) => void
 }
 
 export const [useCheckBoxContext, CheckBoxProvider] =
@@ -45,47 +42,26 @@ export const [useCheckBoxContext, CheckBoxProvider] =
 const CheckBoxMain: CheckBoxMainComponent = forwardRef(function CheckBoxMain<
   T extends ElementType,
 >(
-  { as, children, defaultValues, setValues }: CheckBoxMainProps<T>,
+  { as, children, value, onChange }: CheckBoxMainProps<T>,
   ref: PolymorphicRef<T>,
 ): ReactNode {
   const Element = as || 'div'
-  const Title: TitleElement = Element === 'fieldset' ? 'legend' : 'label'
 
   const id = useId()
 
-  const [activeItems, setActiveItems] = useState<Set<string | number>>(
-    new Set(defaultValues),
-  )
-
-  const onClick = useCallback((selectedItem: string | number) => {
-    if (setValues) {
-      setValues((prev) => {
-        let newItem = [...prev]
-        if (prev.includes(selectedItem)) {
-          newItem = newItem.filter((item) => item !== selectedItem)
-        } else {
-          newItem.push(selectedItem)
-        }
-
-        return newItem
-      })
-    }
-    setActiveItems((prev) => {
-      const newItem = new Set(prev)
-      if (prev.has(selectedItem)) {
-        newItem.delete(selectedItem)
+  const onClick = useCallback(
+    (selectedItem: any) => {
+      if (value.includes(selectedItem)) {
+        const updatedValue = value.filter((r) => r !== selectedItem)
+        onChange(updatedValue)
       } else {
-        newItem.add(selectedItem)
+        onChange([...value, selectedItem])
       }
-
-      return newItem
-    })
-  }, [])
-
-  const providerValue = useMemo(
-    () => ({ id, activeItems, Title, onClick }),
-    [id, activeItems, Title],
+    },
+    [value],
   )
+
+  const providerValue = useMemo(() => ({ id, value, onClick }), [id, value])
 
   return (
     <CheckBoxProvider value={providerValue}>

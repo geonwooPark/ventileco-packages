@@ -4,12 +4,11 @@ import { useCheckBoxContext } from './CheckBoxMain'
 interface CheckBoxItemProps {
   children: (props: { isSelected: boolean }) => React.ReactNode
   value: string | number
-  register?: any
 }
 
-function CheckBoxItem({ children, value, register }: CheckBoxItemProps) {
-  const { id, activeItems, onClick } = useCheckBoxContext()
-  const isSelected = activeItems.has(value)
+function CheckBoxItem({ children, value }: CheckBoxItemProps) {
+  const { id, value: values, onClick } = useCheckBoxContext()
+  const isSelected = values.includes(value)
 
   const onKeyDown = (e: React.KeyboardEvent<HTMLLabelElement>) => {
     if (e.key === 'Enter' || e.key === ' ') {
@@ -35,7 +34,6 @@ function CheckBoxItem({ children, value, register }: CheckBoxItemProps) {
         value={value}
         onClick={() => onClick(value)}
         style={checkBoxItemStyle}
-        {...register}
       />
       {children({ isSelected })}
     </label>

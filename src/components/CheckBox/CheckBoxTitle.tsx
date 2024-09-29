@@ -9,16 +9,16 @@ function CheckBoxTitle({
   children,
   className,
 }: PropsWithChildren<CheckBoxTitleProps>) {
-  const { id, Title } = useCheckBoxContext()
+  const { id } = useCheckBoxContext()
 
   return (
-    <Title
+    <label
       htmlFor={`${id}-checkbox`}
       aria-labelledby={`${id}-checkbox`}
       className={className}
     >
       {children}
-    </Title>
+    </label>
   )
 }
 
