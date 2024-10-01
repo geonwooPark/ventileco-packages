@@ -15,19 +15,23 @@ export default {
       table: {
         type: {
           summary: 'RefObject<HTMLDivElement>',
+          category: 'CheckBox',
         },
+        category: 'CheckBox',
       },
     },
     children: {
       description: '자식 요소들을 포함합니다.',
       table: {
         type: { summary: 'ReactNode' },
+        category: 'CheckBox',
       },
     },
     value: {
       description: '값을 설정합니다.',
       table: {
         type: { summary: 'any[]' },
+        category: 'CheckBox',
       },
     },
     onChange: {
@@ -36,6 +40,7 @@ export default {
         type: {
           summary: '(value: any) => void',
         },
+        category: 'CheckBox',
       },
     },
     _value: {

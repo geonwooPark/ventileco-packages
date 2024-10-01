@@ -26,34 +26,23 @@ export default {
         category: 'Radio',
       },
     },
-    defaultValue: {
-      description: '기본 값을 설정합니다.',
-      table: {
-        type: {
-          summary: '(string | number | readonly string[] | undefined)[]',
-        },
-        category: 'Radio',
-      },
-    },
-    setValue: {
-      description: '값을 설정하는 함수입니다.',
-      table: {
-        type: {
-          summary:
-            'Dispatch<React.SetStateAction<string | number | readonly string[] | undefined>>',
-        },
-        category: 'Radio',
-      },
-    },
-    name: {
-      description:
-        'Radio Group의 이름입니다. 설정하지 않으면 기본값이 없습니다.',
-      table: {
-        type: { summary: 'string' },
-        category: 'Radio',
-      },
-    },
     value: {
+      description: '값을 설정합니다.',
+      table: {
+        type: { summary: 'any' },
+        category: 'Radio',
+      },
+    },
+    onChange: {
+      description: '값들을 변경하는 함수입니다.',
+      table: {
+        type: {
+          summary: '(value: any) => void',
+        },
+        category: 'Radio',
+      },
+    },
+    _value: {
       description: '아이템이 가지는 고유한 값입니다.',
       table: {
         type: { summary: 'string | number | readonly string[] | undefined' },
