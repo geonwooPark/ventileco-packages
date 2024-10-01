@@ -1,5 +1,6 @@
 import React, {
   ForwardedRef,
+  HTMLAttributes,
   KeyboardEventHandler,
   PropsWithChildren,
   forwardRef,
@@ -15,7 +16,7 @@ import TabsIndicator from './TabsIndicator'
 import TabsContainer from './TabsContainer'
 import TabsContent from './TabsContent'
 
-interface TabsProps {
+interface TabsProps extends HTMLAttributes<HTMLDivElement> {
   currentTab: any
   onChange: (value: any) => void
 }
@@ -31,7 +32,12 @@ type TabsContextState = {
 export const [useTabsContext, TabsProvider] = _createContext<TabsContextState>()
 
 function TabsMain(
-  { children, currentTab, onChange }: PropsWithChildren<TabsProps>,
+  {
+    children,
+    currentTab,
+    onChange,
+    ...otherProps
+  }: PropsWithChildren<TabsProps>,
   forwardRef: ForwardedRef<HTMLDivElement>,
 ) {
   const id = useId()
@@ -72,7 +78,9 @@ function TabsMain(
 
   return (
     <TabsProvider value={providerValue}>
-      <div ref={forwardRef}>{children}</div>
+      <div ref={forwardRef} {...otherProps}>
+        {children}
+      </div>
     </TabsProvider>
   )
 }

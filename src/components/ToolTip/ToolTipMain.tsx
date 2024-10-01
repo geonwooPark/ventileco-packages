@@ -1,5 +1,6 @@
 import React, {
   ForwardedRef,
+  HTMLAttributes,
   PropsWithChildren,
   forwardRef,
   useEffect,
@@ -13,7 +14,7 @@ import { ToolTipDirection } from '../../types'
 import { _createContext } from '../../utils/_createContext'
 import ToolTipTriangle from './ToolTipTriangle'
 
-export interface ToolTipProps {
+export interface ToolTipProps extends HTMLAttributes<HTMLDivElement> {
   direction: ToolTipDirection
   enterDelay?: number
   leaveDelay?: number
@@ -42,6 +43,7 @@ function ToolTipMain(
     leaveDelay,
     disabled,
     gap = 16,
+    ...otherProps
   }: PropsWithChildren<ToolTipProps>,
   forwardRef: ForwardedRef<HTMLDivElement>,
 ) {
@@ -158,6 +160,7 @@ function ToolTipMain(
         onMouseOut={onMouseOut}
         onFocus={onMouseOver}
         onBlur={onMouseOut}
+        {...otherProps}
       >
         {children}
       </div>

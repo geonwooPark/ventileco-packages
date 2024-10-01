@@ -1,4 +1,5 @@
 import React, {
+  HTMLAttributes,
   KeyboardEventHandler,
   ReactNode,
   forwardRef,
@@ -17,7 +18,7 @@ import SelectBoxItem from './SelectBoxItem'
 import SelectBoxList from './SelectBoxList'
 import SelectBoxInput from './SelectBoxInput'
 
-interface SelectBoxMainProps {
+interface SelectBoxMainProps extends HTMLAttributes<HTMLDivElement> {
   children?: ReactNode
   className?: string
   value: any
@@ -42,7 +43,10 @@ export const [useSelectBoxContext, SelectBoxProvider] =
   _createContext<SelectBoxContextState>()
 
 const SelectBoxMain = forwardRef<HTMLDivElement, SelectBoxMainProps>(
-  function SelectBoxMain({ children, className, value, setValue, list }, ref) {
+  function SelectBoxMain(
+    { children, className, value, setValue, list, ...otherProps },
+    ref,
+  ) {
     const id = useId()
 
     const [isOpen, setIsOpen] = useState(false)
@@ -196,7 +200,12 @@ const SelectBoxMain = forwardRef<HTMLDivElement, SelectBoxMainProps>(
 
     return (
       <SelectBoxProvider value={providerValue}>
-        <div ref={ref} style={selectBoxStyle} className={className}>
+        <div
+          ref={ref}
+          style={selectBoxStyle}
+          className={className}
+          {...otherProps}
+        >
           {children}
         </div>
       </SelectBoxProvider>

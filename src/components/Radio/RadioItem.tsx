@@ -7,7 +7,7 @@ interface RadioItemProps {
 }
 
 function RadioItem({ children, value }: RadioItemProps) {
-  const { id, selectedValue, name, register, onClick } = useRadioContext()
+  const { id, selectedValue, name, onClick } = useRadioContext()
   const isSelected = selectedValue === value
 
   const onKeyDown = (e: React.KeyboardEvent<HTMLLabelElement>) => {
@@ -36,7 +36,6 @@ function RadioItem({ children, value }: RadioItemProps) {
         onClick={() => onClick(value)}
         defaultChecked={isSelected}
         style={radioButtonStyle}
-        {...register}
       />
       {children({ isSelected })}
     </label>

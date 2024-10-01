@@ -1,5 +1,6 @@
 import React, {
   ForwardedRef,
+  HTMLAttributes,
   PropsWithChildren,
   forwardRef,
   useCallback,
@@ -12,7 +13,7 @@ import SliderContent from './SliderContent'
 import SliderNextButton from './SliderNextButton'
 import { _createContext } from '../../utils/_createContext'
 
-export interface SliderProps {
+interface SliderProps extends HTMLAttributes<HTMLDivElement> {
   gap: number
   step?: number
 }
@@ -31,7 +32,7 @@ export const [useSliderContext, SliderProvider] =
   _createContext<SliderContextState>()
 
 function SliderMain(
-  { children, gap, step = 1 }: PropsWithChildren<SliderProps>,
+  { children, gap, step = 1, ...otherProps }: PropsWithChildren<SliderProps>,
   forwardRef: ForwardedRef<HTMLDivElement>,
 ) {
   const slideContainer = useRef<HTMLDivElement>(null)
@@ -185,7 +186,12 @@ function SliderMain(
 
   return (
     <SliderProvider value={providerValue}>
-      <div role="group" ref={forwardRef} style={sliderContainerStyle}>
+      <div
+        role="group"
+        ref={forwardRef}
+        style={sliderContainerStyle}
+        {...otherProps}
+      >
         {children}
       </div>
     </SliderProvider>

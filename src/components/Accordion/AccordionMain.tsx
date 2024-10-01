@@ -1,5 +1,6 @@
 import {
   ForwardedRef,
+  HTMLAttributes,
   PropsWithChildren,
   forwardRef,
   useCallback,
@@ -12,7 +13,7 @@ import AccordionTrigger from './AccordionTrigger'
 import AccordionItem from './AccordionItem'
 import { _createContext } from '../../utils/_createContext'
 
-interface AccordionProps {
+interface AccordionProps extends HTMLAttributes<HTMLDivElement> {
   className?: string
   multiple?: boolean
 }
@@ -27,7 +28,12 @@ export const [useAccordionContext, AccordionProvider] =
   _createContext<AccordionContextState>()
 
 function AccordionMain(
-  { children, className, multiple = false }: PropsWithChildren<AccordionProps>,
+  {
+    children,
+    className,
+    multiple = false,
+    ...otherProps
+  }: PropsWithChildren<AccordionProps>,
   forwardRef: ForwardedRef<HTMLDivElement>,
 ) {
   const id = useId()
@@ -71,7 +77,12 @@ function AccordionMain(
 
   return (
     <AccordionProvider value={providerValue}>
-      <div role="tablist" ref={forwardRef} className={className}>
+      <div
+        role="tablist"
+        ref={forwardRef}
+        className={className}
+        {...otherProps}
+      >
         {children}
       </div>
     </AccordionProvider>

@@ -1,5 +1,6 @@
 import {
   ForwardedRef,
+  HTMLAttributes,
   PropsWithChildren,
   forwardRef,
   useCallback,
@@ -12,7 +13,7 @@ import PaginationNumbering from './PaginationNumbering'
 import PaginationPrevBoundary from './PaginationPrevBoundary'
 import PaginationNextBoundary from './PaginationNextBoundary'
 
-export interface PaginationProps {
+export interface PaginationProps extends HTMLAttributes<HTMLDivElement> {
   totalItemCount: number
   listItemCount: number
   numberingCount?: number
@@ -43,6 +44,7 @@ function PaginationMain(
     listItemCount,
     className,
     onNavigate,
+    ...otherProps
   }: PropsWithChildren<PaginationProps>,
   forwardRef: ForwardedRef<HTMLDivElement>,
 ) {
@@ -88,6 +90,7 @@ function PaginationMain(
         ref={forwardRef}
         aria-label="Pagination Navigation"
         className={className}
+        {...otherProps}
       >
         {children}
       </div>

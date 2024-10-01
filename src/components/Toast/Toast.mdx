@@ -19,7 +19,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
           <App />
           <ToastProvider.List>
             {toasts.map((toast) => (
-              <ToastProvider.Wrapper key={toast.id} id={toast.id}>
+              <ToastProvider.Wrapper key={toast.id} toastId={toast.id}>
                 // Toast로 사용하고 싶은 UI를 작성하세요.
               </ToastProvider.Wrapper>
             ))}
@@ -47,42 +47,4 @@ function App() {
 }
 
 export default App
-```
-
-## With Framer Motion
-
-```jsx
-import { ToastProvider } from 'ventileco-ui'
-import { motion } from 'framer-motion'
-
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <ToastProvider>
-      {({ toasts }) => (
-        <React.Fragment>
-          <App />
-          <ToastProvider.List>
-            {toasts.map((toast) => (
-              <ToastProvider.Wrapper key={toast.id} id={toast.id} motion={motion}>
-                <div className="flex h-[80px] w-[320px] items-center rounded-full border px-4 py-2">
-                  <div
-                    className={`mr-2 size-5 shrink-0 ${toast.type === 'success' ? 'bg-success' : toast.type === 'error' ? 'bg-error' : 'bg-info'}`}
-                  />
-                  <div>
-                    <p
-                      className={`mr-2 text-lg font-semibold ${toast.type === 'success' ? 'text-success' : toast.type === 'error' ? 'text-error' : 'text-info'}`}
-                    >
-                      {toast.type}
-                    </p>
-                    <p className="text-sm">{toast.message}</p>
-                  </div>
-                </div>
-              </ToastProvider.Wrapper>
-            ))}
-          </ToastProvider.List>
-        </React.Fragment>
-      )}
-    </ToastProvider>
-  </React.StrictMode>,
-)
 ```

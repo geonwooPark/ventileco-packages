@@ -1,5 +1,6 @@
 import {
   ForwardedRef,
+  HTMLAttributes,
   PropsWithChildren,
   forwardRef,
   useCallback,
@@ -10,7 +11,7 @@ import CountUp from './CountUp'
 import CountDown from './CountDown'
 import CountNumber from './CountNumber'
 
-export interface CounterMainProps {
+export interface CounterMainProps extends HTMLAttributes<HTMLDivElement> {
   value: number
   setValue: React.Dispatch<React.SetStateAction<number>>
   minimum?: number
@@ -33,6 +34,7 @@ function CounterMain(
     setValue,
     minimum,
     maximum,
+    ...otherProps
   }: PropsWithChildren<CounterMainProps>,
   forwardRef: ForwardedRef<HTMLDivElement>,
 ) {
@@ -59,7 +61,7 @@ function CounterMain(
 
   return (
     <CounterProvider value={providerValue}>
-      <div ref={forwardRef} role="group">
+      <div ref={forwardRef} role="group" {...otherProps}>
         {children}
       </div>
     </CounterProvider>

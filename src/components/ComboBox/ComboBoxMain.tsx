@@ -1,4 +1,5 @@
 import React, {
+  HTMLAttributes,
   KeyboardEventHandler,
   ReactNode,
   forwardRef,
@@ -19,7 +20,7 @@ import { Option, OptionList } from '../../types'
 import { escapeRegExp } from '../../utils/escapeRegExp'
 import { _createContext } from '../../utils/_createContext'
 
-interface ComboBoxMainProps {
+interface ComboBoxMainProps extends HTMLAttributes<HTMLDivElement> {
   children?: ReactNode
   className?: string
   value: any
@@ -57,7 +58,10 @@ export const [useComboBoxContext, ComboBoxProvider] =
   _createContext<ComboBoxContextState>()
 
 const ComboBoxMain = forwardRef<HTMLDivElement, ComboBoxMainProps>(
-  function ComboBoxMain({ children, className, value, setValue, list }, ref) {
+  function ComboBoxMain(
+    { children, className, value, setValue, list, ...otherProps },
+    ref,
+  ) {
     const id = useId()
 
     const [isOpen, setIsOpen] = useState(false)
@@ -278,7 +282,12 @@ const ComboBoxMain = forwardRef<HTMLDivElement, ComboBoxMainProps>(
 
     return (
       <ComboBoxProvider value={providerValue}>
-        <div ref={ref} style={comboBoxStyle} className={className}>
+        <div
+          ref={ref}
+          style={comboBoxStyle}
+          className={className}
+          {...otherProps}
+        >
           {children}
         </div>
       </ComboBoxProvider>
