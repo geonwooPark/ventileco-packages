@@ -16,6 +16,13 @@ export default {
         category: 'Pagination',
       },
     },
+    page: {
+      description: '현재 페이지를 설정합니다.',
+      table: {
+        type: { summary: 'number' },
+        category: 'Pagination',
+      },
+    },
     totalItemCount: {
       description: '전체 아이템 갯수를 설정합니다.',
       table: {
