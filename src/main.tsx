@@ -14,9 +14,9 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
           <ToastProvider.List>
             {toasts.map((toast) => (
               <ToastProvider.Wrapper
+                as={motion.div}
                 key={toast.id}
-                motion={motion}
-                id={toast.id}
+                toastId={toast.id}
               >
                 <div className="flex h-[80px] w-[320px] items-center rounded-full border px-4 py-2">
                   <div

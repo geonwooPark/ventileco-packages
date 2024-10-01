@@ -20,7 +20,6 @@ import SelectBoxInput from './SelectBoxInput'
 
 interface SelectBoxMainProps extends HTMLAttributes<HTMLDivElement> {
   children?: ReactNode
-  className?: string
   value: any
   setValue: (value: any) => void
   list: OptionList
@@ -44,7 +43,7 @@ export const [useSelectBoxContext, SelectBoxProvider] =
 
 const SelectBoxMain = forwardRef<HTMLDivElement, SelectBoxMainProps>(
   function SelectBoxMain(
-    { children, className, value, setValue, list, ...otherProps },
+    { children, value, setValue, list, ...otherProps },
     ref,
   ) {
     const id = useId()
@@ -200,12 +199,7 @@ const SelectBoxMain = forwardRef<HTMLDivElement, SelectBoxMainProps>(
 
     return (
       <SelectBoxProvider value={providerValue}>
-        <div
-          ref={ref}
-          style={selectBoxStyle}
-          className={className}
-          {...otherProps}
-        >
+        <div ref={ref} style={selectBoxStyle} {...otherProps}>
           {children}
         </div>
       </SelectBoxProvider>

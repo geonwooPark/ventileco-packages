@@ -17,13 +17,6 @@ export default {
         category: 'Tabs',
       },
     },
-    className: {
-      description: '최상위 요소의 클래스를 지정합니다.',
-      table: {
-        type: { summary: 'string' },
-        category: 'Tabs',
-      },
-    },
     currentTab: {
       description: '현재 활성화 된 탭입니다.',
       table: {

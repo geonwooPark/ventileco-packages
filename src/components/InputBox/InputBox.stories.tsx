@@ -15,12 +15,6 @@ export default {
         type: { summary: 'RefObject<HTMLDivElement>' },
       },
     },
-    className: {
-      description: '최상위 요소의 클래스를 지정합니다.',
-      table: {
-        type: { summary: 'string' },
-      },
-    },
     startIcon: {
       description: 'Input의 좌측에 요소를 등록합니다.',
       table: {

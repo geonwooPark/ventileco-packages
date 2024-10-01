@@ -16,13 +16,6 @@ export default {
         category: 'Pagination',
       },
     },
-    className: {
-      description: '최상위 요소의 클래스를 지정합니다.',
-      table: {
-        type: { summary: 'string' },
-        category: 'Pagination',
-      },
-    },
     totalItemCount: {
       description: '전체 아이템 갯수를 설정합니다.',
       table: {

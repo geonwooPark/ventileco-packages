@@ -22,7 +22,6 @@ import { _createContext } from '../../utils/_createContext'
 
 interface ComboBoxMainProps extends HTMLAttributes<HTMLDivElement> {
   children?: ReactNode
-  className?: string
   value: any
   setValue: (value: any) => void
   list: OptionList
@@ -59,7 +58,7 @@ export const [useComboBoxContext, ComboBoxProvider] =
 
 const ComboBoxMain = forwardRef<HTMLDivElement, ComboBoxMainProps>(
   function ComboBoxMain(
-    { children, className, value, setValue, list, ...otherProps },
+    { children, value, setValue, list, ...otherProps },
     ref,
   ) {
     const id = useId()
@@ -282,12 +281,7 @@ const ComboBoxMain = forwardRef<HTMLDivElement, ComboBoxMainProps>(
 
     return (
       <ComboBoxProvider value={providerValue}>
-        <div
-          ref={ref}
-          style={comboBoxStyle}
-          className={className}
-          {...otherProps}
-        >
+        <div ref={ref} style={comboBoxStyle} {...otherProps}>
           {children}
         </div>
       </ComboBoxProvider>

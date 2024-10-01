@@ -18,7 +18,6 @@ export interface PaginationProps extends HTMLAttributes<HTMLDivElement> {
   listItemCount: number
   numberingCount?: number
   page?: number
-  className?: string
   onNavigate: (value: number) => void
 }
 
@@ -42,7 +41,6 @@ function PaginationMain(
     totalItemCount,
     numberingCount = 3,
     listItemCount,
-    className,
     onNavigate,
     ...otherProps
   }: PropsWithChildren<PaginationProps>,
@@ -89,7 +87,6 @@ function PaginationMain(
         role="navigation"
         ref={forwardRef}
         aria-label="Pagination Navigation"
-        className={className}
         {...otherProps}
       >
         {children}

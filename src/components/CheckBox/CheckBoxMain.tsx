@@ -12,7 +12,6 @@ import { _createContext } from '../../utils/_createContext'
 
 interface CheckBoxMainProps extends HTMLAttributes<HTMLDivElement> {
   children?: ReactNode
-  className?: string
   value: any[]
   onChange: (value: any) => void
 }
@@ -27,10 +26,7 @@ export const [useCheckBoxContext, CheckBoxProvider] =
   _createContext<CheckBoxContextState>()
 
 const CheckBoxMain = forwardRef<HTMLDivElement, CheckBoxMainProps>(
-  function CheckBoxMain(
-    { children, className, value, onChange, ...otherProps },
-    ref,
-  ) {
+  function CheckBoxMain({ children, value, onChange, ...otherProps }, ref) {
     const id = useId()
 
     const onClick = useCallback(
@@ -49,7 +45,7 @@ const CheckBoxMain = forwardRef<HTMLDivElement, CheckBoxMainProps>(
 
     return (
       <CheckBoxProvider value={providerValue}>
-        <div role="group" ref={ref} className={className} {...otherProps}>
+        <div role="group" ref={ref} {...otherProps}>
           {children}
         </div>
       </CheckBoxProvider>

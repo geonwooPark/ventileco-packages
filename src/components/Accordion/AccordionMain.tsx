@@ -14,7 +14,6 @@ import AccordionItem from './AccordionItem'
 import { _createContext } from '../../utils/_createContext'
 
 interface AccordionProps extends HTMLAttributes<HTMLDivElement> {
-  className?: string
   multiple?: boolean
 }
 
@@ -30,7 +29,6 @@ export const [useAccordionContext, AccordionProvider] =
 function AccordionMain(
   {
     children,
-    className,
     multiple = false,
     ...otherProps
   }: PropsWithChildren<AccordionProps>,
@@ -77,12 +75,7 @@ function AccordionMain(
 
   return (
     <AccordionProvider value={providerValue}>
-      <div
-        role="tablist"
-        ref={forwardRef}
-        className={className}
-        {...otherProps}
-      >
+      <div role="tablist" ref={forwardRef} {...otherProps}>
         {children}
       </div>
     </AccordionProvider>

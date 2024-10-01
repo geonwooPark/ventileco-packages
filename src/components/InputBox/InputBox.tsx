@@ -1,14 +1,13 @@
 import React, { forwardRef, InputHTMLAttributes, useMemo } from 'react'
 
 interface InputBoxProps extends InputHTMLAttributes<HTMLInputElement> {
-  className?: string
   startIcon?: React.ReactNode
   endIcon?: React.ReactNode
   inputClassName?: string
 }
 
 export default forwardRef<HTMLInputElement, InputBoxProps>(function InputBox(
-  { className, startIcon, endIcon, inputClassName, ...otherProps },
+  { startIcon, endIcon, inputClassName, className, ...otherProps },
   ref,
 ) {
   const containerStyle = useMemo<React.CSSProperties>(
