@@ -1,5 +1,4 @@
 import { ReactNode, forwardRef, useCallback, useId, useMemo } from 'react'
-import CheckBoxTitle from './CheckBoxTitle'
 import CheckBoxList from './CheckBoxList'
 import CheckBoxItem from './CheckBoxItem'
 import { _createContext } from '../../utils/_createContext'
@@ -40,7 +39,7 @@ const CheckBoxMain = forwardRef<HTMLDivElement, CheckBoxMainProps>(
 
     return (
       <CheckBoxProvider value={providerValue}>
-        <div id={`${id}_checkbox`} role="group" ref={ref} className={className}>
+        <div role="group" ref={ref} className={className}>
           {children}
         </div>
       </CheckBoxProvider>
@@ -49,7 +48,6 @@ const CheckBoxMain = forwardRef<HTMLDivElement, CheckBoxMainProps>(
 )
 
 const CheckBox = Object.assign(CheckBoxMain, {
-  Title: CheckBoxTitle,
   List: CheckBoxList,
   Item: CheckBoxItem,
 })

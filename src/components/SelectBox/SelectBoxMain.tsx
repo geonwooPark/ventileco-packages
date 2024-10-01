@@ -15,7 +15,6 @@ import { OptionList } from '../../types'
 import SelectBoxTrigger from './SelectBoxTrigger'
 import SelectBoxItem from './SelectBoxItem'
 import SelectBoxList from './SelectBoxList'
-import SelectBoxTitle from './SelectBoxTitle'
 import SelectBoxInput from './SelectBoxInput'
 
 interface SelectBoxMainProps {
@@ -183,7 +182,6 @@ const SelectBoxMain = forwardRef<HTMLDivElement, SelectBoxMainProps>(
         listRef,
         focusedItem,
         optionList: list,
-
         setIsOpen,
         onKeyboardTrigger,
         onSelect,
@@ -198,12 +196,7 @@ const SelectBoxMain = forwardRef<HTMLDivElement, SelectBoxMainProps>(
 
     return (
       <SelectBoxProvider value={providerValue}>
-        <div
-          id={`${id}_selectbox`}
-          ref={ref}
-          style={selectBoxStyle}
-          className={className}
-        >
+        <div ref={ref} style={selectBoxStyle} className={className}>
           {children}
         </div>
       </SelectBoxProvider>
@@ -212,7 +205,6 @@ const SelectBoxMain = forwardRef<HTMLDivElement, SelectBoxMainProps>(
 )
 
 const SelectBox = Object.assign(SelectBoxMain, {
-  Title: SelectBoxTitle,
   Trigger: SelectBoxTrigger,
   Input: SelectBoxInput,
   List: SelectBoxList,

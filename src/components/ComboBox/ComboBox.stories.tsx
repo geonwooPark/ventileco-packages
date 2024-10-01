@@ -110,7 +110,6 @@ export function Normal() {
       list={comboBoxList}
       className="w-[240px] text-sm"
     >
-      <ComboBox.Title>ComboBox</ComboBox.Title>
       <ComboBox.Trigger>
         <div className="flex w-full items-center rounded-md border border-black px-3 py-2">
           <ComboBox.Input placeholder="🐝 Fruits" />

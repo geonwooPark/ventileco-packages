@@ -61,7 +61,6 @@ export function Controlled() {
 
   return (
     <CheckBox value={values} onChange={(value) => setValues(value)} ref={ref}>
-      <CheckBox.Title>Controlled</CheckBox.Title>
       <CheckBox.List className="flex flex-col gap-2">
         {checkBoxList.map((item) => (
           <CheckBox.Item key={item.id} value={item.value}>

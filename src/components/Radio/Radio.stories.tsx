@@ -93,7 +93,6 @@ export function Controlled() {
         name="Controlled"
         ref={ref}
       >
-        <Radio.Title>제어 컴포넌트</Radio.Title>
         <Radio.List className="flex flex-col gap-2">
           {radioList.map((item) => (
             <Radio.Item key={item.id} value={item.value}>
@@ -138,7 +137,6 @@ export function WithReactHookForm() {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Radio as="fieldset" register={radioRegister} defaultValue="number1">
-        <Radio.Title>With React Hook Form</Radio.Title>
         <Radio.List className="flex gap-4">
           {radioList.map((item) => (
             <Radio.Item key={item.id} value={item.value}>

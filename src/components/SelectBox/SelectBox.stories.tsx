@@ -105,8 +105,6 @@ export function Normal() {
       list={selectBoxList}
       className="w-[240px] text-sm"
     >
-      <SelectBox.Title>SelectBox</SelectBox.Title>
-
       <SelectBox.Trigger className="flex items-center rounded-md border border-black px-3 py-2">
         <SelectBox.Input placeholder="🐝 Fruits" />
       </SelectBox.Trigger>

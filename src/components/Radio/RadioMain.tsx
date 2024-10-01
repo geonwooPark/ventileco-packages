@@ -8,7 +8,6 @@ import React, {
   useState,
 } from 'react'
 import RadioList from './RadioList'
-import RadioTitle from './RadioTitle'
 import RadioItem from './RadioItem'
 import { _createContext } from '../../utils/_createContext'
 import { PolymorphicRef, TitleElement } from '../../types'
@@ -82,7 +81,7 @@ const RadioMain: RadioMainComponent = forwardRef(function RadioMain<
 
   return (
     <RadioProvider value={providerValue}>
-      <Element id={`${id}-radio`} role="radiogroup" ref={ref}>
+      <Element role="radiogroup" ref={ref}>
         {children}
       </Element>
     </RadioProvider>
@@ -90,7 +89,6 @@ const RadioMain: RadioMainComponent = forwardRef(function RadioMain<
 })
 
 const Radio = Object.assign(RadioMain, {
-  Title: RadioTitle,
   List: RadioList,
   Item: RadioItem,
 })

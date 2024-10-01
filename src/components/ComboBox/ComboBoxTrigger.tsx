@@ -19,6 +19,7 @@ function ComboBoxTrigger({
 
   return (
     <div
+      aria-labelledby={`${id}-combobox`}
       ref={triggerRef}
       aria-expanded={isOpen}
       aria-haspopup="listbox"

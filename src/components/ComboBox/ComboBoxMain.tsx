@@ -10,7 +10,6 @@ import React, {
   useRef,
   useState,
 } from 'react'
-import ComboBoxTitle from './ComboBoxTitle'
 import ComboBoxTrigger from './ComboBoxTrigger'
 import ComboBoxInput from './ComboBoxInput'
 import ComboBoxItem from './ComboBoxItem'
@@ -279,12 +278,7 @@ const ComboBoxMain = forwardRef<HTMLDivElement, ComboBoxMainProps>(
 
     return (
       <ComboBoxProvider value={providerValue}>
-        <div
-          id={`${id}_combobox`}
-          ref={ref}
-          style={comboBoxStyle}
-          className={className}
-        >
+        <div ref={ref} style={comboBoxStyle} className={className}>
           {children}
         </div>
       </ComboBoxProvider>
@@ -293,7 +287,6 @@ const ComboBoxMain = forwardRef<HTMLDivElement, ComboBoxMainProps>(
 )
 
 const ComboBox = Object.assign(ComboBoxMain, {
-  Title: ComboBoxTitle,
   Trigger: ComboBoxTrigger,
   Input: ComboBoxInput,
   ClearButton: ComboBoxClearButton,

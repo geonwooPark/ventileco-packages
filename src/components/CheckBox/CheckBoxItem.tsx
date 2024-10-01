@@ -21,14 +21,14 @@ function CheckBoxItem({ children, value }: CheckBoxItemProps) {
 
   return (
     <label
-      htmlFor={`${id}-${value}`}
+      htmlFor={`${id}-checkbox-item-${value}`}
       role="checkbox"
       aria-checked={isSelected}
       tabIndex={0}
       onKeyDown={onKeyDown}
     >
       <input
-        id={`${id}-${value}`}
+        id={`${id}-checkbox-item-${value}`}
         type="checkbox"
         aria-hidden="true"
         value={value}
