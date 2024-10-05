@@ -223,8 +223,9 @@ const ComboBoxMain = forwardRef<HTMLDivElement, ComboBoxMainProps>(
       if (!isOpen) return
 
       const onOutsideClick = (e: MouseEvent) => {
-        if (listRef.current?.contains(e.target as Node)) return
-        if (inputRef.current?.contains(e.target as Node)) return
+        const element = document.getElementById(`${id}-combobox`)
+
+        if (element?.contains(e.target as Node)) return
 
         setKeyword(value || '')
         setIsOpen(false)
@@ -257,7 +258,6 @@ const ComboBoxMain = forwardRef<HTMLDivElement, ComboBoxMainProps>(
         inputRef,
         focusedItem,
         optionList,
-
         onTextChange,
         onTrigger,
         onClear,
@@ -274,7 +274,12 @@ const ComboBoxMain = forwardRef<HTMLDivElement, ComboBoxMainProps>(
 
     return (
       <ComboBoxProvider value={providerValue}>
-        <div ref={ref} style={comboBoxStyle} {...otherProps}>
+        <div
+          id={`${id}-combobox`}
+          ref={ref}
+          style={comboBoxStyle}
+          {...otherProps}
+        >
           {children}
         </div>
       </ComboBoxProvider>

@@ -7,16 +7,9 @@ export interface InputBoxProps extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 export default forwardRef<HTMLInputElement, InputBoxProps>(function InputBox(
-  { startIcon, endIcon, inputClassName, className, ...otherProps },
+  { startIcon, endIcon, inputClassName, className, onClick, ...otherProps },
   ref,
 ) {
-  const containerStyle = useMemo<React.CSSProperties>(
-    () => ({
-      width: '100%',
-    }),
-    [],
-  )
-
   const inputContainerStyle = useMemo<React.CSSProperties>(
     () => ({
       width: '100%',
@@ -38,7 +31,7 @@ export default forwardRef<HTMLInputElement, InputBoxProps>(function InputBox(
   )
 
   return (
-    <div style={containerStyle} className={className}>
+    <div className={className} onClick={onClick}>
       <div style={inputContainerStyle}>
         {startIcon}
         <input

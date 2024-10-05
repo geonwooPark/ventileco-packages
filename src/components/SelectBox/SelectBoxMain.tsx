@@ -32,7 +32,7 @@ type SelectBoxContextState = {
   inputRef: React.RefObject<HTMLInputElement> | null
   focusedItem: string | undefined
   optionList: OptionList
-  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
+  onTrigger: () => void
   onKeyboardTrigger: KeyboardEventHandler<HTMLDivElement>
   onSelect: ({ value, disabled }: { value: string; disabled?: boolean }) => void
 }
@@ -61,6 +61,20 @@ const SelectBoxMain = forwardRef<HTMLDivElement, SelectBoxMainProps>(
       const index = list.findIndex((r) => r.value.toString() === focusedItem)
       return index === -1 ? 0 : index
     }, [list, focusedItem])
+
+    const onTrigger = useCallback(() => {
+      setIsOpen((prev) => {
+        if (!inputRef?.current) return false
+
+        if (prev) {
+          inputRef.current.blur()
+          return false
+        } else {
+          inputRef.current.focus()
+          return true
+        }
+      })
+    }, [])
 
     const onSelect = useCallback(
       ({ value, disabled }: { value: string; disabled?: boolean }) => {
@@ -165,8 +179,9 @@ const SelectBoxMain = forwardRef<HTMLDivElement, SelectBoxMainProps>(
       if (!isOpen) return
 
       const onOutsideClick = (e: MouseEvent) => {
-        if (listRef.current?.contains(e.target as Node)) return
-        if (inputRef.current?.contains(e.target as Node)) return
+        const element = document.getElementById(`${id}-selectbox`)
+
+        if (element?.contains(e.target as Node)) return
 
         setIsOpen(false)
       }
@@ -184,7 +199,7 @@ const SelectBoxMain = forwardRef<HTMLDivElement, SelectBoxMainProps>(
         inputRef,
         focusedItem,
         optionList: list,
-        setIsOpen,
+        onTrigger,
         onKeyboardTrigger,
         onSelect,
       }),
@@ -198,7 +213,12 @@ const SelectBoxMain = forwardRef<HTMLDivElement, SelectBoxMainProps>(
 
     return (
       <SelectBoxProvider value={providerValue}>
-        <div ref={ref} style={selectBoxStyle} {...otherProps}>
+        <div
+          id={`${id}-selectbox`}
+          ref={ref}
+          style={selectBoxStyle}
+          {...otherProps}
+        >
           {children}
         </div>
       </SelectBoxProvider>

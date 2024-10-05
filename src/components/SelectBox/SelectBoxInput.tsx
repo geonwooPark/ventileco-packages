@@ -13,7 +13,7 @@ function SelectBoxInput({ placeholder, ...otherProps }: SelectBoxInputProps) {
     inputRef,
     optionList,
     isOpen,
-    setIsOpen,
+    onTrigger,
     onKeyboardTrigger,
   } = useSelectBoxContext()
 
@@ -30,7 +30,7 @@ function SelectBoxInput({ placeholder, ...otherProps }: SelectBoxInputProps) {
       type="text"
       role="combobox"
       value={selectedLabel || ''}
-      onClick={() => setIsOpen((prev) => !prev)}
+      onClick={onTrigger}
       onKeyDown={onKeyboardTrigger}
       placeholder={placeholder}
       readOnly
