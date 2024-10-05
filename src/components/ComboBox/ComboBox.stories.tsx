@@ -60,6 +60,13 @@ export default {
         category: 'ComboBox.Input',
       },
     },
+    clearIcon: {
+      description: '내부 상태값을 초기화 시키는 아이콘을 설정합니다.',
+      table: {
+        type: { summary: 'ReactNode' },
+        category: 'ComboBox.Input',
+      },
+    },
     as: {
       description: '렌더링할 태그를 입력합니다.',
       table: {
@@ -103,27 +110,27 @@ export function Normal() {
       list={comboBoxList}
       className="w-[240px] text-sm"
     >
-      <ComboBox.Trigger>
-        <div className="flex w-full items-center rounded-md border border-black px-3 py-2">
-          <ComboBox.Input placeholder="🐝 Fruits" />
-          <ComboBox.ClearButton>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth="1.5"
-              stroke="currentColor"
-              className="size-4"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M6 18 18 6M6 6l12 12"
-              />
-            </svg>
-          </ComboBox.ClearButton>
-        </div>
-      </ComboBox.Trigger>
+      <ComboBox.Input
+        placeholder="🐝 Fruits"
+        className="flex h-12 w-full items-center rounded-md border border-black px-3"
+        clearIcon={
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth="1.5"
+            stroke="currentColor"
+            className="size-4"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M6 18 18 6M6 6l12 12"
+            />
+          </svg>
+        }
+      />
+
       <ComboBox.List
         as={motion.ul}
         {...animationProps}

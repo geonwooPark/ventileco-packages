@@ -53,6 +53,13 @@ export default {
         category: 'SelectBox',
       },
     },
+    placeholder: {
+      description: 'Input의 Placeholder를 지정합니다.',
+      table: {
+        type: { summary: 'string' },
+        category: 'SelectBox.Input',
+      },
+    },
     as: {
       description: '렌더링할 태그를 입력합니다.',
       table: {
@@ -98,9 +105,10 @@ export function Normal() {
       list={selectBoxList}
       className="w-[240px] text-sm"
     >
-      <SelectBox.Trigger className="flex items-center rounded-md border border-black px-3 py-2">
-        <SelectBox.Input placeholder="🐝 Fruits" />
-      </SelectBox.Trigger>
+      <SelectBox.Input
+        placeholder="🐝 Fruits"
+        className="flex h-12 w-full items-center rounded-md border border-black px-3"
+      />
 
       <SelectBox.List
         as={motion.ul}

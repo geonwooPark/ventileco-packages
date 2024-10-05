@@ -1,13 +1,21 @@
 import { useMemo } from 'react'
 import { useSelectBoxContext } from './SelectBoxMain'
+import InputBox, { InputBoxProps } from '../InputBox/InputBox'
 
-interface ComboBoxInputProps {
-  className?: string
+interface SelectBoxInputProps extends InputBoxProps {
   placeholder?: string
 }
 
-function SelectBoxInput({ className, placeholder }: ComboBoxInputProps) {
-  const { id, value, optionList } = useSelectBoxContext()
+function SelectBoxInput({ placeholder, ...otherProps }: SelectBoxInputProps) {
+  const {
+    id,
+    value,
+    inputRef,
+    optionList,
+    isOpen,
+    setIsOpen,
+    onKeyboardTrigger,
+  } = useSelectBoxContext()
 
   const selectedItem = useMemo(
     () => optionList.find((r) => r.value === value),
@@ -16,29 +24,24 @@ function SelectBoxInput({ className, placeholder }: ComboBoxInputProps) {
 
   const selectedLabel = selectedItem?.label
 
-  const selectBoxInputStyle = useMemo(
-    () => ({
-      width: '100%',
-      outline: 'none',
-      backgroundColor: 'transparent',
-      cursor: 'pointer',
-    }),
-    [],
-  )
-
   return (
-    <input
+    <InputBox
+      ref={inputRef}
       type="text"
       role="combobox"
+      value={selectedLabel || ''}
+      onClick={() => setIsOpen((prev) => !prev)}
+      onKeyDown={onKeyboardTrigger}
+      placeholder={placeholder}
+      readOnly
+      aria-expanded={isOpen}
+      aria-haspopup="listbox"
+      aria-controls={`${id}-select-list`}
       aria-autocomplete="list"
       aria-activedescendant={
         value ? `${id}-selectbox-option-${value}` : undefined
       }
-      value={selectedLabel || ''}
-      placeholder={placeholder}
-      className={className}
-      style={selectBoxInputStyle}
-      readOnly
+      {...otherProps}
     />
   )
 }

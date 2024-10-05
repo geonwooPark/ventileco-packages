@@ -13,7 +13,6 @@ import React, {
 } from 'react'
 import { _createContext } from '../../utils/_createContext'
 import { OptionList } from '../../types'
-import SelectBoxTrigger from './SelectBoxTrigger'
 import SelectBoxItem from './SelectBoxItem'
 import SelectBoxList from './SelectBoxList'
 import SelectBoxInput from './SelectBoxInput'
@@ -29,8 +28,8 @@ type SelectBoxContextState = {
   id: string
   value: any
   isOpen: boolean
-  triggerRef: React.RefObject<HTMLDivElement> | null
   listRef: React.RefObject<HTMLUListElement> | null
+  inputRef: React.RefObject<HTMLInputElement> | null
   focusedItem: string | undefined
   optionList: OptionList
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
@@ -54,7 +53,7 @@ const SelectBoxMain = forwardRef<HTMLDivElement, SelectBoxMainProps>(
       value && value.toString(),
     )
 
-    const triggerRef = useRef<HTMLDivElement>(null)
+    const inputRef = useRef<HTMLInputElement>(null)
 
     const listRef = useRef<HTMLUListElement>(null)
 
@@ -166,8 +165,8 @@ const SelectBoxMain = forwardRef<HTMLDivElement, SelectBoxMainProps>(
       if (!isOpen) return
 
       const onOutsideClick = (e: MouseEvent) => {
-        if (triggerRef.current?.contains(e.target as Node)) return
         if (listRef.current?.contains(e.target as Node)) return
+        if (inputRef.current?.contains(e.target as Node)) return
 
         setIsOpen(false)
       }
@@ -181,8 +180,8 @@ const SelectBoxMain = forwardRef<HTMLDivElement, SelectBoxMainProps>(
         id,
         value,
         isOpen,
-        triggerRef,
         listRef,
+        inputRef,
         focusedItem,
         optionList: list,
         setIsOpen,
@@ -208,7 +207,6 @@ const SelectBoxMain = forwardRef<HTMLDivElement, SelectBoxMainProps>(
 )
 
 const SelectBox = Object.assign(SelectBoxMain, {
-  Trigger: SelectBoxTrigger,
   Input: SelectBoxInput,
   List: SelectBoxList,
   Item: SelectBoxItem,

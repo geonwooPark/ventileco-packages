@@ -1,33 +1,53 @@
-import { useMemo } from 'react'
 import { useComboBoxContext } from './ComboBoxMain'
+import InputBox, { InputBoxProps } from '../InputBox/InputBox'
 
-interface ComboBoxInputProps {
-  className?: string
-  placeholder: string
+interface ComboBoxInputProps extends InputBoxProps {
+  placeholder?: string
+  clearIcon?: React.ReactNode
 }
 
-function ComboBoxInput({ className, placeholder }: ComboBoxInputProps) {
-  const { id, value, inputRef, keyword, onTextChange } = useComboBoxContext()
-
-  const comboBoxInputStyle = useMemo(
-    () => ({ width: '100%', outline: 'none' }),
-    [],
-  )
+function ComboBoxInput({
+  placeholder,
+  clearIcon,
+  ...otherProps
+}: ComboBoxInputProps) {
+  const {
+    id,
+    value,
+    isOpen,
+    inputRef,
+    keyword,
+    onTrigger,
+    onKeyboardTrigger,
+    onTextChange,
+    onClear,
+  } = useComboBoxContext()
 
   return (
-    <input
+    <InputBox
       ref={inputRef}
       type="text"
       role="combobox"
+      placeholder={placeholder}
+      value={keyword}
+      onChange={onTextChange}
+      onClick={onTrigger}
+      onKeyDown={onKeyboardTrigger}
+      endIcon={
+        clearIcon ? (
+          <span onClick={onClear} style={{ cursor: 'pointer' }}>
+            {clearIcon}
+          </span>
+        ) : null
+      }
       aria-autocomplete="list"
       aria-activedescendant={
         value ? `${id}-combobox-option-${value}` : undefined
       }
-      value={keyword}
-      onChange={onTextChange}
-      placeholder={placeholder}
-      className={className}
-      style={comboBoxInputStyle}
+      aria-expanded={isOpen}
+      aria-haspopup="listbox"
+      aria-controls={`${id}-combobox-list`}
+      {...otherProps}
     />
   )
 }

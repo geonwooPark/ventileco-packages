@@ -11,10 +11,8 @@ import React, {
   useRef,
   useState,
 } from 'react'
-import ComboBoxTrigger from './ComboBoxTrigger'
 import ComboBoxInput from './ComboBoxInput'
 import ComboBoxItem from './ComboBoxItem'
-import ComboBoxClearButton from './ComboBoxClearButton'
 import ComboBoxList from './ComboBoxList'
 import { Option, OptionList } from '../../types'
 import { escapeRegExp } from '../../utils/escapeRegExp'
@@ -33,7 +31,6 @@ type ComboBoxContextState = {
   list: OptionList
   isOpen: boolean
   keyword: string
-  triggerRef: React.RefObject<HTMLDivElement> | null
   listRef: React.RefObject<HTMLUListElement> | null
   inputRef: React.RefObject<HTMLInputElement> | null
   focusedItem: string | undefined
@@ -71,8 +68,6 @@ const ComboBoxMain = forwardRef<HTMLDivElement, ComboBoxMainProps>(
       value && value.toString(),
     )
     const [optionList, setOptionList] = useState(list)
-
-    const triggerRef = useRef<HTMLDivElement>(null)
 
     const inputRef = useRef<HTMLInputElement>(null)
 
@@ -228,7 +223,6 @@ const ComboBoxMain = forwardRef<HTMLDivElement, ComboBoxMainProps>(
       if (!isOpen) return
 
       const onOutsideClick = (e: MouseEvent) => {
-        if (triggerRef.current?.contains(e.target as Node)) return
         if (listRef.current?.contains(e.target as Node)) return
         if (inputRef.current?.contains(e.target as Node)) return
 
@@ -259,7 +253,6 @@ const ComboBoxMain = forwardRef<HTMLDivElement, ComboBoxMainProps>(
         list,
         isOpen,
         keyword,
-        triggerRef,
         listRef,
         inputRef,
         focusedItem,
@@ -290,9 +283,7 @@ const ComboBoxMain = forwardRef<HTMLDivElement, ComboBoxMainProps>(
 )
 
 const ComboBox = Object.assign(ComboBoxMain, {
-  Trigger: ComboBoxTrigger,
   Input: ComboBoxInput,
-  ClearButton: ComboBoxClearButton,
   List: ComboBoxList,
   Item: ComboBoxItem,
 })

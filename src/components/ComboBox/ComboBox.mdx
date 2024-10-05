@@ -46,31 +46,31 @@ function Example() {
       list={comboBoxList}
       className="w-[240px] text-sm"
     >
-      <ComboBox.Trigger>
-        <div className="flex w-full items-center rounded-md border border-black px-3 py-2">
-          <ComboBox.Input placeholder="🐝 Fruits" />
-          <ComboBox.ClearButton>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth="1.5"
-              stroke="currentColor"
-              className="size-4"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M6 18 18 6M6 6l12 12"
-              />
-            </svg>
-          </ComboBox.ClearButton>
-        </div>
-      </ComboBox.Trigger>
+      <ComboBox.Input
+        placeholder="🐝 Fruits"
+        className="flex h-12 w-full items-center rounded-md border border-black px-3"
+        clearIcon={
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth="1.5"
+            stroke="currentColor"
+            className="size-4"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M6 18 18 6M6 6l12 12"
+            />
+          </svg>
+        }
+      />
+
       <ComboBox.List
         as={motion.ul}
         {...animationProps}
-        className='bg-white" absolute z-[200] max-h-[240px] w-full overflow-hidden overflow-y-scroll rounded-md border'
+        className="absolute z-[200] max-h-[240px] w-full overflow-hidden overflow-y-scroll rounded-md border bg-white"
       >
         {({ optionList }) =>
           optionList.length !== 0 ? (
@@ -88,7 +88,7 @@ function Example() {
               ))}
             </>
           ) : (
-            <div className="w-full rounded-md border bg-white px-3 py-2 text-black/50">
+            <div className="w-full rounded-md bg-white px-3 py-2 text-black/50">
               No Results
             </div>
           )
