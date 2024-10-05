@@ -4,6 +4,7 @@ export interface InputBoxProps extends InputHTMLAttributes<HTMLInputElement> {
   startIcon?: React.ReactNode
   endIcon?: React.ReactNode
   inputClassName?: string
+  onClick?: React.MouseEventHandler<HTMLDivElement>
 }
 
 export default forwardRef<HTMLInputElement, InputBoxProps>(function InputBox(
@@ -30,8 +31,15 @@ export default forwardRef<HTMLInputElement, InputBoxProps>(function InputBox(
     [],
   )
 
+  const handleClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    e.preventDefault()
+    if (onClick) {
+      onClick(e)
+    }
+  }
+
   return (
-    <div className={className} onClick={onClick}>
+    <div className={className} onClick={handleClick}>
       <div style={inputContainerStyle}>
         {startIcon}
         <input
