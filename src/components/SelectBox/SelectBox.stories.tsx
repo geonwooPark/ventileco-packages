@@ -101,7 +101,7 @@ export function Normal() {
     <SelectBox
       ref={selectRef}
       value={value}
-      setValue={setValue}
+      onChange={setValue}
       list={selectBoxList}
       className="w-[240px] text-sm"
     >

@@ -106,7 +106,7 @@ export function Normal() {
   return (
     <ComboBox
       value={value}
-      setValue={setValue}
+      onChange={setValue}
       list={comboBoxList}
       className="w-[240px] text-sm"
     >

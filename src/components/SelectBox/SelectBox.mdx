@@ -41,7 +41,14 @@ function Example() {
   }
 
   return (
-    <SelectBox.Input
+    <SelectBox
+      ref={selectRef}
+      value={value}
+      onChange={setValue}
+      list={selectBoxList}
+      className="w-[240px] text-sm"
+    >
+      <SelectBox.Input
         placeholder="🐝 Fruits"
         className="flex h-12 w-full items-center rounded-md border border-black px-3"
       />

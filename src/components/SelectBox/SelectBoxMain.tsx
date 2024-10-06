@@ -20,7 +20,7 @@ import SelectBoxInput from './SelectBoxInput'
 interface SelectBoxMainProps extends HTMLAttributes<HTMLDivElement> {
   children?: ReactNode
   value: any
-  setValue: (value: any) => void
+  onChange: (value: any) => void
   list: OptionList
 }
 
@@ -42,7 +42,7 @@ export const [useSelectBoxContext, SelectBoxProvider] =
 
 const SelectBoxMain = forwardRef<HTMLDivElement, SelectBoxMainProps>(
   function SelectBoxMain(
-    { children, value, setValue, list, ...otherProps },
+    { children, value, onChange, list, onClick, ...otherProps },
     ref,
   ) {
     const id = useId()
@@ -67,7 +67,6 @@ const SelectBoxMain = forwardRef<HTMLDivElement, SelectBoxMainProps>(
         if (!inputRef?.current) return false
 
         if (prev) {
-          inputRef.current.blur()
           return false
         } else {
           inputRef.current.focus()
@@ -82,7 +81,7 @@ const SelectBoxMain = forwardRef<HTMLDivElement, SelectBoxMainProps>(
 
         setIsOpen(false)
         setFocusedItem(value.toString())
-        setValue(value)
+        onChange(value)
       },
       [],
     )
@@ -139,6 +138,14 @@ const SelectBoxMain = forwardRef<HTMLDivElement, SelectBoxMainProps>(
       [focusedIndex],
     )
 
+    const handleClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+      e.preventDefault()
+
+      if (onClick) {
+        onClick(e)
+      }
+    }
+
     useLayoutEffect(() => {
       if (!isOpen) return
       if (!listRef.current) return
@@ -180,8 +187,10 @@ const SelectBoxMain = forwardRef<HTMLDivElement, SelectBoxMainProps>(
 
       const onOutsideClick = (e: MouseEvent) => {
         const element = document.getElementById(`${id}-selectbox`)
+        const listElement = listRef.current
 
         if (element?.contains(e.target as Node)) return
+        if (listElement?.contains(e.target as Node)) return
 
         setIsOpen(false)
       }
@@ -217,6 +226,7 @@ const SelectBoxMain = forwardRef<HTMLDivElement, SelectBoxMainProps>(
           id={`${id}-selectbox`}
           ref={ref}
           style={selectBoxStyle}
+          onClick={handleClick}
           {...otherProps}
         >
           {children}

@@ -21,7 +21,7 @@ import { _createContext } from '../../utils/_createContext'
 interface ComboBoxMainProps extends HTMLAttributes<HTMLDivElement> {
   children?: ReactNode
   value: any
-  setValue: (value: any) => void
+  onChange: (value: any) => void
   list: OptionList
 }
 
@@ -55,7 +55,7 @@ export const [useComboBoxContext, ComboBoxProvider] =
 
 const ComboBoxMain = forwardRef<HTMLDivElement, ComboBoxMainProps>(
   function ComboBoxMain(
-    { children, value, setValue, list, ...otherProps },
+    { children, value, onChange, list, onClick, ...otherProps },
     ref,
   ) {
     const id = useId()
@@ -67,6 +67,7 @@ const ComboBoxMain = forwardRef<HTMLDivElement, ComboBoxMainProps>(
     const [focusedItem, setFocusedItem] = useState<string>(
       value && value.toString(),
     )
+
     const [optionList, setOptionList] = useState(list)
 
     const inputRef = useRef<HTMLInputElement>(null)
@@ -92,7 +93,6 @@ const ComboBoxMain = forwardRef<HTMLDivElement, ComboBoxMainProps>(
         if (!inputRef?.current) return false
 
         if (prev) {
-          inputRef.current.blur()
           return false
         } else {
           inputRef.current.focus()
@@ -106,9 +106,9 @@ const ComboBoxMain = forwardRef<HTMLDivElement, ComboBoxMainProps>(
         e.stopPropagation()
 
         setIsOpen(false)
-        setValue(undefined)
         setKeyword('')
         setFocusedItem('')
+        onChange(undefined)
       },
       [],
     )
@@ -118,8 +118,8 @@ const ComboBoxMain = forwardRef<HTMLDivElement, ComboBoxMainProps>(
 
       setIsOpen(false)
       setFocusedItem(value.toString())
-      setValue(value)
       setKeyword(label)
+      onChange(value)
     }, [])
 
     const onKeyboardTrigger: KeyboardEventHandler<HTMLDivElement> = useCallback(
@@ -177,6 +177,14 @@ const ComboBoxMain = forwardRef<HTMLDivElement, ComboBoxMainProps>(
       [focusedIndex],
     )
 
+    const handleClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+      e.preventDefault()
+
+      if (onClick) {
+        onClick(e)
+      }
+    }
+
     useEffect(() => {
       if (!isOpen) return
 
@@ -224,8 +232,10 @@ const ComboBoxMain = forwardRef<HTMLDivElement, ComboBoxMainProps>(
 
       const onOutsideClick = (e: MouseEvent) => {
         const element = document.getElementById(`${id}-combobox`)
+        const listElement = listRef.current
 
         if (element?.contains(e.target as Node)) return
+        if (listElement?.contains(e.target as Node)) return
 
         setKeyword(value || '')
         setIsOpen(false)
@@ -278,6 +288,7 @@ const ComboBoxMain = forwardRef<HTMLDivElement, ComboBoxMainProps>(
           id={`${id}-combobox`}
           ref={ref}
           style={comboBoxStyle}
+          onClick={handleClick}
           {...otherProps}
         >
           {children}
