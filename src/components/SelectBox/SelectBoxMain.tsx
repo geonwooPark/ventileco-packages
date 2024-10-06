@@ -63,16 +63,7 @@ const SelectBoxMain = forwardRef<HTMLDivElement, SelectBoxMainProps>(
     }, [list, focusedItem])
 
     const onTrigger = useCallback(() => {
-      setIsOpen((prev) => {
-        if (!inputRef?.current) return false
-
-        if (prev) {
-          return false
-        } else {
-          inputRef.current.focus()
-          return true
-        }
-      })
+      setIsOpen((prev) => !prev)
     }, [])
 
     const onSelect = useCallback(

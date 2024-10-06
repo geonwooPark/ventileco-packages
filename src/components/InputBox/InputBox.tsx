@@ -38,8 +38,21 @@ export default forwardRef<HTMLInputElement, InputBoxProps>(function InputBox(
     }
   }
 
+  const handleFocus = (e: React.FocusEvent<HTMLDivElement>) => {
+    const inputElement = e.currentTarget.querySelector('input')
+
+    if (inputElement) {
+      inputElement.focus()
+    }
+  }
+
   return (
-    <div className={className} onClick={handleClick}>
+    <div
+      tabIndex={0}
+      onClick={handleClick}
+      onFocus={handleFocus}
+      className={className}
+    >
       <div style={inputContainerStyle}>
         {startIcon}
         <input

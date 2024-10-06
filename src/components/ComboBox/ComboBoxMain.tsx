@@ -89,16 +89,7 @@ const ComboBoxMain = forwardRef<HTMLDivElement, ComboBoxMainProps>(
     )
 
     const onTrigger = useCallback(() => {
-      setIsOpen((prev) => {
-        if (!inputRef?.current) return false
-
-        if (prev) {
-          return false
-        } else {
-          inputRef.current.focus()
-          return true
-        }
-      })
+      setIsOpen((prev) => !prev)
     }, [])
 
     const onClear = useCallback(
@@ -237,7 +228,7 @@ const ComboBoxMain = forwardRef<HTMLDivElement, ComboBoxMainProps>(
         if (element?.contains(e.target as Node)) return
         if (listElement?.contains(e.target as Node)) return
 
-        setKeyword(value || '')
+        setKeyword((prev) => prev || '')
         setIsOpen(false)
       }
 
