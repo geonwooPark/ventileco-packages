@@ -29,7 +29,6 @@ type SelectBoxContextState = {
   value: any
   isOpen: boolean
   listRef: React.RefObject<HTMLUListElement> | null
-  inputRef: React.RefObject<HTMLInputElement> | null
   focusedItem: string | undefined
   optionList: OptionList
   onTrigger: () => void
@@ -52,8 +51,6 @@ const SelectBoxMain = forwardRef<HTMLDivElement, SelectBoxMainProps>(
     const [focusedItem, setFocusedItem] = useState<string>(
       value && value.toString(),
     )
-
-    const inputRef = useRef<HTMLInputElement>(null)
 
     const listRef = useRef<HTMLUListElement>(null)
 
@@ -196,7 +193,6 @@ const SelectBoxMain = forwardRef<HTMLDivElement, SelectBoxMainProps>(
         value,
         isOpen,
         listRef,
-        inputRef,
         focusedItem,
         optionList: list,
         onTrigger,

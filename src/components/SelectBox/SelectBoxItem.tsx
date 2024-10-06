@@ -15,6 +15,7 @@ interface SelectItemProps {
   }
 }
 
+// 클릭하면 포커스가 넘어가버림 (엔터는 안넘어감)
 function SelectBoxItem({ children, item }: SelectItemProps) {
   const { id, value, focusedItem, onSelect } = useSelectBoxContext()
 
@@ -22,6 +23,17 @@ function SelectBoxItem({ children, item }: SelectItemProps) {
     value !== undefined && value.toString() === item.value.toString()
   const isDisabled = item.disabled ? true : false
   const isFocused = focusedItem === item.value.toString()
+
+  const onMouseDown = (e: React.MouseEvent) => {
+    e.preventDefault()
+  }
+
+  const onClick = () => {
+    onSelect({
+      value: item.value,
+      disabled: item.disabled,
+    })
+  }
 
   const selectBoxItemStyle = useMemo<React.CSSProperties>(
     () => ({
@@ -39,12 +51,8 @@ function SelectBoxItem({ children, item }: SelectItemProps) {
       data-value={item.value}
       data-label={item.label}
       data-disabled={item.disabled}
-      onClick={() =>
-        onSelect({
-          value: item.value,
-          disabled: item.disabled,
-        })
-      }
+      onMouseDown={onMouseDown}
+      onClick={onClick}
       style={selectBoxItemStyle}
     >
       {children({ isSelected, isDisabled, isFocused })}

@@ -15,7 +15,6 @@ function ComboBoxInput({
     id,
     value,
     isOpen,
-    inputRef,
     keyword,
     onTrigger,
     onKeyboardTrigger,
@@ -25,7 +24,6 @@ function ComboBoxInput({
 
   return (
     <InputBox
-      ref={inputRef}
       type="text"
       role="combobox"
       placeholder={placeholder}

@@ -32,7 +32,6 @@ type ComboBoxContextState = {
   isOpen: boolean
   keyword: string
   listRef: React.RefObject<HTMLUListElement> | null
-  inputRef: React.RefObject<HTMLInputElement> | null
   focusedItem: string | undefined
   optionList: OptionList
   onTextChange: (e: React.ChangeEvent<HTMLInputElement>) => void
@@ -69,8 +68,6 @@ const ComboBoxMain = forwardRef<HTMLDivElement, ComboBoxMainProps>(
     )
 
     const [optionList, setOptionList] = useState(list)
-
-    const inputRef = useRef<HTMLInputElement>(null)
 
     const listRef = useRef<HTMLUListElement>(null)
 
@@ -256,7 +253,6 @@ const ComboBoxMain = forwardRef<HTMLDivElement, ComboBoxMainProps>(
         isOpen,
         keyword,
         listRef,
-        inputRef,
         focusedItem,
         optionList,
         onTextChange,

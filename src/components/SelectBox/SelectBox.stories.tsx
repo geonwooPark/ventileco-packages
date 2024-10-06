@@ -107,7 +107,7 @@ export function Normal() {
     >
       <SelectBox.Input
         placeholder="🐝 Fruits"
-        className="flex h-12 w-full items-center rounded-md border border-black px-3"
+        className="flex h-12 w-full items-center rounded-md border border-black px-3 focus-within:border-2"
       />
 
       <SelectBox.List

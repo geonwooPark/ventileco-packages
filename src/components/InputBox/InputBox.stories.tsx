@@ -49,7 +49,7 @@ export function Normal() {
       value={value}
       onChange={onChange}
       placeholder="내용을 입력하세요."
-      className="h-12 w-[360px] rounded-md border border-black px-3"
+      className="h-12 w-[360px] rounded-md border border-black px-3 focus-within:border-2"
       inputClassName="placeholder:text-gray-300 placeholder:text-sm"
       startIcon={
         <svg

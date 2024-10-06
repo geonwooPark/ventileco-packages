@@ -22,6 +22,18 @@ function ComboBoxItem({ children, item }: ComboBoxItemProps) {
   const isDisabled = item.disabled ? true : false
   const isFocused = focusedItem === item.value.toString()
 
+  const onMouseDown = (e: React.MouseEvent) => {
+    e.preventDefault()
+  }
+
+  const onClick = () => {
+    onSelect({
+      value: item.value,
+      label: item.label,
+      disabled: item.disabled,
+    })
+  }
+
   const comboBoxItemStyle = useMemo<React.CSSProperties>(
     () => ({
       cursor: isDisabled ? 'not-allowed' : 'pointer',
@@ -38,13 +50,8 @@ function ComboBoxItem({ children, item }: ComboBoxItemProps) {
       data-value={item.value}
       data-label={item.label}
       data-disabled={item.disabled}
-      onClick={() =>
-        onSelect({
-          value: item.value,
-          label: item.label,
-          disabled: item.disabled,
-        })
-      }
+      onMouseDown={onMouseDown}
+      onClick={onClick}
       style={comboBoxItemStyle}
     >
       {children({ isSelected, isDisabled, isFocused })}
