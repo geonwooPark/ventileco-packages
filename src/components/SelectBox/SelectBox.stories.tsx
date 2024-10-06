@@ -34,7 +34,7 @@ export default {
         category: 'SelectBox',
       },
     },
-    setValue: {
+    onChange: {
       description: '값을 설정하는 함수입니다.',
       table: {
         type: { summary: '(value: any) => void' },
