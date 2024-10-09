@@ -4,6 +4,7 @@ import { fileToPreviewImage } from '../../utils/fileToPreviewImage'
 
 interface FileUploaderProps {
   children: (props: { isDragOver: boolean }) => React.ReactNode
+  className?: string
   value: CustomFile[]
   onChange: (files: CustomFile[]) => void
   onBlur?: React.FocusEventHandler<HTMLLabelElement>
@@ -15,6 +16,7 @@ interface FileUploaderProps {
 
 export default function FileUploader({
   children,
+  className,
   value,
   onChange,
   onBlur,
@@ -104,6 +106,7 @@ export default function FileUploader({
       onDragLeave={onDragLeave}
       onDrop={onDragDrop}
       onBlur={onBlur}
+      className={className}
     >
       {children({ isDragOver })}
       <input
