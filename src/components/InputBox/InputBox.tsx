@@ -18,14 +18,6 @@ export default forwardRef<HTMLInputElement, InputBoxProps>(function InputBox(
     }
   }
 
-  const handleFocus = (e: React.FocusEvent<HTMLDivElement>) => {
-    const inputElement = e.currentTarget.querySelector('input')
-
-    if (inputElement) {
-      inputElement.focus()
-    }
-  }
-
   const inputContainerStyle = useMemo<React.CSSProperties>(
     () => ({
       width: '100%',
@@ -47,12 +39,7 @@ export default forwardRef<HTMLInputElement, InputBoxProps>(function InputBox(
   )
 
   return (
-    <div
-      tabIndex={0}
-      onClick={handleClick}
-      onFocus={handleFocus}
-      className={className}
-    >
+    <div onClick={handleClick} className={className}>
       <div style={inputContainerStyle}>
         {startIcon}
         <input
