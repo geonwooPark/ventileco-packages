@@ -56,7 +56,6 @@ export default forwardRef<HTMLInputElement, InputBoxProps>(function InputBox(
       <div style={inputContainerStyle}>
         {startIcon}
         <input
-          tabIndex={-1}
           ref={ref}
           style={inputStyle}
           className={inputClassName}
