@@ -34,6 +34,7 @@ type SelectBoxContextState = {
   onTrigger: () => void
   onKeyboardTrigger: KeyboardEventHandler<HTMLDivElement>
   onSelect: ({ value, disabled }: { value: string; disabled?: boolean }) => void
+  onBlur?: React.FocusEventHandler
 }
 
 export const [useSelectBoxContext, SelectBoxProvider] =
@@ -41,7 +42,7 @@ export const [useSelectBoxContext, SelectBoxProvider] =
 
 const SelectBoxMain = forwardRef<HTMLDivElement, SelectBoxMainProps>(
   function SelectBoxMain(
-    { children, value, onChange, list, onClick, ...otherProps },
+    { children, value, onChange, list, onClick, onBlur, ...otherProps },
     ref,
   ) {
     const id = useId()
@@ -198,6 +199,7 @@ const SelectBoxMain = forwardRef<HTMLDivElement, SelectBoxMainProps>(
         onTrigger,
         onKeyboardTrigger,
         onSelect,
+        onBlur,
       }),
       [id, value, isOpen, focusedItem, list],
     )

@@ -47,6 +47,7 @@ type ComboBoxContextState = {
     label: string
     disabled?: boolean
   }) => void
+  onBlur?: React.FocusEventHandler
 }
 
 export const [useComboBoxContext, ComboBoxProvider] =
@@ -54,7 +55,7 @@ export const [useComboBoxContext, ComboBoxProvider] =
 
 const ComboBoxMain = forwardRef<HTMLDivElement, ComboBoxMainProps>(
   function ComboBoxMain(
-    { children, value, onChange, list, onClick, ...otherProps },
+    { children, value, onChange, list, onClick, onBlur, ...otherProps },
     ref,
   ) {
     const id = useId()
@@ -260,6 +261,7 @@ const ComboBoxMain = forwardRef<HTMLDivElement, ComboBoxMainProps>(
         onClear,
         onSelect,
         onKeyboardTrigger,
+        onBlur,
       }),
       [id, value, list, isOpen, keyword, focusedItem, optionList],
     )

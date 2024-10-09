@@ -20,6 +20,7 @@ function ComboBoxInput({
     onKeyboardTrigger,
     onTextChange,
     onClear,
+    onBlur,
   } = useComboBoxContext()
 
   return (
@@ -45,6 +46,7 @@ function ComboBoxInput({
       aria-expanded={isOpen}
       aria-haspopup="listbox"
       aria-controls={`${id}-combobox-list`}
+      onBlur={onBlur}
       {...otherProps}
     />
   )

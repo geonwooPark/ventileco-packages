@@ -7,8 +7,15 @@ interface SelectBoxInputProps extends InputBoxProps {
 }
 
 function SelectBoxInput({ placeholder, ...otherProps }: SelectBoxInputProps) {
-  const { id, value, optionList, isOpen, onTrigger, onKeyboardTrigger } =
-    useSelectBoxContext()
+  const {
+    id,
+    value,
+    optionList,
+    isOpen,
+    onTrigger,
+    onKeyboardTrigger,
+    onBlur,
+  } = useSelectBoxContext()
 
   const selectedItem = useMemo(
     () => optionList.find((r) => r.value === value),
@@ -23,6 +30,7 @@ function SelectBoxInput({ placeholder, ...otherProps }: SelectBoxInputProps) {
       role="combobox"
       value={selectedLabel || ''}
       onClick={onTrigger}
+      onBlur={onBlur}
       onKeyDown={onKeyboardTrigger}
       placeholder={placeholder}
       readOnly
