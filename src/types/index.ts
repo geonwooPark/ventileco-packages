@@ -42,3 +42,8 @@ export type TitleElement = 'legend' | 'label'
 
 export type PolymorphicRef<T extends ElementType> =
   React.ComponentPropsWithRef<T>['ref']
+
+export interface CustomFile extends File {
+  path?: string
+  preview?: string
+}
