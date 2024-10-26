@@ -9,13 +9,19 @@ function SliderNextButton({
   children,
   className,
 }: PropsWithChildren<SliderNextButtonProps>) {
-  const { onNextButtonClick } = useSliderContext()
+  const { onNextClick, loopEnabled, page, totalPage } = useSliderContext()
+
+  const isDisabled = !loopEnabled && page >= totalPage
 
   return (
     <button
-      onClick={onNextButtonClick}
       className={className}
+      onClick={() => onNextClick()}
+      onMouseDown={(e) => e.stopPropagation()}
+      onMouseMove={(e) => e.stopPropagation()}
+      onMouseUp={(e) => e.stopPropagation()}
       aria-label="Next Slide"
+      disabled={isDisabled}
     >
       {children}
     </button>

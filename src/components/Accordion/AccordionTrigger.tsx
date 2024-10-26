@@ -24,6 +24,7 @@ function AccordionTrigger({
   const onKeyDown = useCallback((e: React.KeyboardEvent<HTMLButtonElement>) => {
     if (e.key === 'Enter') {
       e.preventDefault()
+
       handleOpen(index)
     }
   }, [])

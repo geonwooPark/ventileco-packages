@@ -9,13 +9,19 @@ function SliderPrevButton({
   children,
   className,
 }: PropsWithChildren<SliderPrevButtonProps>) {
-  const { onPrevButtonClick } = useSliderContext()
+  const { onPrevClick, loopEnabled, page } = useSliderContext()
+
+  const isDisabled = !loopEnabled && page <= 1
 
   return (
     <button
-      onClick={onPrevButtonClick}
       className={className}
+      onClick={onPrevClick}
+      onMouseDown={(e) => e.stopPropagation()}
+      onMouseMove={(e) => e.stopPropagation()}
+      onMouseUp={(e) => e.stopPropagation()}
       aria-label="Previous Slide"
+      disabled={isDisabled}
     >
       {children}
     </button>

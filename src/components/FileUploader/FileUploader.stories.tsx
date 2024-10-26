@@ -75,7 +75,7 @@ export function Normal() {
       <FileUploader
         value={value}
         onChange={onChange}
-        accept={'image/*, video/*, audio/*'}
+        accept={'image/*'}
         limit={5}
         onError={(error) => console.log(error.message)}
       >

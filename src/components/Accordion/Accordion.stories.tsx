@@ -67,7 +67,7 @@ export function Normal() {
         >
           {({ isOpen }) => (
             <React.Fragment>
-              <Accordion.Trigger className="outline-none">
+              <Accordion.Trigger>
                 <div
                   className={`${isOpen && 'text-blue-600'} flex cursor-pointer items-center justify-between px-4 py-2 text-left`}
                 >
