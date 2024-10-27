@@ -15,16 +15,35 @@ export default {
       },
     },
     gap: {
-      description: '슬라이드 아이템 간의 간격을 설정합니다.',
+      description: '슬라이드 간격을 설정하는 값입니다.',
       table: {
         type: { summary: 'number' },
       },
     },
-    step: {
-      description:
-        '버튼을 사용하여 슬라이드 조작 시 건너뛰는 아이템의 갯수를 설정합니다.',
+    perPage: {
+      description: '한 번에 표시될 슬라이드의 개수를 설정하는 값입니다.',
       table: {
         type: { summary: 'number' },
+      },
+    },
+    autoplay: {
+      description:
+        '슬라이드를 자동으로 이동하게 할지 여부를 설정하는 값입니다.',
+      table: {
+        type: { summary: 'boolean' },
+      },
+    },
+    delay: {
+      description:
+        'autoplay가 활성화된 경우, 슬라이드가 자동으로 이동하기 전까지 대기하는 시간을 밀리초 단위로 지정합니다.',
+      table: {
+        type: { summary: 'number' },
+      },
+    },
+    loop: {
+      description: '슬라이드의 순환 여부를 설정하는 값입니다.',
+      table: {
+        type: { summary: 'boolean' },
       },
     },
   },
@@ -32,31 +51,28 @@ export default {
 
 export function Normal() {
   return (
-    <Slider loop perPage={2} className="relative w-full">
+    <Slider loop perPage={3} gap={10} className="relative w-[620px]">
       <Slider.Content className="hide-scroll [&>*]:shrink-0">
-        <Slider.Item className="flex h-[300px] w-[400px] items-center justify-center bg-red-400">
+        <Slider.Item className="flex h-[300px] w-[200px] items-center justify-center bg-red-400">
           Slide1
         </Slider.Item>
-        <Slider.Item className="flex h-[300px] w-[400px] items-center justify-center bg-blue-400">
+        <Slider.Item className="flex h-[300px] w-[200px] items-center justify-center bg-blue-400">
           Slide2
         </Slider.Item>
-        <Slider.Item className="flex h-[300px] w-[400px] items-center justify-center bg-green-400">
+        <Slider.Item className="flex h-[300px] w-[200px] items-center justify-center bg-green-400">
           Slide3
         </Slider.Item>
-        <Slider.Item className="flex h-[300px] w-[400px] items-center justify-center bg-yellow-400">
+        <Slider.Item className="flex h-[300px] w-[200px] items-center justify-center bg-yellow-400">
           Slide4
         </Slider.Item>
-        <Slider.Item className="flex h-[300px] w-[400px] items-center justify-center bg-pink-400">
+        <Slider.Item className="flex h-[300px] w-[200px] items-center justify-center bg-pink-400">
           Slide5
         </Slider.Item>
-        <Slider.Item className="flex h-[300px] w-[400px] items-center justify-center bg-purple-400">
+        <Slider.Item className="flex h-[300px] w-[200px] items-center justify-center bg-purple-400">
           Slide6
         </Slider.Item>
-        <Slider.Item className="flex h-[300px] w-[400px] items-center justify-center bg-orange-400">
+        <Slider.Item className="flex h-[300px] w-[200px] items-center justify-center bg-orange-400">
           Slide7
-        </Slider.Item>
-        <Slider.Item className="flex h-[300px] w-[400px] items-center justify-center bg-neutral-400">
-          Slide8
         </Slider.Item>
       </Slider.Content>
       <Slider.PrevButton className="absolute left-4 top-1/2 -translate-y-1/2 rounded-full bg-black p-2 text-white shadow-md disabled:opacity-70">
