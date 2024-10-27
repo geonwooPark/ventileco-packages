@@ -14,6 +14,12 @@ export default {
         type: { summary: 'RefObject<HTMLDivElement>' },
       },
     },
+    loop: {
+      description: '슬라이드의 순환 여부를 설정하는 값입니다.',
+      table: {
+        type: { summary: 'boolean' },
+      },
+    },
     gap: {
       description: '슬라이드 간격을 설정하는 값입니다.',
       table: {
@@ -38,12 +44,6 @@ export default {
         'autoplay가 활성화된 경우, 슬라이드가 자동으로 이동하기 전까지 대기하는 시간을 밀리초 단위로 지정합니다.',
       table: {
         type: { summary: 'number' },
-      },
-    },
-    loop: {
-      description: '슬라이드의 순환 여부를 설정하는 값입니다.',
-      table: {
-        type: { summary: 'boolean' },
       },
     },
   },
