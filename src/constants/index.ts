@@ -1,13 +1,3 @@
-export const BUTTON_STATUS = {
-  isLoading: {
-    cursor: 'not-allowed',
-  },
-  isDisabled: {
-    cursor: 'not-allowed',
-    backgorundColor: 'red',
-  },
-}
-
 export const TOOLTIP_TRIANGLE_DIRECTION = {
   topLeft: {
     bottom: '-4.5px',
