@@ -77,6 +77,7 @@ function SliderMain(
   const canLoop =
     slideContainer.current &&
     perPage <= slideContainer.current.childNodes.length
+
   const loopEnabled = (loop && canLoop) || false
 
   const onNextClick = useCallback(() => {
@@ -97,8 +98,7 @@ function SliderMain(
       }
     }
 
-    translateX.current -= width
-
+    translateX.current -= (width + gap) * perPage
     slideContainer.current.style.transition = 'transform 0.5s ease'
     slideContainer.current.style.transform = `translateX(${translateX.current}px)`
 
@@ -116,7 +116,7 @@ function SliderMain(
           }
         }
 
-        translateX.current += width
+        translateX.current += (width + gap) * perPage
         slideContainer.current.style.transform = `translateX(${translateX.current}px)`
       }
 
@@ -134,7 +134,7 @@ function SliderMain(
     )
 
     setPage((prev) => (prev >= totalPage ? 1 : prev + 1))
-  }, [perPage, loopEnabled, page, totalPage, width])
+  }, [perPage, loopEnabled, page, totalPage, width, gap])
 
   const onPrevClick = useCallback(() => {
     if (isScrolling.current) return
@@ -164,15 +164,13 @@ function SliderMain(
       })
 
       // 위치 찾고
-      translateX.current -= width
-
+      translateX.current -= (width + gap) * perPage
       slideContainer.current.style.transform = `translateX(${translateX.current}px)`
       slideContainer.current.getBoundingClientRect()
     }
 
     // 위치 이동
-    translateX.current += width
-
+    translateX.current += (width + gap) * perPage
     slideContainer.current.style.transition = 'transform 0.5s ease'
     slideContainer.current.style.transform = `translateX(${translateX.current}px)`
 
@@ -191,7 +189,7 @@ function SliderMain(
 
         // 위치 찾기
         if (Math.floor(totalNodes / 2) >= perPage) {
-          translateX.current = -width
+          translateX.current = -(width + gap) * perPage
         }
         slideContainer.current.style.transform = `translateX(${translateX.current}px)`
       }
@@ -210,22 +208,37 @@ function SliderMain(
     )
 
     setPage((prev) => (prev <= 1 ? totalPage : prev - 1))
-  }, [loopEnabled, perPage, page, totalPage, width])
+  }, [loopEnabled, perPage, page, totalPage, width, gap])
 
   const onReset = useCallback(() => {
+    if (isScrolling.current) return
     if (!slideContainer.current) return
 
     const currentX = translateX.current
-
-    const slideWidth = width / perPage
-
+    const slideWidth = (width + gap) * perPage
     const closestIndex = Math.round(-currentX / slideWidth)
 
     translateX.current = -closestIndex * slideWidth
-
     slideContainer.current.style.transition = 'transform 0.5s ease'
     slideContainer.current.style.transform = `translateX(${translateX.current}px)`
-  }, [perPage, width])
+
+    const handleTransitionEnd = () => {
+      if (!slideContainer.current) return
+
+      isScrolling.current = false
+      slideContainer.current.style.transition = ''
+
+      slideContainer.current.removeEventListener(
+        'transitionend',
+        handleTransitionEnd,
+      )
+    }
+
+    slideContainer.current.addEventListener(
+      'transitionend',
+      handleTransitionEnd,
+    )
+  }, [perPage, width, gap])
 
   const onPageClick = useCallback(
     (page: number) => {
@@ -234,7 +247,7 @@ function SliderMain(
 
       isScrolling.current = true
 
-      const newTranslateX = -(page - 1) * width
+      const newTranslateX = -(page - 1) * (width + gap) * perPage
 
       slideContainer.current.style.transition = 'transform 0.5s ease'
       slideContainer.current.style.transform = `translateX(${newTranslateX}px)`
@@ -325,14 +338,13 @@ function SliderMain(
       ).transform
       const matrix = currentTransform.match(/matrix.*\((.+)\)/)
       const finalTranslateX = matrix ? parseFloat(matrix[1].split(', ')[4]) : 0
-
       const dragDistance = finalTranslateX - translateX.current
 
       if (dragDistance < 0 && Math.abs(dragDistance) > 150) {
         onNextClick()
       } else if (dragDistance > 0 && Math.abs(dragDistance) > 150) {
         onPrevClick()
-      } else {
+      } else if (dragDistance !== 0) {
         onReset()
       }
 
@@ -363,19 +375,22 @@ function SliderMain(
           }
         }
 
-        translateX.current -= width
+        translateX.current -= (width + gap) * perPage
         slideContainer.current.style.transform = `translateX(${translateX.current}px)`
       }
     }
 
     initLoop()
-  }, [loopEnabled, perPage, width])
+  }, [loopEnabled, perPage, width, gap])
 
   useEffect(() => {
     if (!slideContainer.current) return
 
-    setWidth(slideContainer.current.clientWidth || 0)
-    setTotalPage(Math.ceil(slideContainer.current.childNodes.length / perPage))
+    const childNodes = slideContainer.current.childNodes
+    const totalNodes = childNodes.length
+
+    setWidth((childNodes[0] as HTMLElement).clientWidth || 0)
+    setTotalPage(Math.ceil(totalNodes / perPage))
   }, [perPage])
 
   useEffect(() => {
@@ -423,7 +438,6 @@ function SliderMain(
 
   const sliderStyle = useMemo<CSSProperties>(
     () => ({
-      width: '100%',
       overflow: 'hidden',
       cursor: 'grab',
       userSelect: 'none',
