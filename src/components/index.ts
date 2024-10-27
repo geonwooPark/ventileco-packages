@@ -1,5 +1,4 @@
 export { default as Accordion } from './Accordion/AccordionMain'
-export { default as Button } from './Button/Button'
 export { default as CheckBox } from './CheckBox/CheckBoxMain'
 export { default as ComboBox } from './ComboBox/ComboBoxMain'
 export { default as InputBox } from './InputBox/InputBox'
