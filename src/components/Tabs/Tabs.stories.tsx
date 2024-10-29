@@ -56,8 +56,12 @@ export function Normal() {
   }
 
   return (
-    <Tabs currentTab={currentTab} onChange={onChange}>
-      <Tabs.Container className="w-[420px]">
+    <Tabs
+      currentTab={currentTab}
+      onChange={onChange}
+      className="rounded-md border"
+    >
+      <Tabs.Container className="hide-scroll w-[420px] border-b">
         <Tabs.List>
           {tabList.map((item, idx) => (
             <Tabs.Item

@@ -298,6 +298,7 @@ function SliderMain(
   // 문제 - 왼쪽으로 드래그 이동 시 translate가 현재 드래그된 위치를 못잡음
   const onDragStart = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
     preventUnexpectedEffects(e)
+    if (isScrolling.current) return
 
     isDragging.current = true
     startX.current = e.clientX
@@ -340,9 +341,9 @@ function SliderMain(
       const finalTranslateX = matrix ? parseFloat(matrix[1].split(', ')[4]) : 0
       const dragDistance = finalTranslateX - translateX.current
 
-      if (dragDistance < 0 && Math.abs(dragDistance) > 150) {
+      if (dragDistance < 0 && Math.abs(dragDistance) > 100) {
         onNextClick()
-      } else if (dragDistance > 0 && Math.abs(dragDistance) > 150) {
+      } else if (dragDistance > 0 && Math.abs(dragDistance) > 100) {
         onPrevClick()
       } else if (dragDistance !== 0) {
         onReset()
