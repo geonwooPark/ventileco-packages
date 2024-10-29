@@ -340,32 +340,25 @@ function SliderMain(
     [page, totalPage, loop],
   )
 
-  const onDragEnd = useCallback(
-    (
-      e: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>,
-    ) => {
-      if (!slideContainer.current) return
-      if (!isDragging.current) return
+  const onDragEnd = useCallback(() => {
+    if (!slideContainer.current) return
+    if (!isDragging.current) return
 
-      const currentTransform = getComputedStyle(
-        slideContainer.current,
-      ).transform
-      const matrix = currentTransform.match(/matrix.*\((.+)\)/)
-      const finalTranslateX = matrix ? parseFloat(matrix[1].split(', ')[4]) : 0
-      const dragDistance = finalTranslateX - translateX.current
+    const currentTransform = getComputedStyle(slideContainer.current).transform
+    const matrix = currentTransform.match(/matrix.*\((.+)\)/)
+    const finalTranslateX = matrix ? parseFloat(matrix[1].split(', ')[4]) : 0
+    const dragDistance = finalTranslateX - translateX.current
 
-      if (dragDistance < 0 && Math.abs(dragDistance) > 100) {
-        onNextClick()
-      } else if (dragDistance > 0 && Math.abs(dragDistance) > 100) {
-        onPrevClick()
-      } else if (dragDistance !== 0) {
-        onReset()
-      }
+    if (dragDistance < 0 && Math.abs(dragDistance) > 100) {
+      onNextClick()
+    } else if (dragDistance > 0 && Math.abs(dragDistance) > 100) {
+      onPrevClick()
+    } else if (dragDistance !== 0) {
+      onReset()
+    }
 
-      isDragging.current = false
-    },
-    [onNextClick, onPrevClick, onReset],
-  )
+    isDragging.current = false
+  }, [onNextClick, onPrevClick, onReset])
 
   useEffect(() => {
     if (!loopEnabled) return
