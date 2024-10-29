@@ -290,47 +290,60 @@ function SliderMain(
     [loopEnabled, totalPage, onPageClick],
   )
 
-  const preventUnexpectedEffects = (e: React.MouseEvent<HTMLDivElement>) => {
-    e.preventDefault()
-    e.stopPropagation()
-  }
-
   // 문제 - 왼쪽으로 드래그 이동 시 translate가 현재 드래그된 위치를 못잡음
-  const onDragStart = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-    preventUnexpectedEffects(e)
-    if (isScrolling.current) return
+  const onDragStart = useCallback(
+    (
+      e: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>,
+    ) => {
+      if (isScrolling.current) return
 
-    isDragging.current = true
-    startX.current = e.clientX
+      isDragging.current = true
+      if ('touches' in e) {
+        startX.current = e.touches[0].clientX // TouchEvent
+      } else {
+        startX.current = e.clientX // MouseEvent
+      }
 
-    if (slideContainer.current) {
-      const currentTransform = getComputedStyle(
-        slideContainer.current,
-      ).transform
+      if (slideContainer.current) {
+        const currentTransform = getComputedStyle(
+          slideContainer.current,
+        ).transform
 
-      const matrix = currentTransform.match(/matrix.*\((.+)\)/)
+        const matrix = currentTransform.match(/matrix.*\((.+)\)/)
 
-      translateX.current = matrix ? parseFloat(matrix[1].split(', ')[4]) : 0
-    }
-  }, [])
-
-  const onDragMove = useCallback(
-    throttle((e: React.MouseEvent<HTMLDivElement>) => {
-      preventUnexpectedEffects(e)
-
-      if (!isDragging.current || !slideContainer.current) return
-
-      const dragDistance = e.clientX - startX.current
-
-      slideContainer.current.style.transform = `translateX(${translateX.current + dragDistance}px)`
-    }, 16),
+        translateX.current = matrix ? parseFloat(matrix[1].split(', ')[4]) : 0
+      }
+    },
     [],
   )
 
-  const onDragEnd = useCallback(
-    (e: React.MouseEvent<HTMLDivElement>) => {
-      preventUnexpectedEffects(e)
+  const onDragMove = useCallback(
+    throttle(
+      (
+        e: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>,
+      ) => {
+        if (!isDragging.current || !slideContainer.current) return
 
+        const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX
+        const dragDistance = clientX - startX.current
+
+        const canDragLeft = page > 1 || loop
+        const canDragRight = page < totalPage || loop
+
+        if (!canDragLeft && dragDistance > 0) return
+        if (!canDragRight && dragDistance < 0) return
+
+        slideContainer.current.style.transform = `translateX(${translateX.current + dragDistance}px)`
+      },
+      16,
+    ),
+    [page, totalPage, loop],
+  )
+
+  const onDragEnd = useCallback(
+    (
+      e: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>,
+    ) => {
       if (!slideContainer.current) return
       if (!isDragging.current) return
 
@@ -458,6 +471,9 @@ function SliderMain(
         onMouseMove={onDragMove}
         onMouseUp={onDragEnd}
         onMouseLeave={onDragEnd}
+        onTouchStart={onDragStart}
+        onTouchMove={onDragMove}
+        onTouchEnd={onDragEnd}
       >
         {children}
       </div>
