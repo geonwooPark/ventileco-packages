@@ -38,8 +38,6 @@ export type ToastPosition =
   | 'bottomLeft'
   | 'bottomRight'
 
-export type TitleElement = 'legend' | 'label'
-
 export type PolymorphicRef<T extends ElementType> =
   React.ComponentPropsWithRef<T>['ref']
 
