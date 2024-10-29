@@ -349,9 +349,9 @@ function SliderMain(
     const finalTranslateX = matrix ? parseFloat(matrix[1].split(', ')[4]) : 0
     const dragDistance = finalTranslateX - translateX.current
 
-    if (dragDistance < 0 && Math.abs(dragDistance) > 100) {
+    if (dragDistance < 0 && Math.abs(dragDistance) > 10) {
       onNextClick()
-    } else if (dragDistance > 0 && Math.abs(dragDistance) > 100) {
+    } else if (dragDistance > 0 && Math.abs(dragDistance) > 10) {
       onPrevClick()
     } else if (dragDistance !== 0) {
       onReset()
