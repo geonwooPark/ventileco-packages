@@ -17,14 +17,17 @@ import { throttle } from '../../utils/throttle'
 import SliderItem from './SliderItem'
 import SliderPagination from './SliderPagination'
 
-interface SliderProps {
+interface SliderBaseProps {
   gap?: number
   perPage?: number
   autoplay?: boolean
   delay?: number
-  loop?: boolean
   className?: string
 }
+
+type SliderProps =
+  | (SliderBaseProps & { loop: true; startOffset?: never })
+  | (SliderBaseProps & { loop?: false; startOffset?: number })
 
 type SliderContextState = {
   slideContainer: React.RefObject<HTMLDivElement>
@@ -32,6 +35,7 @@ type SliderContextState = {
   gap: number
   perPage: number
   page: number
+  startOffset: number
   totalPage: number
   width: number
   loopEnabled: boolean
@@ -48,6 +52,7 @@ function SliderMain(
   {
     children,
     gap = 0,
+    startOffset = 0,
     perPage = 1,
     autoplay = false,
     delay = 1000,
@@ -98,7 +103,12 @@ function SliderMain(
       }
     }
 
+    if (translateX.current === startOffset) {
+      translateX.current -= startOffset
+    }
+
     translateX.current -= (width + gap) * perPage
+
     slideContainer.current.style.transition = 'transform 0.5s ease'
     slideContainer.current.style.transform = `translateX(${translateX.current}px)`
 
@@ -134,7 +144,7 @@ function SliderMain(
     )
 
     setPage((prev) => (prev >= totalPage ? 1 : prev + 1))
-  }, [perPage, loopEnabled, page, totalPage, width, gap])
+  }, [perPage, loopEnabled, page, totalPage, width, gap, startOffset])
 
   const onPrevClick = useCallback(() => {
     if (isScrolling.current) return
@@ -171,6 +181,11 @@ function SliderMain(
 
     // 위치 이동
     translateX.current += (width + gap) * perPage
+
+    if (translateX.current === 0) {
+      translateX.current += startOffset
+    }
+
     slideContainer.current.style.transition = 'transform 0.5s ease'
     slideContainer.current.style.transform = `translateX(${translateX.current}px)`
 
@@ -208,17 +223,23 @@ function SliderMain(
     )
 
     setPage((prev) => (prev <= 1 ? totalPage : prev - 1))
-  }, [loopEnabled, perPage, page, totalPage, width, gap])
+  }, [loopEnabled, perPage, page, totalPage, width, gap, startOffset])
 
   const onReset = useCallback(() => {
     if (isScrolling.current) return
     if (!slideContainer.current) return
 
     const currentX = translateX.current
+
     const slideWidth = (width + gap) * perPage
     const closestIndex = Math.round(-currentX / slideWidth)
 
     translateX.current = -closestIndex * slideWidth
+
+    if (translateX.current === 0) {
+      translateX.current += startOffset
+    }
+
     slideContainer.current.style.transition = 'transform 0.5s ease'
     slideContainer.current.style.transform = `translateX(${translateX.current}px)`
 
@@ -238,7 +259,7 @@ function SliderMain(
       'transitionend',
       handleTransitionEnd,
     )
-  }, [perPage, width, gap])
+  }, [perPage, width, gap, startOffset])
 
   const onPageClick = useCallback(
     (page: number) => {
@@ -247,7 +268,11 @@ function SliderMain(
 
       isScrolling.current = true
 
-      const newTranslateX = -(page - 1) * (width + gap) * perPage
+      let newTranslateX = -(page - 1) * (width + gap) * perPage
+
+      if (newTranslateX === 0) {
+        newTranslateX += startOffset
+      }
 
       slideContainer.current.style.transition = 'transform 0.5s ease'
       slideContainer.current.style.transform = `translateX(${newTranslateX}px)`
@@ -272,7 +297,7 @@ function SliderMain(
 
       setPage(page)
     },
-    [width, loopEnabled],
+    [width, loopEnabled, gap, perPage, startOffset],
   )
 
   const onKeyDown = useCallback(
@@ -419,6 +444,7 @@ function SliderMain(
       slideContainer,
       pageRefs,
       gap,
+      startOffset,
       perPage,
       width,
       page,
@@ -431,6 +457,7 @@ function SliderMain(
     }),
     [
       gap,
+      startOffset,
       perPage,
       width,
       page,

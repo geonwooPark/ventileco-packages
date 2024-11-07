@@ -9,16 +9,16 @@ function SliderContent({
   children,
   className,
 }: PropsWithChildren<SliderContentProps>) {
-  const { slideContainer, gap } = useSliderContext()
+  const { slideContainer, gap, startOffset } = useSliderContext()
 
   const sliderContentStyle = useMemo<CSSProperties>(
     () => ({
       gap: `${gap}px`,
       display: 'flex',
       width: '100%',
-      transform: 'translateX(0px)',
+      transform: `translateX(${startOffset}px)`,
     }),
-    [gap],
+    [gap, startOffset],
   )
 
   return (

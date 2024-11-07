@@ -51,27 +51,27 @@ export default {
 
 export function Normal() {
   return (
-    <Slider loop perPage={3} gap={10} className="relative w-[620px]">
+    <Slider perPage={2} gap={10} startOffset={16} className="relative w-full">
       <Slider.Content className="hide-scroll [&>*]:shrink-0">
-        <Slider.Item className="flex h-[300px] w-[200px] items-center justify-center bg-red-400">
+        <Slider.Item className="flex size-[200px] items-center justify-center bg-red-400">
           Slide1
         </Slider.Item>
-        <Slider.Item className="flex h-[300px] w-[200px] items-center justify-center bg-blue-400">
+        <Slider.Item className="flex size-[200px] items-center justify-center bg-blue-400">
           Slide2
         </Slider.Item>
-        <Slider.Item className="flex h-[300px] w-[200px] items-center justify-center bg-green-400">
+        <Slider.Item className="flex size-[200px] items-center justify-center bg-green-400">
           Slide3
         </Slider.Item>
-        <Slider.Item className="flex h-[300px] w-[200px] items-center justify-center bg-yellow-400">
+        <Slider.Item className="flex size-[200px] items-center justify-center bg-yellow-400">
           Slide4
         </Slider.Item>
-        <Slider.Item className="flex h-[300px] w-[200px] items-center justify-center bg-pink-400">
+        <Slider.Item className="flex size-[200px] items-center justify-center bg-pink-400">
           Slide5
         </Slider.Item>
-        <Slider.Item className="flex h-[300px] w-[200px] items-center justify-center bg-purple-400">
+        <Slider.Item className="flex size-[200px] items-center justify-center bg-purple-400">
           Slide6
         </Slider.Item>
-        <Slider.Item className="flex h-[300px] w-[200px] items-center justify-center bg-orange-400">
+        <Slider.Item className="flex size-[200px] items-center justify-center bg-orange-400">
           Slide7
         </Slider.Item>
       </Slider.Content>
