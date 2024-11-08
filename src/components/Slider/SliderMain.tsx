@@ -109,7 +109,7 @@ function SliderMain(
 
     translateX.current -= (width + gap) * perPage
 
-    slideContainer.current.style.transition = 'transform 0.5s ease'
+    slideContainer.current.style.transition = 'transform 0.1s ease'
     slideContainer.current.style.transform = `translateX(${translateX.current}px)`
 
     const handleTransitionEnd = () => {
@@ -186,7 +186,7 @@ function SliderMain(
       translateX.current += startOffset
     }
 
-    slideContainer.current.style.transition = 'transform 0.5s ease'
+    slideContainer.current.style.transition = 'transform 0.1s ease'
     slideContainer.current.style.transform = `translateX(${translateX.current}px)`
 
     const handleTransitionEnd = () => {
@@ -240,7 +240,7 @@ function SliderMain(
       translateX.current += startOffset
     }
 
-    slideContainer.current.style.transition = 'transform 0.5s ease'
+    slideContainer.current.style.transition = 'transform 0.1s ease'
     slideContainer.current.style.transform = `translateX(${translateX.current}px)`
 
     const handleTransitionEnd = () => {
@@ -274,7 +274,7 @@ function SliderMain(
         newTranslateX += startOffset
       }
 
-      slideContainer.current.style.transition = 'transform 0.5s ease'
+      slideContainer.current.style.transition = 'transform 0.1s ease'
       slideContainer.current.style.transform = `translateX(${newTranslateX}px)`
 
       const handleTransitionEnd = () => {

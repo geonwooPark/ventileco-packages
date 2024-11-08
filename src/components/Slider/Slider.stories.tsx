@@ -51,7 +51,12 @@ export default {
 
 export function Normal() {
   return (
-    <Slider perPage={2} gap={10} startOffset={16} className="relative w-full">
+    <Slider
+      perPage={2}
+      gap={10}
+      startOffset={20}
+      className="relative w-[500px]"
+    >
       <Slider.Content className="hide-scroll [&>*]:shrink-0">
         <Slider.Item className="flex size-[200px] items-center justify-center bg-red-400">
           Slide1
