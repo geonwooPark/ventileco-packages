@@ -38,39 +38,29 @@ function AccordionMain(
 
   const [activeItems, setActiveItems] = useState<Set<number>>(new Set())
 
-  const handleSingleOpen = useCallback((selectedItem: number) => {
-    setActiveItems((prev) => {
-      const newItem = new Set(prev)
-      if (prev.has(selectedItem)) {
-        newItem.delete(selectedItem)
-      } else {
-        newItem.add(selectedItem)
-      }
+  const handleOpen = useCallback(
+    (selectedItem: number) => {
+      setActiveItems((prev) => {
+        const newItem = new Set(multiple ? prev : [])
+        if (prev.has(selectedItem)) {
+          newItem.delete(selectedItem)
+        } else {
+          newItem.add(selectedItem)
+        }
 
-      return newItem
-    })
-  }, [])
-
-  const handleMultipleOpen = useCallback((selectedItem: number) => {
-    setActiveItems((prev) => {
-      const newItem = new Set<number>([])
-      if (prev.has(selectedItem)) {
-        newItem.delete(selectedItem)
-      } else {
-        newItem.add(selectedItem)
-      }
-
-      return newItem
-    })
-  }, [])
+        return newItem
+      })
+    },
+    [multiple],
+  )
 
   const providerValue = useMemo(
     () => ({
       id,
       activeItems,
-      handleOpen: multiple ? handleSingleOpen : handleMultipleOpen,
+      handleOpen,
     }),
-    [id, activeItems],
+    [id, activeItems, handleOpen],
   )
 
   return (

@@ -55,10 +55,7 @@ export function Normal() {
   }
 
   return (
-    <Accordion
-      multiple
-      className="flex w-[320px] flex-col overflow-hidden rounded-md border border-black"
-    >
+    <Accordion className="flex w-[320px] flex-col overflow-hidden rounded-md border border-black">
       {accordionList.map((item, idx) => (
         <Accordion.Item
           key={item.id}
