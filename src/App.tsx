@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { ReactNode, useState } from 'react'
 import Component1 from './Component1'
 import Component2 from './Component2'
 import { createContext } from './utils/createContext'
@@ -12,11 +12,11 @@ export const [Count5Provider, useCount5] = createContext(() => useState(50))
 
 export default function App() {
   const providers = [
-    Count1Provider,
-    Count2Provider,
-    Count3Provider,
-    Count4Provider,
-    Count5Provider,
+    [Count1Provider],
+    [Count2Provider],
+    [Count3Provider],
+    [Count4Provider],
+    [Count5Provider],
   ]
 
   const ProviderWrapper = withWrapper(
@@ -26,7 +26,7 @@ export default function App() {
         <Component2 />
       </>
     ),
-    providers,
+    providers as any,
   )
 
   return <ProviderWrapper />
