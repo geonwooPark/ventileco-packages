@@ -1,27 +1,21 @@
-import { createContext as _createContext, useContext } from 'react'
+import { createContext as reactCreateContext, useContext } from 'react'
 
-export const createContext = <T, V>(useValue: (init?: T) => V) => {
-  const Context = _createContext<V | null>(null)
+export function createContext<T>(useHook: () => T) {
+  const Context = reactCreateContext<T | null>(null)
 
-  const Provider = ({
-    initialValue,
-    children,
-  }: {
-    initialValue?: T
-    children: React.ReactNode
-  }) => (
-    <Context.Provider value={useValue(initialValue)}>
-      {children}
-    </Context.Provider>
-  )
-
-  const useContextState = () => {
-    const value = useContext(Context)
-
-    if (value === null) throw new Error('Provider missing')
-
-    return value
+  function Provider({ children }: { children: React.ReactNode }) {
+    return <Context.Provider value={useHook()}>{children}</Context.Provider>
   }
 
-  return [Provider, useContextState] as const
+  function useContextValue() {
+    const context = useContext(Context)
+
+    if (context === null) {
+      throw new Error('useContextValue must be used within its Provider')
+    }
+
+    return context
+  }
+
+  return [Provider, useContextValue] as const
 }
