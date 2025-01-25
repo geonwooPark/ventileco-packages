@@ -15,8 +15,8 @@ import ComboBoxInput from './ComboBoxInput'
 import ComboBoxItem from './ComboBoxItem'
 import ComboBoxList from './ComboBoxList'
 import { Option, OptionList } from '../../types'
-import { escapeRegExp } from '../../utils/escapeRegExp'
 import { _createContext } from '../../utils/_createContext'
+import { escapeRegExp } from './utils'
 
 interface ComboBoxMainProps extends HTMLAttributes<HTMLDivElement> {
   children?: ReactNode

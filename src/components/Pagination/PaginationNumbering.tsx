@@ -1,6 +1,6 @@
 import React from 'react'
 import { usePaginationContext } from './PaginationMain'
-import { getChunk } from '../../utils/getChunk'
+import { getChunk } from './utils'
 
 interface PaginationNumberingProps {
   children: (props: { active: boolean; numbering: number }) => React.ReactNode

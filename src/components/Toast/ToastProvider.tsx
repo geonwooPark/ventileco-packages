@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo, useState } from 'react'
-import { ToastPosition, ToastType } from '../../types'
+import { ToastPosition, ToastType } from './types'
 import ToastList from './ToastList'
 import ToastWrapper from './ToastWrapper'
 import { _createContext } from '../../utils/_createContext'

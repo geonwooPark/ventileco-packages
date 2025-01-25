@@ -1,4 +1,4 @@
-import { CustomFile } from '../types'
+import { CustomFile } from '../../../types'
 
 export const fileToPreviewImage = (
   files: FileList,

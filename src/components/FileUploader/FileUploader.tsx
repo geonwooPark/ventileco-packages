@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useId, useRef, useState } from 'react'
-import { CustomFile } from '../../types'
-import { fileToPreviewImage } from '../../utils/fileToPreviewImage'
+import { CustomFile } from './types'
+import { fileToPreviewImage } from './utils'
 
 interface FileUploaderProps {
   children: (props: { isDragOver: boolean }) => React.ReactNode

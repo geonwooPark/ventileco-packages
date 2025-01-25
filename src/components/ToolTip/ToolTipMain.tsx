@@ -10,9 +10,9 @@ import React, {
 } from 'react'
 import ToolTipTrigger from './ToolTipTrigger'
 import ToolTipContent from './ToolTipContent'
-import { ToolTipDirection } from '../../types'
 import { _createContext } from '../../utils/_createContext'
 import ToolTipTriangle from './ToolTipTriangle'
+import { ToolTipDirection } from './types'
 
 export interface ToolTipProps extends HTMLAttributes<HTMLDivElement> {
   direction: ToolTipDirection
