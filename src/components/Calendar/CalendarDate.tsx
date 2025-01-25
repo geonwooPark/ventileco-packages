@@ -1,7 +1,12 @@
 import { useMemo } from 'react'
 import { useCalendarContext } from './CalendarMain'
+import { isSameDate, isSameMonth } from './utils'
 
 interface CalendarDateProps {
+  onClick?: (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    date: Date,
+  ) => void
   rowGap?: number
   columnGap?: number
   children: ({
@@ -21,16 +26,13 @@ interface CalendarDateProps {
 
 export default function CalendarDate({
   children,
+  onClick,
   rowGap = 4,
   columnGap = 4,
 }: CalendarDateProps) {
-  const { days } = useCalendarContext()
-
   const today = new Date()
 
-  const thisDay = today.getDate()
-
-  const thisMonth = today.getMonth()
+  const { parsedMonth, days } = useCalendarContext()
 
   const containerStyle = useMemo<React.CSSProperties>(
     () => ({
@@ -42,7 +44,7 @@ export default function CalendarDate({
     [rowGap, columnGap],
   )
 
-  const boxStyle = useMemo<React.CSSProperties>(
+  const buttonStyle = useMemo<React.CSSProperties>(
     () => ({
       display: 'flex',
       justifyContent: 'center',
@@ -54,15 +56,23 @@ export default function CalendarDate({
   return (
     <div style={containerStyle}>
       {days.map((date, idx) => (
-        <div key={idx} style={boxStyle}>
+        <button
+          key={idx}
+          style={buttonStyle}
+          onClick={(e) => {
+            if (onClick) {
+              onClick(e, date)
+            }
+          }}
+        >
           {children({
             date,
-            isToday: date.getDate() === thisDay,
-            isOtherMonth: date.getMonth() !== thisMonth,
-            isSaturday: date.getDay() === 6,
-            isSunday: date.getDay() === 0,
+            isToday: isSameDate(date, today),
+            isOtherMonth: !isSameMonth(date, parsedMonth),
+            isSaturday: isSameMonth(date, parsedMonth) && date.getDay() === 6,
+            isSunday: isSameMonth(date, parsedMonth) && date.getDay() === 0,
           })}
-        </div>
+        </button>
       ))}
     </div>
   )

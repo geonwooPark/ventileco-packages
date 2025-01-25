@@ -90,17 +90,17 @@ export default function App() {
           </div>
         )}
       </Calendar.DayOfTheWeek>
-      <Calendar.Date>
+      <Calendar.Date onClick={(e, date) => console.log(date)}>
         {({ date, isToday, isOtherMonth, isSaturday, isSunday }) => (
-          <button
-            className={`${isToday && 'font-bold'}
+          <div
+            className={`${isToday && 'rounded-full bg-blue-600 text-white'}
             ${isOtherMonth && 'text-gray-200'}
             ${isSaturday && 'text-blue-400'} 
             ${isSunday && 'text-red-400'} 
             size-10`}
           >
             {formatDate(date, 'DD')}
-          </button>
+          </div>
         )}
       </Calendar.Date>
     </Calendar>

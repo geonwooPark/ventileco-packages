@@ -77,6 +77,7 @@ export const useCalendar = (monthFormat: string) => {
 
   return {
     selectedMonth,
+    parsedMonth,
     days,
     onPrevMonthClick,
     onNextMonthClick,

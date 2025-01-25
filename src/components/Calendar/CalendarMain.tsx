@@ -18,6 +18,7 @@ interface CalendarMainProps {
 
 type CalendarState = {
   selectedMonth: string
+  parsedMonth: Date
   days: Date[]
   onPrevMonthClick: () => void
   onNextMonthClick: () => void
@@ -38,6 +39,7 @@ function CalendarMain(
 ) {
   const {
     selectedMonth,
+    parsedMonth,
     days,
     onPrevMonthClick,
     onNextMonthClick,
@@ -48,13 +50,14 @@ function CalendarMain(
   const providerValue = useMemo(
     () => ({
       selectedMonth,
+      parsedMonth,
       days,
       onPrevMonthClick,
       onNextMonthClick,
       onPrevYearClick,
       onNextYearClick,
     }),
-    [selectedMonth, days],
+    [selectedMonth, parsedMonth, days],
   )
 
   return (

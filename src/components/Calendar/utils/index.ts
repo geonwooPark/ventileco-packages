@@ -1,3 +1,4 @@
+// 날짜 객체를 특정 포맷으로 변환하는 함수
 export const formatDate = (
   date: Date,
   format: string = 'YYYY-MM-DD',
@@ -6,16 +7,17 @@ export const formatDate = (
 
   const map: { [key: string]: string } = {
     YYYY: String(date.getFullYear()),
-    MM: padZero(date.getMonth() + 1),
+    MM: padZero(date.getMonth() + 1), // 월은 1부터 시작
     DD: padZero(date.getDate()),
     hh: padZero(date.getHours()),
     mm: padZero(date.getMinutes()),
     ss: padZero(date.getSeconds()),
   }
 
-  return format.replace(/YYYY|MM|DD|hh|mm|ss/g, (match) => map[match])
+  return format.replace(/YYYY|MM|DD|hh|mm|ss/g, (match) => map[match] || match)
 }
 
+// 문자열을 Date 객체로 변환하는 함수
 export const parseDate = (
   dateString: string,
   format: string = 'YYYY-MM-DD',
@@ -29,10 +31,10 @@ export const parseDate = (
     ss: 0,
   }
 
-  // 정규식을 통해 포맷에 맞는 값 추출
+  // 포맷 문자열을 정규식으로 변환
   const formatRegex = format.replace(
     /YYYY|MM|DD|hh|mm|ss/g,
-    (match) => `(?<${match}>\\d{${match.length}})`,
+    (match) => `(?<${match}>\\d{${match.length}})`, // 캡처 그룹 생성
   )
 
   const regex = new RegExp(`^${formatRegex}$`)
@@ -52,12 +54,17 @@ export const parseDate = (
   })
 
   // Date 객체 생성
-  return new Date(
-    map.YYYY,
-    map.MM - 1, // 월은 0부터 시작하므로 -1
-    map.DD,
-    map.hh,
-    map.mm,
-    map.ss,
+  return new Date(map.YYYY, map.MM - 1, map.DD || 1, map.hh, map.mm, map.ss)
+}
+
+export const isSameDate = (dateA: Date, dateB: Date): boolean => {
+  return (
+    dateA.getFullYear() === dateB.getFullYear() &&
+    dateA.getMonth() === dateB.getMonth() &&
+    dateA.getDate() === dateB.getDate()
   )
+}
+
+export const isSameMonth = (dateA: Date, dateB: Date) => {
+  return dateA.getMonth() === dateB.getMonth()
 }
