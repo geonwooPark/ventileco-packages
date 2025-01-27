@@ -68,3 +68,11 @@ export const isSameDate = (dateA: Date, dateB: Date): boolean => {
 export const isSameMonth = (dateA: Date, dateB: Date) => {
   return dateA.getMonth() === dateB.getMonth()
 }
+
+export const isBetweenDate = (
+  targetDate: Date,
+  startDate: Date,
+  endDate: Date,
+): boolean => {
+  return targetDate >= startDate && targetDate <= endDate
+}

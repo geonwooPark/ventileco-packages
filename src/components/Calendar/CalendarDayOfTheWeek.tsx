@@ -1,15 +1,13 @@
-import { useMemo } from 'react'
+import React, { useMemo } from 'react'
 
 interface CalendarDayOfTheWeekProps {
   dayOfTheWeek: string[]
-  rowGap?: number
   className?: string
   children: ({ item }: { item: string }) => React.ReactNode
 }
 
 export default function CalendarDayOfTheWeek({
   dayOfTheWeek,
-  rowGap = 4,
   className,
   children,
 }: CalendarDayOfTheWeekProps) {
@@ -17,15 +15,7 @@ export default function CalendarDayOfTheWeek({
     () => ({
       display: 'grid',
       gridTemplateColumns: 'repeat(7, minmax(0, 1fr))',
-      rowGap,
-    }),
-    [rowGap],
-  )
-
-  const boxStyle = useMemo<React.CSSProperties>(
-    () => ({
-      display: 'flex',
-      justifyContent: 'center',
+      justifyItems: 'center',
       alignItems: 'center',
     }),
     [],
@@ -34,11 +24,11 @@ export default function CalendarDayOfTheWeek({
   return (
     <div style={containerStyle} className={className}>
       {dayOfTheWeek.map((item, idx) => (
-        <div key={idx} style={boxStyle}>
+        <React.Fragment key={idx}>
           {children({
             item,
           })}
-        </div>
+        </React.Fragment>
       ))}
     </div>
   )

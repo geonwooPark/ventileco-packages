@@ -1,0 +1,201 @@
+import { Meta } from '@storybook/addon-docs'
+
+<Meta title="COMPONENTS/Calendar" />
+
+# Calendar
+
+사용자가 날짜와 관련된 정보를 표시할 수 있도록 도와주는 컴포넌트
+
+## Example
+
+```jsx
+import { Calendar } from 'ventileco-ui'
+
+export function Calendar() {
+  return (
+    <Calendar monthFormat="YYYY년 MM월" className="w-[360px] text-xl">
+      <div className="flex items-center justify-between py-6">
+        <div className="flex items-center gap-2">
+          <Calendar.PrevYear>...insert your SVG icon...</Calendar.PrevYear>
+          <Calendar.PrevMonth>...insert your SVG icon...</Calendar.PrevMonth>
+        </div>
+        <Calendar.SelectedMonth className="text-xl" />
+        <div className="flex items-center gap-2">
+          <Calendar.NextMonth>...insert your SVG icon...</Calendar.NextMonth>
+          <Calendar.NextYear>...insert your SVG icon...</Calendar.NextYear>
+        </div>
+      </div>
+      <Calendar.DayOfTheWeek
+        dayOfTheWeek={['일', '월', '화', '수', '목', '금', '토']}
+        className="mb-4"
+      >
+        {({ item }) => (
+          <div
+            className={`
+            ${item === '토' && 'text-blue-400'}
+            ${item === '일' && 'text-red-400'}
+          `}
+          >
+            {item}
+          </div>
+        )}
+      </Calendar.DayOfTheWeek>
+      <Calendar.Date>
+        {({ date, isToday, isOtherMonth, isSaturday, isSunday }) => (
+          <button
+            className={`
+            cursor-default
+            ${isToday && 'w-full rounded-full bg-blue-600 text-white'}
+            ${isOtherMonth && 'text-gray-200'}
+            ${isSaturday && 'text-blue-400'} 
+            ${isSunday && 'text-red-400'}
+            `}
+          >
+            {formatDate(date, 'DD')}
+          </button>
+        )}
+      </Calendar.Date>
+    </Calendar>
+  )
+}
+```
+
+# DatePicker
+
+사용자가 단일 날짜를 선택할 수 있도록 도와주는 UI 컴포넌트
+
+## Example
+
+```jsx
+import { Calendar, useDatePicker } from 'ventileco-ui'
+
+export function Calendar() {
+  const { date: selectedDate, onChange } = useDatePicker()
+
+  return (
+    <Calendar monthFormat="YYYY년 MM월" className="w-[360px] text-xl">
+      <div className="flex items-center justify-between py-6">
+        <div className="flex items-center gap-2">
+          <Calendar.PrevYear>...insert your SVG icon...</Calendar.PrevYear>
+          <Calendar.PrevMonth>...insert your SVG icon...</Calendar.PrevMonth>
+        </div>
+        <Calendar.SelectedMonth className="text-xl" />
+        <div className="flex items-center gap-2">
+          <Calendar.NextMonth>...insert your SVG icon...</Calendar.NextMonth>
+          <Calendar.NextYear>...insert your SVG icon...</Calendar.NextYear>
+        </div>
+      </div>
+      <Calendar.DayOfTheWeek
+        dayOfTheWeek={['일', '월', '화', '수', '목', '금', '토']}
+        className="mb-4"
+      >
+        {({ item }) => (
+          <div
+            className={`
+            ${item === '토' && 'text-blue-400'}
+            ${item === '일' && 'text-red-400'}
+          `}
+          >
+            {item}
+          </div>
+        )}
+      </Calendar.DayOfTheWeek>
+      <Calendar.Date selected={selectedDate}>
+        {({
+          date,
+          isToday,
+          isOtherMonth,
+          isSaturday,
+          isSunday,
+          isSelected,
+        }) => (
+          <button
+            onClick={() => onChange(date)}
+            className={`
+            ${isToday && 'w-full rounded-full bg-blue-600 text-white'}
+            ${isOtherMonth && 'text-gray-200'}
+            ${isSaturday && 'text-blue-400'} 
+            ${isSunday && 'text-red-400'}
+            ${isSelected && 'w-full rounded-full bg-green-600 text-white'} 
+            `}
+          >
+            {formatDate(date, 'DD')}
+          </button>
+        )}
+      </Calendar.Date>
+    </Calendar>
+  )
+}
+```
+
+# DateRange
+
+사용자가 두 날짜, 즉 시작 날짜와 종료 날짜를 선택할 수 있는 UI 컴포넌트
+
+## Example
+
+```jsx
+import { Calendar, useDateRange } from 'ventileco-ui'
+
+export function Calendar() {
+  const { dateRange, onRangeChange, isFirst } = useDateRange()
+
+  return (
+    <Calendar monthFormat="YYYY년 MM월" className="w-[360px] text-xl">
+      <div className="flex items-center justify-between py-6">
+        <div className="flex items-center gap-2">
+          <Calendar.PrevYear>...insert your SVG icon...</Calendar.PrevYear>
+          <Calendar.PrevMonth>...insert your SVG icon...</Calendar.PrevMonth>
+        </div>
+        <Calendar.SelectedMonth className="text-xl" />
+        <div className="flex items-center gap-2">
+          <Calendar.NextMonth>...insert your SVG icon...</Calendar.NextMonth>
+          <Calendar.NextYear>...insert your SVG icon...</Calendar.NextYear>
+        </div>
+      </div>
+      <Calendar.DayOfTheWeek
+        dayOfTheWeek={['일', '월', '화', '수', '목', '금', '토']}
+        className="mb-4"
+      >
+        {({ item }) => (
+          <div
+            className={`
+            ${item === '토' && 'text-blue-400'}
+            ${item === '일' && 'text-red-400'}
+          `}
+          >
+            {item}
+          </div>
+        )}
+      </Calendar.DayOfTheWeek>
+      <Calendar.Date selected={dateRange}>
+        {({
+          date,
+          isToday,
+          isOtherMonth,
+          isSaturday,
+          isSunday,
+          isBetween,
+          isStartDate,
+          isEndDate,
+        }) => (
+          <button
+            onClick={() => onRangeChange(date)}
+            className={`
+            ${isToday && 'w-full rounded-full bg-blue-600 text-white'}
+            ${isOtherMonth && 'text-gray-200'}
+            ${isSaturday && 'text-blue-400'} 
+            ${isSunday && 'text-red-400'}
+            ${isBetween && 'w-full rounded-none bg-purple-400'}
+            ${isStartDate && 'w-full rounded-l-full bg-purple-600 text-white'}
+            ${isEndDate && 'w-full rounded-r-full bg-purple-600 text-white'}
+            `}
+          >
+            {formatDate(date, 'DD')}
+          </button>
+        )}
+      </Calendar.Date>
+    </Calendar>
+  )
+}
+```

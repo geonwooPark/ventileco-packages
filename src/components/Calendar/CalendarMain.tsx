@@ -10,8 +10,6 @@ import CalendarPrevYear from './CalendarPrevYear'
 import CalendarSelectedMonth from './CalendarSelectedMonth'
 
 interface CalendarMainProps {
-  selectedDate?: string
-  onDateChange?: (date: string) => void
   monthFormat?: string
   className?: string
 }
@@ -32,7 +30,7 @@ export const [useCalendarContext, CalendarProvider] =
 function CalendarMain(
   {
     children,
-    monthFormat = 'MM YYYY',
+    monthFormat = 'YYYY-MM',
     className,
   }: PropsWithChildren<CalendarMainProps>,
   forwardRef: ForwardedRef<HTMLDivElement>,

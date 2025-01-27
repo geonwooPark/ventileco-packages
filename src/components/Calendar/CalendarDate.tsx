@@ -1,78 +1,83 @@
-import { useMemo } from 'react'
+import React, { useMemo } from 'react'
 import { useCalendarContext } from './CalendarMain'
-import { isSameDate, isSameMonth } from './utils'
+import { isBetweenDate, isSameDate, isSameMonth } from './utils'
 
 interface CalendarDateProps {
-  onClick?: (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-    date: Date,
-  ) => void
+  selected?: Date | Date[]
   rowGap?: number
-  columnGap?: number
   children: ({
     date,
     isToday,
     isOtherMonth,
     isSaturday,
     isSunday,
+    isSelected,
+    isBetween,
+    isStartDate,
+    isEndDate,
   }: {
     date: Date
     isToday: boolean
     isOtherMonth: boolean
     isSaturday: boolean
     isSunday: boolean
+    isSelected: boolean
+    isBetween: boolean
+    isStartDate: boolean
+    isEndDate: boolean
   }) => React.ReactNode
 }
 
 export default function CalendarDate({
   children,
-  onClick,
+  selected,
   rowGap = 4,
-  columnGap = 4,
 }: CalendarDateProps) {
-  const today = new Date()
+  const today = useMemo(() => new Date(), [])
 
   const { parsedMonth, days } = useCalendarContext()
+
+  const [startDate, endDate] = useMemo(() => {
+    if (Array.isArray(selected)) {
+      return [selected[0], selected[1]]
+    }
+    return [selected, null]
+  }, [selected])
+
+  const computedDays = useMemo(
+    () =>
+      days.map((date) => ({
+        date,
+        isToday: isSameDate(date, today),
+        isOtherMonth: !isSameMonth(date, parsedMonth),
+        isSaturday: isSameMonth(date, parsedMonth) && date.getDay() === 6,
+        isSunday: isSameMonth(date, parsedMonth) && date.getDay() === 0,
+        isSelected: startDate ? isSameDate(date, startDate) : false,
+        isBetween:
+          startDate && endDate
+            ? isBetweenDate(date, startDate, endDate)
+            : false,
+        isStartDate: startDate ? isSameDate(date, startDate) : false,
+        isEndDate: endDate ? isSameDate(date, endDate) : false,
+      })),
+    [days, today, parsedMonth, startDate, endDate],
+  )
 
   const containerStyle = useMemo<React.CSSProperties>(
     () => ({
       display: 'grid',
       gridTemplateColumns: 'repeat(7, minmax(0, 1fr))',
-      rowGap,
-      columnGap,
-    }),
-    [rowGap, columnGap],
-  )
-
-  const buttonStyle = useMemo<React.CSSProperties>(
-    () => ({
-      display: 'flex',
-      justifyContent: 'center',
+      justifyItems: 'center',
       alignItems: 'center',
+      rowGap,
     }),
-    [],
+    [rowGap],
   )
 
   return (
     <div style={containerStyle}>
-      {days.map((date, idx) => (
-        <button
-          key={idx}
-          style={buttonStyle}
-          onClick={(e) => {
-            if (onClick) {
-              onClick(e, date)
-            }
-          }}
-        >
-          {children({
-            date,
-            isToday: isSameDate(date, today),
-            isOtherMonth: !isSameMonth(date, parsedMonth),
-            isSaturday: isSameMonth(date, parsedMonth) && date.getDay() === 6,
-            isSunday: isSameMonth(date, parsedMonth) && date.getDay() === 0,
-          })}
-        </button>
+      {computedDays.map((info, idx) => (
+        <React.Fragment key={idx}>{children(info)}</React.Fragment>
       ))}
     </div>
   )
