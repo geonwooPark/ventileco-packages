@@ -1,5 +1,5 @@
 import { useCallback, useMemo, useState } from 'react'
-import { formatDate, parseDate } from '../utils'
+import { formatDate, parseMonthFormat } from '../utils'
 
 export const useCalendar = (monthFormat: string) => {
   const today = new Date()
@@ -9,7 +9,7 @@ export const useCalendar = (monthFormat: string) => {
   )
 
   const parsedMonth = useMemo(
-    () => parseDate(selectedMonth, monthFormat),
+    () => parseMonthFormat(selectedMonth, monthFormat),
     [selectedMonth, monthFormat],
   )
 
@@ -45,7 +45,7 @@ export const useCalendar = (monthFormat: string) => {
 
   const onPrevMonthClick = useCallback(() => {
     setSelectedMonth((prev) => {
-      const date = parseDate(prev, monthFormat)
+      const date = parseMonthFormat(prev, monthFormat)
       date.setMonth(date.getMonth() - 1)
       return formatDate(date, monthFormat)
     })
@@ -53,7 +53,7 @@ export const useCalendar = (monthFormat: string) => {
 
   const onNextMonthClick = useCallback(() => {
     setSelectedMonth((prev) => {
-      const date = parseDate(prev, monthFormat)
+      const date = parseMonthFormat(prev, monthFormat)
       date.setMonth(date.getMonth() + 1)
       return formatDate(date, monthFormat)
     })
@@ -61,7 +61,7 @@ export const useCalendar = (monthFormat: string) => {
 
   const onPrevYearClick = useCallback(() => {
     setSelectedMonth((prev) => {
-      const date = parseDate(prev, monthFormat)
+      const date = parseMonthFormat(prev, monthFormat)
       date.setFullYear(date.getFullYear() - 1)
       return formatDate(date, monthFormat)
     })
@@ -69,7 +69,7 @@ export const useCalendar = (monthFormat: string) => {
 
   const onNextYearClick = useCallback(() => {
     setSelectedMonth((prev) => {
-      const date = parseDate(prev, monthFormat)
+      const date = parseMonthFormat(prev, monthFormat)
       date.setFullYear(date.getFullYear() + 1)
       return formatDate(date, monthFormat)
     })

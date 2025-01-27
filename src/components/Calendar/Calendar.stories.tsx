@@ -165,7 +165,7 @@ export function Normal() {
             ${isSunday && 'text-red-400'} 
             `}
           >
-            {formatDate(date, 'DD')}
+            {formatDate(date, 'D')}
           </button>
         )}
       </Calendar.Date>
@@ -283,7 +283,7 @@ export function DatePicker() {
             ${isSelected && 'w-full rounded-full bg-green-600 text-white'} 
             `}
           >
-            {formatDate(date, 'DD')}
+            {formatDate(date, 'D')}
           </button>
         )}
       </Calendar.Date>
@@ -405,7 +405,7 @@ export function DateRange() {
             ${isEndDate && 'w-full rounded-r-full bg-purple-600 text-white'}
             `}
           >
-            {formatDate(date, 'DD')}
+            {formatDate(date, 'D')}
           </button>
         )}
       </Calendar.Date>
