@@ -1,7 +1,7 @@
 import type { Meta } from '@storybook/react'
 import Tabs from './TabsMain'
 import { tabList } from '../../dummy'
-import { useState } from 'react'
+import React, { useState } from 'react'
 
 export default {
   title: 'COMPONENTS/Tabs',

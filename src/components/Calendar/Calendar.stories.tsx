@@ -3,6 +3,7 @@ import Calendar from './CalendarMain'
 import { formatDate } from './utils'
 import useDatePicker from './hooks/useDatePicker'
 import useDateRange from './hooks/useDateRange'
+import React from 'react'
 
 export default {
   title: 'COMPONENTS/Calendar',

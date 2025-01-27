@@ -1,4 +1,4 @@
-import { PropsWithChildren, useMemo } from 'react'
+import React, { PropsWithChildren, useMemo } from 'react'
 import { useTabsContext } from './TabsMain'
 
 function TabsList({ children }: PropsWithChildren) {

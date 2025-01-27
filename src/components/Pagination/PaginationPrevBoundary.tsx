@@ -1,3 +1,4 @@
+import React from 'react'
 import { usePaginationContext } from './PaginationMain'
 
 interface PaginationPrevBoundaryProps {

@@ -1,4 +1,4 @@
-import { ElementType, PropsWithChildren } from 'react'
+import React, { ElementType, PropsWithChildren } from 'react'
 import { useAccordionItemContext } from './AccordionItem'
 import { useAccordionContext } from './AccordionMain'
 

@@ -1,5 +1,5 @@
 import CheckBox from './CheckBoxMain'
-import { useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { checkBoxList } from '../../dummy'
 import { Meta } from '@storybook/react'
 

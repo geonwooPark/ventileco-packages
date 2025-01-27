@@ -1,5 +1,6 @@
 import { useComboBoxContext } from './ComboBoxMain'
 import InputBox, { InputBoxProps } from '../InputBox/InputBox'
+import React from 'react'
 
 interface ComboBoxInputProps extends InputBoxProps {
   placeholder?: string

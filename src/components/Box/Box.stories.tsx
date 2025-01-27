@@ -1,6 +1,6 @@
 import type { Meta } from '@storybook/react'
 import Box from './Box'
-import { useRef } from 'react'
+import React, { useRef } from 'react'
 
 export default {
   title: 'COMPONENTS/Box',

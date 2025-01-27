@@ -1,5 +1,5 @@
 import type { Meta } from '@storybook/react'
-import { useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 import SelectBox from './SelectBoxMain'
 import { motion } from 'framer-motion'
 import { selectBoxList } from '../../dummy'

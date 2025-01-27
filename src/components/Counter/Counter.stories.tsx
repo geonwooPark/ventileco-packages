@@ -1,6 +1,6 @@
 import type { Meta } from '@storybook/react'
 import Counter from './CounterMain'
-import { useState } from 'react'
+import React, { useState } from 'react'
 
 export default {
   title: 'COMPONENTS/Counter',

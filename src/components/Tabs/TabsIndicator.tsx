@@ -1,4 +1,4 @@
-import { CSSProperties, useLayoutEffect, useMemo, useState } from 'react'
+import React, { CSSProperties, useLayoutEffect, useMemo, useState } from 'react'
 import { useTabsContext } from './TabsMain'
 
 interface TabsIndicatorProps {

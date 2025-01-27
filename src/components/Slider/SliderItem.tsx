@@ -1,4 +1,4 @@
-import { InputHTMLAttributes, PropsWithChildren } from 'react'
+import React, { InputHTMLAttributes, PropsWithChildren } from 'react'
 
 interface SliderItemProps extends InputHTMLAttributes<HTMLDivElement> {}
 

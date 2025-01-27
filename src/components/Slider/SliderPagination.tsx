@@ -1,3 +1,4 @@
+import React from 'react'
 import { useSliderContext } from './SliderMain'
 
 interface SliderPaginationProps {

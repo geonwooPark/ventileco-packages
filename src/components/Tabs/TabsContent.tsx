@@ -1,4 +1,4 @@
-import { PropsWithChildren } from 'react'
+import React, { PropsWithChildren } from 'react'
 import { useTabsContext } from './TabsMain'
 
 interface TabsContentProps {

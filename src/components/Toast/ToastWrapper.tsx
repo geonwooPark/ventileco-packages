@@ -1,4 +1,9 @@
-import { ElementType, HTMLAttributes, PropsWithChildren, useMemo } from 'react'
+import React, {
+  ElementType,
+  HTMLAttributes,
+  PropsWithChildren,
+  useMemo,
+} from 'react'
 import { useToastContext } from './ToastProvider'
 
 interface ToastWrapperProps extends HTMLAttributes<HTMLDivElement> {

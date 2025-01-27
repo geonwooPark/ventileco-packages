@@ -9,13 +9,13 @@ import React, {
   useRef,
   useState,
 } from 'react'
-import SliderPrevButton from './SliderPrevButton'
 import SliderContent from './SliderContent'
 import SliderNextButton from './SliderNextButton'
 import { _createContext } from '../../utils/_createContext'
 import { throttle } from '../../utils/throttle'
 import SliderItem from './SliderItem'
 import SliderPagination from './SliderPagination'
+import SliderPrevButton from './SliderPrevButton'
 
 interface SliderBaseProps {
   gap?: number

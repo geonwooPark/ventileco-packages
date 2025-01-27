@@ -1,3 +1,4 @@
+import React from 'react'
 import { useCounterContext } from './CounterMain'
 
 interface CountNumberProps {

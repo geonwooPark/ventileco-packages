@@ -1,6 +1,6 @@
 import type { Meta } from '@storybook/react'
 import ComboBox from './ComboBoxMain'
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { motion } from 'framer-motion'
 import { comboBoxList } from '../../dummy'
 

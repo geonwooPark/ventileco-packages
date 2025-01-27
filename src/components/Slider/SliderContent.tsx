@@ -1,4 +1,4 @@
-import { CSSProperties, PropsWithChildren, useMemo } from 'react'
+import React, { CSSProperties, PropsWithChildren, useMemo } from 'react'
 import { useSliderContext } from './SliderMain'
 
 interface SliderContentProps {

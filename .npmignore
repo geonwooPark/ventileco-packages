@@ -7,26 +7,11 @@ public/
 build/
 src/
 
-dist/components/**/*.stories.js
-dist/components/**/*.stories.d.ts
-dist/components/**/*.test.js
-dist/components/**/*.test.d.ts
-dist/providers/**/*.stories.js
-dist/providers/**/*.stories.d.ts
-dist/providers/**/*.test.js
-dist/providers/**/*.test.d.ts
-dist/*.{js,ts,d.ts,css}
-dist/constants/list.{d.ts,js}
-dist/test/
-dist/dummy/
-
+*.config.js
+*.config.ts
+*.map
+*.json
+*.log
 
 .prettierrc
-.eslintrc.json
-build-storybook.log
-postcss.config.js
 index.html
-tailwind.config.js
-tsconfig.json
-tsconfig.node.json
-vite.config.ts
