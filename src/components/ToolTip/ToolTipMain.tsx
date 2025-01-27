@@ -28,7 +28,7 @@ type ToolTipContextState = {
   direction: ToolTipDirection
   triggerRef: React.RefObject<HTMLDivElement> | null
   tooltipRef: React.RefObject<HTMLDivElement> | null
-  leaveTimer: React.MutableRefObject<number | NodeJS.Timeout | undefined>
+  leaveTimer: React.MutableRefObject<number | undefined>
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
 
@@ -51,8 +51,8 @@ function ToolTipMain(
 
   const triggerRef = useRef<HTMLDivElement>(null)
   const tooltipRef = useRef<HTMLDivElement>(null)
-  const enterTimer = useRef<number | NodeJS.Timeout | undefined>(undefined)
-  const leaveTimer = useRef<number | NodeJS.Timeout | undefined>(undefined)
+  const enterTimer = useRef<number | undefined>(undefined)
+  const leaveTimer = useRef<number | undefined>(undefined)
 
   const onMouseOver = () => {
     clearTimeout(leaveTimer.current)
