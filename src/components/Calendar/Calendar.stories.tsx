@@ -292,7 +292,7 @@ export function DatePicker() {
 }
 
 export function DateRange() {
-  const { dateRange, onRangeChange, isFirst } = useDateRange()
+  const { dateRange, onRangeChange } = useDateRange()
 
   return (
     <Calendar monthFormat="YYYY년 MM월" className="w-[360px] text-xl">

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Meta } from '@storybook/react'
 import FileUploader from './FileUploader'
-import { CustomFile } from '../../types'
+import { CustomFile } from './types'
 
 export default {
   title: 'COMPONENTS/FileUploader',
