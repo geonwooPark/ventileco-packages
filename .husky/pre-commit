@@ -7,4 +7,10 @@ npx lint-staged
 
 echo "Lint-staged가 성공적으로 완료되었습니다!"
 
+# Jest 실행
+echo "테스트를 실행합니다."
+npm run test
+
+echo "테스트가 성공적으로 완료되었습니다!"
+
 exit 0

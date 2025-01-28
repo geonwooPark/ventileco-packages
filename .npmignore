@@ -4,10 +4,12 @@ demo/
 node_modules/
 
 *.config.js
+*.config.cjs
 *.config.ts
 *.map
 *.json
 *.log
+setupTest.js
 
 .prettierrc
 .eslintignore
