@@ -5,6 +5,7 @@ import React, {
   useMemo,
 } from 'react'
 import { useToastContext } from './ToastProvider'
+import Box from '../Box/Box'
 
 interface ToastWrapperProps extends HTMLAttributes<HTMLDivElement> {
   as?: ElementType
@@ -17,8 +18,6 @@ function ToastWrapper({
   toastId,
   ...otherProps
 }: PropsWithChildren<ToastWrapperProps>) {
-  const Tag = as ? as : 'ul'
-
   const { removeToast } = useToastContext()
 
   const onKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
@@ -30,7 +29,8 @@ function ToastWrapper({
   const toastWrapperStyle = useMemo(() => ({ cursor: 'pointer' }), [])
 
   return (
-    <Tag
+    <Box
+      as={as || 'ul'}
       role="alert"
       tabIndex={0}
       aria-atomic="true"
@@ -40,7 +40,7 @@ function ToastWrapper({
       {...otherProps}
     >
       {children}
-    </Tag>
+    </Box>
   )
 }
 

@@ -1,6 +1,7 @@
 import React, { ElementType } from 'react'
 import { useComboBoxContext } from './ComboBoxMain'
 import { OptionList } from '../../types'
+import Box from '../Box/Box'
 
 interface ComboBoxListProps {
   children: (props: { optionList: OptionList }) => React.ReactNode
@@ -16,10 +17,9 @@ function ComboBoxList({
 }: ComboBoxListProps) {
   const { id, isOpen, listRef, optionList } = useComboBoxContext()
 
-  const Tag = as ? as : 'ul'
-
   return isOpen ? (
-    <Tag
+    <Box
+      as={as || 'ul'}
       id={`${id}-combobox-list`}
       ref={listRef}
       role="listbox"
@@ -27,7 +27,7 @@ function ComboBoxList({
       {...otherProps}
     >
       {children({ optionList })}
-    </Tag>
+    </Box>
   ) : null
 }
 

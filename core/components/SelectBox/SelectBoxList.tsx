@@ -1,6 +1,7 @@
 import React, { ElementType } from 'react'
 import { useSelectBoxContext } from './SelectBoxMain'
 import { OptionList } from '../../types'
+import Box from '../Box/Box'
 
 interface SelectListProps {
   children: (props: { optionList: OptionList }) => React.ReactNode
@@ -16,10 +17,9 @@ function SelectBoxList({
 }: SelectListProps) {
   const { id, isOpen, listRef, optionList } = useSelectBoxContext()
 
-  const Tag = as ? as : 'ul'
-
   return isOpen ? (
-    <Tag
+    <Box
+      as={as || 'ul'}
       id={`${id}-select-list`}
       ref={listRef}
       role="listbox"
@@ -27,7 +27,7 @@ function SelectBoxList({
       {...otherProps}
     >
       {children({ optionList })}
-    </Tag>
+    </Box>
   ) : null
 }
 

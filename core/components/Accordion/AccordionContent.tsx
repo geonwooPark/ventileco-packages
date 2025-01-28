@@ -1,6 +1,7 @@
 import React, { ElementType, PropsWithChildren } from 'react'
 import { useAccordionItemContext } from './AccordionItem'
 import { useAccordionContext } from './AccordionMain'
+import Box from '../Box/Box'
 
 interface AccordionContentProps {
   className?: string
@@ -16,10 +17,9 @@ function AccordionContent({
   const { id } = useAccordionContext()
   const { isOpen, index } = useAccordionItemContext()
 
-  const Tag = as ? as : 'ul'
-
   return isOpen ? (
-    <Tag
+    <Box
+      as={as || 'ul'}
       id={`${id}-accordion-region-${index}`}
       role="region"
       aria-labelledby={`${id}-accordion-button-${index}`}
@@ -28,7 +28,7 @@ function AccordionContent({
       {...props}
     >
       {children}
-    </Tag>
+    </Box>
   ) : null
 }
 export default AccordionContent
