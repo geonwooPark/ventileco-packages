@@ -3,31 +3,39 @@
 ## Getting started
 
 ```bash
-npm i ventileco-ui
+npm install ventileco-ui
+```
+
+```bash
+pnpm add ventileco-ui
 ```
 
 ## Introduction
 
-접근성이 높은 디자인 시스템과 웹을 구축하기 위한 오픈 소스 UI 컴포넌트 라이브러리입니다.
+Ventileco UI is an open-source UI component library designed to build accessible design systems and web applications.
 
-대부분의 컴포넌트는 일반적인 UI 패턴으로 제작되지만, 개발자는 매번 번거롭게 맞춤형 컴포넌트를 구축해야 합니다. 이는 시간이 오래 걸리고 매우 어려운 작업입니다.
+Most components are built with common UI patterns, saving developers the hassle of creating custom components from scratch every time. This process can be time-consuming and difficult.
 
-그 결과, 웹의 대부분의 컴포넌트는 접근성이 낮고 성능이 떨어지며 중요한 기능이 부족합니다.
+As a result, many web components are often inaccessible, underperforming, or lacking essential features.
 
-이 프로젝트의 목표는 커뮤니티가 웹 접근성이 높은 디자인 시스템을 구축하는 데 도움이 될 수 있는 오픈 소스 라이브러리를 만드는 것입니다.
+The goal of this project is to create an open-source library that can help the community build accessible and performant web design systems.
 
 ## Features
 
 ### Headless
 
-Headless 컴포넌트 접근 방식을 채택하고 있습니다. Headless 컴포넌트는 UI의 특정 스타일이나 구조에 얽매이지 않고, 순수하게 기능만을 제공하여 개발자가 원하는 방식으로 UI를 구성할 수 있도록 돕습니다. 이러한 접근 방식은 UI와 로직을 분리하여, 개발자가 각자의 요구와 디자인에 맞게 컴포넌트를 커스터마이징할 수 있는 자유를 제공합니다.
+This library adopts a headless component approach. Headless components do not enforce any specific styling or structure; they simply provide functionality. This allows developers the flexibility to structure the UI according to their needs. By separating the UI from the logic, headless components give developers the freedom to customize components according to their preferred design system or CSS framework.
 
-기존의 UI 라이브러리들은 종종 정해진 스타일과 구조를 강제함으로써, 개발자가 자신만의 스타일을 적용하는 데 어려움을 겪게 합니다. 그러나 Headless 컴포넌트는 기본적인 기능만을 제공하며, 스타일링과 레이아웃은 전적으로 개발자의 몫으로 남겨둡니다. 이로 인해 개발자는 자신이 사용하는 CSS 프레임워크나 디자인 시스템에 따라 컴포넌트를 쉽게 통합하고 커스터마이징할 수 있습니다.
+Unlike traditional UI libraries, which often force a specific style and layout, headless components focus purely on functionality. Developers can easily integrate and customize them with their own styles and layouts, making the development process faster and more efficient.
 
 ### Accessibility
 
-접근성을 고려하여 설계된 이 라이브러리는 모든 사용자가 웹을 쉽게 이용할 수 있도록 합니다. ARIA(Accessible Rich Internet Applications) 속성을 사용하여 시각적 요소와 상호작용을 스크린 리더 사용자에게 효과적으로 전달하며, 키보드 네비게이션을 완벽하게 지원하여 모든 인터랙티브 요소에 키보드로 접근할 수 있게 합니다. 이를 통해 장애가 있는 사용자들도 웹사이트를 자유롭게 탐색하고 이용할 수 있습니다.
+Designed with accessibility in mind, this library ensures that all users can navigate the web easily. By utilizing ARIA (Accessible Rich Internet Applications) attributes, it effectively communicates visual elements and interactions to screen reader users. Additionally, it fully supports keyboard navigation, making all interactive elements accessible via keyboard. This ensures that users with disabilities can freely explore and interact with websites.
+
+### Lightweight
+
+Ventileco UI is designed to be lightweight, ensuring minimal bundle size and optimal performance. By focusing on essential components and maintaining flexibility, the library avoids unnecessary bloat, making it a perfect fit for high-performance applications. This lightweight nature also helps to reduce load times, improving the overall user experience.
+
+By using Ventileco UI, developers can create fast, accessible, and responsive applications without sacrificing performance or functionality.
 
 > 🌷 <a  href='https://www.npmjs.com/package/ventileco-ui'>NPM URL</a>
-
-> 🌷 <a href='https://main--6656e94eabe9f240c4c719b9.chromatic.com/'>스토리북 URL</a>
