@@ -1,10 +1,11 @@
 import babel from '@rollup/plugin-babel'
 import typescript from '@rollup/plugin-typescript'
 import dts from 'rollup-plugin-dts'
+import { terser } from 'rollup-plugin-terser'
 
 export default [
   {
-    input: './src/components/index.ts',
+    input: './src/core/index.ts',
     output: {
       file: './dist/index.js',
       format: 'es',
@@ -22,10 +23,11 @@ export default [
       }),
 
       typescript(),
+      terser(),
     ],
   },
   {
-    input: './dist/types/components/index.d.ts',
+    input: './dist/types/index.d.ts',
     output: {
       file: './dist/index.d.ts',
       format: 'es',

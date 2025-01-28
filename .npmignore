@@ -1,10 +1,6 @@
 .github/
-.storybook/
 .husky/
-coverage/
 node_modules/
-public/
-build/
 src/
 
 *.config.js
@@ -15,4 +11,3 @@ src/
 
 .prettierrc
 .eslintignore
-index.html
