@@ -1,7 +1,7 @@
 {
   "name": "ventileco-ui",
   "private": false,
-  "version": "0.5.3",
+  "version": "0.5.4",
   "description": "Headless UI Kit",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -13,7 +13,6 @@
     "headless"
   ],
   "scripts": {
-    "dev": "vite",
     "build": "tsc && rollup -c && rm -rf dist/types",
     "watch": "rollup -cw",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0"
