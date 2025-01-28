@@ -19,7 +19,7 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0"
   },
   "lint-staged": {
-    "*.{ts,tsx}": [
+    "./core/*.{ts,tsx}": [
       "prettier --write",
       "eslint --fix"
     ]

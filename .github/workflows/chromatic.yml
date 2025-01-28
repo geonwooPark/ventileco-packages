@@ -22,8 +22,9 @@ jobs:
     # Job steps
     steps:
       - uses: actions/checkout@v1
-      - run: yarn
-        #👇 Adds Chromatic as a step in the workflow
+      - name: Change directory to demo folder
+        run: cd demo
+      - run: pnpm install
       - uses: chromaui/action@v1
         # Options required for Chromatic's GitHub Action
         with:
