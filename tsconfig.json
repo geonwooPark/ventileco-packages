@@ -15,5 +15,5 @@
     "types": ["jest", "@testing-library/jest-dom"]
   },
   "include": ["./core/**/*"],
-  "exclude": ["./dist", "./node_modules", "./core/**/*.test.tsx"]
+  "exclude": ["./dist", "./node_modules"]
 }
