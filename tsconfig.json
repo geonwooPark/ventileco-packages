@@ -10,9 +10,9 @@
     "esModuleInterop": true,
     "declaration": true,
     "emitDeclarationOnly": true,
-    "declarationMap": false,
+    "declarationMap": true,
     "declarationDir": "./dist/types"
   },
-  "include": ["src/core/**/*"],
-  "exclude": ["./dist", "./node_modules", "./src/**/*.test.tsx"]
+  "include": ["./core/**/*"],
+  "exclude": ["./dist", "./node_modules", "./core/**/*.test.tsx"]
 }

@@ -1,7 +1,8 @@
 .github/
 .husky/
+core/
+demo/
 node_modules/
-src/
 
 *.config.js
 *.config.ts

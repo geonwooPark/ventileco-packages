@@ -28,26 +28,6 @@ Headless 컴포넌트 접근 방식을 채택하고 있습니다. Headless 컴�
 
 접근성을 고려하여 설계된 이 라이브러리는 모든 사용자가 웹을 쉽게 이용할 수 있도록 합니다. ARIA(Accessible Rich Internet Applications) 속성을 사용하여 시각적 요소와 상호작용을 스크린 리더 사용자에게 효과적으로 전달하며, 키보드 네비게이션을 완벽하게 지원하여 모든 인터랙티브 요소에 키보드로 접근할 수 있게 합니다. 이를 통해 장애가 있는 사용자들도 웹사이트를 자유롭게 탐색하고 이용할 수 있습니다.
 
-### With React Hook Form
-
-React Hook Form과의 통합을 지원하여, React 애플리케이션에서 폼 상태를 쉽게 관리할 수 있도록 돕습니다. React Hook Form은 간단한 API와 효율적인 성능으로 복잡한 폼 로직을 간단하게 처리할 수 있는 라이브러리입니다. 이를 통해 개발자는 적은 코드로도 강력한 폼 기능을 구현할 수 있습니다.
-
-React Hook Form과의 원활한 통합을 통해 폼 유효성 검사, 데이터 수집, 상태 관리 등의 기능을 손쉽게 구현할 수 있습니다. 또한, 폼 제출 시의 성능 최적화와 사용자 경험을 향상시킬 수 있으며, 개발 시간과 유지보수 비용을 절감하는 데 크게 기여합니다.
-
 > 🌷 <a  href='https://www.npmjs.com/package/ventileco-ui'>NPM URL</a>
 
-<br/>
-
-## Storybook
-
 > 🌷 <a href='https://main--6656e94eabe9f240c4c719b9.chromatic.com/'>스토리북 URL</a>
-
-<br/>
-
-## Skill
-
-![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=Vite&logoColor=white)
-![Vitest](https://img.shields.io/badge/Vitest-6E9F18?style=for-the-badge&logo=Vite&logoColor=white)
-![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
-![TypeScript](https://img.shields.io/badge/Typescript-3178C6?style=for-the-badge&logo=Typescript&logoColor=white)
-![StoryBook](https://img.shields.io/badge/Storybook-FF4785?style=for-the-badge&logo=Storybook&logoColor=white)
