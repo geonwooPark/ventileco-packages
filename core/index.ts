@@ -14,6 +14,7 @@ export { default as FileUploader } from './components/FileUploader/FileUploader'
 export { default as ErrorBoundary } from './components/ErrorBoundary/ErrorBoundary'
 export { default as Counter } from './components/Counter/CounterMain'
 export { default as Calendar } from './components/Calendar/CalendarMain'
+export { default as Switch } from './components/Switch/SwitchMain'
 
 export { default as useToast } from './components/Toast/hooks/useToast'
 export { default as useDatePicker } from './components/Calendar/hooks/useDatePicker'

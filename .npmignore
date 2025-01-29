@@ -1,6 +1,6 @@
 .husky/
 core/
-demo/
+playground/
 node_modules/
 
 *.config.js
