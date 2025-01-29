@@ -1,6 +1,6 @@
 import React, { createContext } from 'react'
 
-export const _createContext = <T extends Record<string, unknown>>() => {
+export const _createContext = <T>() => {
   const Context = createContext<T | null>(null)
 
   const useContext = () => {

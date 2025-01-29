@@ -1,8 +1,7 @@
-import React, { CSSProperties, PropsWithChildren, useMemo } from 'react'
-import { useTabsContext } from './TabsMain'
+import React, { CSSProperties, PropsWithChildren, useMemo, useRef } from 'react'
 
 function TabsList({ children }: PropsWithChildren) {
-  const { listRef } = useTabsContext()
+  const listRef = useRef<HTMLUListElement>(null)
 
   const listStyle = useMemo<CSSProperties>(
     () => ({

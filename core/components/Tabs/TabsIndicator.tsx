@@ -1,26 +1,36 @@
-import React, { CSSProperties, useLayoutEffect, useMemo, useState } from 'react'
-import { useTabsContext } from './TabsMain'
+import React, {
+  CSSProperties,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react'
+import { useIdContext, useTabContext } from './TabsMain'
 
 interface TabsIndicatorProps {
   className?: string
 }
 
 export default function TabsIndicator({ className }: TabsIndicatorProps) {
-  const { id, currentTab, listRef } = useTabsContext()
+  const id = useIdContext()
 
-  const [width, setWidth] = useState<number | undefined>(0)
-  const [left, setLeft] = useState<number | undefined>(0)
+  const currentTab = useTabContext()
+
+  const [width, setWidth] = useState<number>(0)
+
+  const indicatorRef = useRef<HTMLDivElement | null>(null)
 
   const updateIndicator = () => {
-    const tab = document.getElementById(`${id}-tab-button-${currentTab}`)
-    const list = listRef.current
+    if (!indicatorRef.current) return
 
-    if (tab && list) {
+    const tab = document.getElementById(`${id}-tab-button-${currentTab}`)
+
+    if (tab) {
       const tabRect = tab.getBoundingClientRect()
-      const listRect = list.getBoundingClientRect()
 
       setWidth(tabRect.width)
-      setLeft(tabRect.left - listRect.left)
+
+      indicatorRef.current.style.transform = `translateX(${tab.offsetLeft}px)`
     }
   }
 
@@ -32,16 +42,15 @@ export default function TabsIndicator({ className }: TabsIndicatorProps) {
     return () => {
       window.removeEventListener('resize', updateIndicator)
     }
-  }, [id, currentTab, listRef])
+  }, [id, currentTab])
 
   const indicatorStyle = useMemo<CSSProperties>(
     () => ({
       width: `${width}px`,
-      transform: `translateX(${left}px)`,
       transition: 'transform 0.2s ease',
     }),
-    [width, left],
+    [width],
   )
 
-  return <div className={className} style={indicatorStyle} />
+  return <div ref={indicatorRef} className={className} style={indicatorStyle} />
 }

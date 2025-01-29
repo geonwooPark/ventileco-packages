@@ -1,5 +1,5 @@
-import React from 'react'
-import { useTabsContext } from './TabsMain'
+import React, { KeyboardEventHandler, useCallback } from 'react'
+import { useActionContext, useIdContext, useTabContext } from './TabsMain'
 
 interface TabsItemProps {
   children: (props: { selected: boolean }) => React.ReactNode
@@ -8,13 +8,45 @@ interface TabsItemProps {
 }
 
 function TabsItem({ children, value, className }: TabsItemProps) {
-  const { id, currentTab, onChange, onKeyboardSelect } = useTabsContext()
+  const id = useIdContext()
+
+  const currentTab = useTabContext()
+
+  const { onChange } = useActionContext()
+
   const selected = value === currentTab
 
   const onFocusElement = (e: React.FocusEvent<HTMLLIElement, Element>) => {
     e.target.scrollIntoView({ behavior: 'smooth', block: 'center' })
     onChange(value)
   }
+
+  const onKeyboardSelect: KeyboardEventHandler<HTMLLIElement> = useCallback(
+    (e) => {
+      const element = e.target as HTMLElement
+
+      if (e.key === 'ArrowRight') {
+        e.preventDefault()
+        if (!element.nextSibling) return
+
+        const nextChildNode = element.nextSibling as HTMLElement
+        if (nextChildNode) {
+          nextChildNode.focus()
+        }
+      }
+
+      if (e.key === 'ArrowLeft') {
+        e.preventDefault()
+        if (!element.previousSibling) return
+
+        const prevChildNode = element.previousSibling as HTMLElement
+        if (prevChildNode) {
+          prevChildNode.focus()
+        }
+      }
+    },
+    [],
+  )
 
   return (
     <li

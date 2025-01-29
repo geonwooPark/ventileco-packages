@@ -9,23 +9,33 @@ export default function TestComponent() {
   }
 
   const tabList = [
-    { id: 0, title: '🍇 Grape', content: 'Content1' },
-    { id: 1, title: '🍎 Apple', content: 'Content2' },
-    { id: 2, title: '🍋 Lemon', content: 'Content3' },
-    { id: 3, title: '🍒 Cherry', content: 'Content4' },
+    { id: 0, title: '🍇 Grape' },
+    { id: 1, title: '🍎 Apple' },
+    { id: 2, title: '🍋 Lemon' },
+    { id: 3, title: '🍒 Cherry' },
   ]
 
   return (
-    <Tabs currentTab={currentTab} onChange={onChange}>
+    <Tabs
+      currentTab={currentTab}
+      onChange={onChange}
+      className="border w-[280px]"
+    >
       <Tabs.Container>
         <Tabs.List>
           {tabList.map((item, idx) => (
             <Tabs.Item key={item.id} value={idx}>
-              {({ selected }) => <div>{item.title}</div>}
+              {({ selected }) => (
+                <div
+                  className={`${selected && 'text-blue-600'} cursor-pointer px-4 py-3 text-center transition duration-200 hover:opacity-50`}
+                >
+                  {item.title}
+                </div>
+              )}
             </Tabs.Item>
           ))}
         </Tabs.List>
-        <Tabs.Indicator />
+        <Tabs.Indicator className="h-[2px] bg-black" />
       </Tabs.Container>
 
       <Tabs.Content value={0}>

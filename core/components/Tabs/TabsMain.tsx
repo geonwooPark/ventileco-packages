@@ -1,96 +1,57 @@
 import React, {
-  ForwardedRef,
   HTMLAttributes,
-  KeyboardEventHandler,
   PropsWithChildren,
   forwardRef,
-  useCallback,
+  memo,
   useId,
   useMemo,
-  useRef,
 } from 'react'
 import TabsItem from './TabsItem'
 import { _createContext } from '../../utils/_createContext'
 import TabsList from './TabsList'
 import TabsIndicator from './TabsIndicator'
-import TabsContainer from './TabsContainer'
 import TabsContent from './TabsContent'
+import TabsContainer from './TabsContainer'
 
 interface TabsProps extends HTMLAttributes<HTMLDivElement> {
   currentTab: any
   onChange: (value: any) => void
 }
 
-type TabsContextState = {
-  id: string
-  currentTab: number
-  listRef: React.RefObject<HTMLUListElement>
+type ActionState = {
   onChange: (value: any) => void
-  onKeyboardSelect: React.KeyboardEventHandler<HTMLLIElement>
 }
 
-export const [useTabsContext, TabsProvider] = _createContext<TabsContextState>()
+export const [useActionContext, ActionProvider] = _createContext<ActionState>()
+export const [useTabContext, TabProvider] = _createContext<number>()
+export const [useIdContext, IdProvider] = _createContext<string>()
 
-function TabsMain(
-  {
-    children,
-    currentTab,
-    onChange,
-    ...otherProps
-  }: PropsWithChildren<TabsProps>,
-  forwardRef: ForwardedRef<HTMLDivElement>,
-) {
-  const id = useId()
+const TabsMain = forwardRef<HTMLDivElement, PropsWithChildren<TabsProps>>(
+  function TabsMain({ children, currentTab, onChange, ...otherProps }, ref) {
+    const id = useId()
 
-  const listRef = useRef<HTMLUListElement>(null)
+    const actions = useMemo(() => ({ onChange }), [onChange])
 
-  const onKeyboardSelect: KeyboardEventHandler<HTMLLIElement> = useCallback(
-    (e) => {
-      const element = e.target as HTMLElement
+    return (
+      <ActionProvider value={actions}>
+        <TabProvider value={currentTab}>
+          <IdProvider value={id}>
+            <div ref={ref} {...otherProps}>
+              {children}
+            </div>
+          </IdProvider>
+        </TabProvider>
+      </ActionProvider>
+    )
+  },
+)
 
-      if (e.key === 'ArrowRight') {
-        e.preventDefault()
-        if (!element.nextSibling) return
-
-        const nextChildNode = element.nextSibling as HTMLElement
-        if (nextChildNode) {
-          nextChildNode.focus()
-        }
-      }
-
-      if (e.key === 'ArrowLeft') {
-        e.preventDefault()
-        if (!element.previousSibling) return
-
-        const prevChildNode = element.previousSibling as HTMLElement
-        if (prevChildNode) {
-          prevChildNode.focus()
-        }
-      }
-    },
-    [],
-  )
-
-  const providerValue = useMemo(
-    () => ({ id, currentTab, listRef, onChange, onKeyboardSelect }),
-    [id, currentTab, listRef],
-  )
-
-  return (
-    <TabsProvider value={providerValue}>
-      <div ref={forwardRef} {...otherProps}>
-        {children}
-      </div>
-    </TabsProvider>
-  )
-}
-
-const Tabs = Object.assign(forwardRef(TabsMain), {
-  Container: TabsContainer,
-  List: TabsList,
+const Tabs = Object.assign(TabsMain, {
+  Container: memo(TabsContainer),
+  List: memo(TabsList),
   Item: TabsItem,
-  Indicator: TabsIndicator,
   Content: TabsContent,
+  Indicator: TabsIndicator,
 })
 
 export default Tabs

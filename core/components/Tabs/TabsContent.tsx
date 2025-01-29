@@ -1,5 +1,5 @@
 import React, { PropsWithChildren } from 'react'
-import { useTabsContext } from './TabsMain'
+import { useIdContext, useTabContext } from './TabsMain'
 
 interface TabsContentProps {
   value: any
@@ -11,7 +11,9 @@ function TabsContent({
   value,
   className,
 }: PropsWithChildren<TabsContentProps>) {
-  const { id, currentTab } = useTabsContext()
+  const id = useIdContext()
+
+  const currentTab = useTabContext()
 
   return value === currentTab ? (
     <div
