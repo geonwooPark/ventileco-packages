@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { CSSProperties, useMemo } from 'react'
 import { TOOLTIP_TRIANGLE_DIRECTION } from '../../constants'
 import { useToolTipContext } from './ToolTipMain'
 
@@ -9,13 +9,12 @@ interface ToolTipTriangleProps {
 export default function ToolTipTriangle({ className }: ToolTipTriangleProps) {
   const { direction } = useToolTipContext()
 
-  const triangleStyle = useMemo(
-    () =>
-      ({
-        position: 'absolute',
-        zIndex: '-1',
-        ...TOOLTIP_TRIANGLE_DIRECTION[direction],
-      }) as React.CSSProperties,
+  const triangleStyle = useMemo<CSSProperties>(
+    () => ({
+      position: 'absolute',
+      zIndex: '-1',
+      ...TOOLTIP_TRIANGLE_DIRECTION[direction],
+    }),
     [direction],
   )
 

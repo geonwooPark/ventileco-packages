@@ -1,4 +1,5 @@
 import React, {
+  CSSProperties,
   HTMLAttributes,
   KeyboardEventHandler,
   ReactNode,
@@ -204,7 +205,7 @@ const SelectBoxMain = forwardRef<HTMLDivElement, SelectBoxMainProps>(
       [id, value, isOpen, focusedItem, list],
     )
 
-    const selectBoxStyle = useMemo<React.CSSProperties>(
+    const selectBoxStyle = useMemo<CSSProperties>(
       () => ({ position: 'relative' }),
       [],
     )

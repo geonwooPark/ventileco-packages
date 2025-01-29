@@ -1,20 +1,19 @@
-import React, { PropsWithChildren, useMemo } from 'react'
+import React, { CSSProperties, PropsWithChildren, useMemo } from 'react'
 import { TOAST_POSITION } from '../../constants'
 import { useToastContext } from './ToastProvider'
 
 function ToastList({ children }: PropsWithChildren) {
   const { position } = useToastContext()
 
-  const toastListStyle = useMemo(
-    () =>
-      ({
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '12px',
-        position: 'fixed',
-        zIndex: '500',
-        ...TOAST_POSITION[position],
-      }) as React.CSSProperties,
+  const toastListStyle = useMemo<CSSProperties>(
+    () => ({
+      display: 'flex',
+      flexDirection: 'column',
+      gap: '12px',
+      position: 'fixed',
+      zIndex: '500',
+      ...TOAST_POSITION[position],
+    }),
     [position],
   )
 

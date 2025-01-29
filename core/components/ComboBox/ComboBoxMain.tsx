@@ -1,4 +1,5 @@
 import React, {
+  CSSProperties,
   HTMLAttributes,
   KeyboardEventHandler,
   ReactNode,
@@ -266,8 +267,8 @@ const ComboBoxMain = forwardRef<HTMLDivElement, ComboBoxMainProps>(
       [id, value, list, isOpen, keyword, focusedItem, optionList],
     )
 
-    const comboBoxStyle = useMemo(
-      () => ({ position: 'relative' }) as React.CSSProperties,
+    const comboBoxStyle = useMemo<CSSProperties>(
+      () => ({ position: 'relative' }),
       [],
     )
 

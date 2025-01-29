@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { CSSProperties, useMemo } from 'react'
 import { useCalendarContext } from './CalendarMain'
 import { isBetweenDate, isSameDate, isSameMonth } from './utils'
 
@@ -63,7 +63,7 @@ export default function CalendarDate({
     [days, today, parsedMonth, startDate, endDate],
   )
 
-  const containerStyle = useMemo<React.CSSProperties>(
+  const containerStyle = useMemo<CSSProperties>(
     () => ({
       display: 'grid',
       gridTemplateColumns: 'repeat(7, minmax(0, 1fr))',

@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { CSSProperties, useMemo } from 'react'
 
 interface CalendarDayOfTheWeekProps {
   dayOfTheWeek: string[]
@@ -11,7 +11,7 @@ export default function CalendarDayOfTheWeek({
   className,
   children,
 }: CalendarDayOfTheWeekProps) {
-  const containerStyle = useMemo<React.CSSProperties>(
+  const containerStyle = useMemo<CSSProperties>(
     () => ({
       display: 'grid',
       gridTemplateColumns: 'repeat(7, minmax(0, 1fr))',

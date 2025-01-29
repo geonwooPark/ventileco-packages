@@ -1,10 +1,10 @@
-import React, { PropsWithChildren, useMemo } from 'react'
+import React, { CSSProperties, PropsWithChildren, useMemo } from 'react'
 import { usePaginationContext } from './PaginationMain'
 
 function PaginationPrevButton({ children }: PropsWithChildren) {
   const { page, onPrevClick } = usePaginationContext()
 
-  const prevButtonStyle = useMemo(
+  const prevButtonStyle = useMemo<CSSProperties>(
     () => ({
       display: 'flex',
       alignItems: 'center',

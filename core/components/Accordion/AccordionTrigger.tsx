@@ -1,4 +1,9 @@
-import React, { PropsWithChildren, useCallback, useMemo } from 'react'
+import React, {
+  CSSProperties,
+  PropsWithChildren,
+  useCallback,
+  useMemo,
+} from 'react'
 import { useAccordionContext } from './AccordionMain'
 import { useAccordionItemContext } from './AccordionItem'
 
@@ -28,7 +33,7 @@ function AccordionTrigger({
     }
   }, [])
 
-  const triggerStyle = useMemo(() => ({ width: '100%' }), [])
+  const triggerStyle = useMemo<CSSProperties>(() => ({ width: '100%' }), [])
 
   return (
     <button

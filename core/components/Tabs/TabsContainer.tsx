@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, useMemo } from 'react'
+import React, { CSSProperties, PropsWithChildren, useMemo } from 'react'
 
 interface TabsContainerProps {
   className?: string
@@ -8,7 +8,7 @@ function TabsContainer({
   children,
   className,
 }: PropsWithChildren<TabsContainerProps>) {
-  const containerStyle = useMemo<React.CSSProperties>(
+  const containerStyle = useMemo<CSSProperties>(
     () => ({
       overflowX: 'scroll',
     }),

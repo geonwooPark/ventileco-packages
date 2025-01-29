@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { CSSProperties, useMemo } from 'react'
 import { useSelectBoxContext } from './SelectBoxMain'
 
 interface SelectItemProps {
@@ -35,7 +35,7 @@ function SelectBoxItem({ children, item }: SelectItemProps) {
     })
   }
 
-  const selectBoxItemStyle = useMemo<React.CSSProperties>(
+  const selectBoxItemStyle = useMemo<CSSProperties>(
     () => ({
       cursor: isDisabled ? 'not-allowed' : 'pointer',
     }),

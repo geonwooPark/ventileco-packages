@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { CSSProperties, useMemo } from 'react'
 import { useComboBoxContext } from './ComboBoxMain'
 
 interface ComboBoxItemProps {
@@ -34,7 +34,7 @@ function ComboBoxItem({ children, item }: ComboBoxItemProps) {
     })
   }
 
-  const comboBoxItemStyle = useMemo<React.CSSProperties>(
+  const comboBoxItemStyle = useMemo<CSSProperties>(
     () => ({
       cursor: isDisabled ? 'not-allowed' : 'pointer',
     }),

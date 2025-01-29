@@ -1,4 +1,9 @@
-import React, { forwardRef, InputHTMLAttributes, useMemo } from 'react'
+import React, {
+  CSSProperties,
+  forwardRef,
+  InputHTMLAttributes,
+  useMemo,
+} from 'react'
 
 export interface InputBoxProps extends InputHTMLAttributes<HTMLInputElement> {
   startIcon?: React.ReactNode
@@ -18,7 +23,7 @@ export default forwardRef<HTMLInputElement, InputBoxProps>(function InputBox(
     }
   }
 
-  const inputContainerStyle = useMemo<React.CSSProperties>(
+  const inputContainerStyle = useMemo<CSSProperties>(
     () => ({
       width: '100%',
       height: '100%',

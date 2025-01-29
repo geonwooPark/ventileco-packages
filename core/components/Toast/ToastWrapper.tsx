@@ -1,4 +1,5 @@
 import React, {
+  CSSProperties,
   ElementType,
   HTMLAttributes,
   PropsWithChildren,
@@ -26,7 +27,10 @@ function ToastWrapper({
     }
   }
 
-  const toastWrapperStyle = useMemo(() => ({ cursor: 'pointer' }), [])
+  const toastWrapperStyle = useMemo<CSSProperties>(
+    () => ({ cursor: 'pointer' }),
+    [],
+  )
 
   return (
     <Box

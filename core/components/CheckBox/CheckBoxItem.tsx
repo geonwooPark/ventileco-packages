@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { CSSProperties, useMemo } from 'react'
 import { useCheckBoxContext } from './CheckBoxMain'
 
 interface CheckBoxItemProps {
@@ -17,7 +17,10 @@ function CheckBoxItem({ children, value }: CheckBoxItemProps) {
     }
   }
 
-  const checkBoxItemStyle = useMemo(() => ({ display: 'none' }), [])
+  const checkBoxItemStyle = useMemo<CSSProperties>(
+    () => ({ display: 'none' }),
+    [],
+  )
 
   return (
     <label

@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { CSSProperties, useMemo } from 'react'
 import { useRadioContext } from './RadioMain'
 
 interface RadioItemProps {
@@ -18,7 +18,10 @@ function RadioItem({ children, value }: RadioItemProps) {
     }
   }
 
-  const radioButtonStyle = useMemo(() => ({ display: 'none' }), [])
+  const radioButtonStyle = useMemo<CSSProperties>(
+    () => ({ display: 'none' }),
+    [],
+  )
 
   return (
     <label

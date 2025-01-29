@@ -1,4 +1,10 @@
-import React, { PropsWithChildren, useEffect, useMemo, useState } from 'react'
+import React, {
+  CSSProperties,
+  PropsWithChildren,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react'
 import { createPortal } from 'react-dom'
 import { useToolTipContext } from './ToolTipMain'
 
@@ -30,10 +36,7 @@ function ToolTipContent({ children }: PropsWithChildren) {
     }
   }, [])
 
-  const tooltipStyle = useMemo(
-    () => ({ position: 'fixed' }) as React.CSSProperties,
-    [],
-  )
+  const tooltipStyle = useMemo<CSSProperties>(() => ({ position: 'fixed' }), [])
 
   if (!portalRoot || disabled || !isOpen) return
 

@@ -1,10 +1,10 @@
-import React, { PropsWithChildren, useMemo } from 'react'
+import React, { CSSProperties, PropsWithChildren, useMemo } from 'react'
 import { useTabsContext } from './TabsMain'
 
 function TabsList({ children }: PropsWithChildren) {
   const { listRef } = useTabsContext()
 
-  const listStyle = useMemo<React.CSSProperties>(
+  const listStyle = useMemo<CSSProperties>(
     () => ({
       display: 'flex',
     }),
