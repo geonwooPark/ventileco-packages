@@ -13,14 +13,6 @@ import PaginationNumbering from './PaginationNumbering'
 import PaginationPrevBoundary from './PaginationPrevBoundary'
 import PaginationNextBoundary from './PaginationNextBoundary'
 
-export interface PaginationProps extends HTMLAttributes<HTMLDivElement> {
-  totalItemCount: number
-  listItemCount: number
-  numberingCount?: number
-  page?: number
-  onNavigate: (value: number) => void
-}
-
 type PaginationContextState = {
   page: number
   totalPage: number
@@ -33,6 +25,14 @@ type PaginationContextState = {
 
 export const [usePaginationContext, PaginationProvider] =
   _createContext<PaginationContextState>()
+
+export interface PaginationProps extends HTMLAttributes<HTMLDivElement> {
+  totalItemCount: number
+  listItemCount: number
+  numberingCount?: number
+  page?: number
+  onNavigate: (value: number) => void
+}
 
 function PaginationMain(
   {

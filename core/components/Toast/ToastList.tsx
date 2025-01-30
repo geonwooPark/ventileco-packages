@@ -1,5 +1,5 @@
 import React, { CSSProperties, PropsWithChildren, useMemo } from 'react'
-import { TOAST_POSITION } from '../../constants'
+import { TOAST_POSITION } from './constants'
 import { useToastContext } from './ToastProvider'
 
 function ToastList({ children }: PropsWithChildren) {

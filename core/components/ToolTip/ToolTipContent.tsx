@@ -3,54 +3,53 @@ import React, {
   PropsWithChildren,
   useEffect,
   useMemo,
-  useState,
+  useRef,
 } from 'react'
 import { createPortal } from 'react-dom'
-import { useToolTipContext } from './ToolTipMain'
+import { useIsOpenContext, useRestContext } from './ToolTipMain'
 
 function ToolTipContent({ children }: PropsWithChildren) {
-  const { isOpen, disabled, tooltipRef, leaveTimer, setIsOpen } =
-    useToolTipContext()
+  const isOpen = useIsOpenContext()
 
-  const [portalRoot, setPortalRoot] = useState<HTMLElement | null>(null)
+  const { tooltipRef, onMouseOver, onMouseOut } = useRestContext()
 
-  const onMouseOver = () => {
-    clearTimeout(leaveTimer.current)
-    setIsOpen(true)
-  }
+  const portalRootRef = useRef<HTMLElement | null>(null)
 
-  const onMouseLeave = () => {
-    setIsOpen(false)
-  }
+  const tooltipStyle = useMemo<CSSProperties>(() => ({ position: 'fixed' }), [])
 
   useEffect(() => {
-    const tooltipDiv = document.createElement('div')
-    tooltipDiv.id = 'tool-tip-ventileco'
-    document.body.appendChild(tooltipDiv)
-    setPortalRoot(tooltipDiv)
+    let tooltipDiv = document.getElementById(
+      'tool-tip-ventileco',
+    ) as HTMLDivElement
+
+    if (!tooltipDiv) {
+      tooltipDiv = document.createElement('div')
+      tooltipDiv.id = 'tool-tip-ventileco'
+      tooltipDiv.role = 'tooltip'
+      document.body.appendChild(tooltipDiv)
+    }
+
+    portalRootRef.current = tooltipDiv
 
     return () => {
-      if (tooltipDiv) {
+      if (tooltipDiv && tooltipDiv.parentNode) {
         document.body.removeChild(tooltipDiv)
       }
     }
   }, [])
 
-  const tooltipStyle = useMemo<CSSProperties>(() => ({ position: 'fixed' }), [])
-
-  if (!portalRoot || disabled || !isOpen) return
+  if (!isOpen) return
 
   return createPortal(
     <div
-      role="tooltip"
       style={tooltipStyle}
       ref={tooltipRef}
       onMouseOver={onMouseOver}
-      onMouseLeave={onMouseLeave}
+      onMouseLeave={onMouseOut}
     >
       {children}
     </div>,
-    portalRoot,
+    portalRootRef.current as HTMLElement,
   )
 }
 

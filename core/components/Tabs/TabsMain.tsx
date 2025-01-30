@@ -13,11 +13,6 @@ import TabsIndicator from './TabsIndicator'
 import TabsContent from './TabsContent'
 import TabsContainer from './TabsContainer'
 
-interface TabsProps extends HTMLAttributes<HTMLDivElement> {
-  currentTab: any
-  onChange: (value: any) => void
-}
-
 type ActionState = {
   onChange: (value: any) => void
 }
@@ -25,6 +20,11 @@ type ActionState = {
 export const [useActionContext, ActionProvider] = _createContext<ActionState>()
 export const [useTabContext, TabProvider] = _createContext<number>()
 export const [useIdContext, IdProvider] = _createContext<string>()
+
+interface TabsProps extends HTMLAttributes<HTMLDivElement> {
+  currentTab: any
+  onChange: (value: any) => void
+}
 
 const TabsMain = forwardRef<HTMLDivElement, PropsWithChildren<TabsProps>>(
   function TabsMain({ children, currentTab, onChange, ...otherProps }, ref) {

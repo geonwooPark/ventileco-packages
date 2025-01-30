@@ -5,10 +5,7 @@ export default function TestComponent() {
   return (
     <ToolTip direction="bottom">
       <ToolTip.Trigger>Trigger</ToolTip.Trigger>
-      <ToolTip.Content>
-        Content
-        <ToolTip.Triangle />
-      </ToolTip.Content>
+      <ToolTip.Content>Content</ToolTip.Content>
     </ToolTip>
   )
 }
