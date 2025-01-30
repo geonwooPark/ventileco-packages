@@ -4,12 +4,14 @@ import React, {
   ReactNode,
   forwardRef,
 } from 'react'
-import { PolymorphicRef } from '../../types'
 
 type BoxProps<T extends React.ElementType> = {
   as?: T
   children?: ReactNode
 } & Omit<React.ComponentPropsWithoutRef<T>, 'as' | 'children'>
+
+type PolymorphicRef<T extends ElementType> =
+  React.ComponentPropsWithRef<T>['ref']
 
 type PolymorphicComponent = <T extends ElementType>(
   props: BoxProps<T> & {
