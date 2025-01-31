@@ -1,5 +1,13 @@
-import React, { CSSProperties, PropsWithChildren, useMemo, useRef } from 'react'
+import React, {
+  CSSProperties,
+  PropsWithChildren,
+  useMemo,
+  useRef,
+  isValidElement,
+  cloneElement,
+} from 'react'
 import { useActionContext, useTabContext } from './TabsMain'
+import { TabsItemProps } from './TabsItem'
 
 function TabsList({ children }: PropsWithChildren) {
   const currentTab = useTabContext()
@@ -8,15 +16,16 @@ function TabsList({ children }: PropsWithChildren) {
 
   const listRef = useRef<HTMLUListElement>(null)
 
-  const listToArray = React.Children.map(children, (child, index) =>
-    React.isValidElement(child)
-      ? React.cloneElement(child as JSX.Element, {
-          isActive: currentTab === index,
-          index,
-          onChange,
-        })
-      : child,
-  )
+  const childrenWithProps = React.Children.map(children, (child, index) => {
+    if (isValidElement<TabsItemProps>(child)) {
+      return cloneElement(child, {
+        isActive: currentTab === index,
+        index,
+        onChange,
+      })
+    }
+    return child
+  })
 
   const listStyle = useMemo<CSSProperties>(
     () => ({
@@ -27,7 +36,7 @@ function TabsList({ children }: PropsWithChildren) {
 
   return (
     <ul role="tablist" ref={listRef} style={listStyle}>
-      {listToArray}
+      {childrenWithProps}
     </ul>
   )
 }

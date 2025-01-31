@@ -1,7 +1,7 @@
 import React, { PropsWithChildren } from 'react'
 import { useIdContext } from './TabsMain'
 
-interface TabsPanelProps {
+export interface TabsPanelProps {
   className?: string
   index?: number
 }

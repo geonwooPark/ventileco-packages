@@ -1,7 +1,7 @@
 import React, { KeyboardEventHandler, memo, useCallback } from 'react'
 import { useIdContext } from './TabsMain'
 
-interface TabsItemProps {
+export interface TabsItemProps {
   children: (props: { isActive: boolean }) => React.ReactNode
   className?: string
   index?: number

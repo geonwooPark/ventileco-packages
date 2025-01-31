@@ -6,13 +6,15 @@ import React, {
   useMemo,
 } from 'react'
 
-interface RadioItemProps {
-  checked: boolean
-  onChange: () => void
+export interface RadioItemProps {
+  value: any
+  checked?: boolean
+  onChange?: (value: any) => void
 }
 
 function RadioItem({
   children,
+  value,
   checked,
   onChange,
 }: PropsWithChildren<RadioItemProps>) {
@@ -21,7 +23,7 @@ function RadioItem({
   const onKeyDown = (e: React.KeyboardEvent<HTMLLabelElement>) => {
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault()
-      onChange()
+      onChange!(value)
     }
   }
 
@@ -37,7 +39,7 @@ function RadioItem({
       tabIndex={0}
       aria-checked={checked}
       onKeyDown={onKeyDown}
-      onClick={onChange}
+      onClick={() => onChange!(value)}
     >
       <input
         id={`radio-button-${id}`}

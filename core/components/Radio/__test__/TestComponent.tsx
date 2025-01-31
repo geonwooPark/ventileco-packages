@@ -17,13 +17,13 @@ export default function TestComponent() {
   ]
 
   return (
-    <Radio className="flex flex-col gap-2">
+    <Radio
+      defaultValue={value}
+      onChange={onChange}
+      className="flex flex-col gap-2"
+    >
       {radioList.map((item) => (
-        <Radio.Item
-          key={item.id}
-          checked={value === item.value}
-          onChange={() => onChange(item.value)}
-        >
+        <Radio.Item key={item.id} value={item.value}>
           <p className={`${value === item.value && 'text-blue-400'}`}>
             {item.label}
           </p>

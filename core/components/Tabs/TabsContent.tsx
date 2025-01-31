@@ -1,18 +1,20 @@
-import React, { PropsWithChildren } from 'react'
+import React, { cloneElement, isValidElement, PropsWithChildren } from 'react'
 import { useTabContext } from './TabsMain'
+import { TabsPanelProps } from './TabsPanel'
 
 function TabsContent({ children }: PropsWithChildren) {
   const currentTab = useTabContext()
 
-  const listToArray = React.Children.map(children, (child, index) =>
-    React.isValidElement(child)
-      ? React.cloneElement(child as JSX.Element, {
-          index,
-        })
-      : child,
-  )
+  const childrenWithProps = React.Children.map(children, (child, index) => {
+    if (isValidElement<TabsPanelProps>(child)) {
+      return cloneElement(child, {
+        index,
+      })
+    }
+    return child
+  })
 
-  return listToArray ? listToArray[currentTab] : null
+  return childrenWithProps ? childrenWithProps[currentTab] : null
 }
 
 export default TabsContent
