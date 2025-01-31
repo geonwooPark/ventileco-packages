@@ -1,4 +1,4 @@
-import React, { CSSProperties, PropsWithChildren, useMemo } from 'react'
+import React, { CSSProperties, memo, PropsWithChildren, useMemo } from 'react'
 import { useRestContext } from './ToolTipMain'
 
 function ToolTipTrigger({ children }: PropsWithChildren) {
@@ -24,4 +24,4 @@ function ToolTipTrigger({ children }: PropsWithChildren) {
   )
 }
 
-export default ToolTipTrigger
+export default memo(ToolTipTrigger)

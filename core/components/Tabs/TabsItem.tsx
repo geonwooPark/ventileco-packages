@@ -1,24 +1,26 @@
-import React, { KeyboardEventHandler, useCallback } from 'react'
-import { useActionContext, useIdContext, useTabContext } from './TabsMain'
+import React, { KeyboardEventHandler, memo, useCallback } from 'react'
+import { useIdContext } from './TabsMain'
 
 interface TabsItemProps {
-  children: (props: { selected: boolean }) => React.ReactNode
-  value: any
+  children: (props: { isActive: boolean }) => React.ReactNode
   className?: string
+  index?: number
+  isActive?: boolean
+  onChange?: (value: number) => void
 }
 
-function TabsItem({ children, value, className }: TabsItemProps) {
+function TabsItem({
+  children,
+  className,
+  index,
+  isActive,
+  onChange,
+}: TabsItemProps) {
   const id = useIdContext()
-
-  const currentTab = useTabContext()
-
-  const { onChange } = useActionContext()
-
-  const selected = value === currentTab
 
   const onFocusElement = (e: React.FocusEvent<HTMLLIElement, Element>) => {
     e.target.scrollIntoView({ behavior: 'smooth', block: 'center' })
-    onChange(value)
+    onChange!(index!)
   }
 
   const onKeyboardSelect: KeyboardEventHandler<HTMLLIElement> = useCallback(
@@ -50,19 +52,19 @@ function TabsItem({ children, value, className }: TabsItemProps) {
 
   return (
     <li
-      id={`${id}-tab-button-${value}`}
+      id={`${id}-tab-button-${index}`}
       role="tab"
       tabIndex={0}
-      aria-selected={selected}
-      aria-controls={`${id}-tab-panel-${value}`}
-      onClick={() => onChange(value)}
+      aria-selected={isActive}
+      aria-controls={`${id}-tab-panel-${index}`}
+      onClick={() => onChange!(index!)}
       onFocus={onFocusElement}
       onKeyDown={onKeyboardSelect}
       className={className}
     >
-      {children({ selected })}
+      {children({ isActive: isActive || false })}
     </li>
   )
 }
 
-export default TabsItem
+export default memo(TabsItem, (prev, next) => prev.isActive === next.isActive)

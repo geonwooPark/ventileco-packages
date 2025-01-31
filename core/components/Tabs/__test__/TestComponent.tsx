@@ -1,12 +1,12 @@
-import React, { useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import Tabs from '../TabsMain'
 
 export default function TestComponent() {
   const [currentTab, setCurrentTab] = useState(0)
 
-  const onChange = (value: any) => {
-    setCurrentTab(value)
-  }
+  const onChange = useCallback((index: number) => {
+    setCurrentTab(index)
+  }, [])
 
   const tabList = [
     { id: 0, title: '🍇 Grape' },
@@ -23,11 +23,11 @@ export default function TestComponent() {
     >
       <Tabs.Container>
         <Tabs.List>
-          {tabList.map((item, idx) => (
-            <Tabs.Item key={item.id} value={idx}>
-              {({ selected }) => (
+          {tabList.map((item) => (
+            <Tabs.Item key={item.id}>
+              {({ isActive }) => (
                 <div
-                  className={`${selected && 'text-blue-600'} cursor-pointer px-4 py-3 text-center transition duration-200 hover:opacity-50`}
+                  className={`${isActive && 'text-blue-600'} cursor-pointer px-4 py-3 text-center transition duration-200 hover:opacity-50`}
                 >
                   {item.title}
                 </div>
@@ -38,17 +38,19 @@ export default function TestComponent() {
         <Tabs.Indicator className="h-[2px] bg-black" />
       </Tabs.Container>
 
-      <Tabs.Content value={0}>
-        <div>Content1Content1Cont</div>
-      </Tabs.Content>
-      <Tabs.Content value={1}>
-        <div>Content2</div>
-      </Tabs.Content>
-      <Tabs.Content value={2}>
-        <div>Content3</div>
-      </Tabs.Content>
-      <Tabs.Content value={3}>
-        <div>Content4</div>
+      <Tabs.Content>
+        <Tabs.Panel>
+          <div>Content1Content1Cont</div>
+        </Tabs.Panel>
+        <Tabs.Panel>
+          <div>Content2</div>
+        </Tabs.Panel>
+        <Tabs.Panel>
+          <div>Content3</div>
+        </Tabs.Panel>
+        <Tabs.Panel>
+          <div>Content4</div>
+        </Tabs.Panel>
       </Tabs.Content>
     </Tabs>
   )

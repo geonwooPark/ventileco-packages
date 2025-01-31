@@ -12,17 +12,23 @@ export default function TestComponent() {
     { id: 0, value: 'apple', label: '🍎 Apple' },
     { id: 1, value: 'kiwi', label: '🥝 Kiwi' },
     { id: 2, value: 'peach', label: '🍑 Peach' },
+    { id: 3, value: 'banana', label: '🍌 Banana' },
+    { id: 4, value: 'carrot', label: '🥕 Carrot' },
   ]
 
   return (
-    <Radio value={value} onChange={onChange}>
-      <Radio.List className="flex flex-col gap-2">
-        {radioList.map((item) => (
-          <Radio.Item key={item.id} value={item.value}>
-            {({ isSelected }) => <p>{item.label}</p>}
-          </Radio.Item>
-        ))}
-      </Radio.List>
+    <Radio className="flex flex-col gap-2">
+      {radioList.map((item) => (
+        <Radio.Item
+          key={item.id}
+          checked={value === item.value}
+          onChange={() => onChange(item.value)}
+        >
+          <p className={`${value === item.value && 'text-blue-400'}`}>
+            {item.label}
+          </p>
+        </Radio.Item>
+      ))}
     </Radio>
   )
 }

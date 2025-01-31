@@ -1,30 +1,18 @@
 import React, { PropsWithChildren } from 'react'
-import { useIdContext, useTabContext } from './TabsMain'
+import { useTabContext } from './TabsMain'
 
-interface TabsContentProps {
-  value: any
-  className?: string
-}
-
-function TabsContent({
-  children,
-  value,
-  className,
-}: PropsWithChildren<TabsContentProps>) {
-  const id = useIdContext()
-
+function TabsContent({ children }: PropsWithChildren) {
   const currentTab = useTabContext()
 
-  return value === currentTab ? (
-    <div
-      id={`${id}-tab-panel-${currentTab}`}
-      role="tabpanel"
-      aria-labelledby={`${id}-tab-button-${currentTab}`}
-      className={className}
-    >
-      {children}
-    </div>
-  ) : null
+  const listToArray = React.Children.map(children, (child, index) =>
+    React.isValidElement(child)
+      ? React.cloneElement(child as JSX.Element, {
+          index,
+        })
+      : child,
+  )
+
+  return listToArray ? listToArray[currentTab] : null
 }
 
 export default TabsContent

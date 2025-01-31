@@ -177,7 +177,7 @@ const ToolTipMain = forwardRef<HTMLDivElement, PropsWithChildren<ToolTipProps>>(
 )
 
 const ToolTip = Object.assign(ToolTipMain, {
-  Trigger: memo(ToolTipTrigger),
+  Trigger: ToolTipTrigger,
   Content: ToolTipContent,
   Triangle: ToolTipTriangle,
 })
