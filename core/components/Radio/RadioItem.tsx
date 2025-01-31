@@ -1,20 +1,27 @@
-import React, { CSSProperties, useMemo } from 'react'
-import { useRadioContext } from './RadioMain'
+import React, {
+  CSSProperties,
+  memo,
+  PropsWithChildren,
+  useId,
+  useMemo,
+} from 'react'
 
 interface RadioItemProps {
-  children: (props: { isSelected: boolean }) => React.ReactNode
-  value: string | number | readonly string[] | undefined
+  checked: boolean
+  onChange: () => void
 }
 
-function RadioItem({ children, value }: RadioItemProps) {
-  const { id, value: _value, onChange } = useRadioContext()
-
-  const isSelected = _value === value
+function RadioItem({
+  children,
+  checked,
+  onChange,
+}: PropsWithChildren<RadioItemProps>) {
+  const id = useId()
 
   const onKeyDown = (e: React.KeyboardEvent<HTMLLabelElement>) => {
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault()
-      onChange(value)
+      onChange()
     }
   }
 
@@ -26,23 +33,23 @@ function RadioItem({ children, value }: RadioItemProps) {
   return (
     <label
       role="radio"
-      htmlFor={`${id}-radio-button-${value}`}
+      htmlFor={`radio-button-${id}`}
       tabIndex={0}
-      aria-checked={isSelected}
+      aria-checked={checked}
       onKeyDown={onKeyDown}
+      onClick={onChange}
     >
       <input
-        id={`${id}-radio-button-${value}`}
+        id={`radio-button-${id}`}
         type="radio"
         aria-hidden="true"
-        value={value}
-        onClick={() => onChange(value)}
-        defaultChecked={isSelected}
+        checked={checked}
+        readOnly
         style={radioButtonStyle}
       />
-      {children({ isSelected })}
+      {children}
     </label>
   )
 }
 
-export default RadioItem
+export default memo(RadioItem, (prev, next) => prev.checked === next.checked)
