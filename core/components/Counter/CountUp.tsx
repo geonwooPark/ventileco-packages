@@ -1,12 +1,12 @@
-import React, { PropsWithChildren } from 'react'
-import { useCounterContext } from './CounterMain'
+import React, { memo, PropsWithChildren } from 'react'
+import { useActionsContext } from './CounterMain'
 
 interface CountUpProps {
   isDisabled?: boolean
 }
 
 function CountUp({ children, isDisabled }: PropsWithChildren<CountUpProps>) {
-  const { up } = useCounterContext()
+  const { up } = useActionsContext()
 
   return (
     <button
@@ -20,4 +20,4 @@ function CountUp({ children, isDisabled }: PropsWithChildren<CountUpProps>) {
   )
 }
 
-export default CountUp
+export default memo(CountUp)

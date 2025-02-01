@@ -16,16 +16,17 @@ export interface CounterMainProps extends HTMLAttributes<HTMLDivElement> {
   setValue: React.Dispatch<React.SetStateAction<number>>
   minimum?: number
   maximum?: number
+  className?: string
 }
 
 type CounterState = {
-  number: number
   up: () => void
   down: () => void
 }
 
-export const [useCounterContext, CounterProvider] =
+export const [useActionsContext, ActionsProvider] =
   _createContext<CounterState>()
+export const [useNumberContext, NumberProvider] = _createContext<number>()
 
 function CounterMain(
   {
@@ -34,7 +35,7 @@ function CounterMain(
     setValue,
     minimum,
     maximum,
-    ...otherProps
+    className,
   }: PropsWithChildren<CounterMainProps>,
   forwardRef: ForwardedRef<HTMLDivElement>,
 ) {
@@ -42,29 +43,30 @@ function CounterMain(
     setValue((prev) =>
       maximum === undefined || prev < maximum ? prev + 1 : prev,
     )
-  }, [maximum])
+  }, [maximum, setValue])
 
   const down = useCallback(() => {
     setValue((prev) =>
       minimum === undefined || prev > minimum ? prev - 1 : prev,
     )
-  }, [minimum])
+  }, [minimum, setValue])
 
-  const providerValue = useMemo(
+  const actions = useMemo(
     () => ({
-      number,
       up,
       down,
     }),
-    [number],
+    [down, up],
   )
 
   return (
-    <CounterProvider value={providerValue}>
-      <div ref={forwardRef} role="group" {...otherProps}>
-        {children}
-      </div>
-    </CounterProvider>
+    <ActionsProvider value={actions}>
+      <NumberProvider value={number}>
+        <div ref={forwardRef} role="group" className={className}>
+          {children}
+        </div>
+      </NumberProvider>
+    </ActionsProvider>
   )
 }
 

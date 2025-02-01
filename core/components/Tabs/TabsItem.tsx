@@ -62,7 +62,7 @@ function TabsItem({
       onKeyDown={onKeyboardSelect}
       className={className}
     >
-      {children({ isActive: isActive || false })}
+      {children({ isActive: !!isActive })}
     </li>
   )
 }

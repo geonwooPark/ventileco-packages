@@ -1,12 +1,12 @@
 import React from 'react'
-import { useCounterContext } from './CounterMain'
+import { useNumberContext } from './CounterMain'
 
 interface CountNumberProps {
   className?: string
 }
 
 function CountNumber({ className }: CountNumberProps) {
-  const { number } = useCounterContext()
+  const number = useNumberContext()
 
   return (
     <input
