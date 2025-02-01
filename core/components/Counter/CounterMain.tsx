@@ -19,13 +19,13 @@ export interface CounterMainProps extends HTMLAttributes<HTMLDivElement> {
   className?: string
 }
 
-type CounterState = {
+type ActionsState = {
   up: () => void
   down: () => void
 }
 
 export const [useActionsContext, ActionsProvider] =
-  _createContext<CounterState>()
+  _createContext<ActionsState>()
 export const [useNumberContext, NumberProvider] = _createContext<number>()
 
 function CounterMain(

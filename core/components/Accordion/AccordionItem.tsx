@@ -1,32 +1,53 @@
-import React, { useMemo } from 'react'
-import { useAccordionContext } from './AccordionMain'
-import { _createContext } from '../../utils/_createContext'
+import React, {
+  cloneElement,
+  isValidElement,
+  memo,
+  PropsWithChildren,
+  useId,
+  useMemo,
+} from 'react'
 
-interface AccordionItemProps {
-  children: (props: { isOpen: boolean }) => React.ReactNode
-  index: number
+export interface AccordionItemProps {
+  value: number
+  isActive?: boolean
+  handleOpen?: (selectedItem: number) => void
   className?: string
 }
 
-type AccordionItemContextState = {
-  isOpen: boolean
-  index: number
-}
+function AccordionItem({
+  children,
+  isActive,
+  value,
+  handleOpen,
+  className,
+}: PropsWithChildren<AccordionItemProps>) {
+  const id = useId()
 
-export const [useAccordionItemContext, AccordionItemProvider] =
-  _createContext<AccordionItemContextState>()
-
-function AccordionItem({ children, index, className }: AccordionItemProps) {
-  const { activeItems } = useAccordionContext()
-  const isOpen = activeItems.has(index)
-
-  const providerValue = useMemo(() => ({ isOpen, index }), [isOpen, index])
-
-  return (
-    <AccordionItemProvider value={providerValue}>
-      <div className={className}>{children({ isOpen })}</div>
-    </AccordionItemProvider>
+  const childrenWithProps = useMemo(
+    () =>
+      React.Children.map(children, (child) => {
+        if (
+          isValidElement<{
+            id: string
+            isActive: boolean
+            handleOpen: () => void
+          }>(child)
+        ) {
+          return cloneElement(child, {
+            id,
+            isActive,
+            handleOpen: () => handleOpen!(value),
+          })
+        }
+        return child
+      }),
+    [id, value, isActive, handleOpen, children],
   )
+
+  return <div className={className}>{childrenWithProps}</div>
 }
 
-export default AccordionItem
+export default memo(
+  AccordionItem,
+  (prev, next) => prev.isActive === next.isActive,
+)

@@ -10,18 +10,28 @@ export default function TestComponent() {
       title: '🍋 Lemon',
       content: 'Content3Content3Content3Content3Content3Content3',
     },
+    {
+      id: 3,
+      title: '🫐 Blueberry',
+      content: 'Content4',
+    },
+    {
+      id: 4,
+      title: '🥝 Kiwi',
+      content: 'Content5',
+    },
   ]
 
   return (
     <Accordion>
       {accordionList.map((item) => (
-        <Accordion.Item key={item.id} index={item.id}>
-          {({ isOpen }) => (
-            <React.Fragment>
-              <Accordion.Trigger>{item.title}</Accordion.Trigger>
-              <Accordion.Content>{item.content}</Accordion.Content>
-            </React.Fragment>
-          )}
+        <Accordion.Item key={item.id} value={item.id}>
+          <Accordion.Trigger>
+            {({ isActive }) => <>{item.title}</>}
+          </Accordion.Trigger>
+          <Accordion.Content>
+            {({ isActive }) => <>{item.content}</>}
+          </Accordion.Content>
         </Accordion.Item>
       ))}
     </Accordion>

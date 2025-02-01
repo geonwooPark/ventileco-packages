@@ -1,41 +1,26 @@
 import React, {
   ForwardedRef,
-  HTMLAttributes,
   PropsWithChildren,
+  cloneElement,
   forwardRef,
+  isValidElement,
   useCallback,
-  useId,
   useMemo,
   useState,
 } from 'react'
 import AccordionContent from './AccordionContent'
 import AccordionTrigger from './AccordionTrigger'
-import AccordionItem from './AccordionItem'
-import { _createContext } from '../../utils/_createContext'
+import AccordionItem, { AccordionItemProps } from './AccordionItem'
 
-interface AccordionProps extends HTMLAttributes<HTMLDivElement> {
+interface AccordionProps {
   multiple?: boolean
+  className?: string
 }
-
-type AccordionContextState = {
-  id: string
-  activeItems: Set<number>
-  handleOpen: (selectedTab: number) => void
-}
-
-export const [useAccordionContext, AccordionProvider] =
-  _createContext<AccordionContextState>()
 
 function AccordionMain(
-  {
-    children,
-    multiple = false,
-    ...otherProps
-  }: PropsWithChildren<AccordionProps>,
+  { children, multiple = false, className }: PropsWithChildren<AccordionProps>,
   forwardRef: ForwardedRef<HTMLDivElement>,
 ) {
-  const id = useId()
-
   const [activeItems, setActiveItems] = useState<Set<number>>(new Set())
 
   const handleOpen = useCallback(
@@ -54,21 +39,24 @@ function AccordionMain(
     [multiple],
   )
 
-  const providerValue = useMemo(
-    () => ({
-      id,
-      activeItems,
-      handleOpen,
-    }),
-    [id, activeItems, handleOpen],
+  const childrenWithProps = useMemo(
+    () =>
+      React.Children.map(children, (child) => {
+        if (isValidElement<AccordionItemProps>(child)) {
+          return cloneElement(child, {
+            isActive: activeItems.has(child.props.value),
+            handleOpen: () => handleOpen(child.props.value),
+          })
+        }
+        return child
+      }),
+    [activeItems, handleOpen, children],
   )
 
   return (
-    <AccordionProvider value={providerValue}>
-      <div role="tablist" ref={forwardRef} {...otherProps}>
-        {children}
-      </div>
-    </AccordionProvider>
+    <div role="tablist" ref={forwardRef} className={className}>
+      {childrenWithProps}
+    </div>
   )
 }
 
