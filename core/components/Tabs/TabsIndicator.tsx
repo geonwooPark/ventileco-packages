@@ -1,5 +1,6 @@
 import React, {
   CSSProperties,
+  useCallback,
   useLayoutEffect,
   useMemo,
   useRef,
@@ -20,7 +21,7 @@ export default function TabsIndicator({ className }: TabsIndicatorProps) {
 
   const indicatorRef = useRef<HTMLDivElement | null>(null)
 
-  const updateIndicator = () => {
+  const updateIndicator = useCallback(() => {
     if (!indicatorRef.current) return
 
     const tab = document.getElementById(`${id}-tab-button-${currentTab}`)
@@ -32,7 +33,7 @@ export default function TabsIndicator({ className }: TabsIndicatorProps) {
 
       indicatorRef.current.style.transform = `translateX(${tab.offsetLeft}px)`
     }
-  }
+  }, [currentTab, id])
 
   useLayoutEffect(() => {
     updateIndicator()
@@ -42,7 +43,7 @@ export default function TabsIndicator({ className }: TabsIndicatorProps) {
     return () => {
       window.removeEventListener('resize', updateIndicator)
     }
-  }, [id, currentTab])
+  }, [id, currentTab, updateIndicator])
 
   const indicatorStyle = useMemo<CSSProperties>(
     () => ({

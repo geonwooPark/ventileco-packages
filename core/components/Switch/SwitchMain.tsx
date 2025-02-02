@@ -45,7 +45,7 @@ function SwitchMain({
     ball.style.transform = `translate(${value ? 0 : containerWidth - ballWidth - marginInline * 2}px, -50%)`
 
     onChange(!value)
-  }, [value, marginInline])
+  }, [value, marginInline, onChange])
 
   const onKeyDown: KeyboardEventHandler<HTMLDivElement> = useCallback(
     (e) => {

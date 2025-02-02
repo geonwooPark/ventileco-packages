@@ -1,6 +1,5 @@
 import React, {
   ForwardedRef,
-  HTMLAttributes,
   PropsWithChildren,
   forwardRef,
   useCallback,
@@ -11,7 +10,7 @@ import CountUp from './CountUp'
 import CountDown from './CountDown'
 import CountNumber from './CountNumber'
 
-export interface CounterMainProps extends HTMLAttributes<HTMLDivElement> {
+export interface CounterMainProps {
   value: number
   setValue: React.Dispatch<React.SetStateAction<number>>
   minimum?: number

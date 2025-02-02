@@ -18,13 +18,6 @@ import SelectBoxItem from './SelectBoxItem'
 import SelectBoxList from './SelectBoxList'
 import SelectBoxInput from './SelectBoxInput'
 
-interface SelectBoxMainProps extends HTMLAttributes<HTMLDivElement> {
-  children?: ReactNode
-  value: any
-  onChange: (value: any) => void
-  list: OptionList
-}
-
 type SelectBoxContextState = {
   id: string
   value: any
@@ -40,6 +33,13 @@ type SelectBoxContextState = {
 
 export const [useSelectBoxContext, SelectBoxProvider] =
   _createContext<SelectBoxContextState>()
+
+interface SelectBoxMainProps extends HTMLAttributes<HTMLDivElement> {
+  children?: ReactNode
+  value: any
+  onChange: (value: any) => void
+  list: OptionList
+}
 
 const SelectBoxMain = forwardRef<HTMLDivElement, SelectBoxMainProps>(
   function SelectBoxMain(

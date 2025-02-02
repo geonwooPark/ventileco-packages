@@ -19,13 +19,6 @@ import { Option, OptionList } from '../../types'
 import { _createContext } from '../../utils/_createContext'
 import { escapeRegExp } from './utils'
 
-interface ComboBoxMainProps extends HTMLAttributes<HTMLDivElement> {
-  children?: ReactNode
-  value: any
-  onChange: (value: any) => void
-  list: OptionList
-}
-
 type ComboBoxContextState = {
   id: string
   value: any
@@ -53,6 +46,13 @@ type ComboBoxContextState = {
 
 export const [useComboBoxContext, ComboBoxProvider] =
   _createContext<ComboBoxContextState>()
+
+interface ComboBoxMainProps extends HTMLAttributes<HTMLDivElement> {
+  children?: ReactNode
+  value: any
+  onChange: (value: any) => void
+  list: OptionList
+}
 
 const ComboBoxMain = forwardRef<HTMLDivElement, ComboBoxMainProps>(
   function ComboBoxMain(
