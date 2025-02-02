@@ -4,6 +4,10 @@ import CheckBox from '../CheckBoxMain'
 export default function TestComponent() {
   const [values, setValues] = useState<string[]>([])
 
+  const onChange = (newValues: string[]) => {
+    setValues(newValues)
+  }
+
   const checkBoxList = [
     { id: 0, value: 'carrot', label: '🥕 Carrot' },
     { id: 1, value: 'onion', label: '🧅 Onion' },
@@ -11,14 +15,14 @@ export default function TestComponent() {
   ]
 
   return (
-    <CheckBox value={values} onChange={(value) => setValues(value)}>
-      <CheckBox.List>
-        {checkBoxList.map((item) => (
-          <CheckBox.Item key={item.id} value={item.value}>
-            {({ isSelected }) => <div>{item.label}</div>}
-          </CheckBox.Item>
-        ))}
-      </CheckBox.List>
+    <CheckBox values={values} onChange={onChange}>
+      {checkBoxList.map((item) => (
+        <CheckBox.Item key={item.id} value={item.value}>
+          {({ checked }) => (
+            <div className={`${checked && 'text-red-400'}`}>{item.label}</div>
+          )}
+        </CheckBox.Item>
+      ))}
     </CheckBox>
   )
 }

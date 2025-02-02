@@ -1,60 +1,67 @@
 import React, {
-  HTMLAttributes,
   ReactNode,
+  cloneElement,
   forwardRef,
+  isValidElement,
   useCallback,
-  useId,
   useMemo,
+  useRef,
 } from 'react'
-import CheckBoxList from './CheckBoxList'
-import CheckBoxItem from './CheckBoxItem'
-import { _createContext } from '../../utils/_createContext'
+import CheckBoxItem, { CheckBoxItemProps } from './CheckBoxItem'
 
-interface CheckBoxMainProps extends HTMLAttributes<HTMLDivElement> {
-  children?: ReactNode
-  value: any[]
-  onChange: (value: any) => void
+interface CheckBoxMainProps<T extends string | number> {
+  children: ReactNode
+  values: T[]
+  onChange: (newValues: T[]) => void
+  className?: string
 }
 
-type CheckBoxContextState = {
-  id: string
-  value: any[]
-  onClick: (selectedItem: any) => void
-}
+function CheckBoxMain<T extends string | number>(
+  { children, values, onChange, className }: CheckBoxMainProps<T>,
+  ref: React.Ref<HTMLDivElement>,
+) {
+  const valuesRef = useRef(values)
+  valuesRef.current = values
 
-export const [useCheckBoxContext, CheckBoxProvider] =
-  _createContext<CheckBoxContextState>()
+  const handleClick = useCallback(
+    (value: T) => {
+      const updatedValues = valuesRef.current.includes(value)
+        ? valuesRef.current.filter((v) => v !== value)
+        : [...valuesRef.current, value]
 
-const CheckBoxMain = forwardRef<HTMLDivElement, CheckBoxMainProps>(
-  function CheckBoxMain({ children, value, onChange, ...otherProps }, ref) {
-    const id = useId()
+      onChange(updatedValues)
+    },
+    [onChange],
+  )
 
-    const onClick = useCallback(
-      (selectedItem: any) => {
-        if (value.includes(selectedItem)) {
-          const updatedValue = value.filter((r) => r !== selectedItem)
-          onChange(updatedValue)
-        } else {
-          onChange([...value, selectedItem])
+  const childrenWithProps = useMemo(
+    () =>
+      React.Children.map(children, (child) => {
+        if (isValidElement<CheckBoxItemProps>(child)) {
+          return cloneElement(child, {
+            checked: valuesRef.current.includes(child.props.value as T),
+            onClick: () => handleClick(child.props.value as T),
+          })
         }
-      },
-      [value],
-    )
+        return child
+      }),
+    [handleClick, children],
+  )
 
-    const providerValue = useMemo(() => ({ id, value, onClick }), [id, value])
+  return (
+    <div role="group" ref={ref} className={className}>
+      {childrenWithProps}
+    </div>
+  )
+}
 
-    return (
-      <CheckBoxProvider value={providerValue}>
-        <div role="group" ref={ref} {...otherProps}>
-          {children}
-        </div>
-      </CheckBoxProvider>
-    )
-  },
-)
+const ForwardedCheckBoxMain = forwardRef(CheckBoxMain) as <
+  T extends string | number,
+>(
+  props: CheckBoxMainProps<T> & { ref?: React.Ref<HTMLDivElement> },
+) => JSX.Element
 
-const CheckBox = Object.assign(CheckBoxMain, {
-  List: CheckBoxList,
+const CheckBox = Object.assign(ForwardedCheckBoxMain, {
   Item: CheckBoxItem,
 })
 
