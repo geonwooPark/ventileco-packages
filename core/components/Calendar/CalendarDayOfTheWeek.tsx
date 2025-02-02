@@ -1,6 +1,6 @@
 import React, { CSSProperties, memo, useMemo } from 'react'
 
-interface CalendarDayOfTheWeekProps {
+export interface CalendarDayOfTheWeekProps {
   dayOfTheWeek: string[]
   className?: string
   children: ({ item }: { item: string }) => React.ReactNode

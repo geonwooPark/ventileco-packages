@@ -1,7 +1,7 @@
 import React, { memo, PropsWithChildren } from 'react'
 import { useActionsContext } from './CounterMain'
 
-interface CountDownProps {
+export interface CountDownProps {
   isDisabled?: boolean
 }
 
