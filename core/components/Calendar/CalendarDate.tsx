@@ -1,6 +1,6 @@
 import React, { CSSProperties, useMemo } from 'react'
-import { useCalendarContext } from './CalendarMain'
 import { isBetweenDate, isSameDate, isSameMonth } from './utils'
+import { useDaysContext, useParsedMonthContext } from './CalendarMain'
 
 interface CalendarDateProps {
   selected?: Date | Date[]
@@ -35,7 +35,9 @@ export default function CalendarDate({
 }: CalendarDateProps) {
   const today = useMemo(() => new Date(), [])
 
-  const { parsedMonth, days } = useCalendarContext()
+  const parsedMonth = useParsedMonthContext()
+
+  const days = useDaysContext()
 
   const [startDate, endDate] = useMemo(() => {
     if (Array.isArray(selected)) {

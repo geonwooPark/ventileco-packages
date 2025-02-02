@@ -1,5 +1,5 @@
 import React, { PropsWithChildren } from 'react'
-import { useCalendarContext } from './CalendarMain'
+import { useActionsContext } from './CalendarMain'
 
 interface CalendarNextMonthProps {
   className?: string
@@ -9,7 +9,7 @@ export default function CalendarNextMonth({
   children,
   className,
 }: PropsWithChildren<CalendarNextMonthProps>) {
-  const { onNextMonthClick } = useCalendarContext()
+  const { onNextMonthClick } = useActionsContext()
 
   return (
     <button onClick={onNextMonthClick} className={className}>

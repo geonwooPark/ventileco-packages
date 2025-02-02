@@ -1,5 +1,5 @@
 import React from 'react'
-import { useCalendarContext } from './CalendarMain'
+import { useSelectedMonthContext } from './CalendarMain'
 
 interface CalendarSelectedMonthProps {
   className?: string
@@ -8,7 +8,7 @@ interface CalendarSelectedMonthProps {
 export default function CalendarSelectedMonth({
   className,
 }: CalendarSelectedMonthProps) {
-  const { selectedMonth } = useCalendarContext()
+  const selectedMonth = useSelectedMonthContext()
 
   return <p className={className}>{selectedMonth}</p>
 }

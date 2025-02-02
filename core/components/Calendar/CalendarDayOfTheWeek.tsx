@@ -1,4 +1,4 @@
-import React, { CSSProperties, useMemo } from 'react'
+import React, { CSSProperties, memo, useMemo } from 'react'
 
 interface CalendarDayOfTheWeekProps {
   dayOfTheWeek: string[]
@@ -6,7 +6,7 @@ interface CalendarDayOfTheWeekProps {
   children: ({ item }: { item: string }) => React.ReactNode
 }
 
-export default function CalendarDayOfTheWeek({
+function CalendarDayOfTheWeek({
   dayOfTheWeek,
   className,
   children,
@@ -33,3 +33,5 @@ export default function CalendarDayOfTheWeek({
     </div>
   )
 }
+
+export default memo(CalendarDayOfTheWeek)

@@ -1,5 +1,5 @@
 import React, { PropsWithChildren } from 'react'
-import { useCalendarContext } from './CalendarMain'
+import { useActionsContext } from './CalendarMain'
 
 interface CalendarPrevMonthProps {
   className?: string
@@ -9,7 +9,7 @@ export default function CalendarPrevMonth({
   children,
   className,
 }: PropsWithChildren<CalendarPrevMonthProps>) {
-  const { onPrevMonthClick } = useCalendarContext()
+  const { onPrevMonthClick } = useActionsContext()
 
   return (
     <button onClick={onPrevMonthClick} className={className}>

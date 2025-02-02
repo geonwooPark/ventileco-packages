@@ -1,9 +1,4 @@
-import React, {
-  ForwardedRef,
-  PropsWithChildren,
-  forwardRef,
-  useMemo,
-} from 'react'
+import React, { PropsWithChildren, forwardRef, useMemo } from 'react'
 import { _createContext } from '../../utils/_createContext'
 import { useCalendar } from './hooks/useCalendar'
 import CalendarDate from './CalendarDate'
@@ -14,32 +9,30 @@ import CalendarPrevMonth from './CalendarPrevMonth'
 import CalendarPrevYear from './CalendarPrevYear'
 import CalendarSelectedMonth from './CalendarSelectedMonth'
 
-interface CalendarMainProps {
-  monthFormat?: string
-  className?: string
-}
-
-type CalendarState = {
-  selectedMonth: string
-  parsedMonth: Date
-  days: Date[]
+type ActionsState = {
   onPrevMonthClick: () => void
   onNextMonthClick: () => void
   onPrevYearClick: () => void
   onNextYearClick: () => void
 }
 
-export const [useCalendarContext, CalendarProvider] =
-  _createContext<CalendarState>()
+export const [useActionsContext, ActionsProvider] =
+  _createContext<ActionsState>()
+export const [useSelectedMonthContext, SelectedMonthProvider] =
+  _createContext<string>()
+export const [useParsedMonthContext, ParsedMonthProvider] =
+  _createContext<Date>()
+export const [useDaysContext, DaysProvider] = _createContext<Date[]>()
 
-function CalendarMain(
-  {
-    children,
-    monthFormat = 'YYYY-MM',
-    className,
-  }: PropsWithChildren<CalendarMainProps>,
-  forwardRef: ForwardedRef<HTMLDivElement>,
-) {
+interface CalendarMainProps {
+  monthFormat?: string
+  className?: string
+}
+
+const CalendarMain = forwardRef<
+  HTMLDivElement,
+  PropsWithChildren<CalendarMainProps>
+>(function CalendarMain({ children, monthFormat = 'YYYY-MM', className }, ref) {
   const {
     selectedMonth,
     parsedMonth,
@@ -50,29 +43,32 @@ function CalendarMain(
     onNextYearClick,
   } = useCalendar(monthFormat)
 
-  const providerValue = useMemo(
+  const actions = useMemo(
     () => ({
-      selectedMonth,
-      parsedMonth,
-      days,
       onPrevMonthClick,
       onNextMonthClick,
       onPrevYearClick,
       onNextYearClick,
     }),
-    [selectedMonth, parsedMonth, days],
+    [onPrevMonthClick, onNextMonthClick, onPrevYearClick, onNextYearClick],
   )
 
   return (
-    <CalendarProvider value={providerValue}>
-      <div ref={forwardRef} className={className}>
-        {children}
-      </div>
-    </CalendarProvider>
+    <ActionsProvider value={actions}>
+      <SelectedMonthProvider value={selectedMonth}>
+        <ParsedMonthProvider value={parsedMonth}>
+          <DaysProvider value={days}>
+            <div ref={ref} className={className}>
+              {children}
+            </div>
+          </DaysProvider>
+        </ParsedMonthProvider>
+      </SelectedMonthProvider>
+    </ActionsProvider>
   )
-}
+})
 
-const Calendar = Object.assign(forwardRef(CalendarMain), {
+const Calendar = Object.assign(CalendarMain, {
   Date: CalendarDate,
   DayOfTheWeek: CalendarDayOfTheWeek,
   NextMonth: CalendarNextMonth,
