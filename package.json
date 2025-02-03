@@ -1,5 +1,6 @@
 {
   "name": "ventileco",
+  "version": "0.0.0",
   "type": "module",
   "private": false,
   "scripts": {
