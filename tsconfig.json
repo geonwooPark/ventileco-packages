@@ -7,13 +7,7 @@
     "moduleResolution": "node",
     "baseUrl": "./",
     "strict": true,
-    "esModuleInterop": true,
-    "declaration": true,
-    "emitDeclarationOnly": true,
-    "declarationMap": true,
-    "declarationDir": "./dist/types",
-    "types": ["jest", "@testing-library/jest-dom"]
+    "esModuleInterop": true
   },
-  "include": ["./core/**/*"],
-  "exclude": ["./dist", "./node_modules"]
+  "exclude": ["./node_modules"]
 }
