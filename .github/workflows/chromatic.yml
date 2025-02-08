@@ -17,7 +17,7 @@ jobs:
       - uses: actions/checkout@v1
 
       # pnpm 설치
-      - run: yarn
+      - run: pnpm
 
       # Chromatic을 GitHub Action으로 실행
       - uses: chromaui/action@v1
