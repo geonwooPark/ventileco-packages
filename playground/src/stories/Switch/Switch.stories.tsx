@@ -1,14 +1,14 @@
 import React from 'react'
-import VSwitch from '.'
+import Switch from '.'
 
 export default {
-  title: 'COMPONENTS/Switcx',
-  component: VSwitch,
+  title: 'COMPONENTS/Switch',
+  component: Switch,
   parameters: {
     layout: 'centered',
   },
 }
 
 export function Normal() {
-  return <VSwitch />
+  return <Switch />
 }
