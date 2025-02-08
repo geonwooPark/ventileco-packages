@@ -1,14 +1,14 @@
 import React from 'react'
-import VComboBox from '.'
+import ComboBox from '.'
 
 export default {
   title: 'COMPONENTS/ComboBox',
-  component: VComboBox,
+  component: ComboBox,
   parameters: {
     layout: 'centered',
   },
 }
 
 export function Normal() {
-  return <VComboBox />
+  return <ComboBox />
 }

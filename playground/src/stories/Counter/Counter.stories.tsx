@@ -1,14 +1,14 @@
 import React from 'react'
-import VCounter from '.'
+import Counter from '.'
 
 export default {
   title: 'COMPONENTS/Counter',
-  component: VCounter,
+  component: Counter,
   parameters: {
     layout: 'centered',
   },
 }
 
 export function Normal() {
-  return <VCounter />
+  return <Counter />
 }

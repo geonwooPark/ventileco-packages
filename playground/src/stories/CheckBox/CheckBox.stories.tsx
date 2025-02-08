@@ -1,14 +1,14 @@
 import React from 'react'
-import VCheckBox from '.'
+import CheckBox from '.'
 
 export default {
   title: 'COMPONENTS/CheckBox',
-  component: VCheckBox,
+  component: CheckBox,
   parameters: {
     layout: 'centered',
   },
 }
 
 export function Normal() {
-  return <VCheckBox />
+  return <CheckBox />
 }
