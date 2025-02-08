@@ -1,0 +1,27 @@
+name: 'Chromatic Deployment'
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'playground/**'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'playground/**'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+
+      # pnpm 설치
+      - run: pnpm install
+
+      # Chromatic을 GitHub Action으로 실행
+      - uses: chromaui/action@v1
+        with:
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          workingDirectory: playground

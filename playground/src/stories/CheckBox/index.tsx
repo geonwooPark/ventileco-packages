@@ -18,12 +18,14 @@ export default function CheckBox() {
     <VCheckBox
       values={values}
       onChange={onChange}
-      className="border rounded-md"
+      className="flex flex-col gap-2"
     >
       {checkBoxList.map((item) => (
         <VCheckBox.Item key={item.id} value={item.value}>
           {({ checked }) => (
-            <div className={`px-4 py-3 flex gap-2 items-center`}>
+            <div
+              className={`px-4 py-3 flex gap-2 items-center border rounded-md cursor-pointer`}
+            >
               <div className="relative size-4 rounded-sm border">
                 <div
                   className={`absolute top-[50%] left-[50%] translate-y-[-70%] translate-x-[-50%] w-1.5 h-3.5 border-b-2 border-r-2 transform rotate-45 ${checked ? 'border-blue-600' : 'border-transparent'}`}
