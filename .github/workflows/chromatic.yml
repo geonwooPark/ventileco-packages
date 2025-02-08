@@ -4,11 +4,11 @@ on:
   push:
     branches: [main]
     paths:
-      - 'playground/**'
+      - 'playground/**.stories.tsx'
   pull_request:
     branches: [main]
     paths:
-      - 'playground/**'
+      - 'playground/**.stories.tsx'
 
 jobs:
   test:
@@ -16,7 +16,6 @@ jobs:
     steps:
       - uses: actions/checkout@v1
 
-      # pnpm 설치
       - run: yarn
 
       # Chromatic을 GitHub Action으로 실행
