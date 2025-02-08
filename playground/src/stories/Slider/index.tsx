@@ -5,25 +5,25 @@ export default function Slider() {
   return (
     <VSlider perPage={3} gap={10} className="relative w-[620px]">
       <VSlider.Content className="hide-scroll [&>*]:shrink-0">
-        <VSlider.Item className="flex h-[300px] w-[200px] items-center justify-center bg-red-400">
+        <VSlider.Item className="flex h-[300px] w-[200px] items-center justify-center bg-gray-100">
           Slide1
         </VSlider.Item>
-        <VSlider.Item className="flex h-[300px] w-[200px] items-center justify-center bg-blue-400">
+        <VSlider.Item className="flex h-[300px] w-[200px] items-center justify-center bg-gray-100">
           Slide2
         </VSlider.Item>
-        <VSlider.Item className="flex h-[300px] w-[200px] items-center justify-center bg-green-400">
+        <VSlider.Item className="flex h-[300px] w-[200px] items-center justify-center bg-gray-100">
           Slide3
         </VSlider.Item>
-        <VSlider.Item className="flex h-[300px] w-[200px] items-center justify-center bg-yellow-400">
+        <VSlider.Item className="flex h-[300px] w-[200px] items-center justify-center bg-gray-100">
           Slide4
         </VSlider.Item>
-        <VSlider.Item className="flex h-[300px] w-[200px] items-center justify-center bg-pink-400">
+        <VSlider.Item className="flex h-[300px] w-[200px] items-center justify-center bg-gray-100">
           Slide5
         </VSlider.Item>
-        <VSlider.Item className="flex h-[300px] w-[200px] items-center justify-center bg-purple-400">
+        <VSlider.Item className="flex h-[300px] w-[200px] items-center justify-center bg-gray-100">
           Slide6
         </VSlider.Item>
-        <VSlider.Item className="flex h-[300px] w-[200px] items-center justify-center bg-orange-400">
+        <VSlider.Item className="flex h-[300px] w-[200px] items-center justify-center bg-gray-100">
           Slide7
         </VSlider.Item>
       </VSlider.Content>
