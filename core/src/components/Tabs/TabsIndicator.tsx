@@ -25,13 +25,17 @@ export default function TabsIndicator({ className }: TabsIndicatorProps) {
     if (!indicatorRef.current) return
 
     const tab = document.getElementById(`${id}-tab-button-${currentTab}`)
+    const parent = tab?.parentElement
 
-    if (tab) {
+    if (tab && parent) {
       const tabRect = tab.getBoundingClientRect()
+      const parentRect = parent?.getBoundingClientRect()
+
+      const diff = tabRect.left - parentRect.left
+
+      indicatorRef.current.style.transform = `translateX(${diff}px)`
 
       setWidth(tabRect.width)
-
-      indicatorRef.current.style.transform = `translateX(${tab.offsetLeft}px)`
     }
   }, [currentTab, id])
 

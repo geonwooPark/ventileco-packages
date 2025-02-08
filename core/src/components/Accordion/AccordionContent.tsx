@@ -15,6 +15,7 @@ function AccordionContent({
   as,
   id,
   isActive,
+  ...otherProps
 }: AccordionContentProps) {
   return isActive ? (
     <Box
@@ -24,6 +25,7 @@ function AccordionContent({
       aria-labelledby={`${id}-accordion-button`}
       hidden={!isActive}
       className={className}
+      {...otherProps}
     >
       {children({ isActive: !!isActive })}
     </Box>

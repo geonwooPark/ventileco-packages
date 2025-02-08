@@ -2,7 +2,7 @@
   "name": "ventileco",
   "version": "0.0.0",
   "type": "module",
-  "private": false,
+  "private": true,
   "scripts": {
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0"
   },
