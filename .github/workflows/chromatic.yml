@@ -11,16 +11,18 @@ on:
       - 'playground/**.stories.tsx'
 
 jobs:
-  test:
+  chromatic:
+    name: Run Chromatic
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-
-      - run: yarn
-
-      # Chromatic을 GitHub Action으로 실행
-      - uses: chromaui/action@v1
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Install dependencies
+        run: npm ci --prefix playground
+      - name: Run Chromatic
+        uses: chromaui/action@latest
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
-          token: ${{ secrets.GITHUB_TOKEN }}
           workingDirectory: playground
