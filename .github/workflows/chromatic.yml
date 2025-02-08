@@ -20,7 +20,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: Install dependencies
-        run: npm ci --prefix playground
+        run: pnpm install --filter playground...
       - name: Run Chromatic
         uses: chromaui/action@latest
         with:

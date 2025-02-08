@@ -1,14 +1,14 @@
 import React from 'react'
-import VFileUploader from '.'
+import FileUploader from '.'
 
 export default {
   title: 'COMPONENTS/FileUploader',
-  component: VFileUploader,
+  component: FileUploader,
   parameters: {
     layout: 'centered',
   },
 }
 
 export function Normal() {
-  return <VFileUploader />
+  return <FileUploader />
 }
