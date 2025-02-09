@@ -2,6 +2,7 @@
 core/
 playground/
 node_modules/
+src/
 
 *.config.js
 *.config.cjs
