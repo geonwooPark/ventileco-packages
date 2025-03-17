@@ -48,7 +48,7 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
       minify: true,
-      template: './index.html',
+      template: './src/index.html',
     }),
     new CopyWebpackPlugin({
       patterns: [
