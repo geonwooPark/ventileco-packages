@@ -1,53 +1,54 @@
 #! /usr/bin/env node
-const { execSync } = require('child_process')
-const path = require('path')
-const fs = require('fs')
-const { removeSync, copySync } = require('fs-extra')
-const inquirer = require('inquirer') // 사용자 입력을 받기 위해 inquirer 추가
+import { execSync } from 'child_process'
+import path from 'path'
+import fs from 'fs'
+import inquirer from 'inquirer'
+import ora from 'ora'
+import chalk from 'chalk'
+import fsExtra from 'fs-extra'
+const { removeSync, copySync } = fsExtra
 
 const GIT_REPO = 'https://github.com/geonwooPark/ventileco-packages'
 
-// project-name 미입력
+// 프로젝트 이름 입력 확인
 if (process.argv.length < 3) {
-  console.log('[ERROR]: Enter as in the example below')
-  console.log('ex) npx create-ts-ventileco [project-name]')
+  console.log(chalk.red.bold('[ERROR]: 프로젝트 이름을 입력해주세요.'))
+  console.log(
+    chalk.cyan('예시: ') +
+      chalk.green('npx ventileco-boilerplate [project-name]'),
+  )
   process.exit(1)
 }
 
 const projectName = process.argv[2]
 const currentPath = process.cwd()
 const isCurrentPathProject = projectName === '.'
-const tempPath = path.join(currentPath, 'temp')
+const tempPath = path.join(currentPath, 'ventileco-temp')
 const projectPath = isCurrentPathProject
   ? currentPath
   : path.join(currentPath, projectName)
 
-// project-name 입력시
+// 프로젝트 폴더 생성
 if (!isCurrentPathProject) {
   try {
     fs.mkdirSync(projectPath)
   } catch (err) {
-    if (err.code === 'EEXIST') {
-      console.log(
-        `[ERROR]: The file ${projectName} already exist in the current directory.`,
-      )
-    } else {
-      console.log(error)
-    }
+    console.log(
+      chalk.red.bold(`[ERROR]: ${projectName} 폴더가 이미 존재합니다.`),
+    )
     process.exit(1)
   }
 }
 
 async function chooseTemplate() {
-  // createPromptModule을 사용해 prompt 생성
-  const prompt = inquirer.createPromptModule()
+  console.log(chalk.blue.bold('\n📦 Ventileco Boilerplate Generator'))
+  console.log(chalk.gray('---------------------------------------'))
 
-  // 사용자가 선택할 수 있도록 inquirer로 물어봅니다.
-  const answers = await prompt([
+  const answers = await inquirer.prompt([
     {
       type: 'list',
       name: 'template',
-      message: 'Which template would you like to use?',
+      message: chalk.cyan('어떤 템플릿을 사용하시겠습니까?'),
       choices: ['ts-webpack', 'react-webpack'],
       default: 'ts-webpack',
     },
@@ -59,50 +60,57 @@ async function generator() {
   try {
     // 템플릿 선택
     const selectedTemplate = await chooseTemplate()
-    console.log(`[INFO]: You chose the ${selectedTemplate} template.`)
-
-    // git clone
-    console.log('[INFO]: Downloading create-ts-ventileco...')
-    execSync(
-      `git clone --filter=blob:none --no-checkout ${GIT_REPO} ${tempPath}`,
+    console.log(
+      chalk.cyan(`[INFO]: 선택된 템플릿 → ${chalk.yellow(selectedTemplate)}`),
     )
 
-    // sparse-checkout 활성화 및 선택한 템플릿만 체크아웃
-    execSync('cd ' + tempPath + ' && git sparse-checkout init --cone')
+    // 다운로드 스피너 시작
+    const downloadSpinner = ora(chalk.blue('Downloading template...')).start()
+
+    // 임시 폴더에 git clone
+    execSync(`git clone --filter=blob:none ${GIT_REPO} ${tempPath}`)
+    downloadSpinner.succeed(chalk.green('Download completed!'))
+
+    // sparse-checkout 설정
+    const sparseSpinner = ora(chalk.blue('Applying sparse checkout...')).start()
+    execSync(`cd ${tempPath} && git sparse-checkout init --no-cone`)
     execSync(
       `cd ${tempPath} && git sparse-checkout set packages/boilerplate/${selectedTemplate}`,
     )
+    sparseSpinner.succeed(chalk.green('Sparse checkout applied!'))
 
-    // 임시 폴더에서 선택한 템플릿만 복사
-    console.log('[INFO]: Copying files...')
+    // 파일 복사
+    const copySpinner = ora(chalk.blue('Copying files...')).start()
     copySync(
       `${tempPath}/packages/boilerplate/${selectedTemplate}`,
       projectPath,
     )
-
-    // 임시 폴더 삭제
-    removeSync(tempPath)
+    removeSync(tempPath) // 임시 폴더 삭제
+    copySpinner.succeed(chalk.green('Files copied successfully!'))
 
     // 현재 경로 이동
-    console.log('[INFO]: Moving into directory...')
     if (!isCurrentPathProject) {
       process.chdir(projectPath)
     }
 
     // 의존성 설치
-    console.log('[INFO]: Installing dependencies...')
+    const installSpinner = ora(chalk.blue('Installing dependencies...')).start()
     execSync('git init && pnpm install && pnpm exec husky install')
+    installSpinner.succeed(chalk.green('Dependencies installed!'))
 
-    // SUCCESS !
-    console.log('[SUCCESS]: Success to create-ts-ventileco. Available now !')
-    console.log(`
-      SSSSS  U   U  CCCC  CCCC  EEEEE  SSSSS  SSSSS
-      S      U   U  C      C      E     S      S
-      SSSSS  U   U  C      C      EEEE  SSSSS  SSSSS
-         S   U   U  C      C      E         S     S
-      SSSSS   UUU   CCCC  CCCC  EEEEE  SSSSS  SSSSS
-    `)
+    // 완료 메시지
+    console.log(
+      chalk.green.bold(
+        `\n🎉 ${selectedTemplate} 프로젝트가 성공적으로 생성되었습니다!\n`,
+      ),
+    )
+    console.log(chalk.cyan(`👉 다음 명령어를 실행하세요:\n`))
+    console.log(chalk.yellow(`   cd ${projectName}`))
+    console.log(chalk.yellow('   pnpm run dev\n'))
+
+    console.log(chalk.green('🚀 프로젝트를 즐겁게 개발하세요!\n'))
   } catch (error) {
+    console.log(chalk.red.bold('\n[ERROR]: 오류가 발생했습니다!'))
     console.log(error)
   }
 }
