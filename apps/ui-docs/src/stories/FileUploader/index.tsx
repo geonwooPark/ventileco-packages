@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { FileUploader as VFileUploader } from 'ventileco-ui'
+import { CustomFile, FileUploader as VFileUploader } from 'ventileco-ui'
 
 export default function FileUploader() {
   const [value, setValue] = useState<CustomFile[]>([])

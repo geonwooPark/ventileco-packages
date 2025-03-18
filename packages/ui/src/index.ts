@@ -19,3 +19,5 @@ export { default as Switch } from './components/Switch/SwitchMain'
 export { default as useToast } from './components/Toast/hooks/useToast'
 export { default as useDatePicker } from './components/Calendar/hooks/useDatePicker'
 export { default as useDateRange } from './components/Calendar/hooks/useDateRange'
+
+export { CustomFile } from './components/FileUploader/types'
