@@ -1,7 +1,17 @@
-import React, { useState } from 'react'
-import { InputBox as VInputBox } from 'ventileco-ui'
+import { Meta } from '@storybook/addon-docs'
 
-export default function InputBox() {
+<Meta title="COMPONENTS/InputBox" />
+
+# InputBox
+
+사용자의 클릭 이벤트를 처리하여 다양한 동작을 수행하는 인터페이스 요소
+
+## Example
+
+```jsx
+import InputBox from 'ventileco-ui'
+
+export default function Example() {
   const [value, setValue] = useState('')
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -10,7 +20,7 @@ export default function InputBox() {
   }
 
   return (
-    <VInputBox
+    <InputBox
       value={value}
       onChange={onChange}
       placeholder="내용을 입력하세요."
@@ -35,3 +45,4 @@ export default function InputBox() {
     />
   )
 }
+```

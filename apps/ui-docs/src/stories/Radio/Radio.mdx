@@ -1,0 +1,48 @@
+import { Meta } from '@storybook/addon-docs'
+
+<Meta title="COMPONENTS/Radio" />
+
+# Radio
+
+여러 옵션 중 하나를 선택할 때 사용되며, 단일 선택이 가능한 버튼 형태의 인터페이스 요소
+
+## Example
+
+```jsx
+import Radio from 'ventileco-ui'
+
+const radioList = [
+  { id: 0, value: 'apple', label: '🍎 Apple' },
+  { id: 1, value: 'kiwi', label: '🥝 Kiwi' },
+  { id: 2, value: 'peach', label: '🍑 Peach' },
+]
+
+export default function Example() {
+ const [value, setValue] = useState<string>('')
+
+  const onChange = (value: string) => {
+    setValue(value)
+  }
+
+  return (
+     <Radio
+      defaultValue={value}
+      onChange={onChange}
+      className="w-[240px] flex flex-col gap-2"
+    >
+      {radioList.map((item) => (
+        <Radio.Item key={item.id} value={item.value}>
+          <div className="flex w-full cursor-pointer gap-2 rounded-md border px-4 py-3">
+            <div className="size-5 rounded-full border flex justify-center items-center">
+              {value === item.value && (
+                <div className="size-3 rounded-full border bg-blue-600" />
+              )}
+            </div>
+            <p>{item.label}</p>
+          </div>
+        </Radio.Item>
+      ))}
+    </Radio>
+  )
+}
+```

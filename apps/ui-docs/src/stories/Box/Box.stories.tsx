@@ -1,5 +1,6 @@
-import React from 'react'
-import Box from '.'
+import type { Meta } from '@storybook/react'
+import { Box } from 'ventileco-ui'
+import React, { useRef } from 'react'
 
 export default {
   title: 'COMPONENTS/Box',
@@ -7,8 +8,34 @@ export default {
   parameters: {
     layout: 'centered',
   },
-}
+  argTypes: {
+    ref: {
+      description: '컴포넌트의 인스턴스에 직접 접근하는 방법을 제공합니다.',
+      table: {
+        type: { summary: 'RefObject<any>' },
+      },
+    },
+    as: {
+      description: '요소의 태그를 동적으로 지정합니다.',
+      table: {
+        type: { summary: 'IntrinsicElements' },
+      },
+    },
+  },
+} as Meta
 
 export function Normal() {
-  return <Box />
+  const anchorRef = useRef<HTMLAnchorElement>(null)
+
+  return (
+    <Box
+      as="a"
+      target="_blank"
+      ref={anchorRef}
+      href="https://github.com/geonwooPark/ventileco-ui"
+      className="inline-block rounded-md bg-green-600 px-10 py-4 text-base font-bold text-white transition-all duration-200 hover:opacity-80"
+    >
+      🍐 Pear
+    </Box>
+  )
 }

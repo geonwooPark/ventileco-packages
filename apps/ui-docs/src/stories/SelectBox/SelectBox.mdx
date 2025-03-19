@@ -1,22 +1,31 @@
-import React, { useState } from 'react'
-import { SelectBox as VSelectBox } from 'ventileco-ui'
-import { motion } from 'motion/react'
+import { Meta } from '@storybook/addon-docs'
 
-export default function SelectBox() {
-  const [value, setValue] = useState<string>('')
+<Meta title="COMPONENTS/SelectBox" />
 
-  const selectBoxList = [
-    { value: 'apple', label: '🍎 Apple', disabled: true },
-    { value: 'kiwi', label: '🥝 Kiwi' },
-    { value: 'peach', label: '🍑 Peach', disabled: true },
-    { value: 'grape', label: '🍇 Grape' },
-    { value: 'cherry', label: '🍒 Cherry' },
-    { value: 'apple2', label: '🍎 Apple2' },
-    { value: 'banana2', label: '🥝 Kiwi2', disabled: true },
-    { value: 'peach2', label: '🍑 Peach2', disabled: true },
-    { value: 'grape2', label: '🍇 Grape2' },
-    { value: 'cherry2', label: '🍒 Cherry2' },
-  ]
+# SelectBox
+
+사용자가 리스트에서 옵션을 선택할 수 있도록 목록을 표시해주는 인터페이스 요소
+
+## Example
+
+```jsx
+import { SelectBox } from 'ventileco-ui'
+
+const selectBoxList = [
+  { value: 'apple', label: '🍎 Apple', disabled: true },
+  { value: 'kiwi', label: '🥝 Kiwi' },
+  { value: 'peach', label: '🍑 Peach', disabled: true },
+  { value: 'grape', label: '🍇 Grape' },
+  { value: 'cherry', label: '🍒 Cherry' },
+  { value: 'apple2', label: '🍎 Apple2' },
+  { value: 'banana2', label: '🥝 Kiwi2', disabled: true },
+  { value: 'peach2', label: '🍑 Peach2', disabled: true },
+  { value: 'grape2', label: '🍇 Grape2' },
+  { value: 'cherry2', label: '🍒 Cherry2' },
+]
+
+export default function Example() {
+  const [value, setValue] = useState('')
 
   const animationProps = {
     variants: {
@@ -30,18 +39,18 @@ export default function SelectBox() {
   }
 
   return (
-    <VSelectBox
+    <SelectBox
       value={value}
       onChange={setValue}
       list={selectBoxList}
       className="w-[240px] text-sm"
     >
-      <VSelectBox.Input
+      <SelectBox.Input
         placeholder="🐝 Fruits"
         className="flex h-12 w-full items-center rounded-md border border-black px-3 focus-within:border-2"
       />
 
-      <VSelectBox.List
+      <SelectBox.List
         as={motion.ul}
         {...animationProps}
         className='bg-white" absolute z-[200] max-h-[240px] w-full overflow-hidden overflow-y-scroll rounded-md border'
@@ -49,7 +58,7 @@ export default function SelectBox() {
         {({ optionList }) => (
           <>
             {optionList.map((item) => (
-              <VSelectBox.Item key={item.value} item={item}>
+              <SelectBox.Item key={item.value} item={item}>
                 {({ isSelected, isDisabled, isFocused }) => (
                   <div
                     className={`${isSelected && 'text-blue-600'} ${isDisabled && 'text-gray-300'} ${isFocused && 'bg-blue-100'} w-full px-3 py-2 hover:bg-gray-100`}
@@ -57,11 +66,12 @@ export default function SelectBox() {
                     {item.label}
                   </div>
                 )}
-              </VSelectBox.Item>
+              </SelectBox.Item>
             ))}
           </>
         )}
-      </VSelectBox.List>
-    </VSelectBox>
+      </SelectBox.List>
+    </SelectBox>
   )
 }
+```

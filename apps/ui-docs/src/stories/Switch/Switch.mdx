@@ -1,0 +1,27 @@
+import { Meta } from '@storybook/addon-docs'
+
+<Meta title="COMPONENTS/Switch" />
+
+# Switch
+
+사용자 입력을 통해 이진 상태(켜짐/꺼짐)를 직관적으로 전환할 수 있는 UI 요소
+
+## Example
+
+```jsx
+import { Switch } from 'ventileco-ui'
+
+export default function Example() {
+  return (
+    <Switch
+      value={value}
+      onChange={setValue}
+      marginInline={2}
+      duration={300}
+      className="w-[40px] h-[24px] bg-gray-800 rounded-full"
+    >
+      <Switch.Ball className="size-4 rounded-full bg-white" />
+    </Switch>
+  )
+}
+```

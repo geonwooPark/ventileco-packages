@@ -1,13 +1,23 @@
-import React, { useState } from 'react'
-import { Counter as VCounter } from 'ventileco-ui'
+import { Meta } from '@storybook/addon-docs'
 
-export default function Counter() {
+<Meta title="COMPONENTS/Counter" />
+
+# Counter
+
+사용자가 클릭 이벤트를 통해 숫자 값을 증가 또는 감소시킬 수 있는 UI 요소
+
+## Example
+
+```jsx
+import { Counter } from 'ventileco-ui'
+
+export default function Example() {
   const [value, setValue] = useState(4)
 
   return (
-    <VCounter value={value} setValue={setValue}>
+    <Counter value={value} setValue={setValue}>
       <div className="flex gap-2 rounded-md border border-black px-2">
-        <VCounter.Down>
+        <Counter.Down>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -18,9 +28,9 @@ export default function Counter() {
           >
             <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14" />
           </svg>
-        </VCounter.Down>
-        <VCounter.Number className="h-8 w-10 rounded-md text-center text-xl outline-none" />
-        <VCounter.Up>
+        </Counter.Down>
+        <Counter.Number className="h-8 w-10 rounded-md text-center text-xl outline-none" />
+        <Counter.Up>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -35,8 +45,9 @@ export default function Counter() {
               d="M12 4.5v15m7.5-7.5h-15"
             />
           </svg>
-        </VCounter.Up>
+        </Counter.Up>
       </div>
-    </VCounter>
+    </Counter>
   )
 }
+```

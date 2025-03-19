@@ -1,7 +1,18 @@
-import React, { useState } from 'react'
-import { CustomFile, FileUploader as VFileUploader } from 'ventileco-ui'
+import { Meta } from '@storybook/addon-docs'
 
-export default function FileUploader() {
+<Meta title="COMPONENTS/FileUploader" />
+
+# FileUploader
+
+파일 업로드 시 파일의 확장자, 크기 등을 검증하고 미리보기 이미지(URL)를 생성하여 관리하는 기능을 제공
+
+## Example
+
+```jsx
+import { FileUploader } from 'ventileco-ui'
+
+
+export default function Example() {
   const [value, setValue] = useState<CustomFile[]>([])
 
   const onChange = (files: CustomFile[]) => {
@@ -20,10 +31,10 @@ export default function FileUploader() {
 
   return (
     <>
-      <VFileUploader
+      <FileUploader
         value={value}
         onChange={onChange}
-        accept={'image/*'}
+        accept={'image/*, video/*, audio/*'}
         limit={5}
         onError={(error) => console.log(error.message)}
       >
@@ -51,7 +62,7 @@ export default function FileUploader() {
             <p className="text-body2">등록할 이미지를 선택하거나 올려주세요.</p>
           </div>
         )}
-      </VFileUploader>
+      </FileUploader>
 
       <ul className="mt-4 flex gap-2">
         {value &&
@@ -87,3 +98,4 @@ export default function FileUploader() {
     </>
   )
 }
+```

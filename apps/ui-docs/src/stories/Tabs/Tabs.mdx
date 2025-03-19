@@ -1,6 +1,15 @@
-import type { Meta } from '@storybook/react'
+import { Meta } from '@storybook/addon-docs'
+
+<Meta title="COMPONENTS/Tabs" />
+
+# Tabs
+
+클릭 등의 상호작용을 감지하여 특정 섹션을 보여주는 동작을 수행하는 인터페이스 요소
+
+## Example
+
+```jsx
 import { Tabs } from 'ventileco-ui'
-import React, { useState } from 'react'
 
 const tabList = [
   { id: 0, title: '🍇 Grape' },
@@ -10,38 +19,7 @@ const tabList = [
   { id: 4, title: '🍑 Peach' },
 ]
 
-export default {
-  title: 'COMPONENTS/Tabs',
-  component: Tabs,
-  parameters: {
-    layout: 'centered',
-  },
-  argTypes: {
-    ref: {
-      description: '컴포넌트의 인스턴스에 직접 접근하는 방법을 제공합니다.',
-      table: {
-        type: { summary: 'RefObject<HTMLDivElement>' },
-        category: 'Tabs',
-      },
-    },
-    currentTab: {
-      description: '현재 활성화 된 탭입니다.',
-      table: {
-        type: { summary: 'any' },
-        category: 'Tabs',
-      },
-    },
-    onChange: {
-      description: '활성화 시킬 탭을 변경하는 함수입니다.',
-      table: {
-        type: { summary: '(value: any) => void' },
-        category: 'Tabs',
-      },
-    },
-  },
-} as Meta
-
-export function Normal() {
+export default function Example() {
   const [currentTab, setCurrentTab] = useState(0)
 
   const onChange = (index: number) => {
@@ -93,3 +71,4 @@ export function Normal() {
     </Tabs>
   )
 }
+```

@@ -1,6 +1,15 @@
-import React, { useState } from 'react'
+import { Meta } from '@storybook/addon-docs'
+
+<Meta title="COMPONENTS/ComboBox" />
+
+# ComboBox
+
+사용자가 목록에서 항목을 선택하거나 검색할 수 있는 드롭다운 메뉴
+
+## Example
+
+```jsx
 import { ComboBox } from 'ventileco-ui'
-import { motion } from 'motion/react'
 
 const comboBoxList = [
   { value: 'apple', label: '🍎 Apple', disabled: true },
@@ -15,86 +24,8 @@ const comboBoxList = [
   { value: 'cherry2', label: '🍒 Cherry2' },
 ]
 
-export default {
-  title: 'COMPONENTS/ComboBox',
-  component: ComboBox,
-  parameters: {
-    layout: 'centered',
-  },
-  argTypes: {
-    ref: {
-      description: '컴포넌트의 인스턴스에 직접 접근하는 방법을 제공합니다.',
-      table: {
-        type: {
-          summary: 'RefObject<HTMLDivElement>',
-        },
-        category: 'ComboBox',
-      },
-    },
-    value: {
-      description: '기본 값을 설정합니다.',
-      table: {
-        type: { summary: 'any' },
-        category: 'ComboBox',
-      },
-    },
-    onChange: {
-      description: '값을 설정하는 함수입니다.',
-      table: {
-        type: { summary: '(value: any) => void' },
-        category: 'ComboBox',
-      },
-    },
-    list: {
-      description: '옵션 목록을 제공합니다.',
-      table: {
-        type: {
-          summary: 'OptionList',
-          detail: `
-            {value: any, label: string, disabled?: boolean}[]
-          `,
-        },
-        category: 'ComboBox',
-      },
-    },
-    placeholder: {
-      description: 'Input의 Placeholder를 지정합니다.',
-      table: {
-        type: { summary: 'string' },
-        category: 'ComboBox.Input',
-      },
-    },
-    clearIcon: {
-      description: '내부 상태값을 초기화 시키는 아이콘을 설정합니다.',
-      table: {
-        type: { summary: 'ReactNode' },
-        category: 'ComboBox.Input',
-      },
-    },
-    as: {
-      description: '렌더링할 태그를 입력합니다.',
-      table: {
-        type: { summary: 'ElementType' },
-        category: 'ComboBox.List',
-      },
-    },
-    item: {
-      description: '반복되는 list에서 고유의 항목을 가져옵니다.',
-      table: {
-        type: {
-          summary: 'OptionItem',
-          detail: `
-          {value: any, label: string, disabled?: boolean}
-        `,
-        },
-        category: 'ComboBox.Item',
-      },
-    },
-  },
-}
-
-export function Normal() {
-  const [value, setValue] = useState<string>()
+export default function Example() {
+ const [value, setValue] = useState<string>()
 
   const animationProps = {
     variants: {
@@ -163,5 +94,7 @@ export function Normal() {
         }
       </ComboBox.List>
     </ComboBox>
+
   )
 }
+```

@@ -1,62 +1,17 @@
-import type { Meta } from '@storybook/react'
-import React from 'react'
+import { Meta } from '@storybook/addon-docs'
+
+<Meta title="COMPONENTS/Slider" />
+
+# Slider
+
+클릭이나 드래그를 사용한 상호작용으로 수평으로 이동 가능한 바를 제공하는 인터페이스 요소
+
+## Example
+
+```jsx
 import { Slider } from 'ventileco-ui'
 
-export default {
-  title: 'COMPONENTS/Slider',
-  component: Slider,
-  parameters: {
-    layout: 'top',
-  },
-  argTypes: {
-    ref: {
-      description: '컴포넌트의 인스턴스에 직접 접근하는 방법을 제공합니다.',
-      table: {
-        type: { summary: 'RefObject<HTMLDivElement>' },
-      },
-    },
-    loop: {
-      description: '슬라이드의 순환 여부를 설정하는 값입니다.',
-      table: {
-        type: { summary: 'boolean' },
-      },
-    },
-    gap: {
-      description: '슬라이드 간격을 설정하는 값입니다.',
-      table: {
-        type: { summary: 'number' },
-      },
-    },
-    perPage: {
-      description: '한 번에 표시될 슬라이드의 개수를 설정하는 값입니다.',
-      table: {
-        type: { summary: 'number' },
-      },
-    },
-    autoplay: {
-      description:
-        '슬라이드를 자동으로 이동하게 할지 여부를 설정하는 값입니다.',
-      table: {
-        type: { summary: 'boolean' },
-      },
-    },
-    delay: {
-      description:
-        'autoplay가 활성화된 경우, 슬라이드가 자동으로 이동하기 전까지 대기하는 시간을 밀리초 단위로 지정합니다.',
-      table: {
-        type: { summary: 'number' },
-      },
-    },
-    startOffset: {
-      description: '슬라이드의 좌측에 공백을 줍니다.',
-      table: {
-        type: { summary: 'number' },
-      },
-    },
-  },
-} as Meta
-
-export function Normal() {
+export default function Example() {
   return (
     <Slider perPage={3} gap={10} className="relative w-[620px]">
       <Slider.Content className="hide-scroll [&>*]:shrink-0">
@@ -126,3 +81,4 @@ export function Normal() {
     </Slider>
   )
 }
+```

@@ -1,28 +1,37 @@
-import React from 'react'
-import { Accordion as VAccordion } from 'ventileco-ui'
-import { motion } from 'motion/react'
+import { Meta } from '@storybook/addon-docs'
 
-export default function Accordion() {
-  const accordionList = [
-    { id: 0, title: '🍇 Grape', content: 'Content1' },
-    { id: 1, title: '🍎 Apple', content: 'Content2' },
-    {
-      id: 2,
-      title: '🍋 Lemon',
-      content: 'Content3Content3Content3Content3Content3Content3',
-    },
-    {
-      id: 3,
-      title: '🫐 Blueberry',
-      content: 'Content4',
-    },
-    {
-      id: 4,
-      title: '🥝 Kiwi',
-      content: 'Content5',
-    },
-  ]
+<Meta title="COMPONENTS/Accordion" />
 
+# Accordion
+
+사용자가 섹션을 열거나 닫을 수 있는 접히고 펼쳐지는 인터페이스 요소
+
+## Example
+
+```jsx
+import { Accordion } from 'ventileco-ui'
+
+const accordionList = [
+  { id: 0, title: '🍇 Grape', content: 'Content1' },
+  { id: 1, title: '🍎 Apple', content: 'Content2' },
+  {
+    id: 2,
+    title: '🍋 Lemon',
+    content: 'Content3Content3Content3Content3Content3Content3',
+  },
+  {
+    id: 3,
+    title: '🫐 Blueberry',
+    content: 'Content4',
+  },
+  {
+    id: 4,
+    title: '🥝 Kiwi',
+    content: 'Content5',
+  },
+]
+
+export function Example() {
   const animationProps = {
     variants: {
       hidden: { opacity: 0, y: 20 },
@@ -30,13 +39,15 @@ export default function Accordion() {
     },
     initial: 'hidden',
     animate: 'visible',
+    viewport: { once: true },
+    transition: { duration: 0.3 },
   }
 
   return (
-    <VAccordion className="flex w-[320px] flex-col overflow-hidden rounded-md border border-black">
+    <Accordion className="flex w-[320px] flex-col overflow-hidden rounded-md border border-black">
       {accordionList.map((item) => (
-        <VAccordion.Item key={item.id} value={item.id} className="border">
-          <VAccordion.Trigger>
+        <Accordion.Item key={item.id} value={item.id} className="border">
+          <Accordion.Trigger>
             {({ isActive }) => (
               <div
                 className={`${isActive && 'text-blue-600'} flex cursor-pointer items-center justify-between px-4 py-2 text-left`}
@@ -58,16 +69,17 @@ export default function Accordion() {
                 </svg>
               </div>
             )}
-          </VAccordion.Trigger>
-          <VAccordion.Content
+          </Accordion.Trigger>
+          <Accordion.Content
             as={motion.ul}
             {...animationProps}
             className="w-full break-words bg-gray-50 px-4 py-3"
           >
             {({ isActive }) => <div>{item.content}</div>}
-          </VAccordion.Content>
-        </VAccordion.Item>
+          </Accordion.Content>
+        </Accordion.Item>
       ))}
-    </VAccordion>
+    </Accordion>
   )
 }
+```
