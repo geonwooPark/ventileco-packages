@@ -1,7 +1,12 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "noImplicitOverride": true
+    "importHelpers": true,
+    "noEmitHelpers": true,
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "declarationMap": true,
+    "declarationDir": "./dist/types"
   },
   "include": ["src"],
   "exclude": ["./dist", "./node_modules"]
