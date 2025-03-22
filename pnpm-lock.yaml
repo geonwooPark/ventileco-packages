@@ -134,6 +134,13 @@ importers:
         version: 8.2.0
 
   packages/store:
+    dependencies:
+      '@types/react':
+        specifier: ^18.2.66
+        version: 18.3.18
+      react:
+        specifier: '>=18.0.0'
+        version: 18.3.1
     devDependencies:
       typescript:
         specifier: ^5.7.3
