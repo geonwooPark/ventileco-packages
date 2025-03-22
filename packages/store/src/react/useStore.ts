@@ -6,7 +6,10 @@ export default function useStore<T, U>(
   selector: (state: T) => U,
 ) {
   return [
-    useSyncExternalStore(store.subscribe, () => selector(store.getState())),
-    store.setState,
+    useSyncExternalStore(
+      (callback) => store.subscribe(() => callback()),
+      () => selector(store.getState()),
+    ),
+    store.setState.bind(store),
   ] as const
 }
