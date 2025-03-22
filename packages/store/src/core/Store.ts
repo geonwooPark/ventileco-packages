@@ -1,4 +1,5 @@
-import { Observable } from '../react/Observable'
+import { Observable } from './Observable'
+import { shallowEqual } from '../utils/shallowEqual'
 
 export class Store<T> extends Observable<T> {
   protected state: T
@@ -18,9 +19,9 @@ export class Store<T> extends Observable<T> {
         ? (updater as (prevState: T) => T)(this.state)
         : updater
 
-    // 상태를 전체를 교체할지? 일부만 변경할지?
-
-    this.state = newState
-    this.notify(newState)
+    if (!shallowEqual(newState, this.state)) {
+      this.state = typeof newState === 'object' ? newState : newState
+      this.notify(newState)
+    }
   }
 }
