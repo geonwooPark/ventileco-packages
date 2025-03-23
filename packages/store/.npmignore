@@ -4,10 +4,8 @@ src/
 *.config.js
 *.config.cjs
 *.config.ts
-*.map
 *.json
-*.log
-setupTest.js
+*.map
 
 .prettierrc
 .eslintignore
