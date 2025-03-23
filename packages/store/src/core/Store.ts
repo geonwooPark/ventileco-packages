@@ -1,35 +1,19 @@
 import { Observable } from './Observable'
 import { shallowEqual } from '../utils/shallowEqual'
-import { LocalStorage } from '../persist/LocalStorage'
-import { SessionStorage } from '../persist/SessionStorage'
-import { BaseStorage } from '../persist/BaseStorage'
+import { BaseMiddleware } from '../middleware/BaseMiddleware'
 
 export class Store<T> extends Observable<T> {
   protected state: T
-  private storage: BaseStorage | null
-  private persistKey: string
+  private middlewares?: BaseMiddleware<T>[] = []
 
-  constructor(
-    initialState: T,
-    persist?: 'localStorage' | 'sessionStorage',
-    persistKey?: string,
-  ) {
+  constructor(initialState: T, middlewares?: BaseMiddleware<T>[]) {
     super()
-    this.state = initialState
-    this.storage =
-      persist === 'localStorage'
-        ? new LocalStorage()
-        : persist === 'sessionStorage'
-          ? new SessionStorage()
-          : null
-    this.persistKey = persistKey || 'store-' + this.constructor.name
 
-    if (this.storage) {
-      const storageState = this.storage.get<T>(this.persistKey)
-      if (storageState) {
-        this.state = storageState
-      }
-    }
+    this.state = initialState
+
+    this.middlewares = middlewares
+
+    this.middlewares?.forEach((middleware) => middleware.apply(this))
   }
 
   getState(): T {
@@ -48,11 +32,6 @@ export class Store<T> extends Observable<T> {
           ? Object.assign({}, this.state, newState)
           : newState
       this.notify(newState)
-    }
-
-    // persist
-    if (this.storage) {
-      this.storage.set(this.persistKey, newState)
     }
   }
 }
