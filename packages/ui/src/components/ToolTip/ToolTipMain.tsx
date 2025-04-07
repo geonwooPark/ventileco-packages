@@ -1,7 +1,6 @@
 import React, {
   PropsWithChildren,
   forwardRef,
-  memo,
   useCallback,
   useLayoutEffect,
   useMemo,

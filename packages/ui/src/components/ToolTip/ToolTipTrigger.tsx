@@ -15,7 +15,7 @@ function ToolTipTrigger({ children }: PropsWithChildren) {
     <div
       ref={triggerRef}
       aria-describedby="tooltip"
-      onMouseOver={onMouseOver}
+      onMouseEnter={onMouseOver}
       onMouseLeave={onMouseOut}
       style={triggerStyle}
     >
