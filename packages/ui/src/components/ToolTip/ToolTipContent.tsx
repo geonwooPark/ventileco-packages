@@ -44,7 +44,7 @@ function ToolTipContent({ children }: PropsWithChildren) {
     <div
       style={tooltipStyle}
       ref={tooltipRef}
-      onMouseOver={onMouseOver}
+      onMouseEnter={onMouseOver}
       onMouseLeave={onMouseOut}
     >
       {children}
