@@ -12,7 +12,7 @@ import CountNumber from './CountNumber'
 
 export interface CounterMainProps {
   value: number
-  setValue: React.Dispatch<React.SetStateAction<number>>
+  onChange: (value: number) => void
   minimum?: number
   maximum?: number
   className?: string
@@ -31,7 +31,7 @@ function CounterMain(
   {
     children,
     value: number,
-    setValue,
+    onChange,
     minimum,
     maximum,
     className,
@@ -39,16 +39,12 @@ function CounterMain(
   forwardRef: ForwardedRef<HTMLDivElement>,
 ) {
   const up = useCallback(() => {
-    setValue((prev) =>
-      maximum === undefined || prev < maximum ? prev + 1 : prev,
-    )
-  }, [maximum, setValue])
+    onChange(maximum === undefined || number < maximum ? number + 1 : number)
+  }, [maximum, number])
 
   const down = useCallback(() => {
-    setValue((prev) =>
-      minimum === undefined || prev > minimum ? prev - 1 : prev,
-    )
-  }, [minimum, setValue])
+    onChange(minimum === undefined || number > minimum ? number - 1 : number)
+  }, [minimum, number])
 
   const actions = useMemo(
     () => ({

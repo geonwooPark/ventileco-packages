@@ -13,7 +13,7 @@ export default function TestComponent({
   return (
     <Counter
       value={value}
-      setValue={setValue}
+      onChange={setValue}
       maximum={maximum}
       minimum={minimum}
     >

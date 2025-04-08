@@ -46,7 +46,7 @@ export function Normal() {
   const [value, setValue] = useState(4)
 
   return (
-    <Counter value={value} setValue={setValue}>
+    <Counter value={value} onChange={setValue}>
       <div className="flex gap-2 rounded-md border border-black px-2">
         <Counter.Down>
           <svg
