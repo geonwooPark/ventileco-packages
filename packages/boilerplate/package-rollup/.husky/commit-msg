@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-const fs = require('fs');
+import fs from 'fs';
 
 // 커밋 메시지 형식을 정의합니다.
 const commitMessagePattern =
