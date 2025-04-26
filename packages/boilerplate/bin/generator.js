@@ -104,9 +104,6 @@ async function generator() {
         `\n🎉 ${selectedTemplate} 프로젝트가 성공적으로 생성되었습니다!\n`,
       ),
     )
-    console.log(chalk.cyan(`👉 다음 명령어를 실행하세요:\n`))
-    console.log(chalk.yellow(`   cd ${projectName}`))
-    console.log(chalk.yellow('   pnpm run dev\n'))
 
     console.log(chalk.green('🚀 프로젝트를 즐겁게 개발하세요!\n'))
   } catch (error) {

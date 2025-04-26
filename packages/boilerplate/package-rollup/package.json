@@ -1,6 +1,7 @@
 {
   "name": "package-rollup-boilerplate",
   "version": "1.0.0",
+  "private": true,
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
