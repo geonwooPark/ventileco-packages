@@ -10,8 +10,7 @@
     "dev": "webpack-dev-server --config webpack.dev.js --open --hot",
     "build": "webpack --config webpack.prod.js",
     "lint": "eslint \"src/**/*.{js,jsx,ts,tsx}\"",
-    "prepare": "husky install",
-    "gen-api": "node ./api/generate-api.cjs"
+    "prepare": "husky install"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [

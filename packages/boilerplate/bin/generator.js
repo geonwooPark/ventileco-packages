@@ -49,7 +49,7 @@ async function chooseTemplate() {
       type: 'list',
       name: 'template',
       message: chalk.cyan('어떤 템플릿을 사용하시겠습니까?'),
-      choices: ['ts-webpack', 'react-webpack'],
+      choices: ['ts-webpack', 'react-webpack', 'package-rollup'],
       default: 'ts-webpack',
     },
   ])
