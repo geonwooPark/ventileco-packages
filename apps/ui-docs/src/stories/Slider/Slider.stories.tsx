@@ -53,12 +53,23 @@ export default {
         type: { summary: 'number' },
       },
     },
+    onChange: {
+      description: '페이지가 바뀔 때마다 호출되는 콜백함수입니다.',
+      table: {
+        type: { summary: '(page: number) => void' },
+      },
+    },
   },
 } as Meta
 
 export function Normal() {
   return (
-    <Slider perPage={3} gap={10} className="relative w-[620px]">
+    <Slider
+      perPage={3}
+      gap={10}
+      onChange={(page) => console.log('현재페이지: ', page)}
+      className="relative w-[620px]"
+    >
       <Slider.Content className="hide-scroll [&>*]:shrink-0">
         <Slider.Item className="flex h-[300px] w-[200px] items-center justify-center bg-gray-100">
           Slide1

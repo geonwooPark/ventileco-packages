@@ -40,6 +40,7 @@ interface SliderBaseProps {
   perPage?: number
   autoplay?: boolean
   delay?: number
+  onChange?: (page: number) => void
   className?: string
 }
 
@@ -57,6 +58,7 @@ const SliderMain = forwardRef<HTMLDivElement, PropsWithChildren<SliderProps>>(
       autoplay = false,
       delay = 1000,
       loop = false,
+      onChange,
       className,
     },
     ref,
@@ -444,6 +446,12 @@ const SliderMain = forwardRef<HTMLDivElement, PropsWithChildren<SliderProps>>(
 
       return () => clearInterval(timer)
     }, [loopEnabled, autoplay, page, totalPage, delay, onNextClick])
+
+    useEffect(() => {
+      if (onChange) {
+        onChange(page)
+      }
+    }, [page])
 
     const providerValue = useMemo(
       () => ({
