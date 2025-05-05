@@ -15,7 +15,10 @@ function ToolTipContent({ children }: PropsWithChildren) {
 
   const portalRootRef = useRef<HTMLElement | null>(null)
 
-  const tooltipStyle = useMemo<CSSProperties>(() => ({ position: 'fixed' }), [])
+  const tooltipStyle = useMemo<CSSProperties>(
+    () => ({ position: 'fixed', zIndex: 3000 }),
+    [],
+  )
 
   useEffect(() => {
     let tooltipDiv = document.getElementById(
